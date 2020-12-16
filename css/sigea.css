@@ -1,0 +1,171 @@
+.gritter-center{
+position:absolute;
+left:10px;
+top:10px;
+}
+
+.mycheck{ 
+	transform: scale(1);
+	margin-left: 50px;
+	 } 
+
+.imgRedonda {
+    width:35px;
+    height:35px;
+    border-radius:150px;
+    margin-top: 5px;
+}
+
+.et {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+
+}
+
+
+
+  
+
+label.error{
+    background: #ff2828 center left 2px no-repeat; 
+    border: 2px solid #804040;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #333;
+    color: #ffffff;
+    font-weight: bold;
+    display: none;
+    font-size: 0.7em;
+    padding: 5px 5px 5px 5px;
+    max-width: 6000px;
+    position: absolute; 
+    z-index: 100; 
+}
+
+
+input.error{
+  background: #fff0f4; 
+  color: #c51244;
+  border: 1px solid #c51244 !important; 
+}
+
+
+@font-face {font-family: Girassol;src: url("../fonts/Girassol-Regular.ttf");}
+
+@font-face { font-family: PermanentMarker;src: url("../fonts/PermanentMarker-Regular.ttf");}
+
+@font-face {font-family: Amaranth;src: url("../fonts/Amaranth-Regular.ttf");}
+  
+@font-face { font-family: AmaranthB; src: url("../fonts/Amaranth-Bold.ttf");}
+
+@font-face {font-family: Roboto-Black; src: url("../fonts/Roboto-Black.ttf");}
+
+@font-face {font-family: Roboto-Bold; src: url("../fonts/Roboto-Bold.ttf");}
+
+@font-face {font-family: Roboto-Light; src: url("../fonts/Roboto-Light.ttf");}
+
+@font-face {font-family: Roboto-Regular; src: url("../fonts/Roboto-Regular.ttf");}
+
+
+.fontAmaranth {font-family: 'Amaranth';}
+.fontAmaranthB {font-family: 'AmaranthB';}     
+.fontRobotoBk {font-family: 'Roboto-Black';}   
+.fontRobotoB {font-family: 'Roboto-Bold';}   
+.fontRobotoL {font-family: 'Roboto-Light';}   
+.fontRoboto {font-family: 'Roboto-Regular';}   
+
+    
+
+
+
+/*=====================================PARA LAS FORMULA MATEMATICAS =============================*/
+
+.dblarrow {
+  font-size: 125%;
+  top: -0.4ex;
+  margin: 0 2px;
+}
+.dblarrow:after {
+  content:"\2190";
+  position: absolute;
+  left: 0;
+  top: 0.5ex;
+}
+
+/*=====================================PARA LAS FICHAS DE LOS ALUMNOS=============================*/
+.ma_principal {
+  height:100px; 
+  border:0px solid #CFCFCF; 
+  margin:10px; 
+  padding:0px;
+  width: 100%;
+}
+
+.ma_lineaH {
+  height:100%; 
+  width:5px;
+  border:0px;
+  background-color: #0E02BF; 
+  margin:0px; 
+  display: inline-block;
+}
+
+.ma_foto{
+  text-align: left;
+  margin:0px; 
+  padding: 0px;
+  display: inline-block;
+}
+
+.ma_fotoRec{
+  text-align: left;
+  margin:0px; 
+  padding: 0px;
+  display: inline-block;
+}
+
+
+.ma_datos{
+  text-align: left;
+  margin:0px; 
+  padding: 0px;
+  display: inline-block;
+  height: 100%;
+  word-wrap: break-word;
+}
+
+.ma_foto{
+    width: 70px;
+    height: 70px;
+    border: 2px solid darkgray;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
+}
+
+.ma_foto:hover{
+
+  border: 3px solid darkorange;
+ 
+}
+
+.ma_fotoRec{
+  width: 80px;
+  height: 90px;
+  border: 2px solid darkgray;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 5%;
+  background-size: 100% auto;
+}
+
+.ma_fotoRec:hover{
+  border: 3px solid darkorange;
+}
+
+
+
+.ma_popover{
+   width: 350px;
+}
