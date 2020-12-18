@@ -21,6 +21,7 @@ if (count($res)>0) {
 		$_SESSION['CAMPUS'] = $res[0]["_CAMPUS"];
 		$_SESSION['encode'] = "ISO-8859-1";
 		$_SESSION['carrera'] = $res[0]["usua_carrera"];
+		$_SESSION['roles'] = $res[0]["usua_usuader"];
 		$_SESSION['depto'] = $res[0]["usua_depto"];
 		$_SESSION['idsesion'] =0;
 		$_SESSION['laip'] =$_POST['laip'];
