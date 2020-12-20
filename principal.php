@@ -73,7 +73,7 @@
 		    </button>			
 				<div>
 					<a href="#" class="navbar-brand" style="padding:0px; margin:5px;">
-					   <small class="fontRobotoB"><img class="iconoMenu" src="imagenes/login/sigea.png" style="width:30px; height:30px;"> SiGEA</small>
+					   <small class="fontRobotoB"><img class="iconoMenu" src="imagenes/login/sigea.png" style="width:30px; height:30px;"> SiGEA-ITSSMO</small>
 					</a>
 				</div>
 				
@@ -168,18 +168,14 @@
 										 </div>
 										 <div class="vspace-6-sm"></div>
 										  <div class="row">
-										     <div class="col-xs-5" style="border-left: 5px solid #B07D06;">
-										          <h1 class="text-primary"><strong>Nuestros Valores</strong></h1>
-												     <h5><i class="ace-icon blue fa fa-arrow-circle-right"></i> El Ser Humano</h5>												  												  
-													 <h5><i class="ace-icon red fa fa-arrow-circle-right"></i> El Esp&iacute;ritu de Servicio</h5>
-													 <h5><i class="ace-icon green fa fa-arrow-circle-right"></i> El Liderazgo</h5>
-													 <h5><i class="ace-icon black fa fa-arrow-circle-right"></i> El Trabajo en Equipo</h5>
-													 <h5><i class="ace-icon blue fa fa-arrow-circle-right"></i> La Calidad</h5>
-													 <h5><i class="ace-icon red fa fa-arrow-circle-right"></i> El Alto Desempe&ntilde;o</h5>
+										     <div class="col-xs-5" style="border-left: 5px solid #B07D06; text-align:justify;">
+										          <h1 class="text-primary"><strong>Misión ITSSMO</strong></h1>
+												     <h5>Formar integralmente profesionales competitivos de la ciencia, la tecnología y otras áreas de conocimiento, comprometidos con el desarrollo económico, socia, cultural y con la sustentabilidad del país.</h5>												  												  
+													 
 											 </div>
 											 <div class="col-xs-2" style="text-align: center;"></div>
 											 <div class="col-xs-5" style="text-align: center;">
-											       <img alt="" src="imagenes/empresa/logo2.png" width="80%" height="80%">											
+											       <img alt="" src="imagenes/empresa/logo2.png" width="50%" height="50%">											
 											 </div>
 										 </div>	 
 									</div>

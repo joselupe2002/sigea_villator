@@ -14,8 +14,8 @@ class Conexion {
 		//Base de datos Mysql
 		$this->server='localhost';		
 		
-		$this->user='pEgCaCrFZHdBoGvDiHjJgHcC7777878688868678M';
-		$this->password='KJgC\HNBYIhFsCyGmDjJkDbB,G4E/D2C77786788Q'; //base de datos del server
+		$this->user='qCrJ^JnJXJ676777877688878687888878788877F';
+		$this->password='jJ9I^J;IZH|G+H4E)J9J68887777768777766887K'; //base de datos del server
 		//$this->password='7878867688866778678788767678786786878788A'; //base de datos local
 
 		$this->db='sigea';

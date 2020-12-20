@@ -386,7 +386,7 @@ class UtilUser {
 
 	
 	public function  getPie($pdf,$orienta){	
-		$top1=257; $top2=253; $left1=20; $left2=190;
+		$top1=247; $top2=253; $left1=20; $left2=190;
 		if ($orienta=='H') {$top1=192; $top2=188; $left1=20; $left2=250;}
 
 		$direccion=""; $telefonos=""; $pagina="";
