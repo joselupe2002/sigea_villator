@@ -241,7 +241,7 @@ function cargarDatosPropuesta(tipo){
 			lafecha=hoy.getDate()+"/"+hoy.getMonth()+"/"+hoy.getFullYear()+" "+ hoy.getHours()+":"+hoy.getMinutes();
 			parametros={tabla:"respropuestas",
 						bd:"Mysql",
-						_INSTITUCION:"ITSM",
+						_INSTITUCION:"ITSSMO",
 						_CAMPUS:"0",
 						MATRICULA:usuario,
 						CICLO:miciclo,					
@@ -265,7 +265,7 @@ function cargarDatosPropuesta(tipo){
 								"</div>");	
 								correoalJefe(usuario, "<html>El alumno <span style=\"color:green\"><b>"+usuario+" "+nombreuser+
 								"</b></span> ha capturado los datos de Carta de Presentaci&oacute;n para Residencia Profesional, "+
-								"Favor de Revisarlo para proceder a su autorizaci&oacute;n <BR>","ITSM: CAPTURA DE DATOS DE PRESENTACION DE "+usuario+" "+nombreuser);			
+								"Favor de Revisarlo para proceder a su autorizaci&oacute;n <BR>","ITSSMO: CAPTURA DE DATOS DE PRESENTACION DE "+usuario+" "+nombreuser);			
 
 								setNotificacionalJefe(usuario,"Sol. Carta Presentación RP."+usuario+" "+nombreuser,"nucleo/respropuestas/grid.php?modulo=respropuestas","P",lainstitucion,elcampus);
 								}

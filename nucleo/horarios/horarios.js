@@ -227,7 +227,7 @@ function agregarasignaturasemestre() {
 function agregarAsignaturaGrid(lamateria,materiad,semestre, ht, hp){	
 	parametros={tabla:"edgrupos",
 			    bd:"Mysql",
-			    _INSTITUCION:"ITSM",
+			    _INSTITUCION:"ITSSMO",
 			    _CAMPUS:"0",
 			    DGRU_MATERIA:lamateria,
 			    DGRU_HT:ht,

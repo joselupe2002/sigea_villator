@@ -125,7 +125,7 @@
 			function LoadDatosGen()
 			{
 				$miConex = new Conexion();
-				$resultado=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where _INSTITUCION='ITSM'");
+				$resultado=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where _INSTITUCION='ITSSMO'");
 				foreach ($resultado as $row) {
 					$data[] = $row;
 				}
@@ -289,7 +289,7 @@
 	                </head>
 	      <?php 
 				
-						$res=$miutil->enviarCorreo($data[0]["CORREO"],'SIGEA:ITSM CONSTANCIA '.$data[0]["EVENTOPRIND"].$data[0]["EVENTOD"],
+						$res=$miutil->enviarCorreo($data[0]["CORREO"],'SIGEA:ITSSMO CONSTANCIA '.$data[0]["EVENTOPRIND"].$data[0]["EVENTOD"],
 						'Por medio de la presente se le hace llegar su constancia de participación en el evento: '.$data[0]["EVENTOD"]."br>".
 						'En el marco del : '.$data[0]["EVENTOPRIND"]."<br>".
 						' <br/> En adjunto encontrará su constancia debidamente firmada y sellada. ',$doc);	

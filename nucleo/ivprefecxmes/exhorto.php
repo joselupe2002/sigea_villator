@@ -45,7 +45,7 @@
 				for($i=0;$i<count($headerdes);$i++)
 					$this->Cell($w[$i],7,$headerdes[$i],1,0,'C',true);
 					$this->Ln();
-					// Restauración de colores y fuentes
+					// Restauraciï¿½n de colores y fuentes
 					$this->SetFillColor(255,254,174);
 					$this->SetTextColor(0);
 					$this->SetFont('');
@@ -75,7 +75,7 @@
 					$this->SetFont('Montserrat-ExtraBold','B',8);					
 					$this->Ln();
 					$this->Cell(array_sum($w),0,'','T');
-					// Línea de cierre
+					// Lï¿½nea de cierre
 			}
 
 			
@@ -147,7 +147,7 @@
 		$pdf->Ln(10);
 		$pdf->Cell(0,0,utf8_decode($data[0]["PROFESORD"]),0,1,'L');
 		$pdf->Ln(5);
-		$pdf->Cell(0,0,'DOCENTE DEL ITSM',0,1,'L');
+		$pdf->Cell(0,0,'DOCENTE DEL ITSSMO',0,1,'L');
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,'PRESENTE',0,1,'L');
 		$pdf->Ln(5);
@@ -156,10 +156,10 @@
 		$eldeptomaestro=utf8_decode($data[0]["DEPTOD"]);
 		
 		$pdf->SetFont('Montserrat-SemiBold','',10);
-		$pdf->MultiCell(0,5,'De conformidad con las atribuciones conferidas y encomendadas por el M.A.T.I. Leonardo Rafael Bojorges Güereña, Director General del Instituto Tecnológico Superior de Macuspana,'.
-                            'en términos del artículo 13, fracción III, VIII y XIV de la Ley que Crea el Instituto Tecnológico Superior de Macuspana, artículo 11, '.
-				            'fracción II y X, artículo 16, fracción VIII, X y las demás aplicables del Reglamento Interior del Instituto Tecnológico Superior '.
-				            'de Macuspana, me dirijo a Usted con la oportunidad de hacerle el presente llamado de atención por escrito, debido a su actuación de los días: ',0,'J', false);
+		$pdf->MultiCell(0,5,'De conformidad con las atribuciones conferidas y encomendadas por el M.A.T.I. Leonardo Rafael Bojorges Gï¿½ereï¿½a, Director General del Instituto Tecnolï¿½gico Superior de Macuspana,'.
+                            'en tï¿½rminos del artï¿½culo 13, fracciï¿½n III, VIII y XIV de la Ley que Crea el Instituto Tecnolï¿½gico Superior de Macuspana, artï¿½culo 11, '.
+				            'fracciï¿½n II y X, artï¿½culo 16, fracciï¿½n VIII, X y las demï¿½s aplicables del Reglamento Interior del Instituto Tecnolï¿½gico Superior '.
+				            'de Macuspana, me dirijo a Usted con la oportunidad de hacerle el presente llamado de atenciï¿½n por escrito, debido a su actuaciï¿½n de los dï¿½as: ',0,'J', false);
 		
 		$pdf->Ln(5);
 		$headerdes = array('FECHA','MATERIA','AULA','HORARIO');
@@ -168,11 +168,11 @@
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-SemiBold','',10);
 		$pdf->MultiCell(0,5,'Cuando Usted falto injustificadamente a su jornada de trabajo en el '.
-				$eldeptomaestro.' del Instituto Tecnológico Superior de Macuspana, sin tomar las precauciones debido a las importantes funciones que usted realiza, no notificando con tiempo a su superior jerárquico. ',0,'J', false);
+				$eldeptomaestro.' del Instituto Tecnolï¿½gico Superior de Macuspana, sin tomar las precauciones debido a las importantes funciones que usted realiza, no notificando con tiempo a su superior jerï¿½rquico. ',0,'J', false);
 		$pdf->Ln(5);
-		$pdf->MultiCell(0,5,'Esto crea una imagen de falta de seriedad en su persona y por extensión, de nuestra Institución Educativa. Por lo anterior, '.
+		$pdf->MultiCell(0,5,'Esto crea una imagen de falta de seriedad en su persona y por extensiï¿½n, de nuestra Instituciï¿½n Educativa. Por lo anterior, '.
 				'se le exhorta para que corrija su comportamiento, y en lo futuro notifique previamente a su jefe inmediato cuando tenga la necesidad de ausentarse de sus labores, '.
-				'pues de lo contrario, nos veremos en la obligación de tomar otro tipo de acciones legales.',0,'J', false);
+				'pues de lo contrario, nos veremos en la obligaciï¿½n de tomar otro tipo de acciones legales.',0,'J', false);
 		$pdf->Ln(5);
 		
 		
@@ -183,7 +183,7 @@
 		$pdf->Cell(0,0,'A T E N T A M E N T E',0,1,'L');
 		$pdf->setX(25);$pdf->setY(225);
 		$pdf->SetFont('Montserrat-ExtraLight','I',8);
-		$pdf->Cell(0,0,'Excelencia en Educación Tecnológica',0,1,'L');
+		$pdf->Cell(0,0,'Excelencia en Educaciï¿½n Tecnolï¿½gica',0,1,'L');
 		$pdf->setX(25);$pdf->setY(236);
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,0,utf8_decode($data[0]["JEFED"]),0,1,'L');
@@ -192,7 +192,7 @@
 		
 		$pdf->setX(25);$pdf->setY(245);
 		$pdf->SetFont('Montserrat-Medium','',7);
-		$pdf->Cell(0,0,"C.c.p. ".utf8_decode($subdir)."; Subdirección académica.",0,1,'L');
+		$pdf->Cell(0,0,"C.c.p. ".utf8_decode($subdir)."; Subdirecciï¿½n acadï¿½mica.",0,1,'L');
 		
 
 		
@@ -200,15 +200,15 @@
 		/*
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-SemiBold','',10);
-		$pdf->MultiCell(0,8,'Agradeceré se envie copia del exhorto a esta jefatura de división.',0,'J', false);
+		$pdf->MultiCell(0,8,'Agradecerï¿½ se envie copia del exhorto a esta jefatura de divisiï¿½n.',0,'J', false);
 		$pdf->Ln(5);
-		$pdf->MultiCell(0,8,'Sin más por el momento aprovecho para enviarle un cordial saludo.',0,'J', false);
+		$pdf->MultiCell(0,8,'Sin mï¿½s por el momento aprovecho para enviarle un cordial saludo.',0,'J', false);
 		$pdf->Ln(40);
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,0,'A T E N T A M E N T E',0,1,'L');
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-ExtraLight','I',8);
-		$pdf->Cell(0,0,'Excelencia en Educación Tecnológica',0,1,'L');
+		$pdf->Cell(0,0,'Excelencia en Educaciï¿½n Tecnolï¿½gica',0,1,'L');
 		$pdf->Ln(10);
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,0,utf8_decode($data[0]["JEFED"]),0,1,'L');
@@ -217,7 +217,7 @@
 		$pdf->Ln(55);
 		$pdf->SetFont('Montserrat-Medium','',8);
 		$pdf->setX(25);$pdf->setY(240);
-		$pdf->Cell(0,0,utf8_decode($subdir)."; Subdirección académica.",0,1,'L');
+		$pdf->Cell(0,0,utf8_decode($subdir)."; Subdirecciï¿½n acadï¿½mica.",0,1,'L');
 		
 	*/
 			

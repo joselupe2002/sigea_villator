@@ -287,7 +287,7 @@ function colocaConsecutivo(lafila,modulo) {
 								campollave:"ID",
 								bd:"Mysql",
 								valorllave:lafila[0]["ID"],
-								FOLIO: "ITSM"+"-"+elarea+"-"+JSON.parse(data)[0][0]+"-D",
+								FOLIO: "ITSSMO"+"-"+elarea+"-"+JSON.parse(data)[0][0]+"-D",
 								FECHAEXP:$("#fechafol").val()
 							};
 							

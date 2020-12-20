@@ -95,7 +95,7 @@ function enviarCorreoJefe(modulo,tipo){
 			var parametros = {
 				"MENSAJE": mensaje,
 				"ADJSERVER": 'N',
-				"ASUNTO": 'ITSM: AUTORIZACION DE PRORROGA '+matricula+" "+nombre,
+				"ASUNTO": 'ITSSMO: AUTORIZACION DE PRORROGA '+matricula+" "+nombre,
 				"CORREO" :  elcorreo,
 				"NOMBRE" :  table.rows('.selected').data()[0]["NOMBRE"],
 				"ADJUNTO":''

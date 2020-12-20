@@ -96,7 +96,7 @@ function agregarComite(id,usuario,institucion,campus) {
 			url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"CASOCOMITE"+elanio,
 			success: function(dataC){
 				micons=dataC;							
-				micaso="ITSM-"+elanio+"-"+micons;		
+				micaso="ITSSMO-"+elanio+"-"+micons;		
 				parametros={
 					tabla:"co_solicitud",
 					campollave:"ID",

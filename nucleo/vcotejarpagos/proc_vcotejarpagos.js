@@ -100,7 +100,7 @@ function enviarCorreo(modulo,cotejado, obs, tipo){
     var parametros = {
 		"MENSAJE": mensaje,
 		"ADJSERVER": 'N',
-		"ASUNTO": 'ITSM: STATUS DE PAGO DE '+eltipo,
+		"ASUNTO": 'ITSSMO: STATUS DE PAGO DE '+eltipo,
 		"CORREO" :  elcorreo,
 		"NOMBRE" :  table.rows('.selected').data()[0]["NOMBRE"],
 		"ADJUNTO":''
@@ -151,7 +151,7 @@ function enviarCorreoJefe(modulo,cotejado, obs, matricula, nombre){
 				var parametros = {
 					"MENSAJE": mensaje,
 					"ADJSERVER": 'N',
-					"ASUNTO": 'ITSM: PAGO DE REINSCRIPCIÓN COTEJADO DE '+matricula+" "+nombre,
+					"ASUNTO": 'V: PAGO DE REINSCRIPCIÓN COTEJADO DE '+matricula+" "+nombre,
 					"CORREO" :  elcorreo,
 					"NOMBRE" :  table.rows('.selected').data()[0]["NOMBRE"],
 					"ADJUNTO":''
@@ -211,7 +211,7 @@ function enviarCorreoIngles(modulo,cotejado, obs, matricula, nombre){
 			var parametros = {
 				"MENSAJE": mensaje,
 				"ADJSERVER": 'N',
-				"ASUNTO": 'ITSM: PAGO COTEJADO DE INGLÉS DE '+matricula+" "+nombre,
+				"ASUNTO": 'ITSSMO: PAGO COTEJADO DE INGLÉS DE '+matricula+" "+nombre,
 				"CORREO" :  elcorreo,
 				"NOMBRE" :  table.rows('.selected').data()[0]["NOMBRE"],
 				"ADJUNTO":''

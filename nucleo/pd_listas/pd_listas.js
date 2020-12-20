@@ -188,7 +188,7 @@ function insertaFecha (matricula) {
 			success:  function (response) {
 				parametros={tabla:"asistencia",
 			    bd:"Mysql",
-			    _INSTITUCION:"ITSM",
+			    _INSTITUCION:"ITSSMO",
 			    _CAMPUS:"0",
 			    MATRICULA:matricula,
 			    IDGRUPO:$("#selMaterias").val(),

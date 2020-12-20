@@ -446,7 +446,7 @@ function guardarGen(){
 			CARRERA2:$("#CARRERA2").val(),
 			TIPOCAPT:"WEB",
 			CICLO:elciclo,
-			_INSTITUCION:"ITSM",
+			_INSTITUCION:"ITSSMO",
 			_CAMPUS:"0",
 			fechacap: fechacap
 	};

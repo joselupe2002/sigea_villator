@@ -90,7 +90,7 @@ function generaTablaInformacion(grid_data){
 			idpreg=i+49;
 			cadCampo2="'2193','"+valor.alumno+"','"+valor.profesor+"','"+
 			valor.cvemateria+"','"+valor.GRUPO1+"','"+respuesta+"','15/09/2020',"+
-			respuesta+",'ITSM','0','"+valor.IDDETALLE+"','S','"+idpreg+"','"+valor.IDGRUPO+"');";
+			respuesta+",'ITSSMO','0','"+valor.IDDETALLE+"','S','"+idpreg+"','"+valor.IDGRUPO+"');";
 
 			$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\">");
 			$("#rowM"+contR).append("<td>"+contR+"</td>");

@@ -11,7 +11,7 @@
 	$_SESSION['nombre'] = "registro de aspirantes";
 	$_SESSION['super'] = "N";
 	$_SESSION['inicio'] = 1;
-	$_SESSION['INSTITUCION'] = "ITSM";
+	$_SESSION['INSTITUCION'] = "ITSSMO";
 	$_SESSION['CAMPUS'] = "0";
 	$_SESSION['encode'] = "ISO-8859-1";
 	$_SESSION['carrera'] = "1";

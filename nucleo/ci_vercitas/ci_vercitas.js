@@ -331,8 +331,8 @@ function cancelarCita(elid) {
 				"<b> Fecha: </b>"+dataCita[0]["FECHA"]+"<br>"+
 				"<b> Hora: </b>"+dataCita[0]["HORA"]+"<br>";
 
-				correoPersona(dataCita[0]["SOLICITANTE"],"<html><span style=\"color:green;\"><b>Te confirmamos <span style=\"color:red;\"> CANCELACIÓN </span> de tu cita: </b></span>"+mensaje,"ITSM: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);			
-				correoPersona(dataCita[0]["RESPONSABLE"], "<html><span style=\"color:green;\"><b>Se <span style=\"color:red;\"> CANCELO </span> una cita: </b></span>"+mensaje,"ITSM: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);	
+				correoPersona(dataCita[0]["SOLICITANTE"],"<html><span style=\"color:green;\"><b>Te confirmamos <span style=\"color:red;\"> CANCELACIÓN </span> de tu cita: </b></span>"+mensaje,"ITSSMO: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);			
+				correoPersona(dataCita[0]["RESPONSABLE"], "<html><span style=\"color:green;\"><b>Se <span style=\"color:red;\"> CANCELO </span> una cita: </b></span>"+mensaje,"ITSSMO: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);	
 				
 				lafecha=dameFecha("FECHAHORA");
 				parametros={

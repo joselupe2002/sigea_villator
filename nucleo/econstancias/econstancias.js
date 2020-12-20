@@ -72,7 +72,7 @@ function imprimeReporte(tipocons,consecutivo) {
 
     parametros={tabla:"econstancias",
 			    bd:"Mysql",
-			    _INSTITUCION:"ITSM",
+			    _INSTITUCION:"ITSSMO",
 			    _CAMPUS:"0",
 			    CONSECUTIVO:consecutivo,
 				MATRICULA:$("#selAlumnos").val(),
@@ -214,7 +214,7 @@ function colocaPie(consec,matricula,nombre,carrera) {
 function creaConsCal (elciclo,matricula,consec,anio){
 	$("#encabezadoCons").empty();$("#cuerpoCons").empty();$("#calCons").empty();$("#pieCons").empty();
 	mostrarEspera("esperacons","grid_econstancias", "Cargando Datos..");
-	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSM'";
+	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSSMO'";
 	
 	parametros={sql:elsqlGen,dato:sessionStorage.co,bd:"SQLite"}
 	$.ajax({
@@ -312,7 +312,7 @@ function colocaHorarios(dataCal) {
 function creaConsHor(elciclo,matricula,consec,anio){
 	$("#encabezadoCons").empty();$("#cuerpoCons").empty();$("#calCons").empty();$("#pieCons").empty();
 	mostrarEspera("esperacons","grid_econstancias", "Cargando Datos..");
-	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSM'";
+	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSSMO'";
 	
 	parametros={sql:elsqlGen,dato:sessionStorage.co,bd:"SQLite"}
 
@@ -435,7 +435,7 @@ function colocaPeriodos(dataCal) {
 function creaConsPer(elciclo,matricula,consec,anio){
 	$("#encabezadoCons").empty();$("#cuerpoCons").empty();$("#calCons").empty();$("#pieCons").empty();
 	mostrarEspera("esperacons","grid_econstancias", "Cargando Datos..");
-	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSM'";
+	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSSMO'";
 	parametros={sql:elsqlGen,dato:sessionStorage.co,bd:"SQLite"}
 	$.ajax({
 		type: "POST",
@@ -499,7 +499,7 @@ function creaConsPer(elciclo,matricula,consec,anio){
 function creaConsIns(elciclo,matricula,consec,anio){
 	$("#encabezadoCons").empty();$("#cuerpoCons").empty();$("#calCons").empty();$("#pieCons").empty();
 	mostrarEspera("esperacons","grid_econstancias", "Cargando Datos..");
-	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSM'";
+	elsqlGen="SELECT * from INSTITUCIONES where _INSTITUCION='ITSSMO'";
 	parametros={sql:elsqlGen,dato:sessionStorage.co,bd:"SQLite"}
 	$.ajax({
 		type: "POST",

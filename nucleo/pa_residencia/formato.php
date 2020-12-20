@@ -321,7 +321,7 @@
 		$pdf->Cell(0,0,utf8_decode("h) Información sobre la empresa, organismo o dependencia para la que se desarrollará el proyecto."),"",1,'L',false);
 		$pdf->Ln(5);
 		$pdf->SetFont('Times','B',10);
-		$pdf->Cell(0,0,utf8_decode("DOCUMENTACION A ENTREGAR (Esta sección será llenada por el personal del ITSM)"),"",0,'L',false);
+		$pdf->Cell(0,0,utf8_decode("DOCUMENTACION A ENTREGAR (Esta sección será llenada por el personal del ITSSMO)"),"",0,'L',false);
 		$pdf->Ln(5);
 		$pdf->SetFont('Times','',10);
 		$pdf->Cell(10,5,utf8_decode("No."),"LTR",0,'C',false);$pdf->Cell(125,5,utf8_decode("DOCUMENTO"),"LRT",0,'C',false);$pdf->Cell(40,5,utf8_decode("ENTREGADO"),1,1,'C',false);

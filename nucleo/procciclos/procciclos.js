@@ -216,7 +216,7 @@ function bajaDefinitiva(ciclo){
 							 //INSERTAMOS AL ALUMNOS EN CAJA DEFINITIVA
 							 parametros={tabla:"ebajas",
 							 bd:"Mysql",
-							 _INSTITUCION:"ITSM",
+							 _INSTITUCION:"ITSSMO",
 							 _CAMPUS:"0",
 							 MATRICULA:valor.ALUM_MATRICULA,
 							 CICLO:ciclo,

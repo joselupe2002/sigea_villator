@@ -548,7 +548,7 @@ if (count($data2)>0) {
         $pdf->SetWidths(array(10,15,70, 10,10,10,30,15,15,10));
         $pdf->Ln();
         $pdf->Cell(0,5,utf8_decode('Nota: Este Reporte solo es válido para los trámites internos avalados '.
-        'por la Dirección General del ITSM y para uso personal de alumno.'),0,0,'J',true);
+        'por la Dirección General del ITSSMO y para uso personal de alumno.'),0,0,'J',true);
 
 
         $cadena= "FECHA:".str_replace("/","",$fecha)."|".str_replace(" ","|",$dataAlum[0]["ALUM_MATRICULA"]).

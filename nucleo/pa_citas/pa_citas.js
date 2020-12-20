@@ -242,8 +242,8 @@ function guardarCita(elid){
 								"<b> Requisitos: </b><br>"+dataCita[0]["REQUISITOS"]+"<br>"+									
 								"Favor de llegar a tiempo a su cita <BR>";
 
-								correoPersona(usuario,"<html><span style=\"color:green;\"><b>Te confirmamos tu cita: </b></span>"+mensaje,"ITSM: CONFIRMACIÓN DE CITA "+dataCita[0]["FECHA"]);			
-								correoPersona(dataCita[0]["RESPONSABLE"], "<html><span style=\"color:green;\"><b>Se agendo una cita: </b></span>"+mensaje,"ITSM: CONFIRMACIÓN DE CITA "+dataCita[0]["FECHA"]);	
+								correoPersona(usuario,"<html><span style=\"color:green;\"><b>Te confirmamos tu cita: </b></span>"+mensaje,"ITSSMO: CONFIRMACIÓN DE CITA "+dataCita[0]["FECHA"]);			
+								correoPersona(dataCita[0]["RESPONSABLE"], "<html><span style=\"color:green;\"><b>Se agendo una cita: </b></span>"+mensaje,"ITSSMO: CONFIRMACIÓN DE CITA "+dataCita[0]["FECHA"]);	
 
 								setNotificacionFecha(usuario,"Cita: "+dataCita[0]["HORA"]+" "+dataCita[0]["TRAMITED"],
 										dataCita[0]["FECHA"],dataCita[0]["FECHA"],"","P",institucion,campus);
@@ -332,8 +332,8 @@ function cancelarCita(elid) {
 				"<b> Fecha: </b>"+dataCita[0]["FECHA"]+"<br>"+
 				"<b> Hora: </b>"+dataCita[0]["HORA"]+"<br>";
 
-				correoPersona(dataCita[0]["SOLICITANTE"],"<html><span style=\"color:green;\"><b>Te confirmamos <span style=\"color:red;\"> CANCELACIÓN </span> de tu cita: </b></span>"+mensaje,"ITSM: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);			
-				correoPersona(dataCita[0]["RESPONSABLE"], "<html><span style=\"color:green;\"><b>Se <span style=\"color:red;\"> CANCELO </span> una cita: </b></span>"+mensaje,"ITSM: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);	
+				correoPersona(dataCita[0]["SOLICITANTE"],"<html><span style=\"color:green;\"><b>Te confirmamos <span style=\"color:red;\"> CANCELACIÓN </span> de tu cita: </b></span>"+mensaje,"ITSSMO: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);			
+				correoPersona(dataCita[0]["RESPONSABLE"], "<html><span style=\"color:green;\"><b>Se <span style=\"color:red;\"> CANCELO </span> una cita: </b></span>"+mensaje,"ITSSMO: CANCELACIÓN DE CITA "+dataCita[0]["FECHA"]);	
 				
 				lafecha=dameFecha("FECHAHORA");
 				parametros={

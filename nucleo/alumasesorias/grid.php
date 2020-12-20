@@ -468,11 +468,11 @@ function cargarAsesorias(){
 					$("#vagendar").modal("hide");
 					correoalProf(prof, "<html>El alumno <span style=\"color:green\"><b>"+usuario+" "+nombreuser+
 								"</b></span> ha agendado una asesoria , para el d&iacute;a  "+$("#fecha").val()+" a las "+horario.substr(0,5)+" horas <br/>"+
-								"Lugar: "+"<a href=\""+lugar+"\">"+lugar+"</a>","ITSM: SOLICITUD DE ASESORIAS "+usuario+" "+nombreuser);			
+								"Lugar: "+"<a href=\""+lugar+"\">"+lugar+"</a>","ITSSMO: SOLICITUD DE ASESORIAS "+usuario+" "+nombreuser);			
 
 					correoalAlum(usuario, "<html>"+usuario+" "+nombreuser+" Te confirmamos que tu asesoria quedo agendada <span style=\"color:green\"><b>"+
 								"</b></span> <br> Fecha: "+$("#fecha").val()+" a las "+horario.substr(0,5)+" <br>hora: <br>"+
-								"<br> Lugar: "+"<a href=\""+lugar+"\">"+lugar+"</a>","ITSM: CONFIRMACION DE ASESORIAS "+usuario+" "+nombreuser);			
+								"<br> Lugar: "+"<a href=\""+lugar+"\">"+lugar+"</a>","ITSSMO: CONFIRMACION DE ASESORIAS "+usuario+" "+nombreuser);			
 
 					setNotificacion(prof,"Sol. ASESORIA."+usuario+" "+nombreuser+" Fecha:"+$("#fecha").val()+" Hora:"+horario.substr(0,5),"","","<?php echo $_SESSION["INSTITUCION"]; ?>","<?php  echo $_SESSION["CAMPUS"]; ?>");         
 
@@ -530,11 +530,11 @@ function cargarAsesorias(){
 
 							correoalProf(prof, "<html>El alumno <span style=\"color:green\"><b>"+usuario+" "+nombreuser+
 								"</b></span> ha <span style=\"color:red;\">CANCELADO </span> la asesoria , para el d&iacute;a  "+fecha+" a las "+horario+" horas <br/>"
-							,"ITSM: CANCELACION DE ASESORIAS "+usuario+" "+nombreuser);			
+							,"ITSSMO: CANCELACION DE ASESORIAS "+usuario+" "+nombreuser);			
 
 							correoalAlum(usuario, "<html>"+usuario+" "+nombreuser+" Te confirmamos que tu asesoria quedo<span style=\"color:red;\">CANCELADA</span> <span style=\"color:green\"><b>"+
 								"</b></span> <br> Fecha: "+fecha+" a las "+horario+" <br>hora: <br>"
-								,"ITSM: CANCELACION DE ASESORIAS "+usuario+" "+nombreuser);			
+								,"ITSSMO: CANCELACION DE ASESORIAS "+usuario+" "+nombreuser);			
 
 							}	
 					else {alert ("OCURRIO EL SIGUIENTE ERROR: "+data);}          					           
