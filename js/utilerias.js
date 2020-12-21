@@ -1132,6 +1132,7 @@ function actualizaSelect(nombre,elsql,tipoSelect,eltipo){
 		data:parametros,
         url:  "../"+fuera+"base/getdatossqlSeg.php",
         success: function(data){  
+			alert (data);
 			losdatos=JSON.parse(data);
 			
        	 jQuery.each(JSON.parse(data), function(clave, valor) { 	
