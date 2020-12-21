@@ -1126,6 +1126,7 @@ function actualizaSelect(nombre,elsql,tipoSelect,eltipo){
 	 if (eltipo=="FUERA") {fuera="nucleo/";}
 
 	 parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+	 alert (elsql);
 	 $.ajax({
 		type: "POST",
 		data:parametros,
