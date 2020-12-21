@@ -22,6 +22,8 @@ contMat=1;
 
 		$("#lascarreras").append("<span class=\"label label-warning\">Carrera</span>");
 		 
+		alert (data);
+		
 		$.ajax({
 			type: "GET",
 			url:  "../base/getSesion.php?bd=Mysql&campo=carrera",
