@@ -1136,7 +1136,7 @@ function actualizaSelect(nombre,elsql,tipoSelect,eltipo){
 			losdatos=JSON.parse(data);
 			
        	 jQuery.each(JSON.parse(data), function(clave, valor) { 	
-       		 $("#"+nombre).append("<option value=\""+losdatos[clave][0]+"\">"+utf8Decode(losdatos[clave][1])+"</option>");       	     
+       		 $("#"+nombre).append("<option value=\""+losdatos[clave][0]+"\">"+losdatos[clave][1]+"</option>");       	     
               });
        	
        	 if (tipoSelect=='BUSQUEDA') {    
