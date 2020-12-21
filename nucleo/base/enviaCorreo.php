@@ -14,6 +14,7 @@
           $_POST["MENSAJE"],$_POST["ADJUNTO"]);
      }
   
-     echo "Se envió correo a ".$_POST["NOMBRE"]." CORREO: ".$_POST["CORREO"];						
+     if ($resCorreo=="") {echo "Se envió correo a ".$_POST["NOMBRE"]." CORREO: ".$_POST["CORREO"];}
+     else {echo "Ocurrio un error ".$_POST["NOMBRE"]." CORREO: ".$_POST["CORREO"]." ".$resCorreo;}
 
  ?>

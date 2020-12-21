@@ -93,18 +93,15 @@ function verPlanImp(modulo,usuario,institucion, campus,essuper){
 
 
 function VerHorario(modulo,usuario,institucion, campus,essuper){	
-
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
 	    enlace="nucleo/vcargasprof/horario.php?ID="+table.rows('.selected').data()[0]["EMPL"]+"&ciclod="+table.rows('.selected').data()[0]["CICLO"]+"&ciclo="+table.rows('.selected').data()[0]["CICLO"];
-		abrirPesta(enlace,'Planeacion');
+		abrirPesta(enlace,'Horario');
 	}
-
 	else {
 		alert ("Debe seleccionar un profesor");
 		return 0;
 		}
-
 }
 
 

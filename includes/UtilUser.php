@@ -15,8 +15,8 @@ class UtilUser {
 
 	public function enviarCorreo($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
-		$emisor="sigea@itsmacuspana.edu.mx";
-		$clave="Emanuel2010";
+		$emisor="sigea@smariaoro.tecnm.mx";
+		$clave="Lox40224";
 		
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -30,8 +30,9 @@ class UtilUser {
 						'allow_self_signed' => true
 				)
 		);
-		$mail->Host = "smtp.gmail.com";		
+		$mail->Host = "smtp.office365.com";	
 		$mail->Port = 587; // or 587
+		$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
 		$mail->Username = $emisor;
 		$mail->Password = $clave;
@@ -59,8 +60,8 @@ class UtilUser {
 
 	public function enviarCorreoCopia($receptor,$asunto,$cuerpo,$adj1,$ccopia) {
 		$res="";
-		$emisor="sigea@itsmacuspana.edu.mx";
-		$clave="Emanuel2010";
+		$emisor="sigea@smariaoro.tecnm.mx";
+		$clave="Lox40224";
 		
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -74,8 +75,9 @@ class UtilUser {
 						'allow_self_signed' => true
 				)
 		);
-		$mail->Host = "smtp.gmail.com";		
+		$mail->Host = "smtp.office365.com";	
 		$mail->Port = 587; // or 587
+		$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
 		$mail->Username = $emisor;
 		$mail->Password = $clave;
@@ -101,12 +103,9 @@ class UtilUser {
 
 	public function enviarCorreoAdj($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
-		//$emisor="sigeli.webcore@gmail.com";
-		//$clave="esazxhyljzwtxagn";
 	
-		$emisor="sigea@itsmacuspana.edu.mx";
-		$clave="Emanuel2010";
-	
+		$emisor="sigea@smariaoro.tecnm.mx";
+		$clave="Lox40224";
 
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -120,8 +119,9 @@ class UtilUser {
 						'allow_self_signed' => true
 				)
 		);
-		$mail->Host = "smtp.gmail.com";		
+		$mail->Host = "smtp.office365.com";	
 		$mail->Port = 587; // or 587
+		$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
 		$mail->Username = $emisor;
 		$mail->Password = $clave;
@@ -130,7 +130,9 @@ class UtilUser {
 		$mail->Body =$cuerpo;
 		$mail->AddAddress($receptor);
 		$mail->CharSet = 'ISO-8859-1';
+
 		
+	
 		if (!($adj1=="")) {
 			$mail->AddAttachment($adj1,$adj1);
 		}
@@ -140,6 +142,7 @@ class UtilUser {
 		} else {
 			$res="";
 		}
+		
 		
 		return $res;
 	}
@@ -399,7 +402,7 @@ class UtilUser {
 		}
 		
 		$pdf->Image('../../imagenes/empresa/pie1.png',$left1,$top1,20);
-		$pdf->Image('../../imagenes/empresa/pie2.png',$left2,$top2,15);
+		$pdf->Image('../../imagenes/empresa/pie2.png',$left2,$top2,11);
 		$pdf->SetFont('Montserrat-Medium','',8);
 		$pdf->SetY(-25);
 		$pdf->Cell(0,10,utf8_decode($direccion),0,0,'C');
@@ -411,12 +414,12 @@ class UtilUser {
 	}
 	
 	public function  getEncabezado($pdf,$orienta){
-		$left2=120; $left3=180;
+		$left2=110; $left3=160;
 		if ($orienta=='H') {$left2=210; $left3=260;}
 		$pdf->Image('../../imagenes/empresa/fondo.png',0,0,187,275);
 		$pdf->Image('../../imagenes/empresa/enc1.png',20,8,85);
-		$pdf->Image('../../imagenes/empresa/enc2.png',$left2,6,40);
-		$pdf->Image('../../imagenes/empresa/enc3.png',$left3,8,10);
+		$pdf->Image('../../imagenes/empresa/enc2.png',$left2,3,40);
+		$pdf->Image('../../imagenes/empresa/enc3.png',$left3,8,30);
 		
 		
 		$pdf->AddFont('Montserrat-Black','B','Montserrat-Black.php');

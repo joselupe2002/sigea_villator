@@ -97,16 +97,16 @@ function imprimeReporte(tipocons,consecutivo) {
 		if (tipocons=="2") {creaConsHor($("#selciclo").val(),$("#selAlumnos").val(),consecutivo,elanio); } 
 		if (tipocons=="3") {creaConsPer($("#selciclo").val(),$("#selAlumnos").val(),consecutivo,elanio); } 
 		if (tipocons=="4") {creaConsIns($("#selciclo").val(),$("#selAlumnos").val(),consecutivo,elanio); } 
-		if (tipocons=="5") {window.open("../avancecurri/kardex.php?matricula="+$("#selAlumnos").val(), '_blank');  }
-		if (tipocons=="6") {window.open("boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val(), '_blank');  }
+		if (tipocons=="5") {enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val(); abrirPesta(enlace,"Kardex"); }
+		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val(); abrirPesta(enlace,"Boleta"); }
 	}
 	if ($("#selTipoExp").val()==2) {
-		if (tipocons=="1") {window.open("conscal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio, '_blank');  }
-		if (tipocons=="2") {window.open("conshorario.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio, '_blank');  }
-		if (tipocons=="3") {window.open("consperiodo.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio, '_blank');  }
-		if (tipocons=="4") {window.open("conssincal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio, '_blank');  }
-		if (tipocons=="5") {window.open("../avancecurri/kardex.php?matricula="+$("#selAlumnos").val(), '_blank');  }
-		if (tipocons=="6") {window.open("boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val(), '_blank');  }
+		if (tipocons=="1") {enlace="nucleo/econstancias/conscal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio; abrirPesta(enlace,"Calif"); }
+		if (tipocons=="2") {enlace="nucleo/econstancias/conshorario.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio; abrirPesta(enlace,"Horario");  }
+		if (tipocons=="3") {enlace="nucleo/econstancias/consperiodo.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio; abrirPesta(enlace,"Periodo");  }
+		if (tipocons=="4") {enlace="nucleo/econstancias/conssincal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio;  abrirPesta(enlace,"SinCal"); }
+		if (tipocons=="5") {enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val(); abrirPesta(enlace,"Kardex"); }
+		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val(); abrirPesta(enlace,"Boleta"); }
 	}
 }
 

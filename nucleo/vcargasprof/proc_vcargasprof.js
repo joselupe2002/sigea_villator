@@ -645,7 +645,9 @@ function guardarHorario(institucion,campus){
 function reporteDes(modulo,usuario,institucion, campus,essuper){	
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
-		window.open("../vcargasprof/horario.php?ID="+table.rows('.selected').data()[0][0]+"&ciclod="+table.rows('.selected').data()[0][3]+"&ciclo="+table.rows('.selected').data()[0][2], '_blank');
+
+		enlace="nucleo/vcargasprof/horario.php?ID="+table.rows('.selected').data()[0][0]+"&ciclod="+table.rows('.selected').data()[0][3]+"&ciclo="+table.rows('.selected').data()[0][2];
+		abrirPesta(enlace,'Horario');
 	}
 	else {
 		alert ("Debe seleccionar un profesor");

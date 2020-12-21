@@ -2957,7 +2957,6 @@ function procEnvioCorreo(modulo,colcorreo,ec_elReg){
 
 	elcorreo=lafila[0][colcorreo]; if ($("#elcorreoprueba").val().length>0) {elcorreo=$("#elcorreoprueba").val();}
 	
-
     var parametros = {
 		"MENSAJE": mensaje,
 		"ADJSERVER": 'S',
@@ -2966,7 +2965,6 @@ function procEnvioCorreo(modulo,colcorreo,ec_elReg){
 		"NOMBRE":"",
 		"ADJUNTO":''
     };
-
     $.ajax({
         data:  parametros,
         type: "POST",
@@ -2975,7 +2973,7 @@ function procEnvioCorreo(modulo,colcorreo,ec_elReg){
         {
             $('#txtResultados').val($('#txtResultados').val()+(ec_elReg+1)+" de "+(ec_nreg)+" "+response+"\n");
             ec_elReg++;
-            if (ec_nreg>=ec_elReg) {procEnvioCorreo(modulo,colcorreo,ec_elReg);}
+            if (ec_nreg>ec_elReg) {procEnvioCorreo(modulo,colcorreo,ec_elReg);}
         },
         error : function(error) {
             console.log(error);
