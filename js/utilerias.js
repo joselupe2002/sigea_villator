@@ -930,7 +930,7 @@ function addSELECT(nombre,contenedor,tipo, sql, otrascondiciones, tipoSelect) {
 	if (tipo=='PROPIO') {elsql=sql;}
 
 	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-	alert (elsql);
+
 	$.ajax({
 		type: "POST",
 		data:parametros,
