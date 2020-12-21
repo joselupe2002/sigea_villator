@@ -22,18 +22,15 @@ contMat=1;
 
 		$("#lascarreras").append("<span class=\"label label-warning\">Carrera</span>");
 		 
-		alert (data);
-		
+	
+
 		$.ajax({
 			type: "GET",
 			url:  "../base/getSesion.php?bd=Mysql&campo=carrera",
 			success: function(data){  
-			    alert (data);
+			   
 				addSELECT("selCarreras","lascarreras","PROPIO", "SELECT CARR_CLAVE, CARR_DESCRIP FROM ccarreras where CARR_ACTIVO='S'"+
 				" and CARR_CLAVE IN ("+data+")", "",""); 
-
-				alert ("SELECT CARR_CLAVE, CARR_DESCRIP FROM ccarreras where CARR_ACTIVO='S'"+
-				" and CARR_CLAVE IN ("+data+")");
 				},
 			error: function(data) {	                  
 					   alert('ERROR: '+data);
