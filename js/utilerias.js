@@ -934,8 +934,7 @@ function addSELECT(nombre,contenedor,tipo, sql, otrascondiciones, tipoSelect) {
 		type: "POST",
 		data:parametros,
         url:  "../base/getdatossqlSeg.php",
-        success: function(data){
-			   alert (data);
+        success: function(data){			
        	       losdatos=JSON.parse(data);   
        	       eltipo="";
        	       if (tipoSelect=='BUSQUEDA') {eltipo="chosen-select";}
