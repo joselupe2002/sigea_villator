@@ -498,3 +498,217 @@ function procesoTitulado(matricula, valortit,valorcic){
 	}					     
 });    
 }
+
+
+/*============================================TITULACION ==========================================*/
+function mostrarDatos(modulo,op) {
+	table = $("#G_"+modulo).DataTable();
+
+	lafechaA=table.rows('.selected').data()[0]["FECHA_TITA"]; if (table.rows('.selected').data()[0]["FECHA_TITA"]=='') {lafechaA=table.rows('.selected').data()[0]["FECHA_TIT"];}
+	lafechaAEX=table.rows('.selected').data()[0]["FECHA_ACTA"]; if (table.rows('.selected').data()[0]["FECHA_ACTA"]=='') {lafechaAEX=table.rows('.selected').data()[0]["FECHA_TIT"];}
+	
+	lahoraA=table.rows('.selected').data()[0]["HORA_TITA"]; if (table.rows('.selected').data()[0]["HORA_TITA"]=='') {lahoraA=table.rows('.selected').data()[0]["HORA_TIT"];}
+	presA=table.rows('.selected').data()[0]["PRESA"]; if (table.rows('.selected').data()[0]["PRESA"]=='') {presA=table.rows('.selected').data()[0]["PRES"];}
+	secA=table.rows('.selected').data()[0]["SECA"]; if (table.rows('.selected').data()[0]["SECA"]=='') {secA=table.rows('.selected').data()[0]["SEC"];}
+	vocA=table.rows('.selected').data()[0]["VOCA"]; if (table.rows('.selected').data()[0]["VOCA"]=='') {vocA=table.rows('.selected').data()[0]["VOC"];}
+
+	mostrarConfirm2("infoacta","grid_"+modulo,"Información de Acta Profesional",
+	"<div class=\"row\" style=\"text-align:left;\">"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">No. de Libro</span>"+			
+	"		<input  id=\"libro\" autocomplete=\"off\" class= \"small form-control\" value=\""+table.rows('.selected').data()[0]["LIBRO"]+"\"></input>"+
+	"   </div>"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">No. Foja</span>"+			
+	"		<input  id=\"foja\" autocomplete=\"off\" class= \"small form-control \" value=\""+table.rows('.selected').data()[0]["FOJA"]+"\"></input>"+
+	"   </div>"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">No. Acta</span>"+			
+	"		<input  id=\"acta\" autocomplete=\"off\" class= \"small form-control\" value=\""+table.rows('.selected').data()[0]["ACTA"]+"\"></input>"+
+	"   </div>"+
+	"	<div id=\"lafecha\" class=\"col-sm-4\">"+
+	"		<span class=\"label label-danger\">Fecha Protocolo</span>"+
+	"		<div class=\"input-group\">"+
+	"			<input  class=\"form-control date-picker\" id=\"fechaA\" "+
+	" 					type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" value=\""+lafechaA+"\"/> "+
+	"			<span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span>"+
+	"		</div>"+
+	"   </div>"+
+	"	<div id=\"lahora\" class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">Hora</span>"+			
+	"		<input  id=\"horaA\" autocomplete=\"off\" class= \"small form-control input-mask-hora\" value=\""+lahoraA+"\"></input>"+
+	"   </div>"+
+	"</div>"+
+	"<div class=\"row\" style=\"text-align:left;\">"+
+	"	<div id=\"elpresidente\" class=\"col-sm-6\">"+
+	"		<span class=\"label label-danger\">Presidente</span>"+
+	"		<select class=\" chosen-select form-control text-success\"  id=\"selPresidenteA\"> </select>"+
+	"   </div>"+
+	"	<div id=\"elsecretario\" class=\"col-sm-6\">"+
+	"		<span class=\"label label-warning\">Secretario</span>"+
+	"		<select class=\" chosen-select form-control text-success\"  id=\"selSecretarioA\"> </select>"+
+	"   </div>"+
+	"</div>"+
+	"<div class=\"row\" style=\"text-align:left;\">"+
+	"	<div id=\"elvocal\" class=\"col-sm-6\">"+
+	"		<span class=\"label label-success\">Vocal</span>"+
+	"		<select class=\" chosen-select form-control text-success\"  id=\"selVocalA\"> </select>"+
+	"   </div>"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-danger\">Fecha Acta</span>"+
+	"		<div class=\"input-group\">"+
+	"			<input  class=\"form-control date-picker\" id=\"fechaAEX\" "+
+	" 					type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" value=\""+lafechaAEX+"\"/> "+
+	"			<span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span>"+
+	"		</div>"+
+	"   </div>"+
+	"	<div id=\"elresultado\" class=\"col-sm-2\">"+
+	"		<span class=\"label label-success\">Resultado</span>"+
+	"		<select class=\"form-control text-success\"  id=\"selResultado\"> </select>"+
+	"   </div>"+
+	"	<div id=\"lahora\" class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">Hora Fializó</span>"+			
+	"		<input  id=\"horaAT\" autocomplete=\"off\" class= \"small form-control input-mask-hora\" value=\""+table.rows('.selected').data()[0]["HORA_TITAT"]+"\"></input>"+
+	"   </div>"+
+	"</div>"
+	,"Guardar y Expedir Acta","guardarActa('"+modulo+"');","modal-lg");
+
+	$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
+	$(".input-mask-hora").mask("99:99");
+
+	$('.chosen-select').chosen({allow_single_deselect:true}); 
+	$(window).off('resize.chosen').on('resize.chosen', function() {$('.chosen-select').each(function() {var $this = $(this); $this.next().css({'width': "100%"});})}).trigger('resize.chosen');
+	$(document).on('settings.ace.chosen', function(e, event_name, event_val) { if(event_name != 'sidebar_collapsed') return; $('.chosen-select').each(function() {  var $this = $(this); $this.next().css({'width': "100%"});})});	     		    
+		   
+
+	actualizaSelectMarcar("selPresidenteA", "SELECT EMPL_NUMERO, CONCAT(EMPL_NUMERO,' ',EMPL_NOMBRE,' ',EMPL_APEPAT, ' ',EMPL_APEMAT) from pempleados ORDER BY EMPL_NOMBRE, EMPL_APEPAT", "BUSQUEDA","",presA); 
+	actualizaSelectMarcar("selSecretarioA", "SELECT EMPL_NUMERO, CONCAT(EMPL_NUMERO,' ',EMPL_NOMBRE,' ',EMPL_APEPAT, ' ',EMPL_APEMAT) from pempleados ORDER BY EMPL_NOMBRE, EMPL_APEPAT", "BUSQUEDA","",secA); 
+	actualizaSelectMarcar("selVocalA", "SELECT EMPL_NUMERO, CONCAT(EMPL_NUMERO,' ',EMPL_NOMBRE,' ',EMPL_APEPAT, ' ',EMPL_APEMAT) from pempleados ORDER BY EMPL_NOMBRE, EMPL_APEPAT", "BUSQUEDA","",vocA); 
+	actualizaSelectMarcar("selResultado", "SELECT 'APROBADO','APROBADO' from dual union SELECT 'NO APROBADO','NO APROBADO' from dual ", "","",table.rows('.selected').data()[0]["RESULTADO"]); 
+	
+}
+
+
+function guardarActa(modulo){			
+	table = $("#G_"+modulo).DataTable();
+	parametros={tabla:"tit_pasantes",campollave:"MATRICULA",bd:"Mysql",
+				valorllave:table.rows('.selected').data()[0]["MATRICULA"],
+				FECHA_TITA:$("#fechaA").val(),
+				HORA_TITA:$("#horaA").val(),
+				HORA_TITAT:$("#horaAT").val(),
+				LIBRO:$("#libro").val(),	
+				FOJA:$("#foja").val(),	
+				ACTA:$("#acta").val(),						
+				PRESA:$("#selPresidenteA").val(),
+				SECA:$("#selSecretarioA").val(),
+				VOCA:$("#selVocalA").val(),
+				FECHA_ACTA:$("#fechaAEX").val(),
+				RESULTADO:$("#selResultado").val()
+
+
+			};
+	$.ajax({
+		type: "POST",
+		url:"actualiza.php",
+		data: parametros,
+		success: function(data){				
+			enlace="nucleo/tit_pasantes/actaExam.php?alumno="+table.rows('.selected').data()[0]["MATRICULA"];
+			abrirPesta(enlace, "ActaExam");
+			$("#infoacta").modal("hide");
+			window.parent.document.getElementById('FRtit_pasantes').contentWindow.location.reload();
+
+		}					     
+	});    
+}
+
+
+
+
+function actaExam(modulo,usuario,institucion, campus,essuper) {
+
+	table = $("#G_"+modulo).DataTable();
+		if (table.rows('.selected').data().length>0) {	
+			if (table.rows('.selected').data()[0]["TITULADO"]=='S') {	
+					mostrarDatos(modulo);
+					
+				}					
+			else { alert ("No puede imprimir ACTA DE EXAMEN PROFESIONAL hasta que se marque como titulado"); return 0; }
+		}
+		else { alert ("Debe seleccionar un Registro"); return 0; }
+}
+
+
+
+/*===================================EL TITULO ==========================================*/
+
+function mostrarDatosTit(modulo,op) {
+	table = $("#G_"+modulo).DataTable();
+
+	mostrarConfirm2("infotit","grid_"+modulo,"Información de Título",
+	"<div class=\"row\" style=\"text-align:left;\">"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">No. de Libro</span>"+			
+	"		<input  id=\"libroT\" autocomplete=\"off\" class= \"small form-control\" value=\""+table.rows('.selected').data()[0]["LIBROT"]+"\"></input>"+
+	"   </div>"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">No. Foja</span>"+			
+	"		<input  id=\"fojaT\" autocomplete=\"off\" class= \"small form-control \" value=\""+table.rows('.selected').data()[0]["FOJAT"]+"\"></input>"+
+	"   </div>"+
+	"	<div class=\"col-sm-2\">"+
+	"		<span class=\"label label-warning\">No. Título</span>"+			
+	"		<input  id=\"titulo\" autocomplete=\"off\" class= \"small form-control\" value=\""+table.rows('.selected').data()[0]["TITULO"]+"\"></input>"+
+	"   </div>"+
+	"	<div id=\"lafecha\" class=\"col-sm-4\">"+
+	"		<span class=\"label label-danger\">Fecha Expedición</span>"+
+	"		<div class=\"input-group\">"+
+	"			<input  class=\"form-control date-picker\" id=\"fechaT\" "+
+	" 					type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" value=\""+table.rows('.selected').data()[0]["FECHA_ELTIT"]+"\"/> "+
+	"			<span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span>"+
+	"		</div>"+
+	"   </div>"+
+	"</div>"
+	,"Guardar y Expedir Acta","guardarTit('"+modulo+"');","modal-lg");
+
+	$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
+
+}
+
+
+function guardarTit(modulo){			
+	table = $("#G_"+modulo).DataTable();
+	parametros={tabla:"tit_pasantes",campollave:"MATRICULA",bd:"Mysql",
+				valorllave:table.rows('.selected').data()[0]["MATRICULA"],
+				FECHA_ELTIT:$("#fechaT").val(),
+				LIBROT:$("#libroT").val(),	
+				FOJAT:$("#fojaT").val(),	
+				TITULO:$("#titulo").val(),						
+			};
+	$.ajax({
+		type: "POST",
+		url:"actualiza.php",
+		data: parametros,
+		success: function(data){				
+			enlace="nucleo/tit_pasantes/titulo.php?alumno="+table.rows('.selected').data()[0]["MATRICULA"];
+			abrirPesta(enlace, "Titulo");
+			$("#infotit").modal("hide");
+			window.parent.document.getElementById('FRtit_pasantes').contentWindow.location.reload();
+
+		}					     
+	});    
+}
+
+
+
+
+function titulo(modulo,usuario,institucion, campus,essuper) {
+
+	table = $("#G_"+modulo).DataTable();
+		if (table.rows('.selected').data().length>0) {	
+			if (table.rows('.selected').data()[0]["TITULADO"]=='S') {	
+				mostrarDatosTit(modulo);									
+							
+						}					
+			else { alert ("No puede imprimir TITULO PROFESIONAL hasta que se marque como titulado"); return 0; }
+		}
+		else { alert ("Debe seleccionar un Registro"); return 0; }
+}
