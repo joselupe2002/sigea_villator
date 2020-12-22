@@ -260,7 +260,7 @@
 		$pdf->MultiCell(0,7,utf8_decode("Para los usos legales correspondientes se expide la presente en la ciudad de Santa María del Oro,". 
 		" Durango, a los ".$eldiaA." días del mes de ".$elmesA." del año ".$elanioA."."),0,'J',FALSE);
 
-}
+
 			
 		$pdf->Output();
 
