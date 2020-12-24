@@ -202,7 +202,7 @@ function colocaPie(consec,matricula,nombre,carrera) {
 
 	cadena=consec+"|"+matricula.replace(/ /g, "")+"|"+nombre.replace(/ /g, "")+"|"+carrera.replace(/ /g, "");
 	$("#pieCons").append("<br/>");
-	$("#pieCons").append("<div style=\"text-align:justify;\" > SE EXTIENDE LA PRESENTE EN LA CIUDAD DE MACUSPANA, ESTADO DE TABASCO A"+
+	$("#pieCons").append("<div style=\"text-align:justify;\" > SE EXTIENDE LA PRESENTE EN LA CIUDAD DE EL ORO, ESTADO DE DURANGO A"+
 	" LOS "+NumeroALetras(dia)+" DÍAS DEL MES DE "+meses[mes]+" DE "+NumeroALetras(anio)+
 	", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</div>");
 	$("#pieCons").append("<br/>");

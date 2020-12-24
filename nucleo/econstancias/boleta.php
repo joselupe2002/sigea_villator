@@ -230,7 +230,7 @@
                 $this->SetFont('Montserrat-Black','B',12);
                 $this->ln(5);
                 $this->Cell(50,5,"",'',0,'C');
-                $this->Cell(120,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE MACUSPANA'),'',1,'C');
+                $this->Cell(120,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO'),'',1,'C');
 
                 $this->SetFont('Montserrat-SemiBold','B',12);
                 $this->setX(50);

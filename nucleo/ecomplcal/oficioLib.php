@@ -278,7 +278,7 @@
 				  $miutil->getMesLetra(date("m", strtotime($fechadecof)))." DEL AÑO ". 
 				  $miutil->aletras(date("Y", strtotime($fechadecof)));
         $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE MACUSPANA, ESTADO DE TABASCO A LOS ".
+        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE EL ORO, ESTADO DE DURANGO A LOS ".
 		strtoupper($fechapie).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
 	
         $pdf->Ln(5);

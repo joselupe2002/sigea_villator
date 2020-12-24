@@ -247,7 +247,7 @@
                 $this->setY(($linea+10)); 
                 $this->setX(50); 
                 $this->SetFont('Montserrat-Black','B',10);
-                $this->Cell(0,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE MACUSPANA'),'B',1,'C');
+                $this->Cell(0,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE EL ORO'),'B',1,'C');
 
                 $this->SetFont('Montserrat-SemiBold','B',10);
                 $this->setX(50);
@@ -335,7 +335,7 @@
 
                 $this->SetFont('Montserrat-Medium','',6);
                 $this->Cell(0,5,utf8_decode("NOTA:ACEPTO TODAS LAS CONDICIONES DEL REGLAMENTO PARA ALUMNOS DEL INSTITUTO ". 
-                "TECNOLÓGICO SUPERIOR DE MACUSPANA"),'',0,'C');
+                "TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO"),'',0,'C');
                 $this->Ln(2);
                 $this->Cell(0,5,utf8_decode("LAS MATERIAS INDICADAS CON * NO CUMPLEN CON EL PERIODO REQUERIDO"),'',0,'C');
 

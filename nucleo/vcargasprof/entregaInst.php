@@ -256,7 +256,7 @@
 		$pdf->SetFont('Times','',11);
 		$pdf->Cell(0,0,utf8_decode("SUBDIRECCIÓN ACADÉMICA"),"",0,'C',false);
 		$pdf->Ln(5);
-		$pdf->Cell(0,0,utf8_decode("INSTITUTO TECNOLÓGICO SUPERIOR DE MACUSPANA"),"",0,'C',false);
+		$pdf->Cell(0,0,utf8_decode("INSTITUTO TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO"),"",0,'C',false);
 		$pdf->Ln(5);
 		
 		$pdf->MultiCell(0,5,utf8_decode("REVISIÓN Y VALIDACIÓN DE LA  INSTRUMENTACIÓN DIDÁCTICA PARA LA FORMACIÓN Y DESARROLLO DE ").

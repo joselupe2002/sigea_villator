@@ -191,7 +191,7 @@
 				 </div>
 				 <div class="row"> 
 				    <div class="col-md-12"> 
-						 <a href="https://www.facebook.com/tecnologico.macuspana.73" target="_blank">
+						 <a href="https://www.facebook.com/" target="_blank">
 						 <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
 						 <span style="color:white; font-weight: bold;"> Facebook</span></a>
                     </div>
@@ -208,7 +208,7 @@
 					<div class="row"> 
 							<div class="col-md-12"> 
 								<i class="ace-icon fa fa-envelope-o white bigger-150"></i>
-								<span style="color:white;">escolares@macuspana.tecnm.mx</span>
+								<span style="color:white;">escolares@.tecnm.mx</span>
 							</div>
 					</div>				
 			  </div>				
@@ -217,18 +217,18 @@
 					<div class='space-8'></div>
 					<div class="row"> 
 							<div class="col-md-12"> 
-								<span style="color:#9E9494; font-weight: bold;">INSTITUTO TECNOLÓGICO SUPERIOR DE MACUSPANA</span>
+								<span style="color:#9E9494; font-weight: bold;">INSTITUTO TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO</span>
 							</div>
 					</div>
 					<div class="row"> 
 							<div class="col-md-12"> 
 								<i class="ace-icon fa fa-map-marker green bigger-150"></i>
-								<span style="color:white; font-weight: bold;"> Avenida Tecnológico s/n, Lerdo de Tejada 1ra Secc.</span>
+								<span style="color:white; font-weight: bold;"> Carretera San Bernardo, Km 2 Fracc. Puerto Pinto. Santa María del Oro</span>
 						    </div>
 					</div>
 					<div class="row"> 
 							<div class="col-md-12"> 								
-								<span style="color:white; font-weight: bold;"> Macuspana, Tabasco, C.P. 86719</span>
+								<span style="color:white; font-weight: bold;"> El Oro, Durango</span>
 						    </div>
 					</div>
 					

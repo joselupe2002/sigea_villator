@@ -360,7 +360,7 @@
 
 
 		    	  	    elcorreo=valor.EMPL_CORREO;
-		    	  	    if (valor.EMPL_CORREO.length<=0) {elcorreo="@macuspana.tecnm.mx";}
+		    	  	    if (valor.EMPL_CORREO.length<=0) {elcorreo="";}
 		    	  	    $('#EMPL_CORREO').editable({type: 'text',id: 'telefono_ed', value:elcorreo});
 					    $('#EMPL_CORREO').html(elcorreo);
 						  
