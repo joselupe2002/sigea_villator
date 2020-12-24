@@ -73,7 +73,7 @@ jQuery.each(grid_data, function(clave, valor) {
 	if (valor.DOCGEN_RUTA=="../../imagenes/menu/default.png") {img1="";}
 	img2="<a href=\""+valor.ENLACEEXT+"\"  target=\"_blank\"> <img  id=\"img1\" src=\"../../imagenes/menu/ayuda2.png\"  style=\"width:60px; height:60px;\" /></a>";
 	if ((valor.ENLACEEXT=="") || (valor.ENLACEEXT==null)) {img2="";}
-	
+	if ((valor.DOCGEN_RUTA=="") || (valor.DOCGEN_RUTA==null)) {img1="";}
 
     $("#linea"+cont).append("<div id=\"ventAyuda"+valor.CLAVE+"\" class=\" ayudaPadre fontRoboto col-md-3\">"+
 	"<div class=\"thumbnail search-thumbnail\">"+
