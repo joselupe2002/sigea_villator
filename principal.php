@@ -422,7 +422,9 @@
 	    	      	   
 	    	      	   var url="nucleo/base/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=S"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;	    	      	 
 					  
-					   console.log("/nucleo/"+modulo+"/grid.php"+ " "+existeUrl("/nucleo/"+modulo+"/grid.php"));
+					
+					
+					//console.log("/nucleo/"+modulo+"/grid.php"+ " "+existeUrl("/nucleo/"+modulo+"/grid.php"));
 
 			/*
 							if (existeUrl("/nucleo/"+modulo+"/grid.php")) {
