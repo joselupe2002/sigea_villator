@@ -1,8 +1,8 @@
 
 <?php session_start(); if (($_SESSION['inicio']==1)  && (strpos($_SESSION['permisos'],$_GET["modulo"])) ){ 
 	header('Content-Type: text/html; charset='.$_SESSION['encode']);
-	include("../.././includes/Conexion.php");
-	include("../.././includes/UtilUser.php");
+	include("../../includes/Conexion.php");
+	include("../../includes/UtilUser.php");
 	$miConex = new Conexion();
 	$miUtil= new UtilUser();
 	$logouser="../../imagenes/login/sigea.png";  
