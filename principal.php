@@ -422,7 +422,7 @@
 	    	      	   
 	    	      	   var url="nucleo/base/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=S"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;	    	      	 
 					  
-						console.log("/nucleo/"+modulo+"/grid.php");
+						
 					
 					//console.log("/nucleo/"+modulo+"/grid.php"+ " "+existeUrl("/nucleo/"+modulo+"/grid.php"));
 
@@ -432,7 +432,8 @@
 								}
 					
 								*/
-	    	      	  		
+							
+								console.log(url);
 	    	          var content = '<iframe frameborder="0" id="FR'+modulo+'" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
 				     $('#myTab').tabs('add',{
 				    	    title:nombre,
