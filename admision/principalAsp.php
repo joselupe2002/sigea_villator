@@ -40,18 +40,23 @@
     <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>	      
     </div>
 
+	<?php 
+		$miConex = new Conexion();
+		$resultado=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where inst_clave='".$_SESSION["INSTITUCION"]."'");
+		foreach ($resultado as $row) {$titulo= $row["inst_tituloasp"]; }		
+	?>
+
 
 	<div style="height:10px; background-color: #C18900;"> </div>
-	<div class="container-fluid informacion" style="background-color: #9B0B0B;">   
+	<div class="container-fluid informacion" style="background-color: #DBEEEA;">   
          <div class="row">
              <div class="col-md-4" >
-                   <img src="../imagenes/empresa/logo2.png" alt="" width="50%" class="img-fluid" alt="Responsive image" />  
+                   <img src="../imagenes/empresa/logo2.png" alt="" width="90px" class="img-fluid" alt="Responsive image" />  
 			  </div>
 			  <div class="col-md-4" >
-				   <div class="text-success" style="padding:0px;  font-size:35px; font-family:'Girassol'; color:white; text-align:center; font-weight: bold;">
-						  PROCESO DE ADMISIÓN
-				    </div>
-				   <div class="text-primary"  style="padding:0px; font-size:35px; font-family:'Girassol'; color:white; text-align:center; font-weight: bold;">2020</div>
+				   <div class="text-success" style="padding:0px;  font-size:35px; font-family:'Girassol'; color:#1728A3; text-align:center; font-weight: bold;">
+				   		<?php echo $titulo ?>
+				    </div>				   
 			  </div>
               <div class="col-md-4" style="padding-top: 20px; text-align: right;">
                   <img class="imgRedonda" id="fotoAsp" src="" width="35px" height="40px"></img> 

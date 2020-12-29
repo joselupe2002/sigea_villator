@@ -1,8 +1,23 @@
 
 <div class='space-20'></div>
-<div style="height:5px; background-color:#C40E0E;"> </div>
+<?php 
+		$miConex = new Conexion();
+		$resultadoA=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where inst_clave='".$_SESSION["INSTITUCION"]."'");
+		foreach ($resultadoA as $rowA) {
+			$facebook= $rowA["inst_facebook"]; 
+			$twitter= $rowA["inst_twitter"]; 
+			$instagram= $rowA["inst_instagram"]; 
+			$razon =$rowA["inst_razon"]; 
+			$telsoporte= $rowA["inst_telsoporte"]; 
+			$correosoporte= $rowA["inst_correosoporte"]; 
+			$direccion= $rowA["inst_direccion"]; 
+			$fechaof= $rowA["inst_fechaof"]; 
+		}		
+?>
+
+<div style="height:5px; background-color:#DBEEEA;"> </div>
 <div class="container-fluid informacion" >   
-		 <div class="row" style="background-color: #9B0B0B;">
+		 <div class="row" style="background-color: #040E5A;">
 		     <div class="col-md-2" > </div>
              <div class="col-md-3" > 
 			    <div class='space-8'></div>
@@ -13,11 +28,27 @@
 				 </div>
 				 <div class="row"> 
 				    <div class="col-md-12"> 
-						 <a href="https://www.facebook.com/" target="_blank">
+						 <a href="<?php echo $facebook?>" target="_blank">
 						 <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
 						 <span style="color:white; font-weight: bold;"> Facebook</span></a>
                     </div>
 				 </div>
+				 <div class="row"> 
+				    <div class="col-md-12"> 
+						 <a href="<?php echo $twitter?>" target="_blank">
+						 <i class="ace-icon fa fa-twitter-square text-primary bigger-150"></i>
+						 <span style="color:white; font-weight: bold;"> Twitter</span></a>
+                    </div>
+				 </div>
+
+				 <div class="row"> 
+				    <div class="col-md-12"> 
+						 <a href="<?php echo $instagram?>" target="_blank">
+						 <i class="ace-icon fa fa-instagram text-primary bigger-150"></i>
+						 <span style="color:white; font-weight: bold;"> Instagram</span></a>
+                    </div>
+				 </div>
+
              </div>
 			  <div class="col-md-3" >
 					<div class='space-8'></div>
@@ -29,9 +60,9 @@
 					<div class="row"> 
 							<div class="col-md-12"> 
 							    <i class="ace-icon fa fa-mobile white bigger-150"></i>
-								<span style="color:white;">Tel (649) 52 611 81, 526 05 10</span> <br/>
+								<span style="color:white;"><?php echo $telsoporte; ?></span> <br/>
 								<i class="ace-icon fa fa-envelope-o white bigger-150"></i>
-								<span style="color:white;">escolares@.tecnm.mx</span>
+								<span style="color:white;"><?php echo $correosoporte; ?></span>
 							</div>
 					</div>				
 			  </div>				
@@ -40,18 +71,18 @@
 					<div class='space-8'></div>
 					<div class="row"> 
 							<div class="col-md-12"> 
-								<span style="color:#9E9494; font-weight: bold;">INSTITUTO TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO</span>
+								<span style="color:#9E9494; font-weight: bold;"><?php echo $razon; ?></span>
 							</div>
 					</div>
 					<div class="row"> 
 							<div class="col-md-12"> 
 								<i class="ace-icon fa fa-map-marker green bigger-150"></i>
-								<span style="color:white; font-weight: bold;"> Carretera San Bernardo, Km 2 Fracc. Puerto Pinto. Santa María del Oro</span>
+								<span style="color:white; font-weight: bold;"> <?php echo $direccion; ?></span>
 						    </div>
 					</div>
 					<div class="row"> 
 							<div class="col-md-12"> 								
-								<span style="color:white; font-weight: bold;"> El Oro, Durango</span>
+								<span style="color:white; font-weight: bold;"> <?php echo $fechaof; ?></span>
 						    </div>
 					</div>
 			  </div>

@@ -201,7 +201,8 @@ class VariableStream
 
 /*===================================================================================================================*/
    	        var $eljefe="";
-   	        var $eljefepsto="";
+               var $eljefepsto="";
+               var $razon="";
  
             
             function LoadDatosCiclo()
@@ -221,7 +222,7 @@ class VariableStream
 			{	
                 $data=[];			
                 $miConex = new Conexion();
-                $sql="select RUTA from adjaspirantes a where a.AUX='FOTO".$_GET["curp"]."'";
+                $sql="select RUTA from adjaspirantes a where a.AUX='FOTO_".$_GET["curp"]."_".$_GET["ciclo"]."'";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -230,6 +231,17 @@ class VariableStream
 				return $data;
             }
             
+            function LoadDatosGen()
+			{
+				$miConex = new Conexion();
+				$resultado=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where _INSTITUCION='".$_SESSION['INSTITUCION']."'");
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+			}
+            
+
             function LoadDatosAspirantes()
 			{	
                 $data=[];			
@@ -248,11 +260,14 @@ class VariableStream
 			function Header()
 			{
                 $miutil = new UtilUser();    
-                $left2=120; $left3=170;         
+                $left2=120; $left3=170;     
+                $dataGen = $this->LoadDatosGen();   
+                
+                $this->Image('../imagenes/empresa/fondo.png',0,0,187,275);
                 $this->Image('../imagenes/empresa/enc1.png',20,8,85);
                 $this->Image('../imagenes/empresa/enc2.png',$left2,6,40);
-                $this->Image('../imagenes/empresa/enc3.png',$left3,8,10);
-                $this->Image('../imagenes/empresa/fondo.png',0,0,187,275);
+                $this->Image('../imagenes/empresa/enc3.png',$left3,8,30);
+                
                 
                 $this->AddFont('Montserrat-Black','B','Montserrat-Black.php');
                 $this->AddFont('Montserrat-Black','','Montserrat-Black.php');
@@ -268,11 +283,12 @@ class VariableStream
                 
                 $this->SetFont('Montserrat-Black','B',9);
                 $this->Ln(6);
-                $this->Cell(0,0,utf8_decode('Instituto Tecnológico Superior de Macuspana'),0,0,'R');
+                $this->Cell(0,0,utf8_decode($dataGen[0]["inst_razon"]),0,0,'R');
+                $this->razon=$dataGen[0]["inst_razon"];
                 
                 $this->SetFont('Montserrat-Medium','B',8);
                 $this->Ln(6);
-                $this->Cell(0,0,utf8_decode('"2020, Año de Leona Vicario, Benemérita Madre de la Patria"'),0,0,'C');
+                $this->Cell(0,0,utf8_decode($dataGen[0]["inst_campo1"]),0,0,'C');
 			}
 			
 			
@@ -284,14 +300,15 @@ class VariableStream
                 $dataFoto = $this->LoadFoto();
                 $miutil = new UtilUser();    
                      
-                
+              
+        
                 if (!empty($dataFoto)) { 
                     $lafoto=$dataFoto[0][0]; 
                     $logo = file_get_contents($lafoto);
                   
                     $this->MemImage($logo,20,37,22,28);
                 }
-            
+        
 
                  
                 $fecha=date("d/m/Y"); 
@@ -459,7 +476,7 @@ class VariableStream
                 $this->Row(array(utf8_decode("¡ADVERTENCIA!\n".
                 "El procedimiento de inscripción está sujeto a la normatividad aplicable emitida por el ".
                 "Tecnológico Nacional de México, por lo que su observancia es obligatoria para quienes desean ".
-                "ingresar a una institución del sistema, como lo es el Instituto Tecnológico Superior de Macuspana.".
+                "ingresar a una institución del sistema, como lo es el ".$this->razon.".".
                 "\n".
                 "En consecuencia, la falta de un requisito, por ejemplo, no haber concluido sus estudios de bachillerato (adeudo de materias) u otras análogas; ".
                 " para realizar su inscripción, produce la invalidación de su procedimiento de inscripción en esta institución; ". 

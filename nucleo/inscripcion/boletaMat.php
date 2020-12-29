@@ -239,15 +239,17 @@
                 $data = $this->LoadDatosCursando();
                 $dataCiclo = $this->LoadDatosCiclo();
                 $dataCreditos = $this->LoadDatosCreditos();
+                $dataGen = $this->LoadDatosGen();
+                
             
                 $miutil = new UtilUser();                
 
-                $this->Image('../../imagenes/empresa/logo2.png',20,($linea+8),30);
+                $this->Image('../../imagenes/empresa/logo2.png',20,($linea+4),15);
 
                 $this->setY(($linea+10)); 
                 $this->setX(50); 
                 $this->SetFont('Montserrat-Black','B',10);
-                $this->Cell(0,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE EL ORO'),'B',1,'C');
+                $this->Cell(0,5,utf8_decode($dataGen[0]["inst_razon"]),'B',1,'C');
 
                 $this->SetFont('Montserrat-SemiBold','B',10);
                 $this->setX(50);
@@ -334,8 +336,8 @@
                 $nombre=$miutil->getJefe('303');//Nombre del puesto de control escolar7
 
                 $this->SetFont('Montserrat-Medium','',6);
-                $this->Cell(0,5,utf8_decode("NOTA:ACEPTO TODAS LAS CONDICIONES DEL REGLAMENTO PARA ALUMNOS DEL INSTITUTO ". 
-                "TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO"),'',0,'C');
+                $this->Cell(0,5,utf8_decode("NOTA:ACEPTO TODAS LAS CONDICIONES DEL REGLAMENTO PARA ALUMNOS DEL ". 
+                $dataGen[0]["inst_razon"]),'',0,'C');
                 $this->Ln(2);
                 $this->Cell(0,5,utf8_decode("LAS MATERIAS INDICADAS CON * NO CUMPLEN CON EL PERIODO REQUERIDO"),'',0,'C');
 
@@ -345,7 +347,7 @@
                 $this->Cell(80,5,utf8_decode($nombre),'T',0,'L');
                 $this->setX(10);$this->setY(($linea+125));
                 $this->SetFont('Montserrat-SemiBold','',8);
-                $this->Cell(0,5,"JEFE DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",'',0,'L');
+                $this->Cell(0,5,"JEFE(A) DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",'',0,'L');
 
                /*
                 $this->setX(0);$this->setY(140);

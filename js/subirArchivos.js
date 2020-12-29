@@ -675,7 +675,7 @@ function eliminarEnlaceDrive(nombreComponente,carpeta,nombreImg, nombreInput, ex
 
 /*=================================PARA LOS APIRANTES =============================================================*/
 
-function eliminaTabla(campoid,id,campo,materia,tabla,aux){
+function eliminaTabla(campoid,id,campo,materia,tabla,aux,preruta){
     
 	$('#modalDocument').modal({show:true, backdrop: 'static'});		                                                             
   var loscampos = ["ID","AUX","RUTA","FECHARUTA",];
@@ -689,7 +689,7 @@ function eliminaTabla(campoid,id,campo,materia,tabla,aux){
 
    $.ajax({
    type: "POST",
-   url:"../nucleo/base/eliminar.php",
+   url:preruta+"nucleo/base/eliminar.php",
    data: parametros,
    success: function(data){
 	   $('#dlgproceso').modal("hide"); 
@@ -700,7 +700,7 @@ function eliminaTabla(campoid,id,campo,materia,tabla,aux){
 }
 
 
-function insertaTabla(campoid,id,campo,materia,tabla,aux){
+function insertaTabla(campoid,id,campo,materia,tabla,aux,preruta){
     var losdatos=[];
 	dato=$("#"+campo).val();
     var f = new Date();
@@ -725,7 +725,7 @@ function insertaTabla(campoid,id,campo,materia,tabla,aux){
 
 			$.ajax({
 			type: "POST",
-			url:"../nucleo/base/grabadetalle.php",
+			url:preruta+"nucleo/base/grabadetalle.php",
 			data: parametros,
 			success: function(data){
 				$('#dlgproceso').modal("hide"); 
@@ -735,7 +735,7 @@ function insertaTabla(campoid,id,campo,materia,tabla,aux){
 			});    	    
 	}
 }
-
+   
 function subirPDFDriveSaveAsp(nombreComponente,carpeta,nombreImg, nombreInput, extensiones,fuera,campoid,id,descrip,tabla, operacion, aux){
 	var haymayor=false;
 	laruta=$("#"+nombreInput).attr("value"); 
@@ -1001,6 +1001,166 @@ function eliminarEnlaceCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, 
 	   	    				        	$("#"+nombreInput).attr("value","");
 	   	    				        	alert ("Ocurrio un error al eliminar el archivo al Drive: "+laimagen+res); 				    		
 	   	    				    	}				    						    		   	    				    	   	    		    	    
+                         }); // del .done del ajax  
+    }
+}
+
+
+/*=================================================================*/
+
+function subirPDFDriveSaveAsp_local(nombreComponente,carpeta,nombreImg, nombreInput, extensiones,fuera,campoid,id,descrip,tabla, operacion, aux,cambianombre){
+	var haymayor=false;
+	elid=$("#"+nombreInput).val().substring($("#"+nombreInput).val().indexOf('id=')+3,$("#"+nombreInput).val().length);
+
+
+	laruta=$("#"+nombreInput).attr("value"); 
+	elidborrar=laruta.substring(laruta.lastIndexOf("/") + 1, laruta.length);
+
+
+	var data = new FormData();
+	jQuery.each($('#'+nombreComponente)[0].files, function(i, file) {
+	   				    data.append('archivo', file);
+	   				    var fileName = file.name;
+	   				    var fileSize = file.size;
+	   				    if(fileSize > 4000000){
+	   					    alert('El archivo no debe superar los 4MB');
+	   					    file.value = '';
+	   					    haymayor=true;
+	   				    }
+	   				});
+	   	        	
+	if (haymayor) {return 0;}
+	if (comprueba_extension(nombreComponente,extensiones)==1) {
+
+		rutacarpeta="../../adjuntos/"+carpeta+"/"; 
+		rutacarpetaOrigen="../../adjuntos/"+carpeta+"/"; 
+		rutaphp="../../nucleo/base/"; 
+		rutaespera="../../imagenes/menu/esperar.gif";
+		rutabase="../../";
+
+		if (fuera=='S') {
+			rutaphp="../nucleo/base/"; 
+			rutaespera="../imagenes/menu/esperar.gif"; miruta="../";
+			rutacarpetaOrigen="../adjuntos/"+carpeta+"/"; 
+			rutabase="../";
+		}
+
+		//Solo para el caso de los aspirantes que estan en carpetas diferentes 
+		add=""; 
+		if (carpeta=="docAspira") {
+			rutacarpetaOrigen="../adjuntos/"+carpeta+"/"; 
+			if (nombreComponente.substring(0,3)=='ASP') {add="../";}
+		} 
+		//============================================================================
+
+		secambia=""; if (cambianombre=='S') {secambia="&cambianombre="+aux;}
+
+
+		 $("#"+nombreImg).attr("src",rutaespera);	
+	     jQuery.ajax({
+			        
+	   	    		url: rutaphp+'subirArchivoCarpeta.php?carpeta='+rutacarpeta+'&inputFile=archivo&imganterior='+elidborrar+"&modo=pdf"+secambia,
+	   	    		data: data,
+	   	    		cache: false,
+	   	    		timeout: 600000, 
+	   	    		contentType: false,
+	   	    		processData: false,
+	   	    		type: 'POST'}).done(function(res){  
+						
+						laimagen=res.split("|")[1];	 
+												
+
+						if (((extensiones.indexOf("png")>=0) || (extensiones.indexOf("jpeg")>=0) || (extensiones.indexOf("bmp")>=0)) && !(extensiones=='')) 
+							{elsrc=add+rutacarpetaOrigen+laimagen; elsrc2=rutabase+"imagenes/menu/default.png"} 
+						else {elsrc=rutabase+"imagenes/menu/pdf.png"; elsrc2=rutabase+"imagenes/menu/pdfno.png"}
+							
+															
+						if (!(res.substring(0,2)=="0|")){	
+							
+							
+							$("#"+nombreImg).attr("src",elsrc);
+							$("#"+nombreImg+"_2").attr("src",elsrc);
+
+							$("#enlace_"+nombreInput).attr("href",add+rutacarpetaOrigen+laimagen);	
+							$("#enlace_"+nombreInput+"_2").attr("href",add+rutacarpetaOrigen+laimagen);   	    				    		
+							$("#"+nombreInput).attr("value",laimagen);					
+							
+							$("#btnEli_"+nombreInput).show();						
+
+							$("#"+nombreInput).attr("value",rutacarpetaOrigen+laimagen);
+							
+							if (operacion=="alta") {insertaTabla(campoid,id,nombreInput,descrip,tabla,aux,rutabase);
+							}
+							if (operacion=="edita") {guadarPorta(campoid,id,nombreInput,descrip,tabla,rutabase);}
+						}
+						else {
+							$("#"+nombreImg).attr("src","../imagenes/menu/pdfno.png");
+							$("#"+nombreInput).attr("value","");
+							alert ("Ocurrio un error al subir el archivo : "+laimagen+res); 				    		
+						}	
+
+	   	}); // del .done del ajax
+	} ///del si cumple con las extensiones
+}
+
+
+
+function eliminarEnlaceCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, extensiones,fuera,campoid,id,descrip,tabla, operacion, aux, eltipoarchivo){
+
+    op=confirm("¿Seguro que desea eliminar el archivo?");
+    if (op == true) {   
+    	 laruta=$("#"+nombreInput).attr("value"); 
+		 elid=laruta.substring(laruta.lastIndexOf("/") + 1, laruta.length);
+	
+		elid="../../adjuntos/"+carpeta+"/"+elid; 
+		rutaphp="../../nucleo/base/"; 
+		rutaespera="../../imagenes/menu/esperar.gif";
+		rutaimg="../../";
+		rutabase="../../";
+
+		if (fuera=='S') {
+			rutaphp="../nucleo/base/"; 
+			rutaespera="../imagenes/menu/esperar.gif"; miruta="../";
+			rutaimg="../";
+			rutabase="../";
+		}
+		 
+		$("#"+nombreImg).attr("src",rutaimg+"imagenes/menu/esperar.gif");
+		$("#"+nombreImg+"_2").attr("src",rutaimg+"imagenes/menu/esperar.gif");
+		
+
+	     jQuery.ajax({
+	   	    		  url: rutaphp+'eliminarArchivo.php?imgborrar='+elid,
+	   	    	      cache: false,
+	   	    		  timeout: 600000, 
+	   	    		  contentType: false,
+	   	    		  processData: false,
+	   	    		  type: 'POST'})
+	   	    		  .done(function(res){ 	
+							 
+								laimagen=res.split("|")[1];	
+								if (eltipoarchivo=='IMG') {elsrc=rutaimg+"imagenes/menu/default.png";}else { elsrc=rutaimg+"imagenes/menu/pdfno.png"} 
+					
+							
+	   	    				    $("#"+nombreImg).attr("src",elsrc);
+	   	    				    $("#btnEli_"+nombreInput).css("display","none");
+	    				    	$("#"+nombreImg+"_2").attr("src",rutaimg+"imagenes/menu/pdfno.png");
+									
+									
+	    				    	$("#enlace_"+nombreInput).attr("href",rutaimg+"imagenes/menu/pdfno.png");	
+	    				    	$("#enlace_"+nombreInput+"_2").attr("href",rutaimg+"imagenes/menu/pdfno.png");
+	    				    		
+								$("#"+nombreInput).attr("value","");
+									    		
+	    				        if (operacion=="alta") {eliminaTabla(campoid,id,nombreInput,descrip,tabla,aux,rutabase);}
+	    				        if (operacion=="edita") {editaAdjunto(campoid,id,nombreInput,descrip,tabla,rutabase);}
+
+	    				        	
+	   	    				    if ((res.substring(0,2)=="0|")){	   	    				    			   	    				    
+	   	    				    		$("#"+nombreImg).attr("src",elsrc);
+	   	    				        	$("#"+nombreInput).attr("value","");
+	   	    				        	alert ("Ocurrio un error al eliminar el archivo al Drive: "+laimagen+res); 				    		
+	   	    				    }				    						    		   	    				    	   	    		    	    
                          }); // del .done del ajax  
     }
 }

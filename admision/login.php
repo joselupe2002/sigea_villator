@@ -1,4 +1,22 @@
-<?php header('Content-Type: text/html; charset=UTF-8'); ?>
+<?php header('Content-Type: text/html; charset=UTF-8'); 
+	include("../includes/Conexion.php");
+	include("../includes/UtilUser.php");
+	$miConex = new Conexion();
+	$miUtil= new UtilUser();
+	session_start();		
+	$_SESSION['usuario'] = "ASPIRANTES";
+	$_SESSION['nombre'] = "registro de aspirantes";
+	$_SESSION['super'] = "N";
+	$_SESSION['inicio'] = 1;
+	$_SESSION['INSTITUCION'] = "ITSSMO";
+	$_SESSION['CAMPUS'] = "0";
+	$_SESSION['encode'] = "ISO-8859-1";
+	$_SESSION['carrera'] = "1";
+	$_SESSION['depto'] = "0";
+	$_SESSION['titApli'] = "Sistema Gesti&oacute;n Escolar - Administrativa";
+	$_SESSION['bd'] = "Mysql";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -24,23 +42,28 @@
 	<?php  //include("./includes/Seguridad.php"); $miSeg = new Seguridad();  echo $miSeg->encriptar(""); ?>
 	<body class="login-layout light-login">
 
-	<div style="height:10px; background-color: #C18900;"> </div>
-	<div class="container-fluid informacion" style="background-color: #9B0B0B;">   
+	<?php 
+		$miConex = new Conexion();
+		$resultado=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where inst_clave='".$_SESSION["INSTITUCION"]."'");
+		foreach ($resultado as $row) {$titulo= $row["inst_tituloasp"]; }		
+	?>
+
+	<div style="height:10px; background-color: #040E5A;"> </div>
+	<div class="container-fluid informacion" style="background-color: #DBEEEA;">   
          <div class="row">
              <div class="col-md-4" >
-                   <img src="../imagenes/empresa/logo2.png" alt="" width="50%" class="img-fluid" alt="Responsive image" />  
+                   <img src="../imagenes/empresa/logo2.png" alt="" width="90px" class="img-fluid" alt="Responsive image" />  
 			  </div>
 			  <div class="col-md-4" >
-				   <div class="text-success" style="padding:0px;  font-size:35px; font-family:'Girassol'; color:white; text-align:center; font-weight: bold;">
-						  PROCESO DE ADMISIÓN
-				    </div>
-				   <div class="text-primary"  style="padding:0px; font-size:35px; font-family:'Girassol'; color:white; text-align:center; font-weight: bold;">2020</div>
+				   <div class="text-success" style="padding:0px;  font-size:35px; font-family:'Girassol'; color:#1728A3; text-align:center; font-weight: bold;">
+						  <?php echo $titulo ?>
+				    </div>				   
 			  </div>
               <div class="col-md-4" style="padding-top: 20px; text-align: right;">
 			  </div>
         </div>
     </div>
-	<div style="height:10px; background-color: #C18900;"> 
+	<div style="height:10px; background-color: #040E5A;"> 
 	 </div>
 
 		<div class="main-container">
@@ -251,7 +274,7 @@
 			</div><!-- /.main-content -->
 		</div><!-- /.main-container -->
 
-	<?php include './pie.php'?>
+	<?php include 'pie.php'?>
 
 
 <div id="dialogError" class="hide"></div>

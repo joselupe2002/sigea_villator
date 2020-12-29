@@ -12,6 +12,7 @@ var elciclo="";
 			data:parametros,
 			url:  "../nucleo/base/getdatossqlSeg.php",
 			success: function(data){	
+		
 					if (!(JSON.parse(data)[0]["hay"]>0)) {window.location.href="cerrado.php";}
 
 				   jQuery.each(JSON.parse(data), function(clave, valor) { 	
@@ -728,7 +729,7 @@ function cargarAdjuntos() {
 	elsqlAdj="select IDDOC, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, "+
 			 " (SELECT CICL_CLAVE FROM ciclosesc where CICL_ADMISION='S' ORDER BY CICL_ORDEN DESC LIMIT 1) AS CICLO "+
 	         " from documaspirantes a "+
-	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat(a.CLAVE,'"+$("#CURP").val()+"'))"+
+	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat(a.CLAVE,'_','"+$("#CURP").val()+"','_','"+elciclo+"'))"+
 			 " WHERE a.ENLINEA='S' and a.MODULO='REGISTRO' order by TIPOADJ, DOCUMENTO";
 			 parametros={sql:elsqlAdj,dato:sessionStorage.co,bd:"Mysql"}
 	$.ajax({
@@ -778,15 +779,15 @@ function cargarAdjuntos() {
 								"</div>"); 
 
 			jQuery.each(JSON.parse(data), function(clave, valor) { 
-				   stElim="display:none; cursor:pointer;";
+				    stElim="display:none; cursor:pointer;";
 					if (valor.RUTA.length>0) { stElim="cursor:pointer; display:block; ";} 
 					
 					cadFile="<div class=\"col-sm-4\">"+											
 					"            <span class=\"text-primary\"><strong>"+utf8Decode(valor.DOCUMENTO)+"</strong></span>"+											
 					"            <input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
-					"                   onchange=\"subirPDFDriveSaveAsp('file_"+valor.CLAVE+"','ASPIRANTES_"+valor.CICLO+"','pdf_"+
+					"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','docAspira','pdf_"+
 												  valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+
-												  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+valor.CLAVE+$("#CURP").val()+"');\">"+
+												  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+valor.CLAVE+"_"+$("#CURP").val()+"_"+elciclo+"','S');\">"+
 					"           <input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
 					"        </div>"+
 					"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
@@ -794,9 +795,9 @@ function cargarAdjuntos() {
 					"                 <img class=\"imgadj\" cargado=\"S\" width=\"40px\" height=\"40px\" id=\"pdf_"+valor.CLAVE+"\" name=\"pdf_"+valor.CLAVE+"\" src=\"..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
 					"           </a>"+
 					"           <i style=\""+stElim+"\"  id=\"btnEli_RUTA_"+valor.CLAVE+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
-					"            onclick=\"eliminarEnlaceDriveAsp('file_"+valor.CLAVE+"','ASPIRANTES_"+valor.CICLO+"',"+
+					"            onclick=\"eliminarEnlaceCarpeta('file_"+valor.CLAVE+"','docAspira',"+
 					"                      'pdf_"+valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
-					"                      'adjaspirantes','alta','"+valor.CLAVE+$("#CURP").val()+"');\"></i> "+              				                        
+					"                      'adjaspirantes','alta','"+valor.CLAVE+"_"+$("#CURP").val()+"_"+elciclo+"','PDF');\"></i> "+              				                        
 					"      </div> ";
 
 					

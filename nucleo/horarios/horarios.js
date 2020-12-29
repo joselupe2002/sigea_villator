@@ -107,7 +107,7 @@ var matser="";
 		       " A_VIERNES AS a_viernes, A_SABADO AS a_sabado, A_DOMINGO AS a_domingo, CUPO as cupo,SIE,CICL_CUATRIMESTRE AS SEM"+
 			   " FROM edgrupos, cmaterias, eciclmate WHERE DGRU_CARRERA='"+$("#selCarreras").val()+"'"+
 			   " AND DGRU_CICLO='"+$("#selCiclos").val()+"' and MATE_CLAVE=DGRU_MATERIA and MATE_CLAVE=CICL_MATERIA "+
-			   " AND CICL_MAPA=DGRU_MAPA AND DGRU_MAPA='"+$("#selPlanes").val()+"' order by CICL_CUATRIMESTRE, MATE_DESCRIP";
+			   " AND CICL_MAPA=DGRU_MAPA AND DGRU_MAPA='"+$("#selPlanes").val()+"' order by CICL_CUATRIMESTRE, SIE, MATE_DESCRIP";
 		mostrarEspera("esperahor","grid_horarios","Cargando Horarios...");
 
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -451,6 +451,8 @@ function getEspaciosAulas(){
 			cadFin="";
 			elsql="SELECT "+$("#selDiaEsp").val()+"_A, "+$("#selDiaEsp").val()+"_1 from vedgrupos b where b.CICLO='"+$("#selCiclosEsp").val()+"' "+
 				"and "+$("#selDiaEsp").val()+"_A<>'' order by "+$("#selDiaEsp").val()+"_A,"+$("#selDiaEsp").val()+"_1";
+			
+		
 			parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 			$.ajax({
 				type: "POST",

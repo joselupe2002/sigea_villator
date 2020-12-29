@@ -233,7 +233,8 @@ function cargarAlumnos(){
 	   $("#losalumnos").empty();
 	   $("#losalumnos").append(script);
 	   sql="select a.MATRICULA, a.CURP, a.NOMBRE, APEPAT, APEMAT, a.CIUDADRES, a.CARRERA, a.CALLE,"+
-	       "(SELECT COUNT(*) from dlista where ALUCTR=a.MATRICULA and PDOCVE='"+$("#selCiclos").val()+"') AS INS,"+
+		   "(SELECT COUNT(*) from dlista where ALUCTR=a.MATRICULA and PDOCVE='"+$("#selCiclos").val()+"') AS INS,"+
+		   "(SELECT GPOCVE from dlista where ALUCTR=a.MATRICULA and PDOCVE='"+$("#selCiclos").val()+"' AND GPOCVE<>'' LIMIT 1) AS GPO,"+
 	       "a.MUNRESD,a.ESTRESD from vaspirantes a "+
 		   " where a.CICLO='"+$("#selCiclos").val()+"' and a.CARRERA='"+$("#selCarreras").val()+"' AND a.MATRICULA<>''";
 			parametros={sql:sql,dato:sessionStorage.co,bd:"Mysql"}
@@ -277,7 +278,7 @@ function generaTablaAlumnos(grid_data){
 		"</td>");
 		
 		cadIns="";
-		if (valor.INS>0) cadIns="<i>"+valor.INS+"</i>";
+		if (valor.INS>0) cadIns="<i>"+valor.INS+"|"+valor.GPO+"</i>";
 		
 		$("#rowRAlum"+contFilaAlum).append("<td <label id=\"cAlum_"+contFila+"_0\" class=\"small text-info font-weight-bold\">"+valor.MATRICULA+"</label</td>");		
 		$("#rowRAlum"+contFilaAlum).append("<td style=\"font-size:10px;\"><span class=\"badge badge-primary\" id=\"INS_"+valor.MATRICULA+"\">"+cadIns+"</span>"+valor.NOMBRE+"</td>");
@@ -425,13 +426,17 @@ function eliminar(){
 }
 
 function imprimeBoleta(){
+	var lasmat="";
 	mostrarEspera("guardandoReins","grid_reinscripciones","Guardando...");
 		for (u=1; u<contFilaAlum; u++){
-			cad="";		
-			if ($("#cAlum_"+u+"_99").prop("checked")) {			
-				window.open("boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+
-				            $("#cAlum_"+u+"_99").attr("matricula")+"&ciclo="+$("#elciclo").html().split("|")[0], '_blank');                                 	                                        					          
+			cad="";			
+			if ($("#cAlum_"+u+"_99").prop("checked")) {	
+				lasmat=lasmat+$("#cAlum_"+u+"_99").attr("matricula")+",";										
 			}
 		}
+		
+		enlace="nucleo/inscripcion/bolMasiva.php?carrera="+$("#selCarreras").val()+"&lista="+
+		lasmat+"&ciclo="+$("#elciclo").html().split("|")[0];
+		abrirPesta(enlace,"Boletas");
 		ocultarEspera("guardandoReins");
 }

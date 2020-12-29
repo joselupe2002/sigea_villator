@@ -121,22 +121,17 @@
    	        var $eljefepsto="";
  
    	
-			function LoadDatosCursando()
+			function LoadDatosCursando($mat)
 			{				
                 $miConex = new Conexion();
                 $eltip=($_GET["carrera"]=="10")?"I":"OC";
                 if (($_GET["carrera"]=="10") || ($_GET["carrera"]=="12")) {
-                    $sql="SELECT * FROM vinscripciones_oc where MATRICULA='".$_GET["matricula"]."' and CICLO='".$_GET["ciclo"]."' and TIPOMAT IN ('".$eltip."') ORDER BY  MATERIAD";
+                    $sql="SELECT * FROM vinscripciones_oc where MATRICULA='".$mat."' and CICLO='".$_GET["ciclo"]."' and TIPOMAT IN ('".$eltip."') ORDER BY  MATERIAD";
                 }
-                else if ($_GET["carrera"]=="TODAS")
+                else 
                   {
-                     $sql="SELECT REP, GRUPO, MATERIA,MATERIAD,PROFESOR, PROFESORD,LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO, FECHAINS FROM vinscripciones where MATRICULA='".$_GET["matricula"]."' and CICLO='".$_GET["ciclo"]."'".
-                     "UNION SELECT REP, GRUPO, MATERIA,MATERIAD,PROFESOR, PROFESORD,LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO, FECHAINS FROM vinscripciones_oc where MATRICULA='".$_GET["matricula"]."' and CICLO='".$_GET["ciclo"]."'";
+                     $sql="SELECT * FROM vinscripciones where MATRICULA='".$mat."' and CICLO='".$_GET["ciclo"]."' ORDER BY  MATERIAD";
                   }
-                else   {
-                    $sql="SELECT * FROM vinscripciones where MATRICULA='".$_GET["matricula"]."' and CICLO='".$_GET["ciclo"]."' ORDER BY  MATERIAD";
-                 }
-
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -146,10 +141,10 @@
 			}
 
 
-            function LoadDatosCreditos()
+            function LoadDatosCreditos($mat)
 			{				
                 $miConex = new Conexion();
-                $sql="SELECT sum(CREDITOS) FROM vinscripciones where MATRICULA='".$_GET["matricula"]."' and CICLO='".$_GET["ciclo"]."' ORDER BY  MATERIAD";
+                $sql="SELECT sum(CREDITOS) FROM vinscripciones where MATRICULA='".$mat."' and CICLO='".$_GET["ciclo"]."' ORDER BY  MATERIAD";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -168,19 +163,22 @@
 					$data[] = $row;
 				}
 				return $data;
-			}
+            }
+            
+     
+
           
-            function LoadDatosAlumnos()
+            function LoadDatosAlumnos($mat)
 			{				
                 $miConex = new Conexion();
                 $sql="select ALUM_MATRICULA, CONCAT(ALUM_NOMBRE, ' ',ALUM_APEPAT, ' ',ALUM_APEMAT) AS NOMBRE, ".
                 " ALUM_CARRERAREG AS CARRERA, ALUM_ACTIVO AS SITUACION, ALUM_CICLOTER AS CICLOTER, ".
                 " ALUM_CICLOINS AS CICLOINS, CARR_DESCRIP AS CARRERAD, ".
-                " PLACRED, PLAMAT,  c.CLAVEOF AS ESPECIALIDAD, ALUM_MAPA AS MAPA, getPeriodos('".$_GET["matricula"]."','".$_GET["ciclo"]."') as PERIODOS".
+                " PLACRED, PLAMAT,  c.CLAVEOF AS ESPECIALIDAD, ALUM_MAPA AS MAPA, getPeriodos('".$mat."','".$_GET["ciclo"]."') as PERIODOS".
                 " from falumnos a LEFT outer JOIN especialidad c on (a.ALUM_ESPECIALIDAD=c.ID), ccarreras b, mapas d where ".
                 " CARR_CLAVE=ALUM_CARRERAREG".
-                " and ALUM_MAPA=d.MAPA_CLAVE and a.ALUM_MATRICULA='".$_GET["matricula"]."'";
-               //echo $sql;
+                " and ALUM_MAPA=d.MAPA_CLAVE and a.ALUM_MATRICULA='".$mat."'";
+              // echo $sql;
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -239,17 +237,18 @@
 				return $data;
             }
             
-            function boleta($linea) {
-                $dataAlum = $this->LoadDatosAlumnos();
-                $data = $this->LoadDatosCursando();
-                $dataCiclo = $this->LoadDatosCiclo();
-                $dataCreditos = $this->LoadDatosCreditos();
-                $dataGen = $this->LoadDatosGen();
+            function boleta($linea,$lamat) {
 
+                $dataAlum = $this->LoadDatosAlumnos($lamat);
+                $data = $this->LoadDatosCursando($lamat);
+                $dataCiclo = $this->LoadDatosCiclo($lamat);
+                $dataCreditos = $this->LoadDatosCreditos($lamat);
+                $dataGen = $this->LoadDatosGen();
+                
             
                 $miutil = new UtilUser();                
 
-                $this->Image('../../imagenes/empresa/logo2.png',20,($linea+8),15);
+                $this->Image('../../imagenes/empresa/logo2.png',20,($linea+4),15);
 
                 $this->setY(($linea+10)); 
                 $this->setX(50); 
@@ -341,7 +340,8 @@
                 $nombre=$miutil->getJefe('303');//Nombre del puesto de control escolar7
 
                 $this->SetFont('Montserrat-Medium','',6);
-                $this->Cell(0,5,utf8_decode("NOTA:ACEPTO TODAS LAS CONDICIONES DEL REGLAMENTO PARA ALUMNOS DEL ".$dataGen[0]["inst_razon"]),'',0,'C');
+                $this->Cell(0,5,utf8_decode("NOTA:ACEPTO TODAS LAS CONDICIONES DEL REGLAMENTO PARA ALUMNOS DEL ". 
+                $dataGen[0]["inst_razon"]),'',0,'C');
                 $this->Ln(2);
                 $this->Cell(0,5,utf8_decode("LAS MATERIAS INDICADAS CON * NO CUMPLEN CON EL PERIODO REQUERIDO"),'',0,'C');
 
@@ -353,12 +353,6 @@
                 $this->SetFont('Montserrat-SemiBold','',8);
                 $this->Cell(0,5,"JEFE(A) DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",'',0,'L');
 
-               /*
-                $this->setX(0);$this->setY(140);
-                $this->SetFont('Montserrat-SemiBold','',10);
-                $this->Cell(0,1,"",'B',0,'L');
-                */
-
                 $cadena= "FECHA:".str_replace("/","",$fecha)."|".str_replace(" ","|",$dataAlum[0]["ALUM_MATRICULA"]).
                 str_replace(" ","|",$dataAlum[0]["NOMBRE"])."|".str_replace(" ","|",$dataAlum[0]["CARRERAD"]).
                  "|PERIODO:".$dataCiclo[0][0].$dataCiclo[0][0].
@@ -366,6 +360,15 @@
                  
                  
                 $this->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',160,$linea+104,28,28);     
+
+                
+               /*
+                $this->setX(0);$this->setY(140);
+                $this->SetFont('Montserrat-SemiBold','',10);
+                $this->Cell(0,1,"",'B',0,'L');
+                */
+
+     
 
             }
 
@@ -377,10 +380,19 @@
 		$pdf->SetFont('Arial','',10);
 		$pdf->SetMargins(10, 25 , 25);
 		$pdf->SetAutoPageBreak(true,10); 
-        $pdf->AddPage();
+        
          
-        $pdf->boleta(0);
-        $pdf->boleta(135);
+        $lalista=explode(",",$_GET["lista"]);
+
+        foreach ($lalista as $lis) {
+            if ($lis!='') { 
+                    $pdf->AddPage();
+                    $pdf->boleta(0,$lis);
+                    $pdf->boleta(135,$lis);
+            }
+        }
+
+        
  
         $pdf->Output(); 
 

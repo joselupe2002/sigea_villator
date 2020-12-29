@@ -37,7 +37,7 @@ if (count($res)>0) {
 }
 else {
 	echo "La CURP no se encuentra activa esto puede suceder: ".
-	"<br> <span class=\"text-warning\"><strong>1. La CURP se activa el 02/08/2020. </span></strong><br>".
+	"<br> <span class=\"text-warning\"><strong>1. Aún no existe aplicación de exámen programada para esta fecha. </span></strong><br>".
 	"  <span class=\"text-danger\"><strong> 2. No finalizó su proceso de registro en línea. </span></strong><br>".
 	" <span class=\"text-success\"><strong>3. Esta mal escrita </span></strong>";
 }

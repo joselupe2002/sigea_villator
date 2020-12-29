@@ -51,24 +51,24 @@
     </div>
 
 
-	<div style="height:10px; background-color: #C18900;"> </div>
-	<div class="container-fluid informacion" style="background-color: #9B0B0B;">   
+	<div style="height:10px; background-color: #040E5A;"> </div>
+	<div class="container-fluid informacion" style="background-color: white;">   
          <div class="row">
              <div class="col-md-4" >
-                   <img src="../imagenes/empresa/logo2.png" alt="" width="50%" class="img-fluid" alt="Responsive image" />  
+                   <img src="../imagenes/empresa/logo2.png" alt="" width="90px" class="img-fluid" alt="Responsive image" />  
 			  </div>
 			  <div class="col-md-4" >
-				   <div class="text-success" style="padding:0px;  font-size:35px; font-family:'Girassol'; color:white; text-align:center; font-weight: bold;">
+				   <div class="text-success" style="padding:0px;  font-size:35px; font-family:'Girassol'; color:#1728A3; text-align:center; font-weight: bold;">
 						  PROCESO DE ADMISIÓN
 				    </div>
-				   <div class="text-primary"  style="padding:0px; font-size:35px; font-family:'Girassol'; color:white; text-align:center; font-weight: bold;">2020</div>
+				   
 			  </div>
 			  <div class="col-md-4" style="padding-top: 20px; text-align: right;">
 			      
 			  </div>
         </div>
     </div>
-	<div style="height:10px; background-color: #C18900;"> 
+	<div style="height:10px; background-color: #040E5A;"> 
 	 </div>
 	 
 <div style="padding-left: 30px; padding-right:30px; ">  
