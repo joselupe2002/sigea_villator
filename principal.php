@@ -380,7 +380,7 @@
 
 		function existeUrl(url) {
 			   var http = new XMLHttpRequest();
-			   http.open('HEAD', url, false);
+			    http.open('HEAD', url, false); 
 			   http.send();
 			   return http.status!=404;
 			}
@@ -424,9 +424,12 @@
 					  
 					   console.log("/nucleo/"+modulo+"/grid.php"+ " "+existeUrl("/nucleo/"+modulo+"/grid.php"));
 
-	    	      	   if (existeUrl("/nucleo/"+modulo+"/grid.php")) {
-	    	      		  url="nucleo/"+modulo+"/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=N"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;
-	    	      	   }
+			/*
+							if (existeUrl("/nucleo/"+modulo+"/grid.php")) {
+								url="nucleo/"+modulo+"/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=N"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;
+								}
+					
+								*/
 	    	      	  		
 	    	          var content = '<iframe frameborder="0" id="FR'+modulo+'" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
 				     $('#myTab').tabs('add',{
