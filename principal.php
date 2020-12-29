@@ -422,7 +422,9 @@
 	    	      	   
 	    	      	   var url="nucleo/base/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=S"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;	    	      	 
 					  
-	    	      	   if (existeUrl("nucleo/"+modulo+"/grid.php?modulo="+modulo)) {
+					   console.log("/nucleo/"+modulo+"/grid.php"+ " "+existeUrl("/nucleo/"+modulo+"/grid.php"));
+
+	    	      	   if (existeUrl("/nucleo/"+modulo+"/grid.php")) {
 	    	      		  url="nucleo/"+modulo+"/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=N"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;
 	    	      	   }
 	    	      	  		
