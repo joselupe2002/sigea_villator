@@ -51,6 +51,7 @@
 				$miConex = new Conexion();	
 				$data[]=null;
 				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT PLAN_ORDEN,PLAN_ACTIVIDAD,PLAN_ENTREGABLE,PLAN_FECHAENTREGA from eplandescarga a where PLAN_IDACT='".$actividad."' order by PLAN_ORDEN");
+				//echo "SELECT PLAN_ORDEN,PLAN_ACTIVIDAD,PLAN_ENTREGABLE,PLAN_FECHAENTREGA from eplandescarga a where PLAN_IDACT='".$actividad."' order by PLAN_ORDEN"; 
 				foreach ($resultado as $row) {
 					$data[] = $row;					
 				}
@@ -78,16 +79,16 @@
 				$this->SetDrawColor(0,0,0);
 				$this->SetX(30);
 				$this->SetY(-40);
-				$this->Cell(60,4,$this->elprofe,'T',0,'C',false);
+				$this->Cell(60,4,utf8_decode($this->elprofe),'T',0,'C',false);
 				$this->SetX(130);
-				$this->Cell(60,4,$this->eljefe,'T',0,'C',false);
+				$this->Cell(60,4,utf8_decode($this->eljefe),'T',0,'C',false);
 				
 		
 				$this->SetY(-37);
 				$this->SetX(30);
-				$this->Cell(60,4,'PROFESOR','',0,'L',false);
+				$this->Cell(60,4,utf8_decode('PROFESOR'),'',0,'L',false);
 				$this->SetX(130);
-				$this->Cell(60,4,'JEFE DIVISIÓN','',0,'C',false);
+				$this->Cell(60,4,utf8_decode('JEFE DIVISIÃ“N'),'',0,'C',false);
 				
 		
 				
@@ -117,7 +118,7 @@
 			function imprimeDescarga($headerdes, $datades)
 			{
 				$this->Ln(5);
-				// Colores, ancho de línea y fuente en negrita
+				// Colores, ancho de lï¿½nea y fuente en negrita
 				$this->SetFillColor(172,31,6);
 				$this->SetTextColor(255);
 				$this->SetDrawColor(181,57,35);
@@ -129,7 +130,7 @@
 				for($i=0;$i<count($headerdes);$i++)
 					$this->Cell($w[$i],7,$headerdes[$i],1,0,'C',true);
 					$this->Ln();
-					// Restauración de colores y fuentes
+					// Restauraciï¿½n de colores y fuentes
 					$this->SetFillColor(255,254,174);
 					$this->SetTextColor(0);
 					$this->SetFont('');
@@ -167,7 +168,7 @@
 					$this->Cell(10,4,$suma,'LR',0,'C',$fill);
 					$this->Ln();
 					$this->Cell(array_sum($w),0,'','T');
-					// Línea de cierre
+					// Lï¿½nea de cierre
 			}
 			
 			
@@ -197,7 +198,7 @@
 					for($i=0;$i<count($headerplan);$i++)
 						$this->Cell($w[$i],7,$headerplan[$i],1,0,'C',true);
 						$this->Ln();
-						// Restauración de colores y fuentes
+						// Restauraciï¿½n de colores y fuentes
 						$this->SetFillColor(183,201,255);
 						$this->SetTextColor(0);
 						$this->SetFont('');
@@ -210,14 +211,14 @@
 								foreach($dataPlan as $rowdes)
 								{
 									$this->setX(15);
-									if (count($rowdes)) {
+								
 										$this->Cell($w[0],4,utf8_decode($rowdes[0]),'LR',0,'J',$fill);
 										$this->Cell($w[1],4,utf8_decode($rowdes[1]),'LR',0,'L',$fill);
 										$this->Cell($w[2],4,utf8_decode($rowdes[2]),'LR',0,'L',$fill);
 										$this->Cell($w[3],4,utf8_decode($rowdes[3]),'LR',0,'L',$fill);
 									    $this->Ln();
 										$fill = !$fill;
-									}
+				
 									
 								}
 						}
@@ -258,14 +259,14 @@
 		$pdf->setX(40); $pdf->SetFont('Montserrat-ExtraBold','B',8); $pdf->Cell(0,0,"NOMBRE: ",0,0,'L');	
 		$pdf->setX(60); $pdf->SetFont('Montserrat-Medium','U',8); $pdf->Cell(0,0,utf8_decode($dataEmpl[0]["EMPL_NOMBREC"]),0,1,'L');
 		$pdf->Ln(4);
-		$pdf->setX(40); $pdf->SetFont('Montserrat-ExtraBold','B',8); $pdf->Cell(0,0,"ACADEMÍA: ",0,0,'L');
+		$pdf->setX(40); $pdf->SetFont('Montserrat-ExtraBold','B',8); $pdf->Cell(0,0,"DEPTO: ",0,0,'L');
 		$pdf->setX(60); $pdf->SetFont('Montserrat-Medium','U',8); $pdf->Cell(0,0,utf8_decode($dataEmpl[0]["EMPL_DEPTOD"]),0,1,'L');
 		
 			
 		$pdf->eljefe=$dataEmpl[0]["EMPL_JEFEABREVIA"]." ".$dataEmpl[0]["EMPL_JEFED"];
 		$pdf->elprofe=$dataEmpl[0]["EMPL_ABREVIA"]." ".$dataEmpl[0]["EMPL_NOMBREC"];
 		
-		$headerdes = array('ID','Actividades de Descarga','Lunes','Martes','Miércoles','Jueves','Viernes','TH');		
+		$headerdes = array('ID','Actividades de Descarga','Lunes','Martes','Miï¿½rcoles','Jueves','Viernes','TH');		
 		$datades = $pdf->descarga();
 		if (!($datades[0]==null)) { $pdf->imprimeDescarga($headerdes,$datades);}
 		

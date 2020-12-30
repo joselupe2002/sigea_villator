@@ -5,7 +5,9 @@ function verPlanAs(modulo,usuario,institucion, campus,essuper){
 	if (table.rows('.selected').data().length>0) {		
 		
 		if (table.rows('.selected').data()[0]["RUTA"]) {
-			window.open(table.rows('.selected').data()[0]["RUTA"], '_blank');
+			enlace=table.rows('.selected').data()[0]["RUTA"];
+			previewAdjunto(enlace);
+			//window.open(table.rows('.selected').data()[0]["RUTA"], '_blank');
 		}
 		else {
 			alert ("No se ha adjuntando PDF")
@@ -30,9 +32,9 @@ function addPlanAs(modulo,usuario,institucion, campus,essuper){
 		stElim="display:none; cursor:pointer;";
     	if (table.rows('.selected').data()[0]["RUTA"].length>0) {stElim="cursor:pointer; display:block; ";}
     	btnEliminar="<i style=\""+stElim+"\"  id=\"btnEli_RUTA\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-        "onclick=\"eliminarEnlaceDrive('file_RUTA','MANUALES_ASIG','pdf_RUTA','RUTA','pdf','S','MATE_CLAVE','"+
+        "onclick=\"eliminarEnlaceCarpeta('file_RUTA','manualesAsignaturas','pdf_RUTA','RUTA','pdf','N','MATE_CLAVE','"+
                                         table.rows('.selected').data()[0]["CLAVE"]+"','"+table.rows('.selected').data()[0]["DESCRIPCION"]+
-                                        "','cmaterias','edita','');\"></i> "; 
+                                        "','cmaterias','edita','','PDF');\"></i> "; 
     	
     	 
 		script="<div class=\"modal fade\" id=\"modalDocument\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
@@ -70,7 +72,7 @@ function addPlanAs(modulo,usuario,institucion, campus,essuper){
 		   "                  <div class=\"row\"> "+
 		   "                    <div class=\"col-sm-12\">"+
 		   "                      <input type=\"file\" id=\"file_RUTA\" name=\"file_RUTA\""+
-	       "                          onchange=\"subirPDFDriveSave('file_RUTA','MANUALES_ASIG','pdf_RUTA','RUTA','pdf','S','MATE_CLAVE','"+table.rows('.selected').data()[0]["CLAVE"]+"','"+table.rows('.selected').data()[0]["DESCRIPCION"]+"','cmaterias','edita','');\"/>"+
+	       "                          onchange=\"subirPDFDriveSaveAsp_local('file_RUTA','manualesAsignaturas','pdf_RUTA','RUTA','pdf','N','MATE_CLAVE','"+table.rows('.selected').data()[0]["CLAVE"]+"','"+table.rows('.selected').data()[0]["DESCRIPCION"]+"','cmaterias','edita','','"+table.rows('.selected').data()[0]["CLAVE"]+"');\"/>"+
 	       "                      <input  type=\"hidden\" value=\""+table.rows('.selected').data()[0]["RUTA"]+"\"  name=\"RUTA\" id=\"RUTA\"  placeholder=\"\" />\n"+
            "                  </div> "+
 	       "                 </div>"+		  
@@ -116,12 +118,7 @@ function addPlanAs(modulo,usuario,institucion, campus,essuper){
 }
 
 function cierraModal(modulo){
-	     table = $("#G_"+modulo).DataTable();
-	     table.rows('.selected').data()[0]["COMP_LIBERACION"]=$('#COMP_LIBERACION').val();  
-	     /*
-	     var node = $(table.rows('.selected').row(0).node());	     
-	     node.find("td").eq(24).html($('#COMP_LIBERACION').val());	 
-	     */	    
+		window.parent.document.getElementById('FRcmaterias').contentWindow.location.reload();
          $('#modalDocument').modal("hide");  
     }
 

@@ -232,27 +232,27 @@ function cargarPortafolios(){
 				  elcolorbaja=""; if (valor.BAJA=='S') {elcolorbaja="color:red;";}
 		          $("#row"+valor.MATRICULA).append("<td><span class=\"text-primary\" style=\"font-size:11px; font-weight:bold; "+elcolorbaja+"\">"+valor.NOMBRE+"</span></td>");	
 		          	          
-		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia Encuadre\" target=\"_blank\" href=\""+valor.RUTAENCU+"\">"+
+		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia Encuadre\" target=\"_blank\" onclick=\"previewAdjunto('"+valor.RUTAENCU+"');\">"+
 	                                                    " <img width=\"30px\" height=\"30px\" id=\""+valor.MATRICULA+"ENCUADRE\" "+
 	                                                           "src=\""+ladefault+"\" width=\"50px\" height=\"50px\"></a></td>");
 
-		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia Diuagn&oacute;stica\" target=\"_blank\" href=\""+valor.RUTADIAG+"\">"+
+		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia Diuagn&oacute;stica\" target=\"_blank\"onclick=\"previewAdjunto('"+valor.RUTADIAG+"');\">"+
                           " <img width=\"30px\" height=\"30px\" id=\""+valor.MATRICULA+"DIAGNOSTICA\" "+
                                  "src=\""+ladefault+"\" width=\"30px\" height=\"30px\"></a></td>");
 
-		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia de Producto\" target=\"_blank\" href=\""+valor.RUTAEP+"\">"+
+		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia de Producto\" target=\"_blank\" onclick=\"previewAdjunto('"+valor.RUTAEP+"');\">"+
                           " <img width=\"30px\" height=\"30px\" id=\""+valor.MATRICULA+"EP\" "+
                                  "src=\""+ladefault+"\" width=\"30px\" height=\"30px\"></a></td>");
 
-		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia de desempe&ntilde;o\" target=\"_blank\" href=\""+valor.RUTAED+"\">"+
+		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia de desempe&ntilde;o\" target=\"_blank\" onclick=\"previewAdjunto('"+valor.RUTAED+"');\">"+
                           " <img width=\"30px\" height=\"30px\" id=\""+valor.MATRICULA+"ED\" "+
                                  "src=\""+ladefault+"\" width=\"30px\" height=\"30px\"></a></td>");
                   
-		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia de Conocimiento\" target=\"_blank\" href=\""+valor.RUTAEC+"\">"+
+		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia de Conocimiento\" target=\"_blank\" onclick=\"previewAdjunto('"+valor.RUTAEC+"');\">"+
                           " <img width=\"30px\" height=\"30px\" id=\""+valor.MATRICULA+"EC\" "+
                                  "src=\""+ladefault+"\" width=\"30px\" height=\"30px\"></a></td>");
 
-		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia Actitud\" target=\"_blank\" href=\""+valor.RUTAEA+"\">"+
+		          $("#row"+valor.MATRICULA).append("<td style=\"text-align:center\"><a title=\"Ver Archivo de Evidencia Actitud\" target=\"_blank\" onclick=\"previewAdjunto('"+valor.RUTAEA+"');\">"+
                           " <img width=\"30px\" height=\"30px\" id=\""+valor.MATRICULA+"EA\" "+
                                  "src=\""+ladefault+"\" width=\"30px\" height=\"30px\"></a></td>");
                   

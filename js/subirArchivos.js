@@ -1046,14 +1046,15 @@ function subirPDFDriveSaveAsp_local(nombreComponente,carpeta,nombreImg, nombreIn
 		}
 
 		//Solo para el caso de los aspirantes que estan en carpetas diferentes 
-		add=""; 
+		add=""; enpesta=true;
 		if (carpeta=="docAspira") {
 			rutacarpetaOrigen="../adjuntos/"+carpeta+"/"; 
 			if (nombreComponente.substring(0,3)=='ASP') {add="../";}
+			enpesta=false;
 		} 
 		//============================================================================
 
-		secambia=""; if (cambianombre=='S') {secambia="&cambianombre="+aux;}
+		secambia=""; if (cambianombre!='') {secambia="&cambianombre="+cambianombre;}
 
 
 		 $("#"+nombreImg).attr("src",rutaespera);	
@@ -1081,8 +1082,19 @@ function subirPDFDriveSaveAsp_local(nombreComponente,carpeta,nombreImg, nombreIn
 							$("#"+nombreImg).attr("src",elsrc);
 							$("#"+nombreImg+"_2").attr("src",elsrc);
 
-							$("#enlace_"+nombreInput).attr("href",add+rutacarpetaOrigen+laimagen);	
-							$("#enlace_"+nombreInput+"_2").attr("href",add+rutacarpetaOrigen+laimagen);   	    				    		
+							if (enpesta) { 		
+								$("#enlace_"+nombreInput).removeAttr("href");
+								$("#enlace_"+nombreInput).removeAttr('onclick').click(function () {
+									previewAdjunto(add+rutacarpetaOrigen+laimagen); });
+							
+							}
+							else {
+								$("#enlace_"+nombreInput).attr("href",add+rutacarpetaOrigen+laimagen);	
+								$("#enlace_"+nombreInput+"_2").attr("href",add+rutacarpetaOrigen+laimagen);
+							}
+							
+							
+
 							$("#"+nombreInput).attr("value",laimagen);					
 							
 							$("#btnEli_"+nombreInput).show();						
@@ -1109,6 +1121,7 @@ function eliminarEnlaceCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, 
 
     op=confirm("¿Seguro que desea eliminar el archivo?");
     if (op == true) {   
+
     	 laruta=$("#"+nombreInput).attr("value"); 
 		 elid=laruta.substring(laruta.lastIndexOf("/") + 1, laruta.length);
 	
@@ -1125,6 +1138,7 @@ function eliminarEnlaceCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, 
 			rutabase="../";
 		}
 		 
+
 		$("#"+nombreImg).attr("src",rutaimg+"imagenes/menu/esperar.gif");
 		$("#"+nombreImg+"_2").attr("src",rutaimg+"imagenes/menu/esperar.gif");
 		
@@ -1156,6 +1170,48 @@ function eliminarEnlaceCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, 
 	    				        if (operacion=="edita") {editaAdjunto(campoid,id,nombreInput,descrip,tabla,rutabase);}
 
 	    				        	
+	   	    				    if ((res.substring(0,2)=="0|")){	   	    				    			   	    				    
+	   	    				    		$("#"+nombreImg).attr("src",elsrc);
+	   	    				        	$("#"+nombreInput).attr("value","");
+	   	    				        	alert ("Ocurrio un error al eliminar el archivo al Drive: "+laimagen+res); 				    		
+	   	    				    }				    						    		   	    				    	   	    		    	    
+                         }); // del .done del ajax  
+    }
+}
+
+
+
+function eliminarEnlaceRuta(carpeta,nombreImg, nombreInput, eltipoarchivo){
+   alert (carpeta);
+    op=confirm("¿Seguro que desea eliminar el archivo?");
+    if (op == true) {   
+
+		elid=carpeta; 
+
+		$("#"+nombreImg).attr("src","../../imagenes/menu/esperar.gif");
+		$("#"+nombreImg+"_2").attr("src","../../imagenes/menu/esperar.gif");
+		
+	     jQuery.ajax({
+	   	    		  url: '../base/eliminarArchivo.php?imgborrar='+elid,
+	   	    	      cache: false,
+	   	    		  timeout: 600000, 
+	   	    		  contentType: false,
+	   	    		  processData: false,
+	   	    		  type: 'POST'})
+	   	    		  .done(function(res){ 	
+							 
+								if (eltipoarchivo=='IMG') {elsrc="../../imagenes/menu/default.png";}else { elsrc=rutaimg+"../../imagenes/menu/pdfno.png"} 
+					
+	   	    				    $("#"+nombreImg).attr("src",elsrc);
+	   	    				    $("#btnEli_"+nombreInput).css("display","none");
+	    				    	$("#"+nombreImg+"_2").attr("src",elsrc);
+									
+									
+	    				    	$("#enlace_"+nombreInput).attr("href","../../imagenes/menu/pdfno.png");	
+	    				    	$("#enlace_"+nombreInput+"_2").attr("href","../../imagenes/menu/pdfno.png");
+	    				    		
+								$("#"+nombreInput).attr("value","");
+									    			    				
 	   	    				    if ((res.substring(0,2)=="0|")){	   	    				    			   	    				    
 	   	    				    		$("#"+nombreImg).attr("src",elsrc);
 	   	    				        	$("#"+nombreInput).attr("value","");

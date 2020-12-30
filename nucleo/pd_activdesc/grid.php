@@ -574,7 +574,8 @@ function agregarActividad(id, descrip,modulo,elciclo){
             if (f1<=f2) {         
                   btnSubir="<td width=\"20%\">"+
 		                   "     <input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.PLAN_ID+"\" name=\"file_"+valor.PLAN_ID+"\""+
-	                       "            onchange=\"subirPDFDriveSave('file_"+valor.PLAN_ID+"','ACTDES_"+elciclo+"','pdf_"+valor.PLAN_ID+"','"+valor.PLAN_ID+"','pdf','S','PLAN_ID','"+valor.PLAN_ID+"','"+valor.PLAN_ACTIVIDAD+"','eplandescarga','edita','');\">"+	    	       	                      
+						   "            onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.PLAN_ID+"','actividadesDescarga','pdf_"+valor.PLAN_ID+"','"+
+						                valor.PLAN_ID+"','pdf','N','PLAN_ID','"+valor.PLAN_ID+"','"+valor.PLAN_ACTIVIDAD+"','eplandescarga','edita','','"+valor.PLAN_ID+" "+valor.PLAN_ACTIVIDAD+"');\">"+	    	       	                      
 						   "</td>";										  
                 }
 			
@@ -593,17 +594,19 @@ function agregarActividad(id, descrip,modulo,elciclo){
 	
 		     else { boton=btnSubir;}
 				  
-			stElim="display:none; cursor:pointer;"
-			if (valor.RUTA.length>0) {stElim="cursor:pointer; display:block; ";}
+			stElim="display:none; cursor:pointer;";			
+			if ((valor.RUTA!='') && (valor.RUTA!=null))  {stElim="cursor:pointer; display:block; ";}
 
+		
 			botonPDF="<a target=\"_blank\" id=\"enlace_"+valor.PLAN_ID+"\" href=\""+valor.RUTA+"\">"+
 							"           <img width=\"40px\" height=\"40px\" id=\"pdf_"+valor.PLAN_ID+"\" name=\"pdf_"+valor.PLAN_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 							"      </a>"+	
-							"<input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\""+valor.PLAN_ID+"\" id=\""+valor.PLAN_ID+"\"  placeholder=\"\" />";						
+							"<input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\""+valor.PLAN_ID+"\" id=\""+valor.PLAN_ID+"\"  placeholder=\"\" />"+						
 							"      <i style=\""+stElim+"\" id=\"btnEli_"+valor.PLAN_ID+"\" title=\"Eliminar el archivo que se subi&oacute; anteriormente\" "+
-							"         onclick=\"eliminarEnlaceDrive('file_"+valor.PLAN_ID+"','ACTDES_"+elciclo+"','pdf_"+valor.PLAN_ID+"','"+valor.PLAN_ID+"','pdf','S','PLAN_ID','"+valor.PLAN_ID+"','"+valor.PLAN_ACTIVIDAD+"','eplandescarga','edita','');\" "+
+							"         onclick=\"eliminarEnlaceCarpeta('file_"+valor.PLAN_ID+"','actividadesDescarga','pdf_"+valor.PLAN_ID+"','"+valor.PLAN_ID+"','pdf','N','PLAN_ID','"+valor.PLAN_ID+"','"+valor.PLAN_ACTIVIDAD+"','eplandescarga','edita','','PDF');\" "+
 							"         class=\"ace-icon fa red fa-trash-o bigger-120\"></i>";   	  
 
+				
 		   	 $("#cuerpoActividad").append("<tr id=\"row"+c+"\">");
 		   	 $("#row"+c).append(boton);
 		   	 $("#row"+c).append("<td>"+botonPDF+"</td>");
@@ -720,7 +723,9 @@ function agregarActividad(id, descrip,modulo,elciclo){
 		}
 
 	    function imprimirPlan(){	
-	       window.open("plan.php?profesor=<?php echo $_SESSION["usuario"];?>"+"&ciclo="+$("#elciclo").html()+"&ciclod="+$("#elciclod").html(), '_blank');
+			enlace="nucleo/pd_activdesc/plan.php?profesor=<?php echo $_SESSION["usuario"];?>"+"&ciclo="+$("#elciclo").html()+"&ciclod="+$("#elciclod").html();
+			abrirPesta(enlace,"Plan")
+	       //window.open("plan.php?profesor=<?php echo $_SESSION["usuario"];?>"+"&ciclo="+$("#elciclo").html()+"&ciclod="+$("#elciclod").html(), '_blank');
 		}
 		
 		/*======== Evento cuando se edita una celda =======================*/

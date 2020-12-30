@@ -1459,6 +1459,10 @@ function paginapreview(ht,padre){
 	}
 
 
+/*=================================================================================================================*/
+/*========================================FUNCIONES DE ELEMENTOS ==================================================*/
+/*=================================================================================================================*/
+
 function getElementoEd(padre,nombre,tipo,etiqueta,sql,dato,esllave,ico,autoinc,funcion,bd, elusuario)
 {   elauto="";
 	hab="";	
@@ -2102,12 +2106,11 @@ if (tipo=="SELECT_MULTIPLE") {
 		if ((dato==null)||(dato=="")) { 
 			if (unaimagen=='IMG') {rutaimg="../../imagenes/menu/default.png";} else {rutaimg="../../imagenes/menu/pdfno.png";}
 			elenlace="";}
-	
+
    	    stElim="display:none; cursor:pointer;";
     	if (dato.length>0) {stElim="cursor:pointer; display:block; ";}
     	btnEliminar="<i style=\""+stElim+"\"  id=\"btnEli_"+nombre+"\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-        "onclick=\"eliminarEnlaceCarpeta('file_"+nombre+"','"+nombre+"','img_"+nombre+"','"+nombre+"','pdf','S','"+nombre+"','"+
-										dato+"','"+nombre+"','"+rutag+"','"+unaimagen+"');\"></i> "; 
+        "onclick=\"eliminarEnlaceRuta('"+elenlace+"','img_"+nombre+"','"+nombre+"','IMG');\"></i> "; 
 
 		cad="<label class=\"et\" for=\""+nombre+"\">"+etiqueta+"</label><br/> "+
 		     "  <div class=\"row align-items-end\"> "+
@@ -2125,8 +2128,13 @@ if (tipo=="SELECT_MULTIPLE") {
 		     "  </div>";
 		$("#"+padre).append(cad);
 		return cad;
-	}
+	}	
+
 }
+
+/*=================================================================================================================*/
+/*=======================================FIN DE LA FUNCION DE ELEMENTO=======================================================*/
+/*=================================================================================================================*/
 
 
 function showErrorAlert (reason, detail) {
@@ -2170,7 +2178,7 @@ function verPlaneacion(materia,materiad, grupo, ciclo, contenedor,esjefe){
 			if (JSON.parse(data)[0]["N"]>0) {				
 				abierto=true;
 			}
-			script="<div class=\"modal fade\" id=\"modalDocument\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
+			script="<div class=\"modal fade\" id=\"modalDocumentPlan\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
 			"   <div class=\"modal-dialog modal-lg \" role=\"document\">"+
 			"      <div class=\"modal-content\">"+
 			"          <div class=\"modal-header bg-info\" >"+
@@ -2204,12 +2212,12 @@ function verPlaneacion(materia,materiad, grupo, ciclo, contenedor,esjefe){
 			" <select id=\"aulas\" style=\"visibility:hidden\"></select> "
 			"</div>";
 		
-			$("#modalDocument").remove();
-			if (! ( $("#modalDocument").length )) {
+			$("#modalDocumentPlan").remove();
+			if (! ( $("#modalDocumentPlan").length )) {
 				$("#"+contenedor).append(script); }
 			
 			
-			$('#modalDocument').modal({show:true, backdrop: 'static'});
+			$('#modalDocumentPlan').modal({show:true, backdrop: 'static'});
 			cargarFechas(materia,grupo,ciclo,abierto,esjefe);	
 			cargarFechasEval  (materia,grupo,ciclo,abierto,esjefe);
 			
@@ -3696,4 +3704,13 @@ function eliminaHistorial(idtram,area,tipo,){
 			}					     
 		});    	    
 
+}
+
+
+function previewAdjunto(enlace) {
+	//quitamos los ../ que tenga ya que se debe encontrar en raiz 
+	var re = /\.\.\//gi;
+	var str = enlace;
+	var newstr = str.replace(re, "");
+	abrirPesta(newstr, "Adjunto");
 }

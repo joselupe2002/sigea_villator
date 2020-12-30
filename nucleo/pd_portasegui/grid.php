@@ -183,7 +183,8 @@
     	    //================================eENCUADRE =============================================
     	    $("#row"+valor.ID).append("<td width=\"20%\">"+
  	    		   "                      <input class=\"fileSigea\"  type=\"file\" id=\"file1_"+valor.MATERIA+valor.SIE+"\" name=\"file1_"+valor.MATERIA+valor.SIE+"\""+
- 	    	       "                          onchange=\"subirPDFDriveSave('file1_"+valor.MATERIA+valor.SIE+"','EVIDENCIAS_"+valor.CICLO+"','pdf1_"+valor.MATERIA+valor.SIE+"','"+valor.MATERIA+valor.SIE+"1','pdf','S','ID','"+valor.ID+"','"+valor.MATERIAD+" - ENCUADRE','eadjuntos','alta','ENCUADRE');\">"+
+					"                          onchange=\"subirPDFDriveSaveAsp_local('file1_"+valor.MATERIA+valor.SIE+"','encuadresPorta','pdf1_"+valor.MATERIA+valor.SIE+"','"+
+					                          valor.MATERIA+valor.SIE+"1','pdf','N','ID','"+valor.ID+"','"+valor.MATERIAD+" - ENCUADRE','eadjuntos','alta','ENCUADRE','"+valor.MATERIA+"_"+valor.SIE+"_"+valor.PROFESOR+"');\">"+
  	    	       
  	    	       "                      <input  type=\"hidden\" value=\""+valor.RUTAENCUADRE+"\"  name=\""+valor.MATERIA+valor.SIE+"1\" id=\""+valor.MATERIA+valor.SIE+"1\"  placeholder=\"\" />"+    	    	      
  	    	    "</td>");
@@ -192,12 +193,12 @@
     	    stElim="display:none; cursor:pointer;";
     	    if (valor.RUTAENCUADRE.length>0) { stElim="cursor:pointer; display:block; ";}    	    	  
             eliminarEncuadre="<i style=\""+stElim+"\"  id=\"btnEli_"+valor.MATERIA+valor.SIE+"1\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
-				                        "onclick=\"eliminarEnlaceDrive('file1_"+valor.MATERIA+valor.SIE+"','EVIDENCIAS_"+valor.CICLO+"',"+
-				                        "'pdf1_"+valor.MATERIA+valor.SIE+"','"+valor.MATERIA+valor.SIE+"1','pdf','S','ID','"+
+				                        "onclick=\"eliminarEnlaceCarpeta('file1_"+valor.MATERIA+valor.SIE+"','encuadresPorta',"+
+				                        "'pdf1_"+valor.MATERIA+valor.SIE+"','"+valor.MATERIA+valor.SIE+"1','pdf','N','ID','"+
 				                        valor.ID+"','"+valor.MATERIAD+"-ENCUADRE',"+
-				                        "'eadjuntos','alta','ENCUADRE');\"></i> "; 
+				                        "'eadjuntos','alta','ENCUADRE','PDF');\"></i> "; 
 
-    	    $("#row"+valor.ID).append("<td><div class=\"btn-group\"> <a title=\"Ver Archivo de encuadre\" target=\"_blank\" id=\"enlace_"+valor.MATERIA+valor.SIE+"1\" href=\""+valor.RUTAENCUADRE+"\">"+
+    	    $("#row"+valor.ID).append("<td><div class=\"btn-group\"> <a title=\"Ver Archivo de encuadre\" target=\"_blank\" id=\"enlace_"+valor.MATERIA+valor.SIE+"1\" onclick=\"previewAdjunto('"+valor.RUTAENCUADRE+"');\">"+
      	  		   "                               <img width=\"40px\" height=\"40px\" id=\"pdf1_"+valor.MATERIA+valor.SIE+"\" name=\"pdf1_"+valor.MATERIA+valor.SIE+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
      	 		   "                          </a>"+eliminarEncuadre+"</div>"+
   	    	    "</td>");
@@ -206,7 +207,8 @@
     	    //================================DIAGNOSTICA =============================================
     	    $("#row"+valor.ID).append("<td width=\"20%\">"+
   	    		   "                      <input class=\"fileSigea\" type=\"file\" id=\"file2_"+valor.MATERIA+valor.SIE+"\" name=\"file2_"+valor.MATERIA+valor.SIE+"\""+
-  	    	       "                          onchange=\"subirPDFDriveSave('file2_"+valor.MATERIA+valor.SIE+"','EVIDENCIAS_"+valor.CICLO+"','pdf2_"+valor.MATERIA+valor.SIE+"','"+valor.MATERIA+valor.SIE+"2','pdf','S','ID','"+valor.ID+"','"+valor.MATERIAD+" - EVAL. DIAG. ','eadjuntos','alta','DIAGNOSTICA');\">"+
+					 "                          onchange=\"subirPDFDriveSaveAsp_local('file2_"+valor.MATERIA+valor.SIE+"','diagnosticaPorta','pdf2_"+valor.MATERIA+valor.SIE+"','"+
+					                            valor.MATERIA+valor.SIE+"2','pdf','N','ID','"+valor.ID+"','"+valor.MATERIAD+" - EVAL. DIAG. ','eadjuntos','alta','DIAGNOSTICA','"+valor.MATERIA+"_"+valor.SIE+"_"+valor.PROFESOR+"');\">"+
   	    	       
   	    	       "                      <input  type=\"hidden\" value=\""+valor.RUTADIAGNOSTICA+"\"  name=\""+valor.MATERIA+valor.SIE+"2\" id=\""+valor.MATERIA+valor.SIE+"2\"  placeholder=\"\" />"+    	    	      
   	    	    "</td>");
@@ -214,12 +216,12 @@
     	    stElim="display:none; cursor:pointer;";
     	    if (valor.RUTADIAGNOSTICA.length>0) { stElim="cursor:pointer; display:block; ";}    	    	  
             eliminarDiagnostica="<i style=\""+stElim+"\"  id=\"btnEli_"+valor.MATERIA+valor.SIE+"2\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
-				                        "onclick=\"eliminarEnlaceDrive('file2_"+valor.MATERIA+valor.SIE+"','EVIDENCIAS_"+valor.CICLO+"',"+
-				                        "'pdf2_"+valor.MATERIA+valor.SIE+"','"+valor.MATERIA+valor.SIE+"2','pdf','S','ID','"+
+				                        "onclick=\"eliminarEnlaceCarpeta('file2_"+valor.MATERIA+valor.SIE+"','diagnosticaPorta',"+
+				                        "'pdf2_"+valor.MATERIA+valor.SIE+"','"+valor.MATERIA+valor.SIE+"2','pdf','N','ID','"+
 				                        valor.ID+"','"+valor.MATERIAD+"-DIAG',"+
-				                        "'eadjuntos','alta','DIAGNOSTICA');\"></i> "; 
+				                        "'eadjuntos','alta','DIAGNOSTICA','PDF');\"></i> "; 
 
-     	    $("#row"+valor.ID).append("<td><div class=\"btn-group\">  <a title=\"Ver Archivo de Evaluaci&oacute;n Diagn&oacute;stica\" target=\"_blank\" id=\"enlace_"+valor.MATERIA+valor.SIE+"2\" href=\""+valor.RUTADIAGNOSTICA+"\">"+
+     	    $("#row"+valor.ID).append("<td><div class=\"btn-group\">  <a title=\"Ver Archivo de Evaluaci&oacute;n Diagn&oacute;stica\" target=\"_blank\" id=\"enlace_"+valor.MATERIA+valor.SIE+"2\" onclick=\"previewAdjunto('"+valor.RUTADIAGNOSTICA+"');\">"+
       	  		   "                               <img width=\"40px\" height=\"40px\" id=\"pdf2_"+valor.MATERIA+valor.SIE+"\" name=\"pdf2_"+valor.MATERIA+valor.SIE+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
       	 		   "                         </a>"+eliminarDiagnostica+"</div>"+
    	    	    "</td>");
@@ -285,7 +287,7 @@ function cargarMaterias() {
 
 	
 
-	elsql="SELECT ID, MATERIA, TIPOMAT, MATERIAD, SIE, SEM, CICLO, "+
+	elsql="SELECT ID, MATERIA, TIPOMAT, MATERIAD, SIE, SEM, CICLO, PROFESOR,"+
                  " IFNULL((SELECT RUTA FROM eadjuntos b where b.ID=a.ID and b.AUX='ENCUADRE'),'') AS RUTAENCUADRE, "+
                  " IFNULL((SELECT RUTA FROM eadjuntos b where b.ID=a.ID and b.AUX='DIAGNOSTICA'),'') AS RUTADIAGNOSTICA "+                 
 				 " FROM vcargasprof a where  PROFESOR='<?php echo $_SESSION['usuario']?>' "+
@@ -768,19 +770,19 @@ function impEncuadre(id, materia, descrip, tipomat){
 						 //==========================EVIDENCIA DE PRODUCTO ==========================						 
 						 $("#rowUni"+c).append("<td width=\"20%\">"+
 				 	    		                "<input class=\"fileSigea\" type=\"file\" id=\"file1_"+c+"_"+valor.ENCU_ID+"\" name=\"file1_"+c+"_"+valor.ENCU_ID+"\""+
-				 	    	                    "onchange=\"subirPDFDriveSave('file1_"+c+"_"+valor.ENCU_ID+"','EVIDENCIAS_"+$("#elciclo").html()+"','pdf1_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"1_"+c+"','pdf','S','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+" - EV. PROD.','eadjuntos','alta','EP');\">"+
+				 	    	                    "onchange=\"subirPDFDriveSaveAsp_local('file1_"+c+"_"+valor.ENCU_ID+"','evidenciasPorta','pdf1_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"1_"+c+"','pdf','N','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+" - EV. PROD.','eadjuntos','alta','EP','EP_"+valor.ENCU_ID+"_"+valor.UNID_NUMERO+"_"+valor.UNID_DESCRIP+"');\">"+
                                                 "<input  type=\"hidden\" value=\""+valor.RUTAEP+"\"  name=\""+valor.ENCU_ID+"1_"+c+"\" id=\""+valor.ENCU_ID+"1_"+c+"\"  placeholder=\"\" />"+    	    	      
 				 	    	                "</td>");	
 	    	                
 						 stElim="display:none; cursor:pointer;";
 				    	 if (valor.RUTAEP.length>0) {stElim="cursor:pointer; display:block; ";}
 				    	 eliminarEP="<i style=\""+stElim+"\"  id=\"btnEli_"+valor.ENCU_ID+"1_"+c+"\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-								                        "onclick=\"eliminarEnlaceDrive('NO APLICA','EVIDENCIAS_"+$("#elciclo").html()+"',"+
-								                        "'pdf1_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"1_"+c+"','pdf','S','ID','"+
+								                        "onclick=\"eliminarEnlaceCarpeta('NO APLICA','evidenciasPorta',"+
+								                        "'pdf1_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"1_"+c+"','pdf','N','ID','"+
 								                        valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"- EV. PROD.',"+
-								                        "'eadjuntos','alta','EP');\"></i> "; 
+								                        "'eadjuntos','alta','EP','PDF');\"></i> "; 
 								                        
-						  $("#rowUni"+c).append("<td> <div class=\"btn-group\"> <a title=\"Ver Archivo de Evidencia de Producto\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"1_"+c+"\" href=\""+valor.RUTAEP+"\">"+
+						  $("#rowUni"+c).append("<td> <div class=\"btn-group\"> <a title=\"Ver Archivo de Evidencia de Producto\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"1_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAEP+"');\">"+
 				     	  		                " <img width=\"40px\" height=\"40px\" id=\"pdf1_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf1_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 				     	 		                " </a>"+eliminarEP+"</div>"+
 				  	    	                  "</td>");
@@ -788,19 +790,19 @@ function impEncuadre(id, materia, descrip, tipomat){
 						 //==========================EVIDENCIA DE DESEMPE�O ==========================	
 						  $("#rowUni"+c).append("<td width=\"20%\">"+
 	 	    		                "<input class=\"fileSigea\" type=\"file\" id=\"file2_"+c+"_"+valor.ENCU_ID+"\" name=\"file2_"+c+"_"+valor.ENCU_ID+"\""+
-	 	    	                    "onchange=\"subirPDFDriveSave('file2_"+c+"_"+valor.ENCU_ID+"','EVIDENCIAS_"+$("#elciclo").html()+"','pdf2_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"2_"+c+"','pdf','S','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+" - EV. DESEMP.','eadjuntos','alta','ED');\">"+
+	 	    	                    "onchange=\"subirPDFDriveSaveAsp_local('file2_"+c+"_"+valor.ENCU_ID+"','evidenciasPorta','pdf2_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"2_"+c+"','pdf','N','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+" - EV. DESEMP.','eadjuntos','alta','ED','ED_"+valor.ENCU_ID+"_"+valor.UNID_NUMERO+"_"+valor.UNID_DESCRIP+"');\">"+
                                   "<input  type=\"hidden\" value=\""+valor.RUTAED+"\"  name=\""+valor.ENCU_ID+"2_"+c+"\" id=\""+valor.ENCU_ID+"2_"+c+"\"  placeholder=\"\" />"+    	    	      
 	 	    	                "</td>");	
 
 						  stElim="display:none; cursor:pointer;";
 					      if (valor.RUTAED.length>0) {stElim="cursor:pointer; display:block; ";}
 					      eliminarED="<i style=\""+stElim+"\"  id=\"btnEli_"+valor.ENCU_ID+"2_"+c+"\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-									                        "onclick=\"eliminarEnlaceDrive('NO APLICA','EVIDENCIAS_"+$("#elciclo").html()+"',"+
-									                        "'pdf2_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"2_"+c+"','pdf','S','ID','"+
+									                        "onclick=\"eliminarEnlaceCarpeta('NO APLICA','evidenciasPorta',"+
+									                        "'pdf2_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"2_"+c+"','pdf','N','ID','"+
 									                        valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"- EV. DES.',"+
-									                        "'eadjuntos','alta','ED');\"></i> "; 
+									                        "'eadjuntos','alta','ED','PDF');\"></i> "; 
 									                        
-			               $("#rowUni"+c).append("<td><div class=\"btn-group\"><a title=\"Ver Archivo de Evidencia de Desempe&ntilde;o\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"2_"+c+"\" href=\""+valor.RUTAED+"\">"+
+			               $("#rowUni"+c).append("<td><div class=\"btn-group\"><a title=\"Ver Archivo de Evidencia de Desempe&ntilde;o\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"2_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAED+"');\">"+
 	     	  		                " <img width=\"40px\" height=\"40px\" id=\"pdf2_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf2_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 	     	  		                " </a>"+eliminarED+"</div>"+
 	  	    	                  "</td>");
@@ -809,20 +811,20 @@ function impEncuadre(id, materia, descrip, tipomat){
 			             //==========================EVIDENCIA DE CONOCIMIENTO ==========================	
 			               $("#rowUni"+c).append("<td width=\"20%\">"+
 	 	    		                "<input class=\"fileSigea\" type=\"file\" id=\"file3_"+c+"_"+valor.ENCU_ID+"\" name=\"file3_"+c+"_"+valor.ENCU_ID+"\""+
-	 	    	                    "onchange=\"subirPDFDriveSave('file3_"+c+"_"+valor.ENCU_ID+"','EVIDENCIAS_"+$("#elciclo").html()+"','pdf3_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"3_"+c+"','pdf','S','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"  - EV. CONOC.','eadjuntos','alta','EC');\">"+
+	 	    	                    "onchange=\"subirPDFDriveSaveAsp_local('file3_"+c+"_"+valor.ENCU_ID+"','evidenciasPorta','pdf3_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"3_"+c+"','pdf','N','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"  - EV. CONOC.','eadjuntos','alta','EC','EP_"+valor.ENCU_ID+"_"+valor.UNID_NUMERO+"_"+valor.UNID_DESCRIP+"');\">"+
                                  "<input  type=\"hidden\" value=\""+valor.RUTAEC+"\"  name=\""+valor.ENCU_ID+"3_"+c+"\" id=\""+valor.ENCU_ID+"3_"+c+"\"  placeholder=\"\" />"+    	    	      
 	 	    	                "</td>");	
 
 			               stElim="display:none; cursor:pointer;";
 						   if (valor.RUTAEC.length>0) {stElim="cursor:pointer; display:block; ";}
 						   eliminarEC="<i style=\""+stElim+"\"  id=\"btnEli_"+valor.ENCU_ID+"3_"+c+"\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-										                        "onclick=\"eliminarEnlaceDrive('NO APLICA','EVIDENCIAS_"+$("#elciclo").html()+"',"+
-										                        "'pdf3_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"3_"+c+"','pdf','S','ID','"+
+										                        "onclick=\"eliminarEnlaceCarpeta('NO APLICA','evidenciasPorta',"+
+										                        "'pdf3_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"3_"+c+"','pdf','N','ID','"+
 										                        valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"- EV. CON.',"+
-										                        "'eadjuntos','alta','EC');\"></i> "; 
+										                        "'eadjuntos','alta','EC','PDF');\"></i> "; 
 
 
-			               $("#rowUni"+c).append("<td> <div class=\"btn-group\"><a title=\"Ver Archivo de Evidencia de Conocimiento\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"3_"+c+"\" href=\""+valor.RUTAEC+"\">"+
+			               $("#rowUni"+c).append("<td> <div class=\"btn-group\"><a title=\"Ver Archivo de Evidencia de Conocimiento\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"3_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAEC+"');\">"+
 	     	  		                " <img width=\"40px\" height=\"40px\" id=\"pdf3_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf3_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 	     	  		             " </a>"+eliminarEC+"</div>"+
 	  	    	                  "</td>");
@@ -843,19 +845,19 @@ function impEncuadre(id, materia, descrip, tipomat){
 
 			               $("#rowUni"+c).append("<td width=\"20%\">"+
 	 	    		                "<input class=\"fileSigea\" type=\"file\" id=\"file4_"+c+"_"+valor.ENCU_ID+"\" name=\"file4_"+c+"_"+valor.ENCU_ID+"\""+
-	 	    	                    "onchange=\"subirPDFDriveSave('file4_"+c+"_"+valor.ENCU_ID+"','EVIDENCIAS_"+$("#elciclo").html()+"','pdf4_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"4_"+c+"','pdf','S','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"  - EV. ACT.','eadjuntos','alta','EA');\">"+
+	 	    	                    "onchange=\"subirPDFDriveSaveAsp_local('file4_"+c+"_"+valor.ENCU_ID+"','evidenciasPorta','pdf4_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"4_"+c+"','pdf','N','ID','"+valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"  - EV. ACT.','eadjuntos','alta','EA','EA_"+valor.ENCU_ID+"_"+valor.UNID_NUMERO+"_"+valor.UNID_DESCRIP+"');\">"+
                                  "<input  type=\"hidden\" value=\""+valor.RUTAEA+"\"  name=\""+valor.ENCU_ID+"4_"+c+"\" id=\""+valor.ENCU_ID+"4_"+c+"\"  placeholder=\"\" />"+    	    	      
 	 	    	                "</td>");	
 
 			               stElim="display:none; cursor:pointer;";
 						   if (valor.RUTAEA.length>0) {stElim="cursor:pointer; display:block; ";}
 						   eliminarEA="<i style=\""+stElim+"\"  id=\"btnEli_"+valor.ENCU_ID+"4_"+c+"\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-										                        "onclick=\"eliminarEnlaceDrive('NO APLICA','EVIDENCIAS_"+$("#elciclo").html()+"',"+
-										                        "'pdf4_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"4_"+c+"','pdf','S','ID','"+
+										                        "onclick=\"eliminarEnlaceCarpeta('NO APLICA','evidenciasPorta',"+
+										                        "'pdf4_"+c+"_"+valor.ENCU_ID+"','"+valor.ENCU_ID+"4_"+c+"','pdf','N','ID','"+
 										                        valor.ENCU_ID+"','"+valor.UNID_DESCRIP+"- EV. ACT.',"+
-										                        "'eadjuntos','alta','EA');\"></i> "; 
+										                        "'eadjuntos','alta','EA','PDF');\"></i> "; 
 										                        
-			               $("#rowUni"+c).append("<td><div class=\"btn-group\"> <a title=\"Ver Archivo de Evidencia de Actitud\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"4_"+c+"\" href=\""+valor.RUTAEA+"\">"+
+			               $("#rowUni"+c).append("<td><div class=\"btn-group\"> <a title=\"Ver Archivo de Evidencia de Actitud\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"4_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAEA+"');\">"+
 	     	  		                " <img width=\"40px\" height=\"40px\" id=\"pdf4_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf4_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 	     	  		              " </a>"+eliminarEA+"</div>"+
 	  	    	                  "</td>");
@@ -911,16 +913,18 @@ function impEncuadre(id, materia, descrip, tipomat){
 
 
 	   function impCotejo(ciclo,materia, materiad, grupo, unidad,unidadd) {
-		   
-		    window.open("listacot.php?materia="+materia+"&materiad="+materiad+"&ciclo="+ciclo+
-				    "&grupo="+grupo+"&unidad="+unidad+"&unidadd="+unidadd, '_blank');
+		    enlace="nucleo/pd_portasegui/listacot.php?materia="+materia+"&materiad="+materiad+"&ciclo="+ciclo+
+					"&grupo="+grupo+"&unidad="+unidad+"&unidadd="+unidadd;
+			abrirPesta(enlace,"Cotejo");
+		    
 		   }
 
 
 	   function impCotejo_indus(ciclo,materia, materiad, grupo, unidad,unidadd) {
 		   
-		    window.open("listacotindus.php?materia="+materia+"&materiad="+materiad+"&ciclo="+ciclo+
-				    "&grupo="+grupo+"&unidad="+unidad+"&unidadd="+unidadd, '_blank');
+			enlace="nucleo/pd_portasegui/listacotindus.php?materia="+materia+"&materiad="+materiad+"&ciclo="+ciclo+
+				    "&grupo="+grupo+"&unidad="+unidad+"&unidadd="+unidadd;
+			abrirPesta(enlace,"Cotejo");
 		   }	
     
 		</script>

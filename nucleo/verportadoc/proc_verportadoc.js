@@ -106,10 +106,10 @@ function generaTablaSubir(grid_data, op){
              cadEnc="";
 			 cadDiag="";
              if (!(entre)) {
-				 cadEnc="<a title=\"Ver Archivo de Encuadre\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"A_"+c+"\" href=\""+valor.RUTAENCU+"\">"+
+				 cadEnc="<a title=\"Ver Archivo de Encuadre\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"A_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAENCU+"');\">"+
 				                " <img width=\"40px\" height=\"40px\" id=\"pdfA_"+c+"_"+valor.ENCU_ID+"\" name=\"pdfA_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 				                " </a>";
-				 cadDiag="<a title=\"Ver Archivo de Evidencia Diagn&oacute;stica\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"B_"+c+"\" href=\""+valor.RUTADIAG+"\">"+
+				 cadDiag="<a title=\"Ver Archivo de Evidencia Diagn&oacute;stica\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"B_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTADIAG+"');\">"+
 	                " <img width=\"40px\" height=\"40px\" id=\"pdfB_"+c+"_"+valor.ENCU_ID+"\" name=\"pdfB_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 	                " </a>";
 				 
@@ -134,27 +134,27 @@ function generaTablaSubir(grid_data, op){
 			 $("#rowUni"+c).append("<td title=\""+valor.UNID_DESCRIP+"\">"+valor.UNID_DESCRIP.substring(0,30)+"</td>");	
 			
 
-			 $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Producto\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"1_"+c+"\" href=\""+valor.RUTAEP+"\">"+
+			 $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Producto\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"1_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAEP+"');\">"+
 	     	  		                " <img width=\"40px\" height=\"40px\" id=\"pdf1_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf1_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 	     	 		                " </a>"+
 	  	    	                  "</td>");
 
 
 			 
-            $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Desempe&ntilde;o\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"2_"+c+"\" href=\""+valor.RUTAED+"\">"+
+            $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Desempe&ntilde;o\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"2_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAED+"');\">"+
 		                " <img width=\"40px\" height=\"40px\" id=\"pdf2_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf2_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 		                " </a>"+
 	                  "</td>");
 
            
-            $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Conocimiento\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"3_"+c+"\" href=\""+valor.RUTAEC+"\">"+
+            $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Conocimiento\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"3_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAEC+"');\">"+
 		                " <img width=\"40px\" height=\"40px\" id=\"pdf3_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf3_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 		                " </a>"+
 	                  "</td>");
 
 
           
-            $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Actitud\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"4_"+c+"\" href=\""+valor.RUTAEA+"\">"+
+            $("#rowUni"+c).append("<td> <a title=\"Ver Archivo de Evidencia de Actitud\" target=\"_blank\" id=\"enlace_"+valor.ENCU_ID+"4_"+c+"\" onclick=\"previewAdjunto('"+valor.RUTAEA+"');\">"+
 		                " <img width=\"40px\" height=\"40px\" id=\"pdf4_"+c+"_"+valor.ENCU_ID+"\" name=\"pdf4_"+c+"_"+valor.ENCU_ID+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 		                " </a>"+
 	                  "</td>");
