@@ -34,8 +34,8 @@ var matser="";
 		$("#losplanes").append("<span class=\"label label-danger\">Plan de estudios</span>");
 		addSELECT("selPlanes","losplanes","PROPIO", "SELECT MAPA_CLAVE,MAPA_DESCRIP FROM mapas where MAPA_CLAVE='0'", "","");  			      
 
-		addSELECT_ST("aulas","grid_horarios","PROPIO", "select AULA_CLAVE, AULA_DESCRIP from eaula where "+
-		                                           "AULA_ACTIVO='S' order by AULA_DESCRIP", "","","visibility:hidden;");  			      
+		addSELECT_ST("aulas","contAulas","PROPIO", "select AULA_CLAVE, AULA_DESCRIP from eaula where "+
+		                                           "AULA_ACTIVO='S' order by AULA_DESCRIP", "","","width:80px;");  			      
 		
 		addSELECT_ST("losprofes","grid_horarios","PROPIO","SELECT EMPL_NUMERO, CONCAT(IFNULL(EMPL_APEPAT,''),' ',"+
 													  "IFNULL(EMPL_APEMAT,''),' ',IFNULL(EMPL_NOMBRE,''),' ',EMPL_NUMERO)"+
@@ -107,7 +107,7 @@ var matser="";
 		       " A_VIERNES AS a_viernes, A_SABADO AS a_sabado, A_DOMINGO AS a_domingo, CUPO as cupo,SIE,CICL_CUATRIMESTRE AS SEM"+
 			   " FROM edgrupos, cmaterias, eciclmate WHERE DGRU_CARRERA='"+$("#selCarreras").val()+"'"+
 			   " AND DGRU_CICLO='"+$("#selCiclos").val()+"' and MATE_CLAVE=DGRU_MATERIA and MATE_CLAVE=CICL_MATERIA "+
-			   " AND CICL_MAPA=DGRU_MAPA AND DGRU_MAPA='"+$("#selPlanes").val()+"' order by CICL_CUATRIMESTRE, SIE, MATE_DESCRIP";
+			   " AND CICL_MAPA=DGRU_MAPA AND DGRU_MAPA='"+$("#selPlanes").val()+"' order by CICL_CUATRIMESTRE, MATE_DESCRIP";
 		mostrarEspera("esperahor","grid_horarios","Cargando Horarios...");
 
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -227,7 +227,7 @@ function agregarasignaturasemestre() {
 function agregarAsignaturaGrid(lamateria,materiad,semestre, ht, hp){	
 	parametros={tabla:"edgrupos",
 			    bd:"Mysql",
-			    _INSTITUCION:"ITSSMO",
+			    _INSTITUCION:"ITSM",
 			    _CAMPUS:"0",
 			    DGRU_MATERIA:lamateria,
 			    DGRU_HT:ht,
@@ -359,7 +359,7 @@ function horarioAulas (linea,id,dia,tipo,elaula){
 function filtrarHorarios() {
 	dameVentana("ventFiltros", "grid_horarios","Filtrar Horarios","sm","bg-successs","fa blue fa-filter bigger-160","370");
     $("#body_ventFiltros").append("<div class=\"row\">"+
-								   "    <div class=\"col-sm-12\" id=\"losCampos\"><span class=\"label label-success\">Ciclo Escolar</span></div>"+
+								   "    <div class=\"col-sm-12\" id=\"losCampos\"><span class=\"label label-success\">Tipo Filtro</span></div>"+
 								   "</div><br/>"+
 								   "<div class=\"row\">"+
 								   "    <div class=\"col-sm-12\">"+
@@ -451,8 +451,6 @@ function getEspaciosAulas(){
 			cadFin="";
 			elsql="SELECT "+$("#selDiaEsp").val()+"_A, "+$("#selDiaEsp").val()+"_1 from vedgrupos b where b.CICLO='"+$("#selCiclosEsp").val()+"' "+
 				"and "+$("#selDiaEsp").val()+"_A<>'' order by "+$("#selDiaEsp").val()+"_A,"+$("#selDiaEsp").val()+"_1";
-			
-		
 			parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 			$.ajax({
 				type: "POST",
@@ -614,3 +612,23 @@ function guardarTodos() {
 		$(this).trigger("click");
      });
 }
+
+function reporteGen() {
+	if (($("#selCiclos").val()>0) && ($("#selCarreras").val()>0) ) {
+	enlace="nucleo/horarios/repHorGen.php?ciclo="+$("#selCiclos").val()+"&carrera="+$("#selCarreras").val();
+	abrirPesta(enlace,"Reporte");	
+	}
+	else {alert ("Debe elegir un Ciclo escolar y Un Programa Educativo");}
+}
+
+
+
+function reporteAula() {
+	if (($("#selCiclos").val()>0))  {
+	enlace="nucleo/horarios/repAula.php?ciclo="+$("#selCiclos").val()+"&carrera="+$("#selCarreras").val()+
+	"&aula="+$("#aulas").val();
+	abrirPesta(enlace,"Reporte");	
+	}
+	else {alert ("Debe elegir un Ciclo escolar");}
+}
+
