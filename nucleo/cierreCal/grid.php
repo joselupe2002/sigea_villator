@@ -298,8 +298,10 @@ function enviarBoleta(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
 
 
 function imprimirRepUni(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
-	window.open("../pd_captcal/repUni.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor="+$("#selProfesores").val()+"&materia="+
-								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre, '_blank'); 
+	enlace="nucleo/pd_captcal/repUni.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor="+$("#selProfesores").val()+"&materia="+
+								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre;
+
+	abrirPesta(enlace,"RepUni");
 }
 
 

@@ -7,7 +7,7 @@ function verPlanAs(modulo,usuario,institucion, campus,essuper){
 		if (table.rows('.selected').data()[0]["RUTA"]) {
 			enlace=table.rows('.selected').data()[0]["RUTA"];
 			previewAdjunto(enlace);
-			//window.open(table.rows('.selected').data()[0]["RUTA"], '_blank');
+		
 		}
 		else {
 			alert ("No se ha adjuntando PDF")

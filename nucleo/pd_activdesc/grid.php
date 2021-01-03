@@ -724,8 +724,7 @@ function agregarActividad(id, descrip,modulo,elciclo){
 
 	    function imprimirPlan(){	
 			enlace="nucleo/pd_activdesc/plan.php?profesor=<?php echo $_SESSION["usuario"];?>"+"&ciclo="+$("#elciclo").html()+"&ciclod="+$("#elciclod").html();
-			abrirPesta(enlace,"Plan")
-	       //window.open("plan.php?profesor=<?php echo $_SESSION["usuario"];?>"+"&ciclo="+$("#elciclo").html()+"&ciclod="+$("#elciclod").html(), '_blank');
+			abrirPesta(enlace,"Plan");	       
 		}
 		
 		/*======== Evento cuando se edita una celda =======================*/

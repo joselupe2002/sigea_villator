@@ -95,9 +95,11 @@ function generaTabla(grid_data){
 
 function ofiEx(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
-	window.open("../ivprefecxmes/exhorto.php?mes="+table.rows('.selected').data()[0][0]+"&periodo="+
-			                                    table.rows('.selected').data()[0][1]+"&profesor="+
-			                                    table.rows('.selected').data()[0][2], '_blank');
+	enlace="nucleo/ivprefecxmes/exhorto.php?mes="+table.rows('.selected').data()[0][0]+"&periodo="+
+	table.rows('.selected').data()[0][1]+"&profesor="+
+	table.rows('.selected').data()[0][2];
+	abrirPesta(enlace,"Exhorto");
+	
     return false;
 	
 }

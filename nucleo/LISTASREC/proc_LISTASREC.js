@@ -98,8 +98,8 @@ function generaTabla(grid_data){
 
 
 function verExhorto(elid){
-	
-	window.open("../LISTASREC/exhorto.php?ID="+elid, '_blank');
+	enlace="nucleo/LISTASREC/exhorto.php?ID="+elid
+	abrirPesta(enlace, "Exhorto");
     return false;
 	
 }

@@ -4,7 +4,8 @@ function boletaResidencia(modulo,usuario,institucion, campus,essuper){
  	 table = $("#G_"+modulo).DataTable();
 	 	  
 	  if (table.rows('.selected').data().length>0) {
-		window.open("../residencias/boletaRes.php?ID="+table.rows('.selected').data()[0]["IDPROY"]+"&concal=N", '_blank');
+		  enlace="nucleo/residencias/boletaRes.php?ID="+table.rows('.selected').data()[0]["IDPROY"]+"&concal=N";
+		abrirPesta(enlace, "BoletaRes");
 		$('#modalDocument').modal("hide");  
 
 	}
@@ -22,8 +23,9 @@ function boletaResidenciaCal(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
 		 
 	if (table.rows('.selected').data().length>0) {
-	  window.open("../residencias/boletaRes.php?ID="+table.rows('.selected').data()[0]["IDPROY"]+"&concal=S", '_blank');
-	  $('#modalDocument').modal("hide");  
+		enlace="nucleo/residencias/boletaRes.php?ID="+table.rows('.selected').data()[0]["IDPROY"]+"&concal=S";
+		abrirPesta(enlace, "BoletaRes");	  
+	  	$('#modalDocument').modal("hide");  
 
   }
   else {
@@ -46,7 +48,8 @@ function liberacionRes(modulo,usuario,institucion, campus,essuper){
 			url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork=LIBRESIDENCIA"+elanio,
 			success: function(data){
 				micons=data;
-				window.open("../residencias/liberacion.php?ID="+table.rows('.selected').data()[0]["IDRES"]+"&consec="+micons+"&anio="+elanio, '_blank');
+				enlace="nucleo/residencias/liberacion.php?ID="+table.rows('.selected').data()[0]["IDRES"]+"&consec="+micons+"&anio="+elanio;
+				abrirPesta(enlace, "Liberación");
 				$('#modalDocument').modal("hide");  
 			}					     
 		});

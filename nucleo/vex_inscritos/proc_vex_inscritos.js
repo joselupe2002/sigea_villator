@@ -52,7 +52,7 @@ function impBoletaEx(modulo,usuario,institucion, campus,essuper){
 function imprimeBoleta(matricula,valor, actividad){
 	enlace="nucleo/vex_inscritos/boletaExtra.php?matricula="+matricula+"&valor="+valor+"&actividad="+actividad;
 	abrirPesta(enlace,"Boleta Ex");
-//window.open(enlace,"_blank");
+
 }
 
 

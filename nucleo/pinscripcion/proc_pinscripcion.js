@@ -227,7 +227,6 @@ function verKardex(modulo,usuario,institucion, campus,essuper){
 						content:content,
 						closable:true		    
 					});
-   //window.open(enlace, '_blank'); 
   }
 
 

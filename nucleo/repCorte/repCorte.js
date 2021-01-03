@@ -127,8 +127,8 @@ contMat=1;
 									$("#rowM"+contR).append("<td>"+valor.SIE+"</td>");
 									$("#rowM"+contR).append("<td id=\"nu_"+valor.IDDETALLE+"\"></td>");
 									$("#rowM"+contR).append("<td id=\"nu2_"+valor.IDDETALLE+"\"></td>");
-									verboleta=" onclick=\"window.open('../pd_captcal/repUni.php?grupo="+valor.SIE+"&ciclo="+valor.CICLO+"&profesor="+valor.PROFESOR+"&materia="+
-									valor.MATERIA+"&materiad="+valor.MATERIAD+"&id="+valor.IDDETALLE+"&semestre="+valor.SEMESTRE+"','_blank');\"";
+									verboleta=" onclick=\"previewAdjunto('nucleo/pd_captcal/repUni.php?grupo="+valor.SIE+"&ciclo="+valor.CICLO+"&profesor="+valor.PROFESOR+"&materia="+
+									valor.MATERIA+"&materiad="+valor.MATERIAD+"&id="+valor.IDDETALLE+"&semestre="+valor.SEMESTRE+"');\"";
 
 									$("#rowM"+contR).append("<td><span "+verboleta+" id=\"ta_"+valor.IDDETALLE+"\" class=\"badge badge-info\" style=\"cursor:pointer;\">"+valor.ALUMNOS+"</span></td>");		
 									$("#rowM"+contR).append("<td><span id=\"pa_"+valor.IDDETALLE+"\" class=\"badge badge-success\">0</span></td>");						

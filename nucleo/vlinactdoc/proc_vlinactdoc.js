@@ -4,7 +4,7 @@ function verInstrucciones(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {				
 		if (table.rows('.selected').data()[0]["RUTA"]) {
-			window.open(table.rows('.selected').data()[0]["RUTA"], '_blank');
+			previewAdjunto(table.rows('.selected').data()[0]["RUTA"]);
 		}
 		else {
 			alert ("No se ha adjuntando PDF")

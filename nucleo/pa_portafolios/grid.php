@@ -278,7 +278,9 @@ function cargarMaterias() {
 
 
 function impEncuadre(id, materia, descrip){
-	window.open("encuadres.php?ID="+id+"&materiad="+materia, '_blank');
+	enlace="nucleo/pa_portafolios/encuadres.php?ID="+id+"&materiad="+materia;
+	abrirPesta(enlace,"Encuadre")
+	
 }
 
 

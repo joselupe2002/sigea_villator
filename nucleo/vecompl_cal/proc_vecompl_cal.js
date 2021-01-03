@@ -5,8 +5,10 @@ function liberacion(modulo,usuario,institucion, campus,essuper){
 	if (table.rows('.selected').data().length>0) {		
 		
 		if (table.rows('.selected').data()[0]["PROM"]>=1) {
-			window.open("../vecompl_cal/liberacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"], '_blank');
-			window.open("../vecompl_cal/evaluacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"], '_blank');
+			enlace="nucleo/vecompl_cal/liberacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"];
+			enlace2="nucleo/vecompl_cal/evaluacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"];
+			abrirPesta(enlace, "Liberación");
+			abrirPesta(enlace2, "Evaluación");			
 		}
 		else {
 			alert ("No se puede emitir oficio si la calificación de la actividad no es mayor o igual a  1")
@@ -26,7 +28,8 @@ function laliberacion(modulo,usuario,institucion, campus,essuper){
 	if (table.rows('.selected').data().length>0) {		
 		
 		if (table.rows('.selected').data()[0]["PROM"]>=1) {
-			window.open("../vecompl_cal/liberacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"], '_blank');
+			enlace="nucleo/vecompl_cal/liberacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"];
+			abrirPesta(enlace, "Liberación");
 		}
 		else {
 			alert ("No se puede emitir oficio si la calificación de la actividad no es mayor o igual a  1")
@@ -47,7 +50,7 @@ function verPDF(modulo,usuario,institucion, campus,essuper){
 	if (table.rows('.selected').data().length>0) {		
 		
 		if (table.rows('.selected').data()[0]["COMP_LIBERACION"]) {
-			window.open(table.rows('.selected').data()[0]["COMP_LIBERACION"], '_blank');
+			previewAdjunto(table.rows('.selected').data()[0]["COMP_LIBERACION"]);			
 		}
 		else {
 			alert ("No se ha adjuntando PDF")
@@ -67,7 +70,8 @@ function laevaluacion(modulo,usuario,institucion, campus,essuper){
 	if (table.rows('.selected').data().length>0) {		
 		
 		if (table.rows('.selected').data()[0]["PROM"]>=1) {
-			window.open("../vecompl_cal/evaluacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"], '_blank');
+			enlace="nucleo/vecompl_cal/evaluacion.php?ID="+table.rows('.selected').data()[0]["IDCAL"];
+			abrirPesta(enlace, "Evaluación")
 		}
 		else {
 			alert ("No se puede emitir oficio si la calificación de la actividad no es mayor o igual a  1")

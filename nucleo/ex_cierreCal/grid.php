@@ -278,13 +278,15 @@ function cerrarBoleta(id,profesor,materia,materiad,grupo,ciclo, base,valor){
 
 
 function imprimirBoleta(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
-	window.open("boleta.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor="+$("#selProfesores").val()+"&materia="+
-								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre, '_blank'); 
+	enlace="nucleo/ex_cierreCal/boleta.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor="+$("#selProfesores").val()+"&materia="+
+								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre;
+	abrirPesta(enlace,"Boleta");
 }
 
 function imprimirRepUni(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
-	window.open("../pd_captcal/repUni.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor="+$("#selProfesores").val()+"&materia="+
-								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre, '_blank'); 
+	enlace="nucleo/pd_captcal/repUni.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor="+$("#selProfesores").val()+"&materia="+
+								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre;
+	abrirPesta(enlace,"RepUni");
 }
 
 

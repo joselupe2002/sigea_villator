@@ -138,8 +138,8 @@ function generaTablaInformacion(grid_data){
 		$("#rowM"+contR).append("<td>"+valor.MATERIAD+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.PROFESOR+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.PROFESORD+"</td>");
-		verboleta=" onclick=\"window.open('../pd_captcal/repUni.php?grupo="+valor.GRUPO+"&ciclo="+valor.CICLO+"&profesor="+valor.PROFESOR+"&materia="+
-		valor.MATERIA+"&materiad="+valor.MATERIAD+"&id="+valor.IDGRUPO+"&semestre="+valor.SEMESTRE+"','_blank');\"";
+		verboleta=" onclick=\"previewAdjunto('nucleo/pd_captcal/repUni.php?grupo="+valor.GRUPO+"&ciclo="+valor.CICLO+"&profesor="+valor.PROFESOR+"&materia="+
+		valor.MATERIA+"&materiad="+valor.MATERIAD+"&id="+valor.IDGRUPO+"&semestre="+valor.SEMESTRE+"');\"";
 
 		//alert (verboleta);
 		$("#rowM"+contR).append("<td><span style=\"cursor:pointer;\" title=\""+tit+"\" "+verboleta+" class=\"badge badge-success\">"+valor.TOTAL+"</span></td>");

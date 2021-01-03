@@ -106,9 +106,9 @@ function generaTablaMaterias(grid_data){
 		$("#rowM"+contAlum).append("<td> <span class=\"badge  badge-info\">"+valor.GRUPO+"</span></td>");
 		$("#rowM"+contAlum).append("<td style=\"font-size:12px;\">"+valor.SEMESTRE+"</td>");
 
-		evento="onclick=\"window.open('../pd_captcal/repUni.php?materia="+valor.MATERIA+"&grupo="+valor.GRUPO+
+		evento="onclick=\"previewAdjunto('../pd_captcal/repUni.php?materia="+valor.MATERIA+"&grupo="+valor.GRUPO+
 		"&ciclo="+$("#selCiclos").val()+"&profesor="+valor.PROFESOR+"&id="+valor.IDDETALLE+
-		"&materiad="+valor.MATERIAD+"&semestre="+valor.SEMESTRE+"','_blank');\" ";
+		"&materiad="+valor.MATERIAD+"&semestre="+valor.SEMESTRE+"');\" ";
 
 		stpor="";
 		porc=Math.round((parseInt(valor.RES)/parseInt(valor.ALUM)*100),1);
@@ -206,7 +206,7 @@ jQuery.each(grid_data, function(clave, valor) {
 
 
 		$("#rowM"+contAlum).append("<td style=\"font-size:12px;\">"+
-		                                "<button onclick=\"window.open('reporte.php?ciclo="+valor.CICLO+"&profesor="+valor.PROFESOR+"&profesord="+valor.PROFESORD+"&deptod="+valor.DEPTOD+"');\""+
+		                                "<button onclick=\"previewAdjunto('nucleo/resEvalDocv2/reporte.php?ciclo="+valor.CICLO+"&profesor="+valor.PROFESOR+"&profesord="+valor.PROFESORD+"&deptod="+valor.DEPTOD+"');\""+
 		                                " class=\"btn btn-white btn-success btn-round\">"+
 		                                "<i class=\"/ace-icon blue fa fa-tachometer bigger-140\"></i> Reporte</button></td>");
 		contAlum++;      			

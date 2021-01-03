@@ -458,7 +458,9 @@ var elalumno="";
    }
 
    function imprimirKardex(){
-	   window.open("kardex.php?matricula="+elalumno, '_blank'); 
+	   enlace ="nucleo/avancecurri/kardex.php?matricula="+elalumno;
+	   abrirPesta(enlace,"Kardex");
+
    }
 
 

@@ -338,8 +338,6 @@ function guadarPortafolio(id,campo,materia){
 
 
 function impEncuadre(id, materia, descrip, tipomat){
-	//window.open("encuadres.php?ID="+id+"&materiad="+materia, '_blank');
-	//window.open("planeacion.php?ID="+id+"&materia="+materia, '_blank');
 
 	if (tipomat=='T') {
 		enlace="nucleo/pd_portasegui/planeacionTut.php?ID="+id+"&materia="+materia;

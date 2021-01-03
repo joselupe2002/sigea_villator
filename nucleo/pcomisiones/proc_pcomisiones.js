@@ -63,7 +63,6 @@ function reporteComision(elid,tipo){
 function reporteComRH(elid, tipo){
 	tit='OficioRH';
 	abrirPesta("nucleo/pcomisiones/oficiocomRH.php?tipo="+tipo+"&ID="+elid,tit);
-	//window.open("../pcomisiones/oficiocomRH.php?tipo=0&ID="+elid, '_blank');
     return false;
 }
 
@@ -74,8 +73,7 @@ function oficioCumplida(modulo,tipo){
 	if (table.rows('.selected').data()[0]["CUMPLIDA"]=='S') {
 				tit='OficioSI';
 		        if (tipo==2) {tit='Enviando..';}
-				abrirPesta("nucleo/pcomisiones/oficiocumple.php?tipo="+tipo+"&ID="+elid,tit);
-				//window.open("../pcomisiones/oficiocumple.php?tipo="+tipo+"&ID="+elid, '_blank');
+				abrirPesta("nucleo/pcomisiones/oficiocumple.php?tipo="+tipo+"&ID="+elid,tit);				
 	}
 	else {alert ("La actividad no esta marcada como cumplida")}
     return false;
@@ -88,8 +86,7 @@ function oficioNoCumplida(modulo,tipo){
 	if (table.rows('.selected').data()[0]["CUMPLIDA"]=='N') {
 				tit='OficioNO';
 		        if (tipo==2) {tit='Enviando..';}
-		        abrirPesta("nucleo/pcomisiones/oficionocumple.php?tipo="+tipo+"&ID="+elid, tit)
-				//window.open("../pcomisiones/oficionocumple.php?tipo="+tipo+"&ID="+elid, '_blank');
+		        abrirPesta("nucleo/pcomisiones/oficionocumple.php?tipo="+tipo+"&ID="+elid, tit)				
 	}
 	else {alert ("La actividad no esta marcada como NO cumplida")}
     return false;

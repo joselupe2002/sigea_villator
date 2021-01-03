@@ -155,7 +155,7 @@ function generaTablaInformacion(grid_data){
 
 		 
 		 $("#row"+cont).append("<td><button title=\"Ver Kardex del Alumno\" "+
-		 " onclick=\"window.open('../avancecurri/kardex.php?matricula="+valor.MATRICULA+"','_blank');\" class=\"btn btn-white btn-info btn-round\">"+ 
+		 " onclick=\"previewAdjunto('nucleo/avancecurri/kardex.php?matricula="+valor.MATRICULA+"');\" class=\"btn btn-white btn-info btn-round\">"+ 
 		 " <i class=\"ace-icon blue fa fa-list-alt bigger-140\"></i><span class=\"btn-small\"></span>"+            
 		  "</button></td>");		 
 	
@@ -317,6 +317,4 @@ function cartaPresenta (matricula,nombre,avance) {
 	enlace="nucleo/ss_solicitudes/carta.php?matricula="+matricula+"&ciclo="+$("#selCiclo").val();
 	abrirPesta(enlace,'Carta Presentación');
 
-//	enlace="carta.php?matricula="+matricula+"&ciclo="+$("#selCiclo").val();
-//	window.open(enlace,"_blank");
 }

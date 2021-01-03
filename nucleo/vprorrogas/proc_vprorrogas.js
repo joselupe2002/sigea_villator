@@ -133,7 +133,6 @@ function impFormato(modulo,usuario,institucion, campus,essuper){
 	enlace="nucleo/vprorrogas/formato.php?id="+fila[0]["ID"];
 	abrirPesta(enlace, "Formato")
 	
-   //window.open(enlace, '_blank'); 
   }
 
 

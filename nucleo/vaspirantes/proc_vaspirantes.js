@@ -212,7 +212,7 @@ function verPago(modulo,usuario,essuper){
 						   });			
 						   
 						   if (entre) {
-							   window.open("../"+ruta, '_blank'); 
+							previewAdjunto(ruta;							   
 						   }
 						   else {alert ("No se adjunto documento de pago");}
 		        	        		        	    
@@ -281,7 +281,7 @@ function VerPagoIns(modulo,usuario,essuper){
 						   });			
 						   
 						   if (entre) {
-							   window.open(ruta, '_blank'); 
+							previewAdjunto(ruta);				
 						   }
 						   else {alert ("No se adjunto documento de pago");}
 		        	        		        	    

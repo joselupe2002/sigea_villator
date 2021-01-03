@@ -64,7 +64,9 @@ contMat=1;
 
 
 	function verOficio(matricula){
-	    window.open("oficioLib.php?matricula="+matricula,"_blank");
+		enlace="nucleo/ecomplcal/oficioLib.php?matricula="+matricula;
+		abrirPesta(enlace,"OficioLib")
+	  
 			
 	}	
 

@@ -178,9 +178,9 @@ function generaTablaProfesores(grid_data){
 		$("#rowM"+contAlum).append("<td style=\"font-size:10px;\">"+valor.MATERIAD+"</td>");
 		$("#rowM"+contAlum).append("<td style=\"font-size:10px;\" id=\"uni_"+valor.IDDETALLE+"\">"+valor.NUMUNI+"</td>");
 		
-		evento="onclick=\"window.open('../pd_captcal/repUni.php?materia="+valor.MATERIA+"&grupo="+valor.GRUPO+
+		evento="onclick=\"previewAdjunto('nucleo/pd_captcal/repUni.php?materia="+valor.MATERIA+"&grupo="+valor.GRUPO+
 				"&ciclo="+$("#selCiclos").val()+"&profesor="+valor.PROFESOR+"&id="+valor.IDDETALLE+
-				"&materiad="+valor.MATERIAD+"&semestre="+valor.SEMESTRE+"','_blank');\" ";
+				"&materiad="+valor.MATERIAD+"&semestre="+valor.SEMESTRE+"');\" ";
 		
 		$("#rowM"+contAlum).append("<td style=\"font-size:12px;\"><a "+evento+">"+
 										"<span title=\"Click para ver reporte por Unidades\" style=\"cursor:pointer;\""+

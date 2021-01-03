@@ -362,7 +362,9 @@ function guardarRegistros(matricula){
 			
 			
 			if ($("#imprimirBoletaCheck").prop("checked")) {
-				window.open("boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+matricula+"&ciclo="+$("#elciclo").html().split("|")[0], '_blank');                                 	                                        					          
+				enlace="nucleo/inscripcion/boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+matricula+"&ciclo="+$("#elciclo").html().split("|")[0];
+				abrirPesta(enlace,"BoletaMat");
+				                             	                                        					          
 			}
 		
 		}					     

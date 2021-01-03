@@ -507,7 +507,6 @@ function verMaterias(tipo){
 				    	    content:content,
 				    	    closable:true		    
 				    	});
-	   //window.open(enlace, '_blank'); 
       }
 
    

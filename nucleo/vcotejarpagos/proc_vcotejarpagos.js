@@ -5,7 +5,8 @@ var elReg=0;
 function verPagosGen(modulo,usuario,essuper){
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
-		 window.open(table.rows('.selected').data()[0]["RUTA"], '_blank'); 
+		previewAdjunto(table.rows('.selected').data()[0]["RUTA"]);
+	
 	    
 	}
 	else {

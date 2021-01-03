@@ -942,7 +942,8 @@ function guardarRegistros(cadeliminar){
 			ocultarEspera("guardandoReins");
 			
 			if ($("#imprimirBoletaCheck").prop("checked")) {
-				window.open("boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+$("#selAlumnos").val()+"&ciclo="+$("#elciclo").html().split("|")[0], '_blank');                                 	                                        					          
+				enlace="nucleo/reinscripciones/boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+$("#selAlumnos").val()+"&ciclo="+$("#elciclo").html().split("|")[0];
+				abrirPesta(enlace, "BoletaMat");                                	                                        					          
 			}
 			limpiarVentana();
 		}					     
@@ -1012,11 +1013,13 @@ function guardarTodos(){
 
 
 function verKardex(){
-	window.open("../avancecurri/kardex.php?matricula="+$("#selAlumnos").val(), '_blank'); 
+	enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val();
+	abrirPesta(enlace, "Kardex");
 }
 
 function imprimeBoleta(){
-	window.open("boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+$("#selAlumnos").val()+"&ciclo="+$("#elciclo").html().split("|")[0], '_blank'); 
+	enlace="nucleo/reinscripciones/boletaMat.php?carrera="+$("#selCarreras").val()+"&matricula="+$("#selAlumnos").val()+"&ciclo="+$("#elciclo").html().split("|")[0];
+	abrirPesta(enlace, "BoletaMat");
 }
 
 function verMateriasEvalDoc(){

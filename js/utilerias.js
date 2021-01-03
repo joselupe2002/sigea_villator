@@ -1428,7 +1428,7 @@ function editaFormula(elemento,padre) {
 }
 
 function paginapreview(ht,padre){
-//	 window.open("../base/pagPreview.php?ht="+encodeURI(ht),"Preview","width=600, height=300");
+
 	$("#previewTexto").remove();
 	script=    "<div class=\"modal fade\" id=\"previewTexto\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
 	           "   <div class=\"modal-dialog modal-lg role=\"document\">"+

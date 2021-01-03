@@ -252,8 +252,9 @@ function guardarCita(elid){
 										dataCita[0]["FECHA"],dataCita[0]["FECHA"],"","P",institucion,campus);
 								
 										
-								enlace="../../nucleo/pa_citas/comcita.php?id="+elid;
-								window.open(enlace,"_blank");
+								enlace="nucleo/pa_citas/comcita.php?id="+elid;
+								abrirPesta(enlace, "Comprobante")
+						
 
 								cargamosCitas();
 							}// DEL SUCCESS
