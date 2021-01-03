@@ -16,7 +16,8 @@ var elciclo="";
 					if (!(JSON.parse(data)[0]["hay"]>0)) {window.location.href="cerrado.php";}
 
 				   jQuery.each(JSON.parse(data), function(clave, valor) { 	
-				      elciclo=valor.CICL_CLAVE;			  
+					  elciclo=valor.CICL_CLAVE;		
+					  alert (elciclo);	  
 								   }); 				   
 				  },
 			error: function(data) {	                  
