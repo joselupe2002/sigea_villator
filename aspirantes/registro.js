@@ -5,7 +5,7 @@ var elciclo="";
 
 
     jQuery(function($) { 
-		elsql="SELECT CICL_CLAVE, count(*) as hay FROM ciclosesc where CICL_REGISTROLINEA='S' order by CICL_ORDEN DESC";
+		elsql="SELECT CICL_CLAVE, count(*) as hay FROM ciclosesc where CICL_REGISTROLINEA='S' group by CICL_CLAVE order by CICL_ORDEN DESC";
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 		$.ajax({
 			type: "POST",
