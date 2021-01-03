@@ -431,7 +431,6 @@ var elciclo="";
 	
 function guardarGen(){
 
-	alert ("entre a grabar");
 	var f = new Date();
 	
 	fechacap=pad(f.getDate(),2) + "/" + pad((f.getMonth() +1),2) + "/" + f.getFullYear()+" "+ f.getHours()+":"+ f.getMinutes()+":"+ f.getSeconds();
@@ -457,8 +456,7 @@ function guardarGen(){
 		type: "POST",
 		url:"../nucleo/base/inserta.php",
 		data: parametros,
-		success: function(data){  
-			alert (data);      			        	
+		success: function(data){  		     			        	
 			console.log(data);		 
 		}					     
 	}); 
@@ -485,7 +483,7 @@ function guardarPag1(){
 		url:"../nucleo/base/actualiza.php",
 		data: parametros,
 		success: function(data){        			        	
-										 
+			console.log(data);							 
 		}					     
 	}); 
 	
@@ -517,7 +515,7 @@ function guardarPag2(){
 		url:"../nucleo/base/actualiza.php",
 		data: parametros,
 		success: function(data){        			        	
-												 
+			console.log(data);										 
 	},
 	error: function(data) {	                  
 			alert('ERROR: '+data);
@@ -547,7 +545,7 @@ function guardarPag3(){
 			url:"../nucleo/base/actualiza.php",
 			data: parametros,
 			success: function(data){        			        	
-													 
+				console.log(data);										 
 		},
 		error: function(data) {	                  
 				alert('ERROR: '+data);
@@ -583,7 +581,7 @@ function guardarPag4(){
 			url:"../nucleo/base/actualiza.php",
 			data: parametros,
 			success: function(data){        			        	
-														 
+				console.log(data);										 
 		},
 		error: function(data) {	                  
 				alert('ERROR: '+data);
@@ -614,7 +612,7 @@ function guardarPag5(){
 			url:"../nucleo/base/actualiza.php",
 			data: parametros,
 			success: function(data){        			        	
-														 
+				console.log(data);										 
 		},
 		error: function(data) {	                  
 				alert('ERROR: '+data);
@@ -648,7 +646,7 @@ function guardarPag6(){
 			url:"../nucleo/base/actualiza.php",
 			data: parametros,
 			success: function(data){        			        	
-														 
+				console.log(data);										 
 		},
 		error: function(data) {	                  
 				alert('ERROR: '+data);
@@ -674,6 +672,7 @@ function finalizar(){
 			url:"../nucleo/base/actualiza.php",
 			data: parametros,
 			success: function(data){   
+				console.log(data);	
 				window.open("ficha.php?curp="+$("#CURP").val().toUpperCase()+"&ciclo="+elciclo, '_blank');      			        	
 				location. reload();
 										 
