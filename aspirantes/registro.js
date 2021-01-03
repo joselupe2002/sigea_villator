@@ -13,6 +13,7 @@ var elciclo="";
 			url:  "../nucleo/base/getdatossqlSeg.php",
 			success: function(data){	
 		
+				alert (data);	 
 					if (!(JSON.parse(data)[0]["hay"]>0)) {window.location.href="cerrado.php";}
 
 				   jQuery.each(JSON.parse(data), function(clave, valor) { 	
