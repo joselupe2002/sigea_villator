@@ -5,20 +5,18 @@ var elciclo="";
 
 
     jQuery(function($) { 
-		elsql="SELECT CICL_CLAVE, count(*) as hay FROM ciclosesc where CICL_REGISTROLINEA='S' group by CICL_CLAVE order by CICL_ORDEN DESC";
+		elsql="SELECT CICL_CLAVE, count(*) as hay FROM ciclosesc where CICL_REGISTROLINEA='S' order by CICL_ORDEN DESC";
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 		$.ajax({
 			type: "POST",
 			data:parametros,
 			url:  "../nucleo/base/getdatossqlSeg.php",
 			success: function(data){	
-		
-				alert (data);	 
+		 
 					if (!(JSON.parse(data)[0]["hay"]>0)) {window.location.href="cerrado.php";}
 
 				   jQuery.each(JSON.parse(data), function(clave, valor) { 	
-					  elciclo=valor.CICL_CLAVE;		
-					  alert (elciclo);	  
+					  elciclo=valor.CICL_CLAVE;							  	  
 								   }); 				   
 				  },
 			error: function(data) {	                  
@@ -432,6 +430,8 @@ var elciclo="";
 	});
 	
 function guardarGen(){
+
+	alert ("entre a grabar");
 	var f = new Date();
 	
 	fechacap=pad(f.getDate(),2) + "/" + pad((f.getMonth() +1),2) + "/" + f.getFullYear()+" "+ f.getHours()+":"+ f.getMinutes()+":"+ f.getSeconds();
@@ -457,8 +457,9 @@ function guardarGen(){
 		type: "POST",
 		url:"../nucleo/base/inserta.php",
 		data: parametros,
-		success: function(data){        			        	
-										 
+		success: function(data){  
+			alert (data);      			        	
+			console.log(data);		 
 		}					     
 	}); 
 	
