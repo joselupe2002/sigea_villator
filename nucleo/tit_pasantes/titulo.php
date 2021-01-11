@@ -138,8 +138,6 @@
 			function Header()
 			{
 				
-				$this->Image('../../imagenes/empresa/logo2.png',175,10,25,25);
-				$this->Image('../../imagenes/empresa/sepescudo.png',20,10,21,26);
 
 			}
 			
@@ -147,24 +145,6 @@
 			function Footer()
 			{
 				
-	
-				$miutil = new UtilUser();
-				$pstodg=$miutil->getJefe('101');
-				$pstoce=$miutil->getJefe('303');
-		
-				//249 ANCHO			
-				$this->SetFont('Calibri Bold','',12);
-				$this->SetDrawColor(0,0,0);
-				$this->SetX(20);
-
-				$this->SetY(-40);
-				$this->Cell(90,4,utf8_decode("COTEJÓ"),'',0,'C',false);
-				$this->Cell(90,4,utf8_decode("DIRECTOR(A) GENERAL"),'',0,'C',false);
-				
-				$this->SetY(-30);
-				$this->Cell(90,4,utf8_decode($pstoce),'',0,'C',false);
-				$this->Cell(90,4,utf8_decode($pstodg),'',0,'C',false);
-	
 				
 			}
 			
@@ -179,7 +159,7 @@
 		header("Content-Type: text/html; charset=UTF-8");
 		
 		$pdf->SetMargins(20, 25 , 20);
-		$pdf->SetAutoPageBreak(true,25); 
+		$pdf->SetAutoPageBreak(true,0); 
 		$pdf->AddPage();
 
 		
@@ -187,78 +167,180 @@
 		$dataP = $pdf->LoadDatosPas();
 		$dataGen =$pdf->LoadDatosGen();
 
-		$fechadec=$miutil->formatFecha($dataP[0]["FECHA_TITA"]);
+		$pdf->AddFont('book-antiqua','B','book-antiqua.php');
+		$pdf->AddFont('MervaleScript-Regular','B','MervaleScript-Regular.php');
+
+		
+		$pdf->Ln(20);
+
+
+		$pdf->Image('../../imagenes/empresa/logotit1.png',10,5,38,38);
+		$pdf->Image('../../imagenes/empresa/logotit2.png',168,5,38,38);
+		$pdf->Image('../../imagenes/empresa/fototit.png',18,62,49,69);
+		$pdf->Image('../../imagenes/empresa/firmatit.png',26,160,5,30);
+		$pdf->Image('../../imagenes/empresa/lintit.png',17,249,65,0.5);
+		$pdf->Image('../../imagenes/empresa/lintit.png',137,249,65,0.5);
+
+		$derFoto=(18+49)-20; //left de foto + 49 de ancho de foto - 20 del margen
+		$hojaw=216; $hojah=273;
+		   
+		$pdf->SetFont('book-antiqua','B',16);
+		$pdf->SetY(20);
+		$pdf->Cell(28,5,"",0,0,'C'); //debe ser 48 pero se suman los 20 del margen izquierdo
+		$pdf->Cell(120,5,utf8_decode("EL INSTITUTO TECNOLÓGICO SUPERIOR"),0,0,'C');	
+		$pdf->SetY(25);
+		$pdf->Cell(28,5,"",0,0,'C');
+		$pdf->Cell(120,5,utf8_decode("DE SANTA MARÍA DE EL ORO"),0,0,'C');	
+
+		$pdf->SetY(60); $pdf->SetX(67);
+		$pdf->SetFont('MervaleScript-Regular','B',16);		
+		$pdf->Multicell(110,5,utf8_decode("Otorga a:"),0,'C',false);	
+
+		$pdf->SetFont('book-antiqua','B',16);
+		$pdf->SetY(80); $pdf->SetX(67);
+		$pdf->Multicell(110,5,utf8_decode($dataP[0]["PASANTE"]." AGUIRRE MENDOZA "),0,'C',false);	
+
+		$pdf->SetY(100); $pdf->SetX(67);
+		$pdf->SetFont('MervaleScript-Regular','B',16);		
+		$pdf->Multicell(110,5,utf8_decode("El título de:"),0,'C',false);	
+
+		$pdf->SetFont('book-antiqua','B',16);
+		$pdf->SetY(120); $pdf->SetX(67);
+		$pdf->Multicell(110,5,utf8_decode($dataP[0]["CARRERAT"]),0,'C',false);	
+
+
+		$fechadec=$miutil->formatFecha($dataP[0]["FECHA_ACTA"]);
 		$eldia=date("d", strtotime($fechadec));
 		$elmes=$miutil->getFecha($fechadec,'MES');
 		$elanio=date("Y", strtotime($fechadec));
 
-		$fechadecA=$miutil->formatFecha($dataP[0]["FECHA_ACTA"]);
-		$eldiaA=date("d", strtotime($fechadecA));
-		$elmesA=$miutil->getFecha($fechadecA,'MES');
-		$elanioA=date("Y", strtotime($fechadecA));
+		$fechadec=$miutil->formatFecha($dataP[0]["FECHA_ELTIT"]);
+		$eldia_titn=date("d", strtotime($fechadec));
+		$eldia_tit=$miUtil->aletras(date("d", strtotime($fechadec)));
+		$elmes_tit=$miutil->getFecha($fechadec,'MES');
+		$elanio_titn=date("Y", strtotime($fechadec));
+		$elanio_tit=$miUtil->aletras(date("Y", strtotime($fechadec)));
+
+	
+		$pdf->Image('../../imagenes/empresa/logotit2.png',75,145,6,6);
+		$pdf->Image('../../imagenes/empresa/logotit2.png',111,145,6,6);
+		$pdf->Image('../../imagenes/empresa/logotit2.png',161,145,6,6);
+
+		$pdf->SetY(140); $pdf->SetX(52);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(138,5,utf8_decode("En virtud de haber concluido los estudios requeridos de acuerdo a los planes y programas en"),0,0,'C');
+		$pdf->SetY(145);$pdf->SetX(52);
+		$pdf->Cell(138,5,utf8_decode("vigor y haber sido aprobado en el acto recepcional, que sustento con fecha del ".$eldia." de"),0,0,'C');
+		$pdf->SetY(150);$pdf->SetX(52);
+		$pdf->Cell(138,5,utf8_decode($elmes." del ".$elanio." en las instalaciones de esta institución educativa"),0,0,'C');
+		
+		$pdf->SetY(180);$pdf->SetX(52);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(138,5,utf8_decode("Santa María del Oro, El oro, Durango, a los "),0,0,'C');
+		$pdf->SetY(185);$pdf->SetX(52);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(138,5,utf8_decode($eldia_tit." días del mes de ".$elmes_tit." de ".$elanio_tit),0,0,'C');
+
+		
+		$pdf->SetY(220);$pdf->SetX(30);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(0,5,utf8_decode("Director del Instituto"),0,0,'L');
+
+		$pdf->SetY(215);$pdf->SetX(137);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(65,5,utf8_decode("Secretario de Educación del"),0,0,'C');
+		
+		$pdf->SetY(220);$pdf->SetX(137);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(65,5,utf8_decode("Estado de Durango"),0,0,'C');
+
+		$pdf->SetY(250);$pdf->SetX(17);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(65,5,utf8_decode($dataGen[0]["inst_director"]),0,0,'C');
 
 
-		$pdf->AddFont('Calibri Bold','','Calibri Bold.php');
-		$pdf->AddFont('Eureka Sans Light','B','Eureka Sans Light.php');
-		$pdf->AddFont('Eureka Sans Light','','Eureka Sans Light.php');
-
-		$pdf->AddFont('Eureka-Sans-Light-Regular','B','Eureka-Sans-Light-Regular.php');
-		$pdf->AddFont('Eureka-Sans-Light-Regular','','Eureka-Sans-Light-Regular.php');
-		$pdf->Ln(20);
-
-		$pdf->SetFont('Calibri Bold','',18);
-		$pdf->SetTextColor(12, 30, 97 );
-		$pdf->SetDrawColor(146, 133, 35);
-		$pdf->SetLineWidth(0.7);
-		$pdf->Cell(0,10,utf8_decode("Instituto Tecnológico Superior de Santa María de El Oro"),"B",1,'C');	
-		$pdf->Ln(5);
-		$pdf->SetTextColor(0);
-		$pdf->Cell(0,0,utf8_decode("ACTA DE EXÁMEN PROFESIONAL"),0,1,'C');	
-
-		$pdf->Ln(5);
-
-		$pdf->SetFont('Eureka-Sans-Light-Regular','',18);
-		$pdf->SetTextColor(0);
-		$pdf->SetFont('Times','',12);
-		$pdf->MultiCell(0,7,utf8_decode("El suscrito Director General del Instituto Tecnológico Superior de Santa María de El Oro, ".
-		"certifica que en el Libro de Actas de Examen Profesional No.".$dataP[0]["LIBRO"]." a las ".$dataP[0]["FOJA"]." fojas, ".
-		"se encuentra asentada el acta  No. ".$dataP[0]["ACTA"]." que a la letra dice:". 
-		" En la ciudad de Santa María del Oro, Dgo., el día ".$eldia." del mes de ".$elmes."  del año ".$elanio.", ".
-		"siendo las ".$dataP[0]["HORA_TITA"]." horas, se reunieron en las instalaciones ".
-		"del Instituto Tecnológico Superior de Santa María de El Oro, clave 10EIT0004E los integrantes del jurado: "),0,'J',FALSE);
-
-		$pdf->Ln(7);
-		$pdf->Cell(30,7,utf8_decode("Presidente(a):"),0,0,'L');	
-		$pdf->Cell(120,7,utf8_decode($dataP[0]["PRESAD"]),0,0,'L');	
-
-		$pdf->Ln(7);
-		$pdf->Cell(30,7,utf8_decode("Secretario(a):"),0,0,'L');	
-		$pdf->Cell(120,7,utf8_decode($dataP[0]["SECAD"]),0,0,'L');	
-
-		$pdf->Ln(7);
-		$pdf->Cell(30,7,utf8_decode("Vocal:"),0,0,'L');	
-		$pdf->Cell(120,7,utf8_decode($dataP[0]["VOCAD"]),0,0,'L');	
-
-		$pdf->Ln(10);
-
-		$pdf->MultiCell(0,7,utf8_decode("Y de acuerdo con las disposiciones reglamentarias en vigor y la opción seleccionada: ".
-		$dataP[0]["OPCIOND"].", se procedió a llevar a cabo el Acto de Recepción Profesional a ".$dataP[0]["PASANTE"].
-		", con número de control ".$dataP[0]["MATRICULA"].", pasante de la carrera de: ".$dataP[0]["CARRERAD"].
-		" con clave del plan de estudios ".$dataP[0]["MAPA"]."."),0,'J',FALSE);
+		$pdf->SetY(250);$pdf->SetX(137);
+		$pdf->SetFont('MervaleScript-Regular','B',16);
+		$pdf->Cell(65,5,utf8_decode($dataGen[0]["inst_rfc"]),0,0,'C');
 
 
+		/*====================================================*/
+		$pdf->AddPage();
 
-		$pdf->MultiCell(0,7,utf8_decode("Tomando en cuenta los integrantes del jurado las facultades mostradas en el acto de ".
-		"recepción, se dictaminó que fuera: ".$dataP[0]["RESULTADO"]."."),0,'J',FALSE);
+		$pdf->SetY(20);
+		$pdf->SetFont('Arial','',8);
+		$pdf->Cell(0,5,utf8_decode("\"Construyendo una Sociedad Tecnológica\""),0,0,'C');
+
+		$pdf->SetY(40);$pdf->SetX(40);
+		$pdf->SetFont('Arial','B',10);
+		$pdf->Cell(140,10,utf8_decode("REGISTRADO EN EL DEPARTAMENTO DE SERVICIOS ESCOLARES"),"LTR",0,'C');
+		$pdf->SetY(50);$pdf->SetX(40);
+				
+			$pdf->Cell(5,5,"","L",0,'L');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(20,5,utf8_decode("Con no."),"",0,'C');
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(20,5,$dataP[0]["TITULO"],"B",0,'C');
 
 
+			$pdf->Cell(5,5,"","",0,'C');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(20,5,utf8_decode("en el libro"),"",0,'C');
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(20,5,$dataP[0]["LIBROT"],"B",0,'C');
 
-		$pdf->MultiCell(0,7,utf8_decode("El(la) Presidente(a) del Jurado hizo saber al sustentante el resultado obtenido, ".
-		"el Código de Ética Profesional y le tomó la Protesta de Ley.  Dándose por terminado el Acto a las ".$dataP[0]["HORA_TITAT"].
-		" horas, y una vez escrita, leída y aprobada la firmaron para constancia las personas que el acto intervinieron."),0,'J',FALSE);
+			$pdf->Cell(5,5,"","",0,'C');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(20,5,utf8_decode("a fojas"),"",0,'C');
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(20,5,$dataP[0]["FOJAT"],"B",0,'C');
+			$pdf->Cell(5,5,"","R",0,'C');
 
-		$pdf->MultiCell(0,7,utf8_decode("Para los usos legales correspondientes se expide la presente en la ciudad de Santa María del Oro,". 
-		" Durango, a los ".$eldiaA." días del mes de ".$elmesA." del año ".$elanioA."."),0,'J',FALSE);
+		$pdf->SetY(55);$pdf->SetX(40);
+		//FECHA 
+			$pdf->Cell(5,5,"","L",0,'L');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(30,5,utf8_decode("Santa María del Oro, Dgo."),"",0,'C');
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(10,5,$eldia_titn,"B",0,'C');
+
+			$pdf->Cell(5,5,"","",0,'C');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(10,5,utf8_decode("de"),"",0,'C');
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(30,5,$elmes_tit,"B",0,'C');
+
+			$pdf->Cell(5,5,"","",0,'C');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(10,5,utf8_decode("de"),"",0,'C');
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(30,5,$elanio_titn,"B",0,'C');
+			$pdf->Cell(5,5,"","R",0,'C');
+
+			//CIERRE
+			$pdf->SetY(60);$pdf->SetX(40);
+			$pdf->Cell(140,5,"","LRB",0,'L');
+		
+			$nombre=$miutil->getJefe('303');//Nombre del puesto de Recursos Humanos
+
+	
+			$pdf->SetY(70);$pdf->SetX(40);
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(140,20,utf8_decode("COTEJÓ"),"LTR",0,'C');
+			$pdf->SetY(90);$pdf->SetX(40);
+			$pdf->SetFont('Arial','B',11);
+			$pdf->Cell(140,5,$nombre,"LR",0,'C');
+
+			$pdf->SetY(95);$pdf->SetX(40);
+			$pdf->Cell(5,5,"","L",0,'C');
+			$pdf->SetFont('Arial','',6);
+			$pdf->Cell(130,5,"","B",0,'C');
+			$pdf->Cell(5,5,"","R",0,'C');
+
+			$pdf->SetY(100);$pdf->SetX(40);
+			$pdf->SetFont('Arial','B',7);
+			$pdf->Cell(140,5,"JEFE (A)  DEL DEPARTAMENTO DE SERVICIOS ESCOLARES","LRB",0,'C');
+				
 
 
 			
