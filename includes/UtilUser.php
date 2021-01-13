@@ -389,8 +389,8 @@ class UtilUser {
 
 	
 	public function  getPie($pdf,$orienta){	
-		$top1=253; $top2=243; $left1=20; $left2=160; $iniciaTexto=30; $anchoTexto=110;
-		if ($orienta=='H') {$top1=192; $top2=188; $left1=20; $left2=215;  $iniciaTexto=60; $anchoTexto=150;}
+		$top1=253; $top2=243; $left1=20; $left2=160; $iniciaTexto=50; $anchoTexto=110;
+		if ($orienta=='H') {$top1=192; $top2=188; $left1=20; $left2=215;  $iniciaTexto=80; $anchoTexto=150;}
 
 		$direccion=""; $telefonos=""; $pagina="";
 		$miConexU = new Conexion();
@@ -405,7 +405,9 @@ class UtilUser {
 		$pdf->SetFont('Montserrat-Medium','',8);
 		$pdf->SetY(-25);
 		$elpie= utf8_decode($direccion)." ".utf8_decode($telefonos)."\n ".utf8_decode($pagina);
-		$pdf->Cell($iniciaTexto,0,'',0,0,'C');$pdf->MultiCell($anchoTexto,3,$elpie,0,'C',false);
+		
+		$pdf->SetX($iniciaTexto);
+		$pdf->MultiCell($anchoTexto,3,$elpie,0,'C',false);
 		$pdf->Image('../../imagenes/empresa/piepag2.png',$left2,$top2,46,20);
 	}
 	

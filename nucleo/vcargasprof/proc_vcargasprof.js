@@ -692,7 +692,7 @@ function entInstxCar(modulo,usuario,institucion, campus,essuper){
 function oficioDes(modulo,usuario,institucion, campus,essuper){	
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
-		enlace=("nucleo/vcargasprof/oficiodes.php?ID="+table.rows('.selected').data()[0][0]+"&ciclod="+table.rows('.selected').data()[0][3]+"&ciclo="+table.rows('.selected').data()[0][2];
+		enlace="nucleo/vcargasprof/oficiodes.php?ID="+table.rows('.selected').data()[0][0]+"&ciclod="+table.rows('.selected').data()[0][3]+"&ciclo="+table.rows('.selected').data()[0][2];
 		abrirPesta(enlace, "OficioDes")
 	
 	}
