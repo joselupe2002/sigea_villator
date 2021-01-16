@@ -31,12 +31,12 @@ function cargarInformacion(){
 				losroles=JSON.parse(data)[0][0].split(",");
 				if (JSON.parse(data)[0][1]!='S') {
 					losroles.forEach(function callback(currentValue, index, array) {
-						elsql2+="select * from edocgen LEFT OUTER JOIN fures ON (DEPARTAMENTO=URES_URES) where TIPO='AYUDA' AND  USUARIOS LIKE '%"+currentValue+"%' UNION "						
+						elsql2+="select * from edocgen LEFT OUTER JOIN fures ON (DEPARTAMENTO=URES_URES) where   USUARIOS LIKE '%"+currentValue+"%' UNION "						
 					});
 					elsql2=elsql2.substring(0,elsql2.length-7);   
 				}
 				else {
-				   elsql2="select * from edocgen LEFT OUTER JOIN fures ON (DEPARTAMENTO=URES_URES) where TIPO='AYUDA' ORDER BY URES_DESCRIP";
+				   elsql2="select * from edocgen LEFT OUTER JOIN fures ON (DEPARTAMENTO=URES_URES)  ORDER BY URES_DESCRIP";
 				}
 
 		
