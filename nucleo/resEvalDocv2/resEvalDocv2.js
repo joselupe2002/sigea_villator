@@ -32,7 +32,7 @@ contMat=1;
 		   });
 		
 		$("#losciclossel").append("<span class=\"label label-danger\">Ciclo Escolar</span>");
-		addSELECT("selCiclos","losciclossel","PROPIO", "SELECT CICL_CLAVE, CICL_DESCRIP FROM ciclosesc order by cicl_clave desc", "","");  			      
+		addSELECT("selCiclos","losciclossel","PROPIO", "SELECT CICL_CLAVE, concat(CICL_CLAVE,' ',CICL_DESCRIP) as CICL_CLAVE FROM ciclosesc order by cicl_clave desc", "","");  			      
 	
 		$("#losciclos").append("<i class=\" fa white fa-level-down bigger-180\"></i> ");
 		$("#losciclos").append("<strong><span id=\"elciclo\" class=\"text-white bigger-40\"></span></strong>");
@@ -424,3 +424,10 @@ function generaTablaFaltan(grid_data){
 	
 	});	
 	} 
+
+
+
+	function repGeneral(){
+		enlace="nucleo/resEvalDocv2/reporteGen.php?ciclo="+$("#selCiclos").val()+"&depto="+$("#selCarreras").val()+"&deptod="+$("#selCarreras option:selected").text();
+		abrirPesta(enlace,"RepGen")
+	}

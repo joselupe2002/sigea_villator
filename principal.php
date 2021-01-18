@@ -145,39 +145,60 @@
 				<div class="main-content-inner"> 		
 					<div id="myTab" class="easyui-tabs" style="width:100%; height:600px; overflow-y: hidden;">
 					       <div title="Inicio" style="padding:20px;">	
-									<div class="row" id="prorroga"> </div>
+
+
+						   			<div class="row" id="prorroga"> </div>
 						            <div class="widget-main">
-						                <div class="row">
+						            <div class="row">
 						                     <div class="col-xs-12" style="text-align: center;">
-						                           <h2 class="text-warning" id="lacarrera"></h2>
+						                           <h2 class="text-warning fontAmaranthB" id="lacarrera"></h2>
 						                     </div>
-						                </div>
+						            </div>
+
+						   			<div class="row">
+										     <div class="col-xs-5" style="border-left: 5px solid #B07D06; text-align:justify;">
+										          <h1 class="text-primary fontRobotoB"><strong>Misión ITSSMO</strong></h1>
+												     <h5 class="fontRoboto">Formar integralmente profesionales competitivos de la ciencia, la tecnología y otras áreas de conocimiento, comprometidos con el desarrollo económico, socia, cultural y con la sustentabilidad del país.</h5>												  												  
+													 
+											 </div>
+											 <div class="col-xs-2" style="text-align: center;"></div>
+											 <div class="col-xs-5" style="text-align: center;">
+											       <img alt="" src="imagenes/empresa/logo2.png" width="40%" height="40%">											
+											 </div>
+									</div>	 
+
+									
 										 <div class="row">
 										     <div class="col-xs-5" style="border-left: 5px solid #009DE1;">
 										          <h1 id="etlamision" class="text-success"></h1>
-												  <h5 style="text-align: justify;" id="lamision"></h5>
+												  <h5  class="fontRoboto" style="text-align: justify;" id="lamision"></h5>
 											 </div>
 											 
 											  <div class="col-xs-2" ></div>
 											  
 											  <div class="col-xs-5" style="border-left: 5px solid #089E2A;">
 										          <h1 id="etlavision" class="text-danger"></h1>
-												  <h5 style="text-align: justify;" id="lavision"></h5>
+												  <h5  class="fontRoboto" style="text-align: justify;" id="lavision"></h5>
+											 </div>											 
+										 </div>
+
+										 <div class="row">
+										     <div class="col-xs-5" style="border-left: 5px solid #009DE1;">
+										          <h1 id="etobjetivo" class="text-success"></h1>
+												  <h5  class="fontRoboto" style="text-align: justify;" id="objetivo"></h5>
 											 </div>
 											 
+											  <div class="col-xs-2" ></div>
+											  
+											  <div class="col-xs-5" style="border-left: 5px solid #089E2A;">
+										          <h1 id="etatributos" class="text-danger"></h1>
+												  <h5  class="fontRoboto" style="text-align: justify;" id="atributos"></h5>
+											 </div>											 
 										 </div>
+
+
 										 <div class="vspace-6-sm"></div>
-										  <div class="row">
-										     <div class="col-xs-5" style="border-left: 5px solid #B07D06; text-align:justify;">
-										          <h1 class="text-primary"><strong>Misión ITSSMO</strong></h1>
-												     <h5>Formar integralmente profesionales competitivos de la ciencia, la tecnología y otras áreas de conocimiento, comprometidos con el desarrollo económico, socia, cultural y con la sustentabilidad del país.</h5>												  												  
-													 
-											 </div>
-											 <div class="col-xs-2" style="text-align: center;"></div>
-											 <div class="col-xs-5" style="text-align: center;">
-											       <img alt="" src="imagenes/empresa/logo2.png" width="50%" height="50%">											
-											 </div>
-										 </div>	 
+										 
 									</div>
 						    </div>						    
 					</div>
@@ -228,7 +249,7 @@
 
 											//alert ("dta;"+data+"::"+co+"="+sessionStorage.co+"=<?php echo $_SESSION["idsesion"]?>");
 											
-											elsql="SELECT CARR_DESCRIP,MISION,VISION from dashboard, ccarreras where  CARR_CLAVE=CARRERA AND CARRERA in ('"+carreras+"')";
+											elsql="SELECT CARR_DESCRIP,MISION,VISION, OBJETIVO, ATRIBUTOSEGRE from dashboard, ccarreras where  CARR_CLAVE=CARRERA AND CARRERA in ('"+carreras+"')";
 										
 											parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 											$.ajax({
@@ -246,6 +267,13 @@
 
 															$("#etlavision").html("<strong>Visi&oacute;n</strong>");
 															$("#lavision").html(utf8Decode(valor.VISION));
+
+															$("#etobjetivo").html("<strong>Objetivo Educacional</strong>");
+															$("#objetivo").html(utf8Decode(valor.OBJETIVO));
+
+
+															$("#etatributos").html("<strong>Atributos de Egreso</strong>");
+															$("#atributos").html(utf8Decode(valor.OBJETIVO));
 
 														});
 														

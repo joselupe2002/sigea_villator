@@ -124,15 +124,17 @@
 			{		
                 $data=[];		
                 $miConex = new Conexion();
-                $sql="select a.IDDETALLE, PROFESOR, PROFESORD, MATERIA, MATERIAD, SEMESTRE, SIE AS GRUPO, ".
-                "(SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE ".
-                " or (l.IDGRUPO IN (SELECT DGRU_ID FROM edgrupos g where g.DGRU_BASE=a.IDDETALLE)) ".
-                ") AS RES, ".
-                " (select count(*) from dlista where (IDGRUPO=a.IDDETALLE)  ".
-                " or (IDGRUPO IN (SELECT g.DGRU_ID FROM edgrupos g where IFNULL(g.DGRU_BASE,0)=a.IDDETALLE)) AND BAJA='N') AS ALUM ".
-                " from vedgrupos a, cmaterias b  ".
-                " where MATERIA=MATE_CLAVE  and ifnull(MATE_TIPO,'') NOT IN ('T')  and a.BASE IS NULL and a.CICLO='".$_GET["ciclo"]."'  and PROFESOR='".$_GET["profesor"]."'". " ORDER BY SEMESTRE,MATERIAD";
 
+                $car=" and ALUM_CARRERAREG='".$_GET["depto"]."'"; if ($_GET["depto"]=="0") {$car="";}
+                $sql="select  ". 
+                "(SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l, falumnos  where l.TERMINADA='S' ".
+                " AND MATRICULA=ALUM_MATRICULA and CICLO='".$_GET["ciclo"]."' ".$car.
+                ") AS RES, ".
+                " (select count(DISTINCT(ALUCTR)) from dlista, falumnos where (PDOCVE='".$_GET["ciclo"]."') ".
+                "    AND BAJA='N' and ALUCTR=ALUM_MATRICULA ".$car.") AS ALUM ".
+                " from dual ";
+
+                
                 //echo $sql;
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -169,22 +171,6 @@
 				return $data;
 			}
 
-
-            function LoadDatosObs()
-			{				
-                $data=[];	
-                $miConex = new Conexion();
-                $sql="select DESCRIP AS OBS from ed_observa u, edgrupos v where u.IDGRUPO=v.DGRU_ID and ".
-                "v.DGRU_PROFESOR='".$_GET["profesor"]."' and v.DGRU_CICLO='".$_GET["ciclo"]."' and DESCRIP<>''";
-
-				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
-				foreach ($resultado as $row) {
-					$data[] = $row;
-				}
-				return $data;
-			}
-        
-      
           
 			function LoadDatosGen()
 			{
@@ -209,7 +195,7 @@
                 $this->SetY(20);
                 $this->SetFont('Arial','',12);
                 $this->SetX(100);
-                $this->MultiCell(100,5,utf8_decode($datagen[0]["inst_razon"]),0,'R');              
+                $this->MultiCell(100,5,utf8_decode($datagen[0]["inst_razon"]),0,'R');
                 $this->Ln(5);	
 
                 $this->SetX(10);
@@ -222,8 +208,13 @@
 			{				
                 $data=[];	
                 $miConex = new Conexion();
-                $sql=" select * from ed_respuestasv2 b, cmaterias where MATERIA=MATE_CLAVE and ifnull(MATE_TIPO,'') NOT IN ('T')  AND  b.CICLO='".$_GET["ciclo"]."' and b.PROFESOR='".$_GET["profesor"]."'";
 
+                $car=" and ALUM_CARRERAREG='".$_GET["depto"]."'"; if ($_GET["depto"]=="0") {$car="";}
+
+                $sql=" select * from ed_respuestasv2 b, cmaterias, falumnos  where MATERIA=MATE_CLAVE ".
+                " and ifnull(MATE_TIPO,'') NOT IN ('T')  AND MATRICULA=ALUM_MATRICULA AND b.CICLO='".$_GET["ciclo"]."'".$car;
+
+                //echo $sql;
 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -255,6 +246,9 @@
         $datagen=$pdf->LoadDatosGen();
         $elanio=substr($dataciclo[0]["CICL_INICIO"],6,4);
        
+        $cad=$_GET["deptod"];
+        if ($_GET["depto"]=='0') {$cad="CICLO ESCOLAR ".$dataciclo[0]["CICL_DESCRIP"];}
+
         $pdf->Ln(10);
         $pdf->Cell(0,0,utf8_decode('SEP RESULTADOS DE LA EVALUACION DE LOS PROFESORES SES-TNM'),0,1,'C');
         $pdf->Ln(5);
@@ -264,27 +258,11 @@
         $pdf->Ln(5);
         $pdf->Cell(0,0,utf8_decode($datagen[0]["inst_razon"]),0,1,'C');
         $pdf->Ln(5);
-        $pdf->Cell(0,0,utf8_decode("REPORTE POR PROFESOR"),0,1,'C');
-        $pdf->SetFont('Arial','B',10);
-        $pdf->Ln(5);
-        $pdf->Cell(0,0,utf8_decode($_GET["deptod"]),0,1,'C');
-        $pdf->Ln(5);
+       
 
-
-        $pdf->SetFont('Arial','',8); 
-        $pdf->Cell(50,5,'',0,0,'L',false);        
-        $pdf->Cell(15,5,utf8_decode('Número:'),1,0,'L',false);
-        $pdf->Cell(55,5,$_GET["profesor"],1,0,'L',false);
-        $pdf->Cell(50,5,'',0,0,'L',false);  
-        $pdf->Ln();
-
-        $pdf->Cell(50,5,'',0,0,'L',false);        
-        $pdf->Cell(15,5,utf8_decode('Nombre:'),1,0,'L',false);
-        $pdf->Cell(55,5,utf8_decode($_GET["profesord"]),1,0,'L',false);
-        $pdf->Cell(50,5,'',0,0,'L',false);  
         $pdf->Ln();
         $pdf->SetFont('Arial','B',8);
-        $pdf->Cell(110,5,'MATERIA',1,0,'C',false);
+        $pdf->Cell(110,5,'RUBRO',1,0,'C',false);
         $pdf->Cell(20,5,'EVALUARON',1,0,'C',false);
         $pdf->Cell(20,5,'INSCRITOS',1,0,'C',false);
         $pdf->Cell(20,5,'PORCENTAJE',1,0,'C',false);
@@ -296,8 +274,10 @@
         $n=1;
         $dataAs=$pdf->LoadDatosAsignaturas();
         $evaluaron=0;$totalalum=0;
+
+        
         foreach($dataAs as $row) {
-            $pdf->Row(array( utf8_decode($row["MATERIA"]." ".$row["MATERIAD"]),
+            $pdf->Row(array( utf8_decode($cad),
                              utf8_decode($row["RES"]),
                              utf8_decode($row["ALUM"]),
                              number_format(round(($row["RES"]/$row["ALUM"])*100,2),2)." %"
@@ -328,6 +308,7 @@
         $pdf->Cell(20,5,'',1,0,'C',false);
         $pdf->Ln(8);
 
+        
         $miscolores="";
         $ethorizontal="chl=";
         $valores="chd=t:";
@@ -442,28 +423,6 @@
         $pdf->SetFont('Arial','B',8);
         $pdf->Cell(150,5,"RESULTADO GLOBAL ".$global." ".$etval,1,0,'C',false);
    
-        $pdf->AddPage();
-        $pdf->ln(10);
-        $pdf->SetFont('Arial','B',8);
-        $pdf->SetTextColor(0);  
-        $pdf->Cell(10,5,'NO.',1,0,'L',false);
-        $pdf->SetFont('Arial','',8);
-        $pdf->Cell(10,5,$_GET["profesor"],1,0,'L',false);
-        $pdf->SetFont('Arial','B',8);
-        $pdf->Cell(30,5,'NOMBRE',1,0,'L',false);
-        $pdf->SetFont('Arial','',8);
-        $pdf->Cell(120,5,utf8_decode($_GET["profesord"]),1,0,'L',false);
-        $pdf->Ln(5);
-
-        $dataObs=$pdf->LoadDatosObs();
-        $pdf->SetWidths(array(170));
-        $pdf->SetAligns(array('J'));
-        foreach($dataObs as $row) {
-            $pdf->Row(array( utf8_decode($row["OBS"]),                        
-                             )
-                      );
-        }
-
 
          $pdf->Output(); 
 

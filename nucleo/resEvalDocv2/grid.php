@@ -46,12 +46,12 @@
 			      <div class="row" >	
 				         <div id="losciclos" class="col-sm-1">
 						</div> 	
-						<div id="losciclossel" class="col-sm-3" >
+						<div id="losciclossel" class="col-sm-2" >
 						</div>                    				
 						<div id="lascarreras" class="col-sm-3">
 						</div>       			 
 					
-						<div class="col-sm-5" style="padding-top:14px;">
+						<div class="col-sm-6" style="padding-top:14px;">
 						    <button title="Ver todas las materias y profesores porcentaje de evaluaciones realizadas" onclick="cargarInformacion();" class="btn btn-white btn-info btn-round" value="Agregar"> 
 								<i class="ace-icon green fa fa-book bigger-100"></i><span class="btn-small"> Materias</span>            
 							</button>
@@ -66,6 +66,10 @@
 
 							<button title="Cargar Lista de alumnos y materias sin evaluar" onclick="cargarFaltantes();" class="btn btn-white btn-info btn-round" value="Agregar"> 
 								<i class="ace-icon red fa fa-book bigger-100"></i><span class="btn-small"> Faltan</span>            
+							</button>
+
+							<button title="Reporte General de Evaluación Docente" onclick="repGeneral();" class="btn btn-white btn-info btn-round" value="Agregar"> 
+								<i class="ace-icon red fa fa-book bigger-100"></i><span class="btn-small"> Rep. Gen.</span>            
 							</button>
 
 							<button title="Convertir a tabla para exportar" onclick="convertirDataTable('tabMaterias');" 
