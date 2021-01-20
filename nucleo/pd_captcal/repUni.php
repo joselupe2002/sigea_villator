@@ -128,7 +128,7 @@
                 "IFNULL(LISFA7,'0') AS LISFA7,IFNULL(LISFA8,'0') AS LISFA8,IFNULL(LISFA9,'0') AS LISFA9,".
                 "IFNULL(LISFA10,'0') AS LISFA10,IFNULL(LISFA11,'0') AS LISFA11,IFNULL(LISFA12,'0') AS LISFA12,".
                 "IFNULL(LISFA13,'0') AS LISFA13,IFNULL(LISFA14,'0') AS LISFA14,IFNULL(LISFA15,'0') AS LISFA15,".
-                "concat(ALUM_NOMBRE,' ',ALUM_APEPAT,' ',ALUM_APEMAT) as NOMBRE, ALUM_MATRICULA, IF (LISCAL<70,'NA',LISCAL) as LISCAL".
+                "concat(ALUM_APEPAT,' ',ALUM_APEMAT,' ',ALUM_NOMBRE) as NOMBRE, ALUM_MATRICULA, IF (LISCAL<70,'NA',LISCAL) as LISCAL".
                 " from dlista a, falumnos b  where ALUCTR=ALUM_MATRICULA and a.PDOCVE='".$_GET["ciclo"].
                 "' and a.MATCVE='".$_GET["materia"]."' and a.GPOCVE='".$_GET["grupo"]."' ORDER BY ALUM_APEPAT, ALUM_APEMAT, ALUM_NOMBRE";
                 
