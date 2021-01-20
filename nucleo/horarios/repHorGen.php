@@ -261,7 +261,7 @@
 					}		
 					
 					// L�nea de cierre
-
+							$this->Ln();
 							$this->Cell(array_sum($w),0,'','T');
 							$this->Ln();
 							$this->SetFont('Montserrat-ExtraBold','B',8);
