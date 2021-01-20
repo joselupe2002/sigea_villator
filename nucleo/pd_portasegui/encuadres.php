@@ -153,9 +153,9 @@
 			function loadDatosEncuadre()
 			{
 				$miConex = new Conexion();
-				$resultado=$miConex->getConsulta("Mysql","SELECT s.UNID_NUMERO AS NUM, UNID_DESCRIP AS TEMA,  IF(ENCU_EP='',ENCU_EP,CONCAT('EP1: ',ENCU_EP)) AS EP,".
-			                                     " IF(ENCU_ED='',ENCU_ED,CONCAT('ED1: ',ENCU_ED)) AS ED, IF(ENCU_EC='',ENCU_EC,CONCAT('EC1: ',ENCU_EC)) AS EC,".
-												 " IF(ENCU_EA='',ENCU_EA,CONCAT('EA1: ',ENCU_EA)) AS EA ".
+				$resultado=$miConex->getConsulta("Mysql","SELECT s.UNID_NUMERO AS NUM, UNID_DESCRIP AS TEMA,  IF(ENCU_EP='',ENCU_EP,CONCAT(ENCU_EP)) AS EP,".
+			                                     " IF(ENCU_ED='',ENCU_ED,CONCAT(ENCU_ED)) AS ED, IF(ENCU_EC='',ENCU_EC,CONCAT(ENCU_EC)) AS EC,".
+												 " IF(ENCU_EA='',ENCU_EA,CONCAT(ENCU_EA)) AS EA ".
 												 " from encuadres u, eunidades s where u.ENCU_IDTEMA=s.UNID_ID ".
 						                         " and u.ENCU_IDDETGRUPO=".$_GET["ID"]." ORDER BY UNID_NUMERO ");
 															
@@ -331,8 +331,7 @@
 			$pdf->Cell(30,8,utf8_decode("EV. DESEMPEÑO"),'1',0,'C',TRUE);
 			$pdf->Cell(30,8,"EV. CONOCIMIENTO",'1',0,'C',TRUE);
 			$pdf->Cell(30,8,"EV. ACTITUD",'1',0,'C',TRUE);
-			$pdf->Ln();
-			
+	
 			$pdf->SetDrawColor(0,0,0);
 			$pdf->SetLineWidth(.2);
 			$pdf->SetFillColor(255,255,255);
@@ -358,7 +357,7 @@
 			$pdf->SetFillColor(172,31,6);
 			$pdf->SetTextColor(255);
 			$pdf->Cell(92,8,"Referencias",'1',0,'C',TRUE);
-			$pdf->Cell(92,8,"Apoyos Did�cticos",'1',0,'C',TRUE);
+			$pdf->Cell(92,8,utf8_decode("Apoyos Didácticos"),'1',0,'C',TRUE);
 			
 			$pdf->SetFont('Montserrat-Medium','',8);
 			$pdf->Ln();
@@ -427,7 +426,7 @@
 		
 			if (!($row["ENCU_POLITICAS"]=='')) {
 					$pdf->SetFont('Montserrat-ExtraBold','B',10);
-					$pdf->Cell(184,8,"OTRAS POL�TICAS",1,0,'C',FALSE);
+					$pdf->Cell(184,8,"OTRAS POLITICAS",1,0,'C',FALSE);
 					$pdf->Ln();
 					$pdf->SetFont('Montserrat-Medium','B',10);
 					
