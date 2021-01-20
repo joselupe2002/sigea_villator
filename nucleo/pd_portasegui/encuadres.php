@@ -214,7 +214,7 @@
 		
 				$this->SetY(-43);				
 				$this->SetX(140);
-				$this->Cell(60,4,'JEFE DIVISIÓN','',0,'C',false);
+				$this->Cell(60,4,'JEFE DIVISIï¿½N','',0,'C',false);
 				
 				*/
 			}
@@ -289,16 +289,16 @@
 			$pdf->SetFuente(array('Montserrat-ExtraBold','Montserrat-Medium'));
 			$pdf->SetTamano(array('10','10'));
 			$pdf->SetEstilo(array('B',''));
-			$pdf->Row(array("Horas teoría – horas prácticas – créditos:",utf8_decode($row["HT"])."-".utf8_decode($row["HP"])."-".utf8_decode($row["CREDITOS"])));
+			$pdf->Row(array("Horas teorï¿½a ï¿½ horas prï¿½cticas ï¿½ crï¿½ditos:",utf8_decode($row["HT"])."-".utf8_decode($row["HP"])."-".utf8_decode($row["CREDITOS"])));
 			
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
-			$pdf->Cell(184,8,"Objetivo(s) general  de la asignatura. (competencias específicas)",'1',0,'L',false);
+			$pdf->Cell(184,8,"Objetivo(s) general  de la asignatura. (competencias especï¿½ficas)",'1',0,'L',false);
 			$pdf->Ln();
 			$pdf->SetFont('Montserrat-Medium','',10); 
 			$pdf->MultiCell(184,5,utf8_decode($row["COMPETENCIAS"]),1,'J', false);			
 			
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
-			$pdf->Cell(184,8,"Aportación al perfil profesional",'1',0,'L',false);
+			$pdf->Cell(184,8,"Aportaciï¿½n al perfil profesional",'1',0,'L',false);
 			$pdf->Ln();
 			$pdf->SetFont('Montserrat-Medium','',10);
 			$pdf->MultiCell(184,5,utf8_decode($row["CARACTERIZACION"]),1,'J', false);
@@ -328,15 +328,10 @@
 			$pdf->Cell(10,8,"No.",'1',0,'C',TRUE);
 			$pdf->Cell(54,8,"Temas",'1',0,'C',TRUE);
 			$pdf->Cell(30,8,"EV. PRODUCTO",'1',0,'C',TRUE);
-			$pdf->Cell(30,8,"EV. DESEMPEÑO",'1',0,'C',TRUE);
+			$pdf->Cell(30,8,utf8_decode("EV. DESEMPEÃ‘O"),'1',0,'C',TRUE);
 			$pdf->Cell(30,8,"EV. CONOCIMIENTO",'1',0,'C',TRUE);
 			$pdf->Cell(30,8,"EV. ACTITUD",'1',0,'C',TRUE);
 			$pdf->Ln();
-			$pdf->Cell(10,16,"",'BL',0,'C',TRUE);
-			$pdf->Cell(54,8,"Ponderaciones",'BR',0,'R',TRUE);
-			$pdf->Cell(60,8,"50%",'1',0,'C',TRUE);
-			$pdf->Cell(30,8,"40%",'1',0,'C',TRUE);
-			$pdf->Cell(30,8,"10%",'1',0,'C',TRUE);
 			
 			$pdf->SetDrawColor(0,0,0);
 			$pdf->SetLineWidth(.2);
@@ -363,7 +358,7 @@
 			$pdf->SetFillColor(172,31,6);
 			$pdf->SetTextColor(255);
 			$pdf->Cell(92,8,"Referencias",'1',0,'C',TRUE);
-			$pdf->Cell(92,8,"Apoyos Didácticos",'1',0,'C',TRUE);
+			$pdf->Cell(92,8,"Apoyos Didï¿½cticos",'1',0,'C',TRUE);
 			
 			$pdf->SetFont('Montserrat-Medium','',8);
 			$pdf->Ln();
@@ -432,7 +427,7 @@
 		
 			if (!($row["ENCU_POLITICAS"]=='')) {
 					$pdf->SetFont('Montserrat-ExtraBold','B',10);
-					$pdf->Cell(184,8,"OTRAS POLÍTICAS",1,0,'C',FALSE);
+					$pdf->Cell(184,8,"OTRAS POLï¿½TICAS",1,0,'C',FALSE);
 					$pdf->Ln();
 					$pdf->SetFont('Montserrat-Medium','B',10);
 					
@@ -452,12 +447,12 @@
 			  
 			$pdf->Ln();
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
-			$pdf->Cell(184,8,"LISTA DE ALUMNOS ENTERADOS DEL ENCUADRE E INSTRUMENTACIÓN DIDÁCTICA",1,0,'C',FALSE);
+			$pdf->Cell(184,8,utf8_decode("LISTA DE ALUMNOS ENTERADOS DEL ENCUADRE E INSTRUMENTACIÃ“N DIDÃCTICA"),1,0,'C',FALSE);
 			$pdf->Ln();
 			$pdf->SetFont('Montserrat-Medium','B',8);
-			$pdf->MultiCell(184,5,"1. Dió a conocer las reglas y/o políticas de este curso de acuerdo al lineamiento para la acreditación de asignaturas.",1,'J', false);
-			$pdf->MultiCell(184,5,"2. Explicó y entrego la instrumentación didáctica (digital) y los indicadores de cada rubro a evaluar.",1,'J', false);
-			$pdf->MultiCell(184,5,"3. Aplicó la evaluación diagnóstica.",1,'J', false);
+			$pdf->MultiCell(184,5,utf8_decode("1. DiÃ³ a conocer las reglas y/o polÃ­ticas de este curso de acuerdo al lineamiento para la acreditaciÃ“n de asignaturas."),1,'J', false);
+			$pdf->MultiCell(184,5,utf8_decode("2. ExplicÃ³ y entrego la instrumentaciÃ³n didÃ¡ctica (digital) y los indicadores de cada rubro a evaluar."),1,'J', false);
+			$pdf->MultiCell(184,5,utf8_decode("3. AplicÃ³ la evaluaciÃ³n diagnÃ³stica."),1,'J', false);
 			$pdf->SetFont('Montserrat-Medium','B',10);
 			
 			$pdf->SetFont('Montserrat-ExtraBold','B',8);
