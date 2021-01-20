@@ -207,11 +207,12 @@
 					$fill = false;
 					$this->SetFont('Montserrat-Medium','',6);
 					$suma=0;
+					$lin=0;
 					$elsem=$data[0]["SEMESTRE"];
 					foreach($data as $row)
 					{
 
-						if ($elsem!=$row["SEMESTRE"]) { 
+						if (($elsem!=$row["SEMESTRE"])&&($lin>0)) { 
 							$this->Ln();
 							$this->Cell(array_sum($w),0,'','T');
 							$this->Ln();
@@ -239,7 +240,7 @@
 							$this->ln();
 						}
 						else {$this->Ln(); }
-						
+
 						$horasMat=$this->dameHoras($row);
 						$this->Cell($w[0],4,utf8_decode($row[0]),'LR',0,'J',$fill);
 						$this->Cell($w[1],4,$row[1],'LR',0,'L',$fill);
@@ -260,6 +261,32 @@
 					}		
 					
 					// L�nea de cierre
+
+							$this->Cell(array_sum($w),0,'','T');
+							$this->Ln();
+							$this->SetFont('Montserrat-ExtraBold','B',8);
+							$this->Cell(array_sum($w)-10,4,'Suma de Horas','LR',0,'R',$fill);
+							$this->Cell(10,4,$suma,'LR',0,'C',$fill);
+							$this->Ln();
+							$this->Cell(array_sum($w),0,'','T');
+							$suma=0;	
+							$this->SetFont('Montserrat-Medium','B',6);
+
+							$this->ln(); 
+							$this->Cell(254,0,"",'T',0,'L',$fill);  
+							$elsem=$row["SEMESTRE"]; 
+							$this->ln(5);
+							$this->SetFillColor(172,31,6);
+							$this->SetTextColor(255);	
+							$this->SetFont('Montserrat-ExtraBold','B',8);									
+							for($i=0;$i<count($header);$i++) {$this->Cell($w[$i],7,$header[$i],1,0,'C',true);}
+							$this->SetFont('Montserrat-Medium','B',6);
+							$this->SetFillColor(255,254,174);
+							$this->SetTextColor(0);
+							$this->ln();
+							$this->Cell(254,0,"",'T',0,'L',$fill); 
+							$this->ln();
+
 			}
 			
 			
