@@ -123,7 +123,7 @@
                        "LISFALT, (CASE WHEN NUMREP=1 THEN 'R' WHEN NUMREP>1 THEN 'E' ELSE '' END) AS REP, ".               
                 "MATRICULA, NOMBRE, EXTRA".
                 " from vboleta a  where  a.CICLO='".$_GET["ciclo"].
-                "' and a.MATERIA='".$_GET["materia"]."' and a.GRUPO='".$_GET["grupo"]."'";
+                "' and a.MATERIA='".$_GET["materia"]."' and a.GRUPO='".$_GET["grupo"]."' order by NOMBRE";
                // echo $sql;
 
         		$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
