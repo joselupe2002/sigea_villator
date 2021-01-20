@@ -1,0 +1,266 @@
+<html lang="es-ES"><head><script>
+/*
+** Copyright (c) 2008, Oracle and/or its affiliates. All rights reserved.
+*/
+
+/**
+ * This is the loopback script to process the url before the real page loads. It introduces
+ * a separate round trip. During this first roundtrip, we currently do two things: 
+ * - check the url hash portion, this is for the PPR Navigation. 
+ * - do the new window detection
+ * the above two are both controled by parameters in web.xml
+ * 
+ * Since it's very lightweight, so the network latency is the only impact. 
+ * 
+ * here are the list of will-pass-in parameters (these will replace the param in this whole
+ * pattern: 
+ *        viewIdLength                           view Id length (characters), 
+ *        loopbackIdParam                        loopback Id param name, 
+ *        loopbackId                             loopback Id,
+ *        loopbackIdParamMatchExpr               loopback Id match expression, 
+ *        windowModeIdParam                      window mode param name, 
+ *        windowModeParamMatchExpr               window mode match expression, 
+ *        clientWindowIdParam                    client window Id param name, 
+ *        clientWindowIdParamMatchExpr           client window Id match expression, 
+ *        windowId                               window Id,
+ *        redirectIdParam                        redirect Id parameter name
+ *        jsessionId                             session Id that needs to be appended to the redirect URL
+ *        enablePPRNav                           whether we want to enable PPR Navigation
+ *        useCookies                             boolean indicating whether loopback values should be set as cookies,as opposed to query parameters
+ *        cleanUrlMatchExpr1                     match expression for clearing out internal parameters like _afrLoop
+ *        cleanUrlMatchExpr2                     secondary (cleanup) match expression for clearing out internal parameters like _afrLoop
+ *
+ */
+ 
+function _addCookie(name, value)
+{
+  //Expire cookies in 30 seconds (once the cookie is included in the request header, it does not matter that it expired).
+  var d = new Date();
+  d.setTime(d.getTime() + 30000);
+  var expires = "; expires=" + d.toUTCString();
+  
+  document.cookie = name + '=' + value + expires + '; path=/';
+}
+
+var id = null; 
+var query = ''; 
+var href = document.location.href; 
+var hashIndex = href.indexOf("#"); 
+var hash = null;
+
+var useCookies = false;
+if (useCookies)
+{
+  if (navigator && (true === navigator.cookieEnabled))
+  {
+    useCookies = navigator.cookieEnabled;
+  }
+  else
+  {
+    var t = '_cookiesEnabled_';
+    document.cookie = t;
+    useCookies = (document.cookie.indexOf(t) != -1);
+  }
+}
+
+// process the hash part of the url, split the url
+if (hashIndex > 0) 
+{ 
+  hash = href.substring(hashIndex + 1); 
+  // only analyze hash when pprNav is on
+  if (false && hash && hash.length > 0) 
+  { 
+    hash = decodeURIComponent(hash); 
+    if (hash.charAt(0) == "@") 
+    { 
+      query = hash.substring(1); 
+    } 
+    else 
+    { 
+      var state = hash.split("@"); 
+      id = state[0]; 
+      query = state[1]; 
+    } 
+  } 
+  href = href.substring(0, hashIndex); 
+  query = (query != null) ? query : '';
+}
+
+var oldUri = href;
+
+if (useCookies)
+{
+  // Clear out any leftover internal parameters that may have been left in a bookmark, etc.
+  href = href.replace(/_afrLoop=[^&^#]*&*|_afrRedirect=[^&^#]*&*|Adf-Window-Id=[^&^#]*&*|_afrWindowMode=[^&^#]*&*/g, '').replace(/[\?&]+$|[\?&]+(?=#)/, '');
+}
+
+/* process the query part */
+var queryIndex = href.indexOf("?"); 
+if (queryIndex > 0) 
+{
+  // only when pprNav is on, we take in the query from the hash portion
+  query = (query || (id && id.length>0))? query: href.substring(queryIndex); 
+  href = href.substring(0, queryIndex); 
+} 
+
+var jsessionIndex = href.indexOf(';');
+if (jsessionIndex > 0)
+{
+  href = href.substring(0, jsessionIndex);
+}
+
+// we will replace the viewId only when pprNav is turned on
+if (false) 
+{
+  if (id != null && id.length > 0) 
+  { 
+    href = href.substring(0, href.length - 19) + id;
+  } 
+}
+
+if (useCookies)
+{
+  _addCookie("_afrLoop", "3891617546029946");
+  // We are adding the redirect Id parameter as well in case we are overriding redirect cookies (this should happen very infrequently,
+  // and the end result will be performing a loopback for the request doing the rediect)
+  _addCookie("_afrRedirect", "");
+}
+else
+{
+  var isSet = false; 
+  if (query == null || query.length == 0) 
+  { 
+    query = "?"; 
+  } 
+  else if (query.indexOf("_afrLoop") >= 0) 
+  { 
+    isSet = true; 
+    query = query.replace(/_afrLoop[^&]*/, "_afrLoop=3891617546029946"); 
+  } 
+  else 
+  { 
+    query += "&"; 
+  } 
+  if (!isSet) 
+  { 
+    query = query += "_afrLoop=3891617546029946"; 
+  }
+}
+
+var serverWindowId = "w4";
+var clientWindowId = window.name;
+
+// webkit will return a bogus window.name (html comment) if an iframe is not given
+// an explicit id or name attribute.
+// richwindowmanager._validatewindowid fails webkit browsers w namingcontainers
+var vwid = new RegExp("^[\\w]+$");
+if (!vwid.test(clientWindowId))
+  clientWindowId = null;
+// below is the new window detection logic
+// we only think you are in ctrl-N case if your window.name is null/empty
+// determine and append the _afrWindowMode param  
+// set the default window mode to 0 to avoid getting redirected when existing window's name
+// is the same as what the server expects while opening a new window
+var windowMode = 0;
+  
+
+// "_rtrnId" query param is used by both browser window dialogs and inline dialogs
+if (query.indexOf("_rtrnId") >= 0)
+{
+  windowMode=1;
+}
+else if (!clientWindowId)
+{
+  // No client window name, so this is the ctrl-N case
+  windowMode=2;
+}
+
+if (useCookies)
+{
+  _addCookie("_afrWindowMode", windowMode);
+}
+else
+{
+  if (query.indexOf("_afrWindowMode=") >= 0) 
+  { 
+    query = query.replace(/_afrWindowMode=[^&]*/, "_afrWindowMode="+windowMode); 
+  } 
+  else 
+  { 
+    query = query += "&_afrWindowMode="+windowMode; 
+  }
+}
+
+// append the _afrWindowId param with the current client windowId.  If the client doesn't
+// have a window name, use the name from the server and set the window's name to it
+if (!clientWindowId)
+{
+  clientWindowId = serverWindowId;
+  window.name = clientWindowId;
+}
+
+if (useCookies)
+{
+  _addCookie("Adf-Window-Id", clientWindowId);
+}
+else
+{  
+  /* in case we couldn't detect the windowId from the server side */  
+  if (query.indexOf("Adf-Window-Id=") >= 0) 
+  { 
+    query = query.replace(/Adf-Window-Id=\w*/, "Adf-Window-Id="+clientWindowId); 
+  } 
+  else 
+  { 
+    query = query += "&Adf-Window-Id=" + clientWindowId; 
+  }
+}
+
+var sess = "";
+
+if (sess)
+{
+  /* here we check the jsessionId, if we ask the container to send jsessionId as */
+  /* a parameter then it will look like "?jsessionid=xxx". */
+  if (sess.indexOf(";")==0)
+  {
+    href += sess;    
+  }
+  else if (sess.indexOf("?") == 0) 
+  {
+    if (query == null || query.length == 0) 
+    { 
+      query = "?"; 
+    }
+    else
+    {
+      query += "&";
+    }
+    query += sess.substr(1); 
+  }
+}
+
+ // Workaround for the Firebug bug, where the cached version of the loopback script is served
+ var isOldFirebug = false;
+ 
+ if (window.console != null && window.console.firebug != null)
+ {
+   var ver = parseFloat(window.console.firebug);
+   isOldFirebug = !isNaN(ver) && ver < 1.9;
+ }
+ 
+ var newHref = href + query;
+  
+ hash = (false) ? null : hash;
+ 
+ if (oldUri == newHref && (hash != null || isOldFirebug))
+ {
+   document.location.reload(true);
+ }
+ else
+ {
+   newHref = (hash == null) ? newHref : newHref + '#' + hash;
+   document.location.replace(newHref);
+ }
+
+</script><noscript>Esta página utiliza JavaScript y necesita un explorador activado para JavaScript. Su explorador no está activado para JavaScript.</noscript></head></html>
