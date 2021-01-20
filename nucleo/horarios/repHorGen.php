@@ -254,7 +254,7 @@
 					    $this->Cell($w[9],4,$row[9],'LR',0,'L',$fill);
 					    $this->Cell($w[10],4,$horasMat,'LR',0,'C',$fill);
 						$suma+=$horasMat;	
-				
+						$lin++;
 										
 											
 						$fill = !$fill;
