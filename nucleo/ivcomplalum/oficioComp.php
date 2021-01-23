@@ -230,8 +230,8 @@
 		
 
 		$dataGen = $pdf->LoadDatosGen();
-		$nombre=$miutil->getJefe('303');//Nombre del puesto de Recursos Humanos
-		$elpsto="DEPARTAMENTO DE SERVICIOS ESCOLARES";
+		$nombre=$miutil->getJefe('403');
+		$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('403'),"EMPL_FIRMAOF");
 		
 		
 		//Extraemos el Departamento de acuerdo a la carrera 

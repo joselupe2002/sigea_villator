@@ -131,6 +131,7 @@ var miciclo="";
 
 							OpcionesResidencia();
 							abrirCapturaProyecto();
+							documentosRes();
 							OpcionesEvaluaciones();							
 							
 						}	
@@ -285,84 +286,12 @@ function cargarDatosPropuesta(tipo){
 
 	function abrirCapturaProyecto (){
 
-
-		elsql="SELECT IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARTAPRES'),'') AS RUTAPRES, "+
-			  " IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SOLANTEP'),'') AS RUTASOLANTEP, "+
-			  " IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_ANTEP'),'') AS RUTAANTEP, "+
-			  " IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_LIBSER'),'') AS RUTALIBSER, "+
-			  " IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_IMSS'),'') AS RUTAIMSS, "+
-			  " IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARDEX'),'') AS RUTACARDEX, "+
-			  "       IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARTAACEP'),'') AS RUTAACEP FROM DUAL"; 
-
-		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-		$.ajax({
-			type: "POST",
-			data:parametros,
-			url:  "../base/getdatossqlSeg.php",
-			success: function(data){	
-
-				$("#documentos2").append("<div class=\"row\"><div id=\"cartaPres\" class=\"col-sm-6\"></div>"+
-															"<div id=\"cartaAcep\" class=\"col-sm-6\"></div>"+
-										"</div>"+
-										"<div class=\"row\"><div id=\"Libser\" class=\"col-sm-6\"></div>"+
-															"<div id=\"Imss\" class=\"col-sm-6\"></div>"+
-										"</div>"+
-										"<div class=\"row\"><div id=\"Cardex\" class=\"col-sm-6\"></div>"+
-															"<div id=\"Otro\" class=\"col-sm-6\"></div>"+
-										"</div>"+
-										"<div class=\"row\"><div id=\"solAntep\" class=\"col-sm-6\"></div>"+
-															"<div id=\"Antep\" class=\"col-sm-6\"></div>"+
-										"</div>");
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTAPRES"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("cartaPres","Carta Presenta. Sellada","cartapres",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_CARTAPRES",JSON.parse(data)[0]["RUTAPRES"],activaEliminar);
-				
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTAACEP"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("cartaAcep","Carta de Aceptación","cartaacep",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'CARTA DE ACEPTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_CARTAACEP",JSON.parse(data)[0]["RUTAACEP"],activaEliminar);
-				
-
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTASOLANTEP"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("solAntep","Sol. Anteproyecto Sellada","solantep",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'SOLICITUD DE ANTEPROYECTO FIRMADA Y SELLADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SOLANTEP",JSON.parse(data)[0]["RUTASOLANTEP"],activaEliminar);
-				
-
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTAANTEP"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("Antep","Anteprotecto Autorizado","antep",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'ANTEPROYECTO AUTORIZADO','eadjresidencia','alta',usuario+"_"+miciclo+"_ANTEP",JSON.parse(data)[0]["RUTAANTEP"],activaEliminar);
-				
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTALIBSER"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("Libser","Liberación Servicio Social","libser",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'LIBERACIÓN DE SERVICIO SOCIAL','eadjresidencia','alta',usuario+"_"+miciclo+"_LIBSER",JSON.parse(data)[0]["RUTALIBSER"],activaEliminar);
-				
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTAIMSS"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("Imss","Carta Vigencia IMSS","imss",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'ANTEPROYECTO AUTORIZADO','eadjresidencia','alta',usuario+"_"+miciclo+"_IMSS",JSON.parse(data)[0]["RUTAIMSS"],activaEliminar);
-				
-				activaEliminar="";
-				if (JSON.parse(data)[0]["RUTACARDEX"]!='') {	activaEliminar='S';}					
-				dameSubirArchivoDrive("Cardex","Cardex de estudios","cardex",'ADJRESIDENCIA','pdf',
-				'ID',usuario,'CARDEX DE ESTUDIOS','eadjresidencia','alta',usuario+"_"+miciclo+"_CARDEX",JSON.parse(data)[0]["RUTACARDEX"],activaEliminar);
-				
-				
-			}
-		});
-
-	
-
 		var abierto=false;
 		elsql="select count(*) as N from ecortescal where  CICLO='"+miciclo+"'"+
 		" and ABIERTO='S' and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
 		" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
 		" AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='CAPTPROYRES' "+
 		" order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
-
 
 
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -387,24 +316,101 @@ function cargarDatosPropuesta(tipo){
 					"</div>");
 
 				}
-				else {
-					$("#pcapt").removeClass("glyphicon glyphicon-unchecked blue bigger-260");
-					$("#pcapt").addClass("fa  fa-times red bigger-260");
-					$("#documentos2").append("<hr>"+
-							"<button  onclick=\"verProyecto();\" class=\"btn btn-white btn-success btn-bold\">"+
-							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>2. Imprimir Sol. Proyecto"+
-							"</button>"+
-					"</div>");
-				}
+				
 			}
 		});
-	
-
-		
 
 	}
 
 
+	function documentosRes(){
+
+		var abierto=false;
+		elsql="select count(*) as N from ecortescal where  CICLO='"+miciclo+"'"+
+		" and ABIERTO='S' and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
+		" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
+		" AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='SUBIRDOCRES' "+
+		" order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
+	
+		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+		$.ajax({
+			type: "POST",
+			data:parametros,
+			url:  "../base/getdatossqlSeg.php",
+			success: function(data){					
+				if (JSON.parse(data)[0]["N"]>0) {	
+						elsql="SELECT IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARTAPRES'),'') AS RUTAPRES, "+
+						" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SOLANTEP'),'') AS RUTASOLANTEP, "+
+						" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_ANTEP'),'') AS RUTAANTEP, "+
+						" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_LIBSER'),'') AS RUTALIBSER, "+
+						" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_IMSS'),'') AS RUTAIMSS, "+
+						" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARDEX'),'') AS RUTACARDEX, "+
+						"       IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARTAACEP'),'') AS RUTAACEP FROM DUAL"; 
+
+						parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+						$.ajax({
+							type: "POST",
+							data:parametros,
+							url:  "../base/getdatossqlSeg.php",
+							success: function(data){	
+
+								$("#documentos2").append("<div class=\"row\"><div id=\"cartaPres\" class=\"col-sm-6\"></div>"+
+																			"<div id=\"cartaAcep\" class=\"col-sm-6\"></div>"+
+														"</div>"+
+														"<div class=\"row\"><div id=\"Libser\" class=\"col-sm-6\"></div>"+
+																			"<div id=\"Imss\" class=\"col-sm-6\"></div>"+
+														"</div>"+
+														"<div class=\"row\"><div id=\"Cardex\" class=\"col-sm-6\"></div>"+
+																			"<div id=\"Otro\" class=\"col-sm-6\"></div>"+
+														"</div>"+
+														"<div class=\"row\"><div id=\"solAntep\" class=\"col-sm-6\"></div>"+
+																			"<div id=\"Antep\" class=\"col-sm-6\"></div>"+
+														"</div>");
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTAPRES"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("cartaPres","Carta Presenta. Sellada","cartapres",'residenciasProf','pdf',
+								'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_CARTAPRES",JSON.parse(data)[0]["RUTAPRES"],activaEliminar,usuario+"_"+miciclo+"_CARTAPRES");
+								
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTAACEP"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("cartaAcep","Carta de Aceptación","cartaacep",'residenciasProf','pdf',
+								'ID',usuario,'CARTA DE ACEPTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_CARTAACEP",JSON.parse(data)[0]["RUTAACEP"],activaEliminar,usuario+"_"+miciclo+"_CARTAACEP");
+								
+
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTASOLANTEP"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("solAntep","Sol. Anteproyecto","solantep",'residenciasProf','pdf',
+								'ID',usuario,'SOLICITUD DE ANTEPROYECTO FIRMADA Y SELLADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SOLANTEP",JSON.parse(data)[0]["RUTASOLANTEP"],activaEliminar,usuario+"_"+miciclo+"_SOLANTEP");
+								
+
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTAANTEP"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("Antep","Anteprotecto Autorizado","antep",'residenciasProf','pdf',
+								'ID',usuario,'ANTEPROYECTO AUTORIZADO','eadjresidencia','alta',usuario+"_"+miciclo+"_ANTEP",JSON.parse(data)[0]["RUTAANTEP"],activaEliminar,usuario+"_"+miciclo+"_ANTEP",JSON.parse(data)[0]["RUTAANTEP"]);
+								
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTALIBSER"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("Libser","Liberación Serv. Soc.","libser",'residenciasProf','pdf',
+								'ID',usuario,'LIBERACIÓN DE SERVICIO SOCIAL','eadjresidencia','alta',usuario+"_"+miciclo+"_LIBSER",JSON.parse(data)[0]["RUTALIBSER"],activaEliminar,usuario+"_"+miciclo+"_LIBSER");
+								
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTAIMSS"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("Imss","Carta Vigencia IMSS","imss",'residenciasProf','pdf',
+								'ID',usuario,'ANTEPROYECTO AUTORIZADO','eadjresidencia','alta',usuario+"_"+miciclo+"_IMSS",JSON.parse(data)[0]["RUTAIMSS"],activaEliminar);
+								
+								activaEliminar="";
+								if (JSON.parse(data)[0]["RUTACARDEX"]!='') {	activaEliminar='S';}					
+								dameSubirArchivoLocal("Cardex","Cardex de estudios","cardex",'residenciasProf','pdf',
+								'ID',usuario,'CARDEX DE ESTUDIOS','eadjresidencia','alta',usuario+"_"+miciclo+"_CARDEX",JSON.parse(data)[0]["RUTACARDEX"],activaEliminar,usuario+"_"+miciclo+"_CARDEX");
+												
+							}
+						});					
+
+				}
+			}
+		});
+
+	}
 
 	function capturaProyecto(){
 
@@ -737,23 +743,23 @@ function cargarDatosPropuesta(tipo){
 						
 										activaEliminar="";
 										if (JSON.parse(data)[0]["EVAL1"]!='') {	activaEliminar='S';}					
-										dameSubirArchivoDrive("EVAL1","1ra Evaluación","eval1",'ADJRESIDENCIA','pdf',
-										'ID',usuario,'PRIMERA EVALUACIÓN','eadjresidencia','alta',usuario+"_"+elciclo+"_EVAL1",JSON.parse(data)[0]["EVAL1"],activaEliminar);
+										dameSubirArchivoLocal("EVAL1","1ra Evaluación","eval1",'residenciasProf','pdf',
+										'ID',usuario,'PRIMERA EVALUACIÓN','eadjresidencia','alta',usuario+"_"+elciclo+"_EVAL1",JSON.parse(data)[0]["EVAL1"],activaEliminar,usuario+"_"+elciclo+"_EVAL1");
 										
 										activaEliminar="";
 										if (JSON.parse(data)[0]["EVAL2"]!='') {	activaEliminar='S';}					
-										dameSubirArchivoDrive("EVAL2","Segunda Evaluación","eval2",'ADJRESIDENCIA','pdf',
-										'ID',usuario,'SEGUNDA EVALUACION','eadjresidencia','alta',usuario+"_"+elciclo+"_EVAL2",JSON.parse(data)[0]["EVAL2"],activaEliminar);
+										dameSubirArchivoLocal("EVAL2","Segunda Evaluación","eval2",'residenciasProf','pdf',
+										'ID',usuario,'SEGUNDA EVALUACION','eadjresidencia','alta',usuario+"_"+elciclo+"_EVAL2",JSON.parse(data)[0]["EVAL2"],activaEliminar,usuario+"_"+elciclo+"_EVAL2");
 										
 										activaEliminar="";
 										if (JSON.parse(data)[0]["EVALF"]!='') {	activaEliminar='S';}					
-										dameSubirArchivoDrive("EVALF","Evaluación Final","evalf",'ADJRESIDENCIA','pdf',
-										'ID',usuario,'EVALUACIÓN FINAL','eadjresidencia','alta',usuario+"_"+elciclo+"_EVALF",JSON.parse(data)[0]["EVALF"],activaEliminar);							
+										dameSubirArchivoLocal("EVALF","Evaluación Final","evalf",'residenciasProf','pdf',
+										'ID',usuario,'EVALUACIÓN FINAL','eadjresidencia','alta',usuario+"_"+elciclo+"_EVALF",JSON.parse(data)[0]["EVALF"],activaEliminar,usuario+"_"+elciclo+"_EVALF");							
 			
 										activaEliminar="";
 										if (JSON.parse(data)[0]["REPTEC"]!='') {	activaEliminar='S';}					
-										dameSubirArchivoDrive("REPTEC","Reporte Técnico","reptec",'ADJRESIDENCIA','pdf',
-										'ID',usuario,'REPORTE TÉCNICO','eadjresidencia','alta',usuario+"_"+elciclo+"_REPTEC",JSON.parse(data)[0]["REPTEC"],activaEliminar);							
+										dameSubirArchivoLocal("REPTEC","Reporte Técnico","reptec",'residenciasProf','pdf',
+										'ID',usuario,'REPORTE TÉCNICO','eadjresidencia','alta',usuario+"_"+elciclo+"_REPTEC",JSON.parse(data)[0]["REPTEC"],activaEliminar,usuario+"_"+elciclo+"_REPTEC");							
 										
 									}
 								});		

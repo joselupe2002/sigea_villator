@@ -60,7 +60,7 @@ var credM1=0;
 							"<select onchange=\"elegirTipoOperacion();\" id=\"tipoOperacion\">"+
 							"	<option value=\"0\">Elija una opción</option>"+
 							"	<option value=\"N\">Carrera</option>"+
-							"	<option value=\"I\">Inglés</option>"+
+						//	"	<option value=\"I\">Inglés</option>"+
 						//	"	<option value=\"OC\">ExtraEscolares</option>"+
 							"</select>");
 						    
@@ -156,8 +156,8 @@ var credM1=0;
 						activaEliminar='S';
 						if (JSON.parse(data2)[0][2]>0) {laruta=JSON.parse(data2)[0][0]; 
 														activaEliminar=JSON.parse(data2)[0][1]=='N'?'S':'N'; }
-						dameSubirArchivoDrive("elrecibo","Recibo de Pago de "+txtop,"reciboreins",'RECIBOREINS','pdf',
-								'ID',usuario,'RECIBO DE PAGO '+txtop,'eadjreins','alta',usuario+"_"+miciclo+"_"+idop,laruta,activaEliminar);						
+						dameSubirArchivoLocal("elrecibo","Recibo de Pago de "+txtop,"reciboreins",'recibosReins','pdf',
+								'ID',usuario,'RECIBO DE PAGO '+txtop,'eadjreins','alta',usuario+"_"+miciclo+"_"+idop,laruta,activaEliminar,usuario+"_"+miciclo+"_"+idop);						
 					
 						//en caso de que el pago ya haya sido validado
 						if (JSON.parse(data2)[0][1]=='S') {

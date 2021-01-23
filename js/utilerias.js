@@ -2777,10 +2777,62 @@ function dameSubirArchivoDrive(contenedor,etiqueta,nombre,carpetaDrive,extension
 			$('#enlace_'+nombre).attr('href', '..\\..\\imagenes\\menu\\pdfno.png');
 			$('#img_'+nombre).attr('src', "..\\..\\imagenes\\menu\\pdfno.png");
 		   }
+}
+
+
+function dameSubirArchivoLocal(contenedor,etiqueta,nombre,carpetaDrive,extensiones,campoIDTabla,valorid,mensajesubida,tablasubir,altaedita,aux, ruta, activareliminar, nombrefile) {		    
+	cad=
+	"  <div class=\"row \"> "+		
+	"      <div class=\"col-sm-8\" id=\"inputFileRow\">"+
+	"          <label class=\"et\" for=\""+nombre+"\">"+etiqueta+"</label><br/> "+
+	"          <input  class=\"fileSigea\" type=\"file\" id=\"file_"+nombre+"\" name=\"file_"+nombre+"\""+
+	"                 onchange=\"subirPDFDriveSaveAsp_local('file_"+nombre+"','"+carpetaDrive+"','img_"+nombre+"',"+
+	"                 '"+nombre+"','"+extensiones+"','N','"+campoIDTabla+"','"+valorid+"','"+mensajesubida+
+	"                 ','"+tablasubir+"','"+altaedita+"','"+aux+"','"+nombrefile+"');\"/>"+
+	"          <input type=\"hidden\" value=\""+ruta+"\"  name=\""+nombre+"\" id=\""+nombre+"\"  placeholder=\"\" />\n"+
+	"      </div> ";
+
+	stElim="display:none; cursor:pointer;";
+	if (ruta.length>0) { stElim="cursor:pointer; ";}    
+	cadeliminar='';
+	if (activareliminar=='S') {
+			cadeliminar="<i style=\""+stElim+"\"  id=\"btnEli_"+nombre+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
+							"onclick=\"eliminarEnlaceCarpeta('file_"+nombre+"','"+carpetaDrive+"',"+
+							"'img_"+nombre+"','"+nombre+"','"+extensiones+"','N','"+campoIDTabla+"','"+
+							valorid+"','"+mensajesubida+"','"+tablasubir+"','"+altaedita+"','"+aux+"','PDF');\">"+
+						"</i>";
+	}
+	eliminar="<div class=\"col-sm-3\" style=\"padding-top:10px;\">"+
+	"           <a title=\"Ver Archivo\" target=\"_blank\" id=\"enlace_"+nombre+"\" href=\""+ruta+"\">"+
+	"                  <img id=\"img_"+nombre+"\" name=\"img_"+nombre+"\" src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
+	"           </a>"+cadeliminar+		
+	"          </div>"+
+	"  </div>";
+
+	
+	$("#"+contenedor).append(cad+eliminar);
+
+	$('.fileSigea').ace_file_input({
+		no_file:'Sin archivo ...',
+		btn_choose:'Buscar',
+		btn_change:'Cambiar',
+		droppable:false,
+		onchange:null,
+		thumbnail:false, //| true | large
+		whitelist: extensiones,
+		blacklist:'exe|php'
+		//onchange:''
+		//
+	});
+	if ((ruta=='') || (ruta==null)) { 
+		$('#enlace_'+nombre).attr('href', '..\\..\\imagenes\\menu\\pdfno.png');
+		$('#img_'+nombre).attr('src', "..\\..\\imagenes\\menu\\pdfno.png");
+	   }
 
 
 
 }
+
 
 function abrirPesta(enlace,titulo) {
 var content = '<iframe frameborder="0" id="FRNoti" src="'+enlace+'" style="overflow-x:hidden;width:100%;height:100%;"></iframe></div>';	
