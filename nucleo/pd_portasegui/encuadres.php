@@ -289,16 +289,16 @@
 			$pdf->SetFuente(array('Montserrat-ExtraBold','Montserrat-Medium'));
 			$pdf->SetTamano(array('10','10'));
 			$pdf->SetEstilo(array('B',''));
-			$pdf->Row(array("Horas teor�a � horas pr�cticas � cr�ditos:",utf8_decode($row["HT"])."-".utf8_decode($row["HP"])."-".utf8_decode($row["CREDITOS"])));
+			$pdf->Row(array(utf8_decode("Horas teorícas horas prácticas y créditos:"),utf8_decode($row["HT"])."-".utf8_decode($row["HP"])."-".utf8_decode($row["CREDITOS"])));
 			
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
-			$pdf->Cell(184,8,"Objetivo(s) general  de la asignatura. (competencias espec�ficas)",'1',0,'L',false);
+			$pdf->Cell(184,8,utf8_decode("Objetivo(s) general  de la asignatura. (competencias específicas)"),'1',0,'L',false);
 			$pdf->Ln();
 			$pdf->SetFont('Montserrat-Medium','',10); 
 			$pdf->MultiCell(184,5,utf8_decode($row["COMPETENCIAS"]),1,'J', false);			
 			
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
-			$pdf->Cell(184,8,"Aportaci�n al perfil profesional",'1',0,'L',false);
+			$pdf->Cell(184,8,utf8_decode("Aportación al perfil profesional"),'1',0,'L',false);
 			$pdf->Ln();
 			$pdf->SetFont('Montserrat-Medium','',10);
 			$pdf->MultiCell(184,5,utf8_decode($row["CARACTERIZACION"]),1,'J', false);
