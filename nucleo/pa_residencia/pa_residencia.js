@@ -385,7 +385,7 @@ function cargarDatosPropuesta(tipo){
 
 								activaEliminar="";
 								if (JSON.parse(data)[0]["RUTAANTEP"]!='') {	activaEliminar='S';}					
-								dameSubirArchivoLocal("Antep","Anteprotecto Autorizado","antep",'residenciasProf','pdf',
+								dameSubirArchivoLocal("Antep","Anteproyecto Autorizado","antep",'residenciasProf','pdf',
 								'ID',usuario,'ANTEPROYECTO AUTORIZADO','eadjresidencia','alta',usuario+"_"+miciclo+"_ANTEP",JSON.parse(data)[0]["RUTAANTEP"],activaEliminar,usuario+"_"+miciclo+"_ANTEP",JSON.parse(data)[0]["RUTAANTEP"]);
 								
 								activaEliminar="";
