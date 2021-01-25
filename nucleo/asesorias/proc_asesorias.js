@@ -10,7 +10,7 @@ function reporteAsesorias(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
 	 claveProf="";
 	 nombreProf="";
-	 sq="SELECT CONCAT(EMPL_NUMERO,'|',EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) FROM pempleados where EMPL_USER='"+usuario+"'";
+	 sq="SELECT CONCAT(EMPL_NUMERO,'|',EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) FROM pempleados where EMPL_NUMERO='"+usuario+"'";
 	 parametros={sql:sq,dato:sessionStorage.co,bd:"Mysql",numcol:'0',numlin:'0'}
 
 	 $.ajax({
