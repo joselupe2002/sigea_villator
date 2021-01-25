@@ -163,13 +163,15 @@
 
 				$this->SetY(-40);
 
-				$this->Cell(30,4,"DOCENTE",'T',0,'C',false);
+				$this->Cell(50,4,"DOCENTE",'T',0,'C',false);
 			
 
 				$this->SetX(205);				
 				$this->Cell(55,4,utf8_decode($dirgen),'T',0,'C',false);
 			
 
+				$this->SetY(-37);
+				
 				$this->SetX(205);
 				$this->Cell(55,4,utf8_decode('DIRECTOR GENERAL'),'',0,'C',false);
 				

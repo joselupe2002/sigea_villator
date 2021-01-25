@@ -17,7 +17,17 @@
    	
    	        var $eljefe="";
    	        var $eljefepsto="";
- 
+	
+			function LoadDepto($depto)
+			{				
+				$miConex = new Conexion();
+				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT URES_DESCRIP from fures where URES_URES='".$depto."'");				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+			}
+
    	
 			function LoadData()
 			{				
@@ -42,7 +52,9 @@
 			function Header()
 			{
 				$miutil = new UtilUser();
-				$miutil->getEncabezado($this,'V');			
+				$miutil->getEncabezado($this,'V');	
+				
+				
 			}
 			
 			
@@ -113,7 +125,13 @@
 		
 		$depto=$miUtil->getDatoEmpl($data[0]["COMI_AUTORIZO"],"EMPL_DEPTO");
 		$elpsto=$miUtil->getDatoEmpl($data[0]["COMI_PROFESOR"],"EMPL_FIRMAOF");
-	
+
+		
+		$deptod=$pdf->LoadDepto($depto)[0]["URES_DESCRIP"];
+		$pdf->setY(35);
+		$pdf->Cell(0,0,utf8_decode($deptod),0,1,'R');
+		
+
 		
 		$dataof=$miutil->verificaOficio($depto,"COMISION",$_GET["ID"]);
 		$fechadecof=$miutil->formatFecha($dataof[0]["CONT_FECHA"]);
