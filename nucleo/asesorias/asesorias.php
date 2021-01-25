@@ -184,7 +184,7 @@
 				echo "SELECT ASES_MATRICULA, ASES_MATRICULAD, IF(ASES_SEXO=1,'H','M') AS ASES_SEXOD, ASES_CARRERAD,". 
 				"ASES_ASIGNATURAD, ASES_FECHA, ASES_HORA, '' as ASES_FIRMA, ASES_TEMA from vasesorias ".
 				" WHERE ASES_CICLO='".$_GET["ciclo"]."' and ASES_PROFESOR='".$_GET["ID"]."'".
-				" and ANIO='".$_GET["anio"]."'".$tipoas." ".$elmes";
+				" and ANIO='".$_GET["anio"]."'".$tipoas." ".$elmes;
 
 				
 				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT ASES_MATRICULA, ASES_MATRICULAD, IF(ASES_SEXO=1,'H','M') AS ASES_SEXOD, ASES_CARRERAD,". 
