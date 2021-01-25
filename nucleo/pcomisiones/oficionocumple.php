@@ -114,7 +114,11 @@
 		$depto=$miUtil->getDatoEmpl($data[0]["COMI_AUTORIZO"],"EMPL_DEPTO");
 		$elpsto=$miUtil->getDatoEmpl($data[0]["COMI_PROFESOR"],"EMPL_FIRMAOF");
 		
-		
+			//LEYENDA DE ENCABEZADO
+			$pdf->SetFont('Montserrat-SemiBold','',10);
+			$deptod=$miUtil->LoadURES("URES_DESCRIP",$depto)[0]["URES_DESCRIP"];
+			$pdf->setY(37);
+			$pdf->Cell(0,0,utf8_decode($deptod),0,1,'R');
 		
 		
 		

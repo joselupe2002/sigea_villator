@@ -223,7 +223,16 @@ class UtilUser {
 
 
 	
-	
+	function LoadURES($campo,$depto)
+			{				
+				$miConex = new Conexion();
+				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT ".$campo." from fures where URES_URES='".$depto."'");				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+			}
+
 
 	public function getJefe($depto){
 		

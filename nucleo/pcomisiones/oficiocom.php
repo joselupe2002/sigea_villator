@@ -18,16 +18,7 @@
    	        var $eljefe="";
    	        var $eljefepsto="";
 	
-			function LoadDepto($depto)
-			{				
-				$miConex = new Conexion();
-				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT URES_DESCRIP from fures where URES_URES='".$depto."'");				
-				foreach ($resultado as $row) {
-					$data[] = $row;
-				}
-				return $data;
-			}
-
+		
    	
 			function LoadData()
 			{				
@@ -127,8 +118,9 @@
 		$elpsto=$miUtil->getDatoEmpl($data[0]["COMI_PROFESOR"],"EMPL_FIRMAOF");
 
 		
-		$deptod=$pdf->LoadDepto($depto)[0]["URES_DESCRIP"];
-		$pdf->setY(35);
+		$pdf->SetFont('Montserrat-SemiBold','',10);
+		$deptod=$miUtil->LoadURES("URES_DESCRIP",$depto)[0]["URES_DESCRIP"];
+		$pdf->setY(37);
 		$pdf->Cell(0,0,utf8_decode($deptod),0,1,'R');
 		
 
@@ -152,7 +144,7 @@
 		
 		$pdf->SetFont('Montserrat-Medium','',9);
 		$pdf->Ln(10);
-		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"].$fechaof,0,1,'R');	
+		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"]." ".$fechaof,0,1,'R');	
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,'OFICIO No. '.utf8_decode($dataof[0]["CONT_NUMOFI"]),0,1,'R');
 		$pdf->SetFont('Montserrat-ExtraBold','B',9);
