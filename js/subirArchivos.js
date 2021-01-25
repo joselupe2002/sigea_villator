@@ -908,6 +908,38 @@ function subirArchivo(nombreComponente,carpeta,nombreImg, nombreInput, extension
 }
 
 
+function subirArchivNombre(nombreComponente,carpeta,nombreImg, nombreInput, extensiones,nombre){		
+	var data = new FormData();
+	
+	jQuery.each($('#'+nombreComponente)[0].files, function(i, file) {
+	    data.append('archivo', file);
+	});
+
+	if (comprueba_extension(nombreComponente,extensiones)==1) {
+		$("#"+nombreImg).attr("src","../../imagenes/menu/esperar.gif");	
+		jQuery.ajax({
+			url: '../base/subirArchivoCarpeta.php?carpeta='+carpeta+'&inputFile=archivo&imganterior='+
+			                       $("#"+nombreInput).attr("value")+"&cambianombre="+nombre,
+		    data: data,
+		    cache: false,
+		    contentType: false,
+		    processData: false,
+		    type: 'POST'})
+		    .done(function(res){ 	
+		    	laimagen=res.split("|")[1];
+		    	if (!(res.substring(0,2)=="0|")){
+		    		$("#"+nombreImg).attr("src",carpeta+laimagen);
+		        	$("#"+nombreInput).attr("value",carpeta+laimagen);
+		    	}
+		    	else {
+		    		$("#"+nombreImg).attr("src","../../imagenes/menu/default.png");
+		        	$("#"+nombreInput).attr("value","../../imagenes/menu/default.png");
+		        	alert ("Ocurrio un error al subir la imagen: "+laimagen); 				    		
+		    	}				    						    			    
+    	    });        		            
+	}
+}
+
 
 //========================para la subida de archivos en carpetas del sistemas =============================*/
 
@@ -946,7 +978,7 @@ function subirPDFCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, extens
 	   	    				    	if (!(res.substring(0,2)=="0|")){	   	    				    	 		  	   		    				
 	   	    				    		$("#"+nombreImg).attr("src",elsrc);
 	   	    				    		$("#enlace_"+nombreInput).attr("href",ruta+laimagen);	   	    				    		
-	   	    				        	$("#"+nombreInput).attr("value",laimagen);
+	   	    				        	$("#"+nombreInput).attr("value",ruta+laimagen);
 	   	    				    	}
 	   	    				    	else {
 	   	    				    		$("#"+nombreImg).attr("src",elsrc2);
@@ -1182,7 +1214,7 @@ function eliminarEnlaceCarpeta(nombreComponente,carpeta,nombreImg, nombreInput, 
 
 
 function eliminarEnlaceRuta(carpeta,nombreImg, nombreInput, eltipoarchivo){
-   alert (carpeta);
+
     op=confirm("¿Seguro que desea eliminar el archivo?");
     if (op == true) {   
 

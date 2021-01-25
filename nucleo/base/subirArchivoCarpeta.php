@@ -22,7 +22,7 @@ if ($_SESSION['inicio']==1) {
 						unlink($_GET['carpeta'].$_GET['imganterior']);
 					}						
 				}
-
+		
 					
 				if (!(move_uploaded_file($_FILES[$_GET['inputFile']]['tmp_name'],
 						$_GET['carpeta']. $name)))

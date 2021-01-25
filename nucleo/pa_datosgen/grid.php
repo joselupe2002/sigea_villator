@@ -45,7 +45,7 @@
     				   <div class="space-4"></div>
                       
  	    		       <input class="fileSigea" type="file" id="file_ALUM_FOTO" name="file_ALUM_FOTO" 
- 	    		             onchange="subirArchivoDriveName('file_ALUM_FOTO','ALUM_FOTO','img_ALUM_FOTO','ALUM_FOTO','jpeg|png|JPG|jpg','S','<?php echo $_SESSION["usuario"];?>')">
+ 	    		             onchange="subirArchivNombre('file_ALUM_FOTO','../../adjuntos/ALUM_FOTO/','img_ALUM_FOTO','ALUM_FOTO','jpeg|png|JPG|jpg','<?php echo $_SESSION["usuario"];?>')">
  	    		       
                         <input type="hidden" value=""  name="ALUM_FOTO" id="ALUM_FOTO" placeholder="" />   	
 						<button  onclick="guardarCampo('ALUM_FOTO',true,'La Foto fue asignada correctamente');" class="btn btn-white btn-info btn-bold">

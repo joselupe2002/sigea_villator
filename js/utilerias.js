@@ -2098,9 +2098,9 @@ if (tipo=="SELECT_MULTIPLE") {
 	if (tipo=="ARCHIVO_CARPETA") {
 		dominio=document.domain;
 		unaimagen=sql.split("*")[2];
-		if (unaimagen=='IMG') {rutaimg=sql.split('*')[1]+dato;} else {rutaimg="../../imagenes/menu/pdf.png";}
+		if (unaimagen=='IMG') {rutaimg=dato;} else {rutaimg="../../imagenes/menu/pdf.png";}
 		rutag=sql.split('*')[1];
-		elenlace=rutag+dato;
+		elenlace=dato;
 		lasext=sql.split('*')[0];
 
 		if ((dato==null)||(dato=="")) { 

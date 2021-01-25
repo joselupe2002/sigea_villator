@@ -46,7 +46,7 @@
     				   <div class="space-4"></div>
                       
  	    		       <input class="fileSigea" type="file" id="file_EMPL_FOTO" name="file_EMPL_FOTO" 
- 	    		             onchange="subirArchivoDriveName('file_EMPL_FOTO','EMPL_FOTO','img_EMPL_FOTO','EMPL_FOTO','jpeg|png|JPG|jpg','S','<?php echo $_SESSION["usuario"];?>')">
+ 	    		             onchange="subirArchivNombre('file_EMPL_FOTO','../../adjuntos/EMPL_FOTO/','img_EMPL_FOTO','EMPL_FOTO','jpeg|png|JPG|jpg','<?php echo $_SESSION["usuario"] ?>')">
  	    		       
                         <input type="hidden" value=""  name="EMPL_FOTO" id="EMPL_FOTO" placeholder="" />   	
 						<button  onclick="guardarCampo('EMPL_FOTO',true,'La Foto fue asignada correctamente');" class="btn btn-white btn-info btn-bold">
@@ -110,21 +110,24 @@
 													</div>
 
 													<div class="profile-info-row"><div class="profile-info-name">Direcci&oacute;n </div>
-														<div class="profile-info-value"><i class="fa fa-map-marker light-orange bigger-110"></i>
-															<span class="editable" id="EMPL_DIRECCION" name="EMPL_DIRECCION">Direcci&oacute;n</span>
+														<div class="input-group">
+																<span class="input-group-addon"><i class="ace-icon fa fa-pencil red"></i></span>
+																<input class="form-control input-mask-phone" name="EMPL_DIRECCION" id="EMPL_DIRECCION" type="text" />
 														</div>
 													</div>
 													
-													<div class="profile-info-row"><div class="profile-info-name">Tel&eacute;fono </div>
-														<div class="profile-info-value"><i class="fa fa-phone light-orange bigger-110"></i>
-															<span class="editable" name="EMPL_TELEFONO" id="EMPL_TELEFONO">999999999</span>
-														</div>
+													<div class="profile-info-row"><div class="profile-info-name">Tel&eacute;fono</div>
+															<div class="input-group">
+																	<span class="input-group-addon"><i class="ace-icon fa fa-pencil red"></i></span>
+																	<input class="form-control input-mask-phone" name="EMPL_TELEFONO" id="EMPL_TELEFONO" type="text" id="form-field-mask-2" />
+															</div>
 													</div>
 													
-													<div class="profile-info-row"><div class="profile-info-name">e-mail </div>
-														<div class="profile-info-value"><i class="fa fa-maxcdn light-orange bigger-110"></i>
-															<span class="editable" id="EMPL_CORREO">micorreo@algo.mx</span>
-														</div>
+													<div class="profile-info-row"><div class="profile-info-name">e-mail</div>
+															<div class="input-group">
+																	<span class="input-group-addon"><i class="ace-icon fa fa-pencil red"></i></span>
+																	<input class="form-control" name="EMPL_CORREO" id="EMPL_CORREO" type="text" />
+															</div>
 													</div>
 													
 													<div class="profile-info-row"><div class="profile-info-name">Carrera </div>
@@ -162,11 +165,14 @@
 														</div>
 													</div>
 
-													<div class="profile-info-row"><div class="profile-info-name">Abrevia (Ing.) </div>
-														<div class="profile-info-value"><i class="fa fa-gears light-orange bigger-110"></i>
-															<span class="editable" id="EMPL_ABREVIA"></span>
+													<div class="profile-info-row"><div class="profile-info-name">Abrevia </div>
+														<div class="input-group">
+																<span class="input-group-addon"><i class="ace-icon fa fa-pencil red"></i></span>
+																<input class="form-control input-mask-phone" name="EMPL_ABREVIA" id="EMPL_ABREVIA" type="text" />
 														</div>
 													</div>
+
+									
 
 													<div class="profile-info-row"><div class="profile-info-name">Habilidades Técnicas</div>
 														<div class="profile-info-value">
@@ -184,9 +190,10 @@
 
 											<div id="asesorias" class="tab-pane fade">
 												<div class="profile-user-info profile-user-info-striped">
-													<div class="profile-info-row"><div class="profile-info-name">Lugar / Enlace </div>
-														<div class="profile-info-value"><i class="fa fa-globe light-orange bigger-110"></i>
-															<span class="editable" id="EMPL_LUGARAS">Sin Lugar</span>
+													<div class="profile-info-row"><div class="profile-info-name">Link / Lugar Asesorías </div>
+														<div class="input-group">
+																<span class="input-group-addon"><i class="ace-icon fa fa-pencil red"></i></span>
+																<input class="form-control input-mask-phone" name="EMPL_LUGARAS" id="EMPL_LUGARAS" type="text" />
 														</div>
 													</div>
 
@@ -344,51 +351,53 @@
 					  losdatos=JSON.parse(data);	
 			      		    	    		    	        
 		    	      jQuery.each(losdatos, function(clave, valor) { 
-		    	    	
+					  
+						$('#EMPL_NUMERO').html(valor.EMPL_NUMERO);
+
 		    	    	//text editable		    	  	   
 		    	  	    $('#EMPL_NOMBRE').html(valor.EMPL_NOMBRE+' '+valor.EMPL_APEPAT+' '+valor.EMPL_APEMAT);		    	  	  
-		    	  	
-		    	  	    ladirecccion=valor.EMPL_DIRECCION;
-		    	  	    if (valor.EMPL_DIRECCION.length<=0) {ladirecccion="Direccion...";}
-		    	  	    $('#EMPL_DIRECCION').editable({type: 'text',id: 'direccion_ed', value:ladirecccion});
-		    	  	    $('#EMPL_DIRECCION').html(ladirecccion);
-
-						tel=valor.EMPL_TELEFONO;						  
-		    	  	    if ((valor.EMPL_TELEFONO=='') || (valor.EMPL_TELEFONO==null)) {tel="999999999";}
-		    	  	    $('#EMPL_TELEFONO').editable({type: 'text',id: 'telefono_ed', value:tel});
-		    	  	    $('#EMPL_TELEFONO').html(tel);
-
-
-		    	  	    elcorreo=valor.EMPL_CORREO;
-		    	  	    if (valor.EMPL_CORREO.length<=0) {elcorreo="";}
-		    	  	    $('#EMPL_CORREO').editable({type: 'text',id: 'telefono_ed', value:elcorreo});
-					    $('#EMPL_CORREO').html(elcorreo);
+					  
+						if ((valor.EMPL_DIRECCION=='') || (valor.EMPL_DIRECCION==null)) {ladirecccion="";}
+		    	  	    else {ladirecccion=valor.EMPL_DIRECCION;}
+						  $('#EMPL_DIRECCION').val(ladirecccion);
 						  
 
-						laabrevia=valor.EMPL_ABREVIA;
-		    	  	    if (valor.EMPL_ABREVIA.length<=0) {laabrevia="ING.";}
-		    	  	    $('#EMPL_ABREVIA').editable({type: 'text',id: 'abrevia_ed', value:laabrevia});
-						$('#EMPL_ABREVIA').html(laabrevia);
+						if ((valor.EMPL_TELEFONO=='') || (valor.EMPL_TELEFONO==null)) {tel="";}
+		    	  	    else {tel=valor.EMPL_TELEFONO;}
+		    	  	    $('#EMPL_TELEFONO').val(tel);
+
+
+						if ((valor.EMPL_CORREO=='') || (valor.EMPL_CORREO==null)) {elcorreo="";}
+		    	  	    else {elcorreo=valor.EMPL_CORREO;}
+						  $('#EMPL_CORREO').val(elcorreo);
+						  
+						if ((valor.EMPL_ABREVIA=='') || (valor.EMPL_ABREVIA==null)) {laabrevia="";}
+		    	  	    else {laabrevia=valor.EMPL_ABREVIA;}
+		    	  	    $('#EMPL_ABREVIA').val(laabrevia);
+
 						  
 
-						  $('#EMPL_FECING').html(valor.EMPL_FECING);
+						if ((valor.EMPL_FECING=='') || (valor.EMPL_FECING==null)) {fecing="";}
+		    	  	    else {fecing=valor.EMPL_ABREVIA;}
+						$('#EMPL_FECING').html(valor.fecing);
 
 
-						  $('#EMPL_NUMERO').html(valor.EMPL_NUMERO);
-
-						  lugar=valor.EMPL_LUGARAS;						  
-		    	  	    if ((valor.EMPL_LUGARAS=='') || (valor.EMPL_LUGARAS==null)) {lugar="Sin Lugar";}
-		    	  	    $('#EMPL_LUGARAS').editable({type: 'text',id: 'lugaras_ed', value:lugar});
-		    	  	    $('#EMPL_LUGARAS').html(lugar);
+						
 
 
-
+						if ((valor.EMPL_LUGARAS=='') || (valor.EMPL_LUGARAS==null)) {lugar="";}
+		    	  	    else {lugar=valor.EMPL_LUGARAS;}
+						  $('#EMPL_LUGARAS').val(lugar);
+						  
 				
-						  $('#EMPL_DEPTO').html(valor.EMPL_DEPTO+' '+valor.URES_DESCRIP);					
-						  $('#img_EMPL_FOTO').attr("src",valor.EMPL_FOTO);
-						  $('#EMPL_FOTO').val(valor.EMPL_FOTO);
+						if ((valor.EMPL_DEPTO=='') || (valor.EMPL_DEPTO==null)) {depto="";}
+						else {depto=valor.EMPL_DEPTO+' '+valor.URES_DESCRIP;}
+						$('#EMPL_DEPTO').html(depto);					
+						  
+						$('#img_EMPL_FOTO').attr("src",valor.EMPL_FOTO);
+						$('#EMPL_FOTO').val(valor.EMPL_FOTO);
 
-						  $('#EMPL_FECING').html(valor.EMPL_FECING);
+					
 						  
 						  
 						  addSELECT_CONVALOR("selEMPL_FORMACION","EMPL_FORMACION","PROPIO", "SELECT CARR_CLAVE, CARR_DESCRIP FROM pcarrempl order by CARR_DESCRIP", "","BUSQUEDA",valor.EMPL_FORMACION);  			      
@@ -428,14 +437,14 @@ function guardar(){
 		    	campollave:"EMPL_NUMERO",
 		    	valorllave:"<?php echo $_SESSION['usuario'];?>",
 		    	bd:"Mysql",
-		    	EMPL_DIRECCION:$("#EMPL_DIRECCION").html(),
-		    	EMPL_TELEFONO:$("#EMPL_TELEFONO").html(),
-		    	EMPL_CORREO:$("#EMPL_CORREO").html(),
+		    	EMPL_DIRECCION:$("#EMPL_DIRECCION").val(),
+		    	EMPL_TELEFONO:$("#EMPL_TELEFONO").val(),
+		    	EMPL_CORREO:$("#EMPL_CORREO").val(),
 				EMPL_FOTO:$("#EMPL_FOTO").val(), 
 				EMPL_FORMACION:$("#selEMPL_FORMACION").val(),
 				EMPL_EGRESADODE:$("#selEMPL_EGRESADODE").val(), 
-				EMPL_ABREVIA:$("#EMPL_ABREVIA").html(), 
-				EMPL_LUGARAS:$("#EMPL_LUGARAS").html(), 
+				EMPL_ABREVIA:$("#EMPL_ABREVIA").val(), 
+				EMPL_LUGARAS:$("#EMPL_LUGARAS").val(), 
 				EMPL_ULTIGRA:$("#selEMPL_ULTIGRA").val(),
 				EMPL_HABTEC: $("#selEMPL_HABTEC").val()==null?' ':$("#selEMPL_HABTEC").val().toString(), 
 				EMPL_HABPER:$("#selEMPL_HABPER").val()==null?' ':$("#selEMPL_HABPER").val().toString(), 
