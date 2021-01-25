@@ -114,7 +114,7 @@
    	       function getDatosPersona($num){   		       
             	$miConex = new Conexion();  
             	$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT EMPL_NOMBREC, EMPL_ULTIGRAD, EMPL_EGRESADODED, ".
-            			"EMPL_FOTO, EMPL_DEPTOD, EMPL_JEFEABREVIA,EMPL_JEFE, EMPL_JEFED, EMPL_RFC, EMPL_CURP, EMPL_NUMERO, EMPL_FECING ".
+            			"EMPL_FOTO, EMPL_DEPTOD, EMPL_JEFEABREVIA, EMPL_JEFEFIRMAOF,EMPL_JEFE, EMPL_JEFED, EMPL_RFC, EMPL_CURP, EMPL_NUMERO, EMPL_FECING ".
             			" FROM vempleados WHERE EMPL_NUMERO= '".$num."'" );
                 foreach ($resultado as $row) {$data[] = $row;}            
             	return $data;            		
