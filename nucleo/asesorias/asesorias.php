@@ -257,7 +257,7 @@
 		$pdf->setX(60); $pdf->SetFont('Montserrat-Medium','U',8); $pdf->Cell(0,0,utf8_decode($dataEmpl[0]["EMPL_NOMBREC"]),0,1,'L');
 		
 		$pdf->Ln(5);
-		$pdf->setX(20); $pdf->SetFont('Montserrat-ExtraBold','B',8); $pdf->Cell(0,0,"ACADEMIA: ",0,0,'L');
+		$pdf->setX(20); $pdf->SetFont('Montserrat-ExtraBold','B',8); $pdf->Cell(0,0,"DEPARTAMENTO: ",0,0,'L');
 		$pdf->setX(60); $pdf->SetFont('Montserrat-Medium','U',8); $pdf->Cell(0,0,str_replace("DEPARTAMENTO","",utf8_decode($dataEmpl[0]["EMPL_DEPTOD"])),0,1,'L');
 		$pdf->setX(150); $pdf->SetFont('Montserrat-ExtraBold','B',8); $pdf->Cell(0,0,"TIPO DE ASESORIA: ",0,0,'L');
 		$pdf->setX(185); $pdf->SetFont('Montserrat-Medium','U',8); $pdf->Cell(0,0,utf8_decode($_GET["tipod"]),0,1,'L');
