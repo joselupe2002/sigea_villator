@@ -163,34 +163,15 @@
 
 				$this->SetY(-40);
 
-				$this->Cell(30,4,"INTERESADO",'T',0,'C',false);
-				
-				$this->SetX(45);
-				$this->Cell(60,4,utf8_decode($this->eljefe),'T',0,'C',false);
-				
-				$this->SetX(110);
-				$this->Cell(45,4,utf8_decode($subdir),'T',0,'C',false);
+				$this->Cell(30,4,"DOCENTE",'T',0,'C',false);
+			
 
-				$this->SetX(160);
-				$this->Cell(45,4,utf8_decode($dir),'T',0,'C',false);
+				$this->SetX(205);				
+				$this->Cell(55,4,utf8_decode($dirgen),'T',0,'C',false);
+			
 
-				$this->SetX(215);				
-				$this->Cell(45,4,utf8_decode($dirgen),'T',0,'C',false);
-				
-		
-				$this->SetY(-37);
-				$this->SetX(45);
-				if ($this->eljefe=='L.M. CLEMENTE SILVAN EMETERIO') {$lacad="JEFE DE DEPARTAMENTO";} else {$lacad="JEFE DIVISIÓN";}
-				$this->Cell(60,4,utf8_decode($lacad),'',0,'C',false);
-
-				$this->SetX(110);
-				$this->Cell(45,4,utf8_decode('SUBDIRECTOR ACADÉMICO'),'',0,'C',false);
-				
-				$this->SetX(160);
-				$this->Cell(45,4,utf8_decode('DIRECTOR ACADÉMICO'),'',0,'C',false);
-
-				$this->SetX(215);
-				$this->Cell(45,4,utf8_decode('DIRECTOR GENERAL'),'',0,'C',false);
+				$this->SetX(205);
+				$this->Cell(55,4,utf8_decode('DIRECTOR GENERAL'),'',0,'C',false);
 				
 				
 			}
