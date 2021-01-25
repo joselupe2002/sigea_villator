@@ -108,7 +108,8 @@
    	
    
    	        
-   	     var $eljefe="";
+			var $eljefe="";
+			var $elpstojefe="";
    	       
    	       function getDatosPersona($num){   		       
             	$miConex = new Conexion();  
@@ -165,7 +166,7 @@
 		
 				$this->SetY(-37);				
 				$this->SetX(209);
-				$this->Cell(60,4,utf8_decode('JEFE DIVISIÓN'),'',0,'C',false);
+				$this->Cell(60,4,utf8_decode($this->elpstojefe),'',0,'C',false);
 				
 				
 			}
@@ -270,6 +271,7 @@
 		$pdf->Ln(4);
 		
 		$pdf->eljefe=$dataEmpl[0]["EMPL_JEFEABREVIA"]." ".$dataEmpl[0]["EMPL_JEFED"];
+		$pdf->elpstojefe=$dataEmpl[0]["EMPL_JEFEFIRMAOF"]
 
 	
 		$header = array('CONT.', 'NOMBRE DEL ALUMNO', 'GEN.','PROGRAMA EDUCATIVO','TEMA/ASIGNATURA','FECHA','HORA');		
