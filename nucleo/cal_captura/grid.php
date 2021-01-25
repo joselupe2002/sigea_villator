@@ -281,9 +281,9 @@
 		if (tipo=="FALTA"){campo='F';}
 
 		eltidepocorte="CCO3";
-		if ($("#selTipo")=='1'){eltidepocorte="CCO3";}
-		if ($("#selTipo")=='2'){eltidepocorte="CCC1";}
-		if ($("#selTipo")=='3'){eltidepocorte="CCC2";}
+		if ($("#selTipo").val()=='1'){eltidepocorte="CCO3";}
+		if ($("#selTipo").val()=='2'){eltidepocorte="CCC1";}
+		if ($("#selTipo").val()=='3'){eltidepocorte="CCC2";}
 		
 
 		tipocal=$("#selTipo").val();
