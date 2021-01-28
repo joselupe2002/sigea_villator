@@ -56,13 +56,13 @@ var arr_preguntas=[];
 
 function cargarResultados(resultado) {
 	if (resultado=='S') {
-	cad="Para el <strong> Instituto Tecnológico Superior de Macuspana</strong>, es un honor y privilegio informarle que ha sido "+
+	cad="Para el <strong> Instituto Tecnológico Superior de Santa María de El Oro</strong>, es un honor y privilegio informarle que ha sido "+
 		"<span class=\"text-success\"><strong>ACEPTADO</strong></span>"+" en nuestra casa de estudios para cursar la "+
 		" carrera de <strong>"+utf8Decode(carrerad)+".</strong><br/>";
 	
 	cadPol="El procedimiento de inscripción está sujeto a la normatividad aplicable emitida por el "+
 		"<b>Tecnológico Nacional de México</b>, por lo que su observancia es obligatoria para quienes desean "+
-		"ingresar a una institución del sistema, como lo es el Instituto Tecnológico Superior de Macuspana.<br><br>"+
+		"ingresar a una institución del sistema, como lo es el Instituto Tecnológico Superior de Santa María de El Oro.<br><br>"+
 
 		"En consecuencia, la falta de un requisito, por ejemplo, <span class=\"text-danger\"><b>no haber concluido sus estudios de bachillerato "+	
 		"(adeudo de materias) u otras análogas; </b></span>para realizar su inscripción, produce la invalidación de su procedimiento "+

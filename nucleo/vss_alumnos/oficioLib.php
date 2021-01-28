@@ -94,7 +94,7 @@
         $pdf->Ln(5);
    
 
-        $pdf->MultiCell(0,5,utf8_decode("Se extiende la presente para los fines legales que al interesado convengan en la ciudad de Macuspana, Tabasco, a los ".
+        $pdf->MultiCell(0,5,utf8_decode("Se extiende la presente para los fines legales que al interesado convengan en la ciudad de Santa María de El Oro, Tabasco, a los ".
 		strtolower($fechaof)).".",0,'J',FALSE);
 		
 		$pdf->setY(180);

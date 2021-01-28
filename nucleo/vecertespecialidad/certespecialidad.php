@@ -205,7 +205,7 @@
 
         $pdf->SetFont('Beastformer','',14);
         $pdf->Cell(0,5,utf8_decode('El Tecnológico Nacional de México'),0,1,'C');
-        $pdf->Cell(0,5,utf8_decode('y el Instituto Tecnológico Superior de Macuspana'),0,0,'C');
+        $pdf->Cell(0,5,utf8_decode('y el Instituto Tecnológico Superior de Santa María de El Oro'),0,0,'C');
       
         $pdf->Ln(15);
         $pdf->SetFont('Arial','',13);
@@ -243,7 +243,7 @@
 
         $pdf->Ln(15);
         $pdf->SetFont('Arial','',13);
-        $pdf->MultiCell(0,5,utf8_decode('El presente se otorga el día  '.$fechapie.", en la ciudad de Macuspana, del estado de Tabasco."),0,'J',false);
+        $pdf->MultiCell(0,5,utf8_decode('El presente se otorga el día  '.$fechapie.", en la ciudad de Santa María de El Oro, del estado de Tabasco."),0,'J',false);
 
 
 

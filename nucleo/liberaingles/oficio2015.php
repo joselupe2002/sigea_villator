@@ -151,7 +151,7 @@
 
 		$fechaof=$miutil->aletras(date("d"))." días del mes de  ".$miutil->getMesLetra(date("m"))." del año ". $miutil->aletras(date("Y"));
 
-		$pdf->MultiCell(0,8,utf8_decode('Se extiende la presente en la ciudad de Macuspana, Tabasco, a los '.$fechaof.', para los fines legales que convengan al interesado.'),0,'J', false);
+		$pdf->MultiCell(0,8,utf8_decode('Se extiende la presente en la ciudad de Santa María de El Oro, Tabasco, a los '.$fechaof.', para los fines legales que convengan al interesado.'),0,'J', false);
 		$pdf->Ln(5);
 
 		$pdf->MultiCell(0,8,utf8_decode('Sin otro asunto que tratar, quedo de Usted, no sin antes enviarle un cordial saludo.'),0,'J', false);

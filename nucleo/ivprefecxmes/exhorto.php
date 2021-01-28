@@ -156,10 +156,10 @@
 		$eldeptomaestro=utf8_decode($data[0]["DEPTOD"]);
 		
 		$pdf->SetFont('Montserrat-SemiBold','',10);
-		$pdf->MultiCell(0,5,'De conformidad con las atribuciones conferidas y encomendadas por el M.A.T.I. Leonardo Rafael Bojorges G�ere�a, Director General del Instituto Tecnol�gico Superior de Macuspana,'.
-                            'en t�rminos del art�culo 13, fracci�n III, VIII y XIV de la Ley que Crea el Instituto Tecnol�gico Superior de Macuspana, art�culo 11, '.
+		$pdf->MultiCell(0,5,'De conformidad con las atribuciones conferidas y encomendadas por el M.A.T.I. Leonardo Rafael Bojorges G�ere�a, Director General del Instituto Tecnol�gico Superior  de Santa María de El Oro,'.
+                            'en t�rminos del art�culo 13, fracci�n III, VIII y XIV de la Ley que Crea el Instituto Tecnol�gico Superior de Santa María de El Oro, artículo 11, '.
 				            'fracci�n II y X, art�culo 16, fracci�n VIII, X y las dem�s aplicables del Reglamento Interior del Instituto Tecnol�gico Superior '.
-				            'de Macuspana, me dirijo a Usted con la oportunidad de hacerle el presente llamado de atenci�n por escrito, debido a su actuaci�n de los d�as: ',0,'J', false);
+				            'de Santa María de El Oro, me dirijo a Usted con la oportunidad de hacerle el presente llamado de atenci�n por escrito, debido a su actuaci�n de los d�as: ',0,'J', false);
 		
 		$pdf->Ln(5);
 		$headerdes = array('FECHA','MATERIA','AULA','HORARIO');
@@ -168,7 +168,7 @@
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-SemiBold','',10);
 		$pdf->MultiCell(0,5,'Cuando Usted falto injustificadamente a su jornada de trabajo en el '.
-				$eldeptomaestro.' del Instituto Tecnol�gico Superior de Macuspana, sin tomar las precauciones debido a las importantes funciones que usted realiza, no notificando con tiempo a su superior jer�rquico. ',0,'J', false);
+				$eldeptomaestro.' del Instituto Tecnol�gico Superior de de Santa María de El Oro, sin tomar las precauciones debido a las importantes funciones que usted realiza, no notificando con tiempo a su superior jer�rquico. ',0,'J', false);
 		$pdf->Ln(5);
 		$pdf->MultiCell(0,5,'Esto crea una imagen de falta de seriedad en su persona y por extensi�n, de nuestra Instituci�n Educativa. Por lo anterior, '.
 				'se le exhorta para que corrija su comportamiento, y en lo futuro notifique previamente a su jefe inmediato cuando tenga la necesidad de ausentarse de sus labores, '.

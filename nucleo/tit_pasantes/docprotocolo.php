@@ -203,7 +203,7 @@
                 $this->Cell(0,0,utf8_decode("PROTESTA DE LEY"),0,1,'C');
                 $this->Ln(10);
                 
-                $this->MultiCell(0,8,utf8_decode("¡Protesta Usted ejercer la profesión con absoluto respeto a las normas establecidas por la Constitución Política de los Estados Unidos Mexicanos y la Ley Reglamentaria del Artículo 5° Constitucional, así como su reglamento respectivo con la responsabilidad y decisión que ella requiere, con respeto, dignidad y la ética profesional que de usted espera el pueblo de México y el Instituto Tecnológico Superior de Macuspana que hoy le otorga el título de:")
+                $this->MultiCell(0,8,utf8_decode("¡Protesta Usted ejercer la profesión con absoluto respeto a las normas establecidas por la Constitución Política de los Estados Unidos Mexicanos y la Ley Reglamentaria del Artículo 5° Constitucional, así como su reglamento respectivo con la responsabilidad y decisión que ella requiere, con respeto, dignidad y la ética profesional que de usted espera el pueblo de México y el Instituto Tecnológico Superior de Santa María de El Oro que hoy le otorga el título de:")
                 ,0,'J',FALSE);
 
                 $this->Ln(15);
