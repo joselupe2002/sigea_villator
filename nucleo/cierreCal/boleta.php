@@ -302,7 +302,7 @@
         $pdf->Cell(85,5,'NOMBRE','LRB',0,'C',true);
         $pdf->Cell(15,5,'FALTAS','LRB',0,'C',true);
         $pdf->Cell(15,5,utf8_decode('1RA'),1,0,'C',true);
-        $pdf->Cell(15,5,utf8_decode('2DA'),1,0,'C',true);
+        $pdf->Cell(10,5,utf8_decode('2DA'),1,0,'C',true);
        // $pdf->Cell(15,5,utf8_decode('3RA'),1,0,'C',true); //se quito no se manje 3ra oportunidad
         $pdf->Cell(10,6,'REP','LRB',0,'C',true);
         
