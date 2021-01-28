@@ -223,75 +223,31 @@ var miciclo="";
 												"</div>"
 							);
 
-							
-							elsql="SELECT RUTA,COTEJADO,count(*) FROM eadjreins where AUX LIKE '"+usuario+"_"+miciclo+"_SS_SOLSS'";
-							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-							$.ajax({
-								type: "POST",
-								data:parametros,
-								url:  "../base/getdatossqlSeg.php",
-								success: function(data2){ 
-									laruta=""; 
-									activaEliminar="S";
-									losdatos2=JSON.parse(data2); 	
-					
-									if ((losdatos2[0][2])>0){laruta=losdatos2[0][0]; 
-															activaEliminar=losdatos2[0][1]=='N'?'S':'N';}
-									
-												
-									dameSubirArchivoDrive("documentos","Subir Solicitud debidamente requisitada y firmadas ","solss",'RECIBOREINS','pdf',
-									'ID',usuario,'SOLICITUD DE SERVICIO ','eadjreins','alta',usuario+"_"+miciclo+"_SS_SOLSS",laruta,activaEliminar);
-								}
-							});
+							$("#documentos").append("<div class=\"row\"><div id=\"sssol\" class=\"col-sm-6\"></div>"+
+																			"<div id=\"sscartacom\" class=\"col-sm-6\"></div>"+
+														"</div>");
 
-							elsql="SELECT RUTA,COTEJADO,count(*) FROM eadjreins where AUX LIKE '"+usuario+"_"+miciclo+"_SS_PAGOCONS'";
-							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-							$.ajax({
-								type: "POST",
-								data:parametros,
-								url:  "../base/getdatossqlSeg.php",
-								success: function(data2){ 
-									laruta=""; 
-									activaEliminar="S";
-									losdatos2=JSON.parse(data2); 	
-									if ((losdatos2[0][2])>0){laruta=losdatos2[0][0]; 
-															activaEliminar=losdatos2[0][1]=='N'?'S':'N';}
-									dameSubirArchivoDrive("documentos","Subir Pago por concepto de Constancia de Estudios ","pagocons",'RECIBOREINS','pdf',
-									'ID',usuario,'RECIBO DE PAGO CONSTANCIA','eadjreins','alta',usuario+"_"+miciclo+"_SS_PAGOCONS",laruta,activaEliminar);
-								}
-							});
 
-							elsql="SELECT RUTA,COTEJADO,count(*) FROM eadjreins where AUX LIKE '"+usuario+"_"+miciclo+"_SS_CARTACOM'";
+							elsql="SELECT IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SS_SOLSS'),'') AS RUTA_SSSOL, "+
+							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARTACOM'),'') AS RUTA_SSCARTACOM, "+
+							"       IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_INFORMEFIN'),'') AS RUTA_SSREPFIN FROM DUAL"; 
+	
 							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 							$.ajax({
 								type: "POST",
 								data:parametros,
 								url:  "../base/getdatossqlSeg.php",
-								success: function(data2){ 
-									laruta=""; 
-									activaEliminar="S";
-									losdatos2=JSON.parse(data2); 	
-									if ((losdatos2[0][2])>0){laruta=losdatos2[0][0]; 
-															activaEliminar=losdatos2[0][1]=='N'?'S':'N';}
-									dameSubirArchivoDrive("documentos","Subir Carta Compromiso debidamente requisitada y firmadas ","cartacom",'RECIBOREINS','pdf',
-									'ID',usuario,'CARTA COMPROMISO SERVICIO SOCIAL','eadjreins','alta',usuario+"_"+miciclo+"_SS_CARTACOM",laruta,activaEliminar);
-								}
-							});
-
-							elsql="SELECT RUTA,COTEJADO,count(*) FROM eadjreins where AUX LIKE '"+usuario+"_"+miciclo+"_SS_PAGOAPERSS'";
-							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-							$.ajax({
-								type: "POST",
-								data:parametros,
-								url:  "../base/getdatossqlSeg.php",
-								success: function(data2){ 
-									laruta=""; 
-									activaEliminar="S";
-									losdatos2=JSON.parse(data2); 	
-									if ((losdatos2[0][2])>0){laruta=losdatos2[0][0]; 
-															activaEliminar=losdatos2[0][1]=='N'?'S':'N';}
-									dameSubirArchivoDrive("documentos","Subir Pago por concepto de apertura Servicio Social","pagoaperss",'RECIBOREINS','pdf',
-									'ID',usuario,'RECIBO DE APERTURA SERVICIO SOCIAL','eadjreins','alta',usuario+"_"+miciclo+"_SS_PAGOAPERSS",laruta,activaEliminar);
+								success: function(data){
+									activaEliminar="";
+									if (JSON.parse(data)[0]["RUTA_SS_SOL"]!='') {	activaEliminar='S';}					
+									dameSubirArchivoLocal("sssol","Solicitud Firmada","sssol",'servicioSocial','pdf',
+									'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOL",JSON.parse(data)[0]["RUTA_SSSOL"],activaEliminar,usuario+"_"+miciclo+"_SSSOL");
+										
+									activaEliminar="";
+									if (JSON.parse(data)[0]["RUTA_SS_SOL"]!='') {	activaEliminar='S';}					
+									dameSubirArchivoLocal("sssol","Carta Compromiso","ss_solss",'servicioSocial','pdf',
+									'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOL",JSON.parse(data)[0]["RUTA_SSSOL"],activaEliminar,usuario+"_"+miciclo+"_SSSOL");
+										
 								}
 							});
 
