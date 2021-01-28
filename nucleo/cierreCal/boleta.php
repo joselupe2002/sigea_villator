@@ -293,8 +293,8 @@
         $pdf->Cell(7,5,'','TLR',0,'C',true);
         $pdf->Cell(17,5,'','TLR',0,'C',true);
         $pdf->Cell(85,5,'','TLR',0,'C',true);
-        //$pdf->Cell(15,5,'','TLR',0,'C',true);//se quito no se manje 3ra oportunidad
-        $pdf->Cell(45,5,'CALIFICACIONES','TLR',0,'C',true);
+        $pdf->Cell(15,5,'','TLR',0,'C',true);
+        $pdf->Cell(30,5,'CALIFICACIONES','TLR',0,'C',true);
         $pdf->Cell(10,5,'','TLR',1,'C',true);
 
         $pdf->Cell(7,5,'NO.','LRB',0,'C',true);
@@ -302,7 +302,7 @@
         $pdf->Cell(85,5,'NOMBRE','LRB',0,'C',true);
         $pdf->Cell(15,5,'FALTAS','LRB',0,'C',true);
         $pdf->Cell(15,5,utf8_decode('1RA'),1,0,'C',true);
-        $pdf->Cell(10,5,utf8_decode('2DA'),1,0,'C',true);
+        $pdf->Cell(15,5,utf8_decode('2DA'),1,0,'C',true);
        // $pdf->Cell(15,5,utf8_decode('3RA'),1,0,'C',true); //se quito no se manje 3ra oportunidad
         $pdf->Cell(10,6,'REP','LRB',0,'C',true);
         
@@ -311,7 +311,7 @@
         $pdf->SetFont('Montserrat-Medium','',7);
         $pdf->SetFillColor(172,31,6);
         $pdf->SetTextColor(0);
-        $pdf->SetWidths(array(7,17, 85, 15,15,15,15,10));
+        $pdf->SetWidths(array(7,17, 85, 15,15,15,10));
         $pdf->SetAligns(array("L","L", "L", "C","C","C","C","C"));
         $n=1;
 
