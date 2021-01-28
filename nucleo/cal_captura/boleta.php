@@ -292,18 +292,17 @@
         $pdf->SetFont('Montserrat-ExtraBold','B',9);
         $pdf->Cell(7,5,'','TLR',0,'C',true);
         $pdf->Cell(17,5,'','TLR',0,'C',true);
-        $pdf->Cell(70,5,'','TLR',0,'C',true);
+        $pdf->Cell(85,5,'','TLR',0,'C',true);
         $pdf->Cell(15,5,'','TLR',0,'C',true);
-        $pdf->Cell(45,5,'CALIFICACIONES','TLR',0,'C',true);
+        $pdf->Cell(30,5,'CALIFICACIONES','TLR',0,'C',true);
         $pdf->Cell(10,5,'','TLR',1,'C',true);
 
         $pdf->Cell(7,5,'NO.','LRB',0,'C',true);
         $pdf->Cell(17,5,'CONTROL','LRB',0,'C',true);
-        $pdf->Cell(70,5,'NOMBRE','LRB',0,'C',true);
+        $pdf->Cell(85,5,'NOMBRE','LRB',0,'C',true);
         $pdf->Cell(15,5,'FALTAS','LRB',0,'C',true);
         $pdf->Cell(15,5,utf8_decode('1RA'),1,0,'C',true);
         $pdf->Cell(15,5,utf8_decode('2DA'),1,0,'C',true);
-        $pdf->Cell(15,5,utf8_decode('3RA'),1,0,'C',true);
         $pdf->Cell(10,5,'REP','LRB',0,'C',true);
         
 
@@ -311,7 +310,7 @@
         $pdf->SetFont('Montserrat-Medium','',7);
         $pdf->SetFillColor(172,31,6);
         $pdf->SetTextColor(0);
-        $pdf->SetWidths(array(7,17, 70, 15,15,15,15,10));
+        $pdf->SetWidths(array(7,17, 85, 15,15,15,10));
         $pdf->SetAligns(array("L","L", "L", "C","C","C","C","C"));
         $n=1;
 
@@ -324,7 +323,6 @@
                              utf8_decode($row["LISFALT"]),
                              utf8_decode($row["LISCAL1"]),
                              utf8_decode($row["LISCAL2"]),
-                             utf8_decode($row["LISCAL3"]),
                              utf8_decode($row["REP"])                            
                              )
                       );

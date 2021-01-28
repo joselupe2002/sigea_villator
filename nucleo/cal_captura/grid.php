@@ -59,7 +59,7 @@
 			   <select  id="selTipo" style="width: 100%;">
 			     <option value="1">PRIMERA OPORTUNIDAD</option>
 				 <option value="2">SEGUNDA OPORTUNIDAD</option>
-				 <option value="3">TERCERA OPORTUNIDAD</option>
+				
 			   </select>
 		 </div>
 		 
