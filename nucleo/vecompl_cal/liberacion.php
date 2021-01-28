@@ -60,13 +60,15 @@
 				
 				$this->SetX(10);$this->SetY(-40);
 				$this->Cell(50,0,utf8_decode("RESPONSABLE DE ACTIVIDAD"),0,1,'C');
-				
+			
+				/*
 				$this->SetX(100);$this->SetY(-45);
 				$this->SetFont('Montserrat-ExtraBold','B',8);
 				$this->Cell(250,0,utf8_decode($this->eljefe),0,0,'C');
 				
 				$this->SetX(10);$this->SetY(-40);
 				$this->Cell(250,0,utf8_decode($this->eljefepsto),0,1,'C');
+				*/
 				
 				
 				$this->SetX(10);$this->SetY(-30);
@@ -145,7 +147,7 @@
         		" Actividad Desarrollada: ".utf8_decode($data[0]["ACTIVIDADD"])." del ".$fechaini." al ".$fechafin,0,'J', false);
         $pdf->Ln(5);
         $pdf->Ln(5);
-        $pdf->MultiCell(0,8,"Se extiende la presente en la ciudad de Santa María de El Oro, Durango a los ".$eldia." días del mes de ".$elmes." de ".$elanio,0,'J', false);
+        $pdf->MultiCell(0,8,utf8_decode("Se extiende la presente en la ciudad de Santa María de El Oro, Durango a los ").$eldia.utf8_decode(" días del mes de ").$elmes." de ".$elanio,0,'J', false);
         $pdf->Ln(5);
        
         
