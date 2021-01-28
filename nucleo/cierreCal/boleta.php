@@ -293,7 +293,7 @@
         $pdf->Cell(7,5,'','TLR',0,'C',true);
         $pdf->Cell(17,5,'','TLR',0,'C',true);
         $pdf->Cell(85,5,'','TLR',0,'C',true);
-        $pdf->Cell(15,5,'','TLR',0,'C',true);
+        //$pdf->Cell(15,5,'','TLR',0,'C',true);//se quito no se manje 3ra oportunidad
         $pdf->Cell(45,5,'CALIFICACIONES','TLR',0,'C',true);
         $pdf->Cell(10,5,'','TLR',1,'C',true);
 
