@@ -223,14 +223,14 @@
             
                 $miutil = new UtilUser();                
 
-                $this->Image('../../imagenes/empresa/logo2.png',20,($linea+8),30);
+                $this->Image('../../imagenes/empresa/logo2.png',20,($linea+8),25);
 
                 $this->setY(($linea+10)); 
                 $this->setX(50); 
                 $this->SetFont('Montserrat-Black','B',12);
                 $this->ln(5);
                 $this->Cell(50,5,"",'',0,'C');
-                $this->Cell(120,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO'),'',1,'C');
+                $this->Cell(120,5,utf8_decode($dataGen[0]['inst_razon']),'',1,'C');
 
                 $this->SetFont('Montserrat-SemiBold','B',12);
                 $this->setX(50);
