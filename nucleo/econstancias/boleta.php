@@ -303,8 +303,8 @@
                             foreach($data as $row) {
                                 $this->setX(20);
                                 $opcion='1RA OPORTUNIDAD';
-                                if ($row["VECES"]==2) {$opcion='2DA OPORTUNIDAD';}
-                                if ($row["VECES"]>2) {$opcion='ESPECIAL';}
+                                if ($row["TCAL"]==2) {$opcion='2DA OPORTUNIDAD';}
+                                if ($row["TCAL"]>2) {$opcion='3RA OPORTUNIDAD';}
 
                                 $lacal="NA";
                                 if ($row["LISCAL"]>=70) {$lacal=$row["LISCAL"]; $napr++; $sumaapr+=$row["LISCAL"]; $crapr+=$row["CREDITOS"]; }

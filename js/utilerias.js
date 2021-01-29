@@ -2802,8 +2802,9 @@ function dameSubirArchivoLocal(contenedor,etiqueta,nombre,carpetaDrive,extension
 							valorid+"','"+mensajesubida+"','"+tablasubir+"','"+altaedita+"','"+aux+"','PDF');\">"+
 						"</i>";
 	}
+	
 	eliminar="<div class=\"col-sm-3\" style=\"padding-top:10px;\">"+
-	"           <a title=\"Ver Archivo\" target=\"_blank\" id=\"enlace_"+nombre+"\" href=\""+ruta+"\">"+
+	"           <a title=\"Ver Archivo\" id=\"enlace_"+nombre+"\" onclick=\"previewAdjunto('"+ruta+"');\">"+
 	"                  <img id=\"img_"+nombre+"\" name=\"img_"+nombre+"\" src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
 	"           </a>"+cadeliminar+		
 	"          </div>"+

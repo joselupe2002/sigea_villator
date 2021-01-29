@@ -183,6 +183,9 @@
 <script src="pa_servsoc.js?v=<?php echo date('YmdHis'); ?>"></script>
 <script type="text/javascript">
 	var usuario="<?php echo $_SESSION["usuario"];?>";
+	var lainstitucion="<?php echo $_SESSION["INSTITUCION"];?>";
+	var elcampus="<?php echo $_SESSION["CAMPUS"];?>";
+	
 	var maxuni=0;
 </script>
 

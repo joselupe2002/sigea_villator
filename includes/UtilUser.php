@@ -398,7 +398,7 @@ class UtilUser {
 
 	
 	public function  getPie($pdf,$orienta){	
-		$top1=253; $top2=243; $left1=20; $left2=160; $iniciaTexto=50; $anchoTexto=110;
+		$top1=253; $top2=243; $left1=10; $left2=160; $iniciaTexto=50; $anchoTexto=110;
 		if ($orienta=='H') {$top1=192; $top2=188; $left1=20; $left2=215;  $iniciaTexto=80; $anchoTexto=150;}
 
 		$direccion=""; $telefonos=""; $pagina="";
@@ -411,7 +411,7 @@ class UtilUser {
 		}
 	
 		$pdf->Image('../../imagenes/empresa/piepag1.png',$left1,$top1,36);
-		$pdf->SetFont('Montserrat-Medium','',8);
+		$pdf->SetFont('Montserrat-Medium','',7);
 		$pdf->SetY(-25);
 		$elpie= utf8_decode($direccion)." ".utf8_decode($telefonos)."\n ".utf8_decode($pagina);
 		

@@ -183,11 +183,9 @@ var miciclo="";
    function OpcionesServicio(){
 
 	var abierto=false;
-	elsql="select count(*) as N from ecortescal where  CICLO='"+miciclo+"'"+
-	" and ABIERTO='S' and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
-	" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
-	" AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='SOLSERSOC' "+
-	" order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
+	$("#servicio").empty();
+
+	elsql="select ID, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"'";
 
 	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 	$.ajax({
@@ -196,7 +194,7 @@ var miciclo="";
 		url:  "../base/getdatossqlSeg.php",
 		success: function(data){
 	
-			if (JSON.parse(data)[0]["N"]>0) {				
+			if (JSON.parse(data)[0]["HAY"]>0) {				
 					elsql="select CLAVE, DOCGEN_RUTA FROM edocgen where CLAVE IN ('SOLSS','CARCOMSS') ORDER BY CLAVE";
 					parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 					$.ajax({
@@ -223,13 +221,13 @@ var miciclo="";
 												"</div>"
 							);
 
-							$("#documentos").append("<div class=\"row\"><div id=\"sssol\" class=\"col-sm-6\"></div>"+
-																			"<div id=\"sscartacom\" class=\"col-sm-6\"></div>"+
-														"</div>");
+							$("#documentos").append("<div class=\"row\"><div id=\"cont_sssol\" class=\"col-sm-12\"></div>"+
+													"                   <div id=\"cont_sscartacom\" class=\"col-sm-12\"></div>"+
+													"</div>");
 
 
-							elsql="SELECT IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SS_SOLSS'),'') AS RUTA_SSSOL, "+
-							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_CARTACOM'),'') AS RUTA_SSCARTACOM, "+
+							elsql="SELECT IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSSOLSS'),'') AS RUTA_SSSOL, "+
+							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSCARTACOM'),'') AS RUTA_SSCARTACOM, "+
 							"       IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_INFORMEFIN'),'') AS RUTA_SSREPFIN FROM DUAL"; 
 	
 							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -240,13 +238,13 @@ var miciclo="";
 								success: function(data){
 									activaEliminar="";
 									if (JSON.parse(data)[0]["RUTA_SS_SOL"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("sssol","Solicitud Firmada","sssol",'servicioSocial','pdf',
-									'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOL",JSON.parse(data)[0]["RUTA_SSSOL"],activaEliminar,usuario+"_"+miciclo+"_SSSOL");
+									dameSubirArchivoLocal("cont_sssol","Solicitud Firmada","sssol",'servicioSocial','pdf',
+									'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOLSS",JSON.parse(data)[0]["RUTA_SSSOL"],activaEliminar,usuario+"_"+miciclo+"_SSSOL");
 										
 									activaEliminar="";
 									if (JSON.parse(data)[0]["RUTA_SS_SOL"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("sssol","Carta Compromiso","ss_solss",'servicioSocial','pdf',
-									'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOL",JSON.parse(data)[0]["RUTA_SSSOL"],activaEliminar,usuario+"_"+miciclo+"_SSSOL");
+									dameSubirArchivoLocal("cont_sscartacom","Carta Compromiso","sscartacom",'servicioSocial','pdf',
+									'ID',usuario,'CARTA DE PRESENTACIÓN','eadjresidencia','alta',usuario+"_"+miciclo+"_SSCARTACOM",JSON.parse(data)[0]["RUTA_SSCARTACOM"],activaEliminar,usuario+"_"+miciclo+"_SSCARTACOM");
 										
 								}
 							});
@@ -257,13 +255,321 @@ var miciclo="";
 				else { console.log("No hay proceso abierto");
 						$("#servicio").append("<div class=\"row\">"+
 						"    <div class=\"col-sm-12\"> "+
-						"          <div class=\"alert alert-danger\">El proceso de Solicitud de Servicio Social no esta abierto</div> "+
+						"          <div class=\"alert alert-danger\">No se ha realizado Solicitud de Servicio Social para este Ciclo</div> "+
 						"    </div>");
 				}
 			}
 		}); //del ajax de busqueda de corte abierto 
 
+		$("#servicio").append("<div class=\"fontRobotoB\" id=\"pcapt\" style=\"text-align:left;\"></div>");
+		abrirCaptura();
+
 	}
 
 
-    
+
+	function abrirCaptura(){
+
+		var abierto=false;
+		elsql="select count(*) as N from ecortescal where  CICLO='"+miciclo+"'"+
+		" and ABIERTO='S' and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
+		" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
+		" AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='SOLSERSOC' "+
+		" order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
+
+
+		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+		$.ajax({
+			type: "POST",
+			data:parametros,
+			url:  "../base/getdatossqlSeg.php",
+			success: function(data){
+				
+				if (JSON.parse(data)[0]["N"]>0) {	
+					
+					elsql="select  ENVIADA, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"' GROUP BY ENVIADA";			
+					parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+					$.ajax({
+						type: "POST",
+						data:parametros,
+						url:  "../base/getdatossqlSeg.php",
+						success: function(data){
+							bt1="<button  onclick=\"capturaProyecto();\" class=\"btn btn-white btn-info btn-bold\">"+
+							"     <i class=\"ace-icon green glyphicon glyphicon-book\"></i>1. Capturar Solicitud"+
+							"</button> &nbsp;  &nbsp; ";
+							bt2="<button  onclick=\"verProyecto();\" class=\"btn btn-white btn-success btn-bold\">"+
+							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>2. Imprimir Solicitud"+
+							"</button>  &nbsp;  &nbsp; ";
+							bt3="<button  onclick=\"verCartaCom();\" class=\"btn btn-white btn-warning btn-bold\">"+
+							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>3. Carta Compromiso"+
+							"</button>  &nbsp;  &nbsp; ";
+							bt4="<button  onclick=\"enviarSol();\" class=\"btn btn-white btn-danger btn-bold\">"+
+							"     <i class=\"ace-icon blue  fa  fa-share-square-o\"></i>4. Enviar"+
+							"</button>";
+
+							if (JSON.parse(data)[0]["ENVIADA"]=='S') { bt4=''; bt1="";}	
+
+								//Si esta abierto aparecemos la opción de capturar Proyecto.
+							$("#pcapt").append(bt1+bt2+bt3+bt4+
+							"</div>"+"<hr><div style=\"text-align:center;\">");
+						}
+					});
+				
+
+				}
+				
+			}
+		});
+
+	}
+
+	
+	function capturaProyecto(){
+
+		elsql="select ifnull(ID,'0') as ID,ifnull( MATRICULA,'') AS MATRICULA,ifnull( CICLO,'') AS CICLO,ifnull( INICIO,'') AS INICIO,"+
+		"ifnull( PROGRAMA,'') AS PROYECTO,ifnull( TERMINO,'') AS TERMINO,ifnull( EMPRESA,'') AS EMPRESA,"+
+		"ifnull( REPRESENTANTE,'') AS REPRESENTANTE,ifnull( PUESTO,'') AS PUESTO,ifnull(PROGRAMA,'') AS PROGRAMA,"+
+		"ifnull( MODALIDAD,'') AS MODALIDAD,ifnull( ACTIVIDADES,'') AS ACTIVIDADES,ifnull( DIRECCION,'') AS DIRECCION,"+
+		"ifnull( TIPOPROG,'') AS TIPOPROG,ifnull(ENVIADA,'') AS ENVIADA, ifnull( TIPOPROGADD,'') AS TIPOPROGADD, ifnull( FECHACOM,'') AS FECHACOM, VALIDADO AS VALIDADO,"+
+		"count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"'"+
+		" and MATRICULA='"+usuario+"'";
+
+		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+		$.ajax({
+			type: "POST",
+			data:parametros,
+			url:  "../base/getdatossqlSeg.php",
+			success: function(data){
+
+				misdatos=JSON.parse(data);
+
+				if (misdatos[0]["HAY"]>0) {proceso="actualizaDatos("+misdatos[0]["ID"]+");"; } else {proceso="grabarDatos();";}
+				mostrarConfirm2("infoError","grid_pa_servsoc","Captura de Solicitud",
+				"<div class=\"ventanaSC\" style=\"text-align:justify; width:99%; height:250px; overflow-y:auto; overflow-x:hidden;\">"+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-6\">"+
+							"<label class=\"fontRobotoB\">Dependencia Oficial</label><input class=\"form-control captProy\" id=\"empresa\" value=\""+misdatos[0]["EMPRESA"]+"\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-3\">"+
+							"<label  class=\"fontRobotoB\">Inicia</label>"+
+							" <div class=\"input-group\"><input  class=\"form-control  captProy date-picker\"  value=\""+misdatos[0]["INICIO"]+"\" id=\"inicio\" "+
+							" type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" /> "+
+							" <span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span></div>"+
+						"</div>"+
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Termina</label>"+
+							" <div class=\"input-group\"><input  class=\"form-control captProy date-picker\" value=\""+misdatos[0]["TERMINO"]+"\" id=\"termino\" "+
+							" type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" /> "+
+							" <span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span></div>"+
+						"</div>"+						
+					"</div>"+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-6\">"+
+							"<label class=\"fontRobotoB\">Titular de la Dependencia: </label><input class=\"form-control captProy\" value=\""+misdatos[0]["REPRESENTANTE"]+"\" id=\"representante\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-6\">"+
+							"<label class=\"fontRobotoB\">Cargo del Titular:</label><input class=\"form-control captProy\" value=\""+misdatos[0]["PUESTO"]+"\" id=\"puesto\"></input>"+
+						"</div>"+	
+					"</div>"+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-12\">"+
+							"<label class=\"fontRobotoB\">Domicilio Empresa: </label><input class=\"form-control captProy\" value=\""+misdatos[0]["DIRECCION"]+"\" id=\"direccion\"></input>"+
+						"</div>"+						
+					"</div>"+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-9\">"+
+							"<label class=\"fontRobotoB\">Nombre del Programa </label><input class=\"form-control captProy\" value=\""+misdatos[0]["PROGRAMA"]+"\" id=\"programa\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Modalidad</label><select class=\"form-control captProy\"  id=\"modalidad\"></select>"+
+						"</div>"+					
+					"</div>"+
+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-12\">"+
+							"<label class=\"fontRobotoB\">Actividades</label><textarea rows=\"5\"  class=\"form-control captProy\" style=\"width:100%;\"  id=\"actividades\">"+misdatos[0]["ACTIVIDADES"]+"</textarea>"+
+						"</div>"+					
+					"</div>"+
+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-6\">"+
+							"<label class=\"fontRobotoB\">Tipo de Programa</label><select class=\"form-control captProy\"  id=\"tipoprog\"></select>"+
+						"</div>"+	
+						"<div class=\"col-sm-6\">"+
+							"<label class=\"fontRobotoB\">Otro, especifique</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["TIPOPROGADD"]+"\" id=\"tipoprogadd\"></input>"+
+						"</div>"+			
+					"</div>"+
+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Fecha Firma de Compromiso</label>"+
+							" <div class=\"input-group\"><input  class=\"form-control captProy date-picker\" value=\""+misdatos[0]["FECHACOM"]+"\" id=\"fechacom\" "+
+							" type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" /> "+
+							" <span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span></div>"+
+						"</div>"+		
+					"</div>"+					
+				"</div>"
+				,"Grabar Datos",proceso,"modal-lg");
+
+				actualizaSelectMarcar("modalidad", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='SSMODALIDAD'", "","",misdatos[0]["MODALIDAD"]); 
+				actualizaSelectMarcar("tipoprog", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='SSTIPOPROG'", "","",misdatos[0]["TIPOPROG"]); 
+				$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
+				
+			
+				$('.captProy').keypress(function(){
+					$(this).css("border-color","black");				
+				});
+			} //del successs
+		});
+
+	}
+
+
+	
+	function grabarDatos(){
+		vacios=false;
+		$('.captProy').each(function(){
+			if (($(this).val()=="") || (($(this).val()=="0"))) {
+				$(this).css("border-color","red");
+				vacios=true;
+			}
+		 });
+		 if (!vacios) {
+			mostrarEspera("esperaInf","grid_pa_servsoc","Cargando Datos...");
+
+			fecha=dameFecha("FECHAHORA");
+			parametros={tabla:"ss_alumnos",
+					bd:"Mysql",
+					MATRICULA:usuario,
+					CICLO:miciclo,
+					INICIO:$("#inicio").val(),
+					TERMINO:$("#termino").val(),
+					EMPRESA:$("#empresa").val(),
+					MODALIDAD:$("#modalidad").val(),
+					PUESTO:$("#puesto").val(),
+					REPRESENTANTE:$("#representante").val(),
+					PROGRAMA:$("#programa").val(),
+					TIPOPROG:$("#tipoprog").val(),
+					DIRECCION:$("#direccion").val(),
+					FECHACOM:$("#fechacom").val(),
+					TIPOPROGADD:$("#tipoprogadd").val(),
+					ACTIVIDADES:$("#actividades").val(),
+					USUARIO:usuario,
+					FECHAUS:fecha,
+					_INSTITUCION: lainstitucion, 
+					_CAMPUS: elcampus}						
+					$.ajax({
+							type: "POST",
+							url:"../base/inserta.php",
+							data: parametros,
+							success: function(data){ 
+							
+								 ocultarEspera("esperaInf");  
+								 ocultarEspera("infoError"); 
+								   							
+							
+								}
+							});	
+					OpcionesServicio();
+								
+		 }
+		 else {alert ("No ha capturado toda la información de su solicitud");}
+	}
+
+
+	function actualizaDatos(elid){
+		vacios=false;
+		$('.captProy').each(function(){
+			if($(this).val()==""){
+				$(this).css("border-color","red");
+				vacios=true;
+			}
+		 });
+		 if (!vacios) {
+			mostrarEspera("esperaInf","grid_pa_servsoc","Cargando Datos...");
+			fecha=dameFecha("FECHAHORA");
+			parametros={tabla:"ss_alumnos",
+					bd:"Mysql",
+					campollave:"ID",
+					valorllave:elid,
+					MATRICULA:usuario,
+					CICLO:miciclo,
+					INICIO:$("#inicio").val(),
+					TERMINO:$("#termino").val(),
+					EMPRESA:$("#empresa").val(),
+					PUESTO:$("#puesto").val(),
+					REPRESENTANTE:$("#representante").val(),
+					PROGRAMA:$("#programa").val(),
+					MODALIDAD:$("#modalidad").val(),
+					TIPOPROG:$("#tipoprog").val(),
+					DIRECCION:$("#direccion").val(),
+					FECHACOM:$("#fechacom").val(),
+					TIPOPROGADD:$("#tipoprogadd").val(),
+					ACTIVIDADES:$("#actividades").val(),
+					USUARIO:usuario,
+					FECHAUS:fecha,
+					_INSTITUCION: lainstitucion, 
+					_CAMPUS: elcampus}						
+					$.ajax({
+							type: "POST",
+							url:"../base/actualiza.php",
+							data: parametros,
+							success: function(data){ 
+								 ocultarEspera("esperaInf");  
+								 ocultarEspera("infoError"); 								   														
+								}
+							});		
+							OpcionesServicio();
+							
+		 }
+		 else {alert ("No ha capturado toda la información de su solicitud");}
+	}
+
+
+	function  verProyecto(){
+
+		elsql="select ID, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"'";
+
+		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+		$.ajax({
+			type: "POST",
+			data:parametros,
+			url:  "../base/getdatossqlSeg.php",
+			success: function(data){
+				misdatos=JSON.parse(data);
+				if (misdatos[0]["HAY"]>0) {
+					enlace="nucleo/pa_servsoc/solicitud.php?id="+misdatos[0]["ID"];
+					abrirPesta(enlace, "Solic.");
+				} 
+				else {alert ("No se ha capturado aún los datos de la Solicitud");}
+			}
+		});
+	
+	}
+
+
+	function  verCartaCom(){
+
+		elsql="select ID, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"'";
+
+		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+		$.ajax({
+			type: "POST",
+			data:parametros,
+			url:  "../base/getdatossqlSeg.php",
+			success: function(data){
+				misdatos=JSON.parse(data);
+				if (misdatos[0]["HAY"]>0) {
+					enlace="nucleo/pa_servsoc/cartaCom.php?id="+misdatos[0]["ID"];
+					abrirPesta(enlace, "Solic.");
+				} 
+				else {alert ("No se ha capturado aún los datos de la Solicitud");}
+			}
+		});
+	
+	}
+
+
+	function enviarSol() {
+
+	}
