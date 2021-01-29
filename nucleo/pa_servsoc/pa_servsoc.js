@@ -492,7 +492,7 @@ var miciclo="";
 							url:"../base/inserta.php",
 							data: parametros,
 							success: function(data){ 
-							
+								console.log(data);
 								 ocultarEspera("esperaInf");  
 								 ocultarEspera("infoError"); 
 								   							
@@ -544,6 +544,7 @@ var miciclo="";
 							url:"../base/actualiza.php",
 							data: parametros,
 							success: function(data){ 
+								console.log(data);
 								 ocultarEspera("esperaInf");  
 								 ocultarEspera("infoError"); 								   														
 								}
