@@ -203,21 +203,7 @@ var miciclo="";
 						url:  "../base/getdatossqlSeg.php",
 						success: function(data){ 
 							losdatos=JSON.parse(data); 
-						
-							/*
-							$("#servicio").append("<div class=\"row\">"+
-												"    <div class=\"col-sm-2\"> "+
-												"       <a href=\""+losdatos[1][1]+"\" target=\"_blank\"> <img src=\"../../imagenes/menu/word.png\" height=\"40px;\" width=\"40px;\"> </img></a>"+
-												"       <span  class=\"badge badge-success\">1. Bajar Solicitud</span>"+
-												"    </div>"+
-												"    <div class=\"col-sm-2\"> "+
-												"       <a href=\""+losdatos[0][1]+"\" target=\"_blank\"> <img src=\"../../imagenes/menu/word.png\" height=\"40px;\" width=\"40px;\"> </img></a>"+
-												"       <span  class=\"badge badge-success\">2. Bajar Carta Compromiso</span>"+
-												"    </div>"+
-												"</div>";
-												
-							);
-							*/
+				
 
 							$("#servicio").append("<div class=\"row\" style=\"text-align:left;\">"+
 												"    <div class=\"col-sm-12\"> "+
@@ -317,6 +303,8 @@ var miciclo="";
 			data:parametros,
 			url:  "../base/getdatossqlSeg.php",
 			success: function(data){
+
+				alert (data);
 				
 				if (JSON.parse(data)[0]["N"]>0) {	
 					
