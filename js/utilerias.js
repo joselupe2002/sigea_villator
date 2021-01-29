@@ -149,6 +149,30 @@ function decodificaHora(horario) {
 }
 
 
+function getJefeDepto(depto){
+	var cadFin="";
+	res="";
+	elsql="SELECT URES_JEFE from fures  where URES_URES='"+depto+"'" ;
+	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+
+	$.ajax({
+		type: "POST",
+		data:parametros,
+		url:  "../base/getdatossqlSeg.php",
+		success: function(data){  
+	
+			  res=JSON.parse(data)[0]["URES_JEFE"];				
+		 },
+		 error: function(data) {	                  
+					alert('ERROR: '+data);
+					res=false;
+					return false;
+								  }
+	});	  
+	return res;   
+}
+
+
 function obtenerHorarios(id,elciclo,linea){
 	var cadFin="";
 	res=true;

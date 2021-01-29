@@ -69,6 +69,57 @@ function finaliza(modulo,usuario,essuper){
 
 
 
+	function setValidado(id,valor,obs,user){
+		$('#modalDocument').modal({show:true, backdrop: 'static'});	 
+		   if (valor=='S') {parametros={tabla:"ss_alumnos",campollave:"ID",bd:"Mysql",valorllave:id,VALIDADO: valor,OBS:obs};}
+		   else {parametros={tabla:"ss_alumnos",campollave:"ID",bd:"Mysql",valorllave:id,VALIDADO: valor,OBS:obs,ENVIADA:'N'};}
+		   $.ajax({
+		   type: "POST",
+		   url:"actualiza.php",
+		   data: parametros,
+		   success: function(data){
+			   $('#dlgproceso').modal("hide"); 
+			   if (data.substring(0,1)=='0') {alert ("Ocurrio un error: "+data);}
+			   //else {alert ("La actividad: "+table.rows('.selected').data()[0]["ACTIVIDAD"]+" ha sido autorizada")}	
+			   window.parent.document.getElementById('FRvss_alumnos').contentWindow.location.reload();
+		   }					     
+		   });    	                
+	}
+
+
+	
+
+	
+function validarSol (modulo,usuario,essuper){
+	table = $("#G_"+modulo).DataTable();
+	$("#confirmCotejado").empty();
+	mostrarConfirm("confirmCotejado", "grid_vss_alumnos",  "Proceso de Cotejo",
+	"<span class=\"label label-success\">Observaciones</span>"+
+	"     <textarea id=\"obsCotejado\" style=\"width:100%; height:100%; resize: none;\">"+table.rows('.selected').data()[0]["OBS"]+"</textarea>",
+	"¿Marcar como Validado? "+
+	"<SELECT id=\"cotejado\"><OPTION value=\"S\">SI</OPTION><OPTION value=\"N\">NO</OPTION></SELECT>"
+	,"Finalizar Proceso", "btnMarcarValidado('"+table.rows('.selected').data()[0]["MATRICULA"]+"','"+table.rows('.selected').data()[0]["ID"]+"','"+modulo+"','"+usuario+"');","modal-sm");
+}
+
+
+function btnMarcarValidado(alumno,id,modulo,eluser){
+	setValidado(id,$("#cotejado").val(),$("#obsCotejado").val(),eluser);
+
+	status="<span style=\"color:red\"><b>NO VALIDADO</b></span>"; 
+	cadObs="<b>Favor de Revisar la siguiente Observación:<b><br>"+$("#obsCotejado").val();
+	if ($("#cotejado").val()=='S') {status="<span style=\"color:green\"><b> VALIDADO</b></span>"; cadObs="";}
+
+	correoalAlum(alumno, "<html>Tu solicitud de Servicio Social ha sido "+status+
+							"</b></span>."+cadObs
+							,"STATUS DE SOLICITUD SERVICIO SOCIAL "+alumno);			
+
+}
+
+
+
+	
+
+
 function impLib(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
