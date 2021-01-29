@@ -304,17 +304,17 @@ var miciclo="";
 			url:  "../base/getdatossqlSeg.php",
 			success: function(data){
 
-				alert (data);
 				
 				if (JSON.parse(data)[0]["N"]>0) {	
 					
-					elsql="select  ENVIADA, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"' GROUP BY ENVIADA";			
+					elsql="select  ifnull(ENVIADA,'N') AS ENVIADA, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"'";			
 					parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 					$.ajax({
 						type: "POST",
 						data:parametros,
 						url:  "../base/getdatossqlSeg.php",
 						success: function(data){
+
 							bt1="<button  onclick=\"capturaProyecto();\" class=\"btn btn-white btn-info btn-bold\">"+
 							"     <i class=\"ace-icon green glyphicon glyphicon-book\"></i>1. Capturar Solicitud"+
 							"</button> &nbsp;  &nbsp; ";
@@ -333,6 +333,8 @@ var miciclo="";
 								//Si esta abierto aparecemos la opción de capturar Proyecto.
 							$("#pcapt").append(bt1+bt2+bt3+bt4+
 							"</div>"+"<hr><div style=\"text-align:center;\">");
+
+							
 						}
 					});
 				
