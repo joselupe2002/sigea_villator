@@ -140,3 +140,20 @@ function impLib(modulo,usuario,institucion, campus,essuper){
 		}
 
 }
+
+
+
+	
+function veradjss  (modulo,usuario,institucion, campus,essuper){
+
+	table = $("#G_"+modulo).DataTable();
+	if (table.rows('.selected').data().length>0) {
+		ss_mostrarAdjuntos(modulo,usuario,institucion, campus,essuper,table.rows('.selected').data()[0]["CICLO"]);
+	}
+	else {
+		alert ("Debe seleccionar un Registro");
+		return 0;
+
+		}
+
+}
