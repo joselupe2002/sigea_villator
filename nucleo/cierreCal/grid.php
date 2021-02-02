@@ -148,7 +148,7 @@
 		function change_SELECT(elemento) {
         if (elemento=='selCiclos') {
 		
-			actualizaSelect("selProfesores","select distinct PROFESOR, CONCAT( PROFESORD ,' ',PROFESOR) from vcargasprof where CICLO='"+
+			actualizaSelect("selProfesores","select distinct PROFESOR, CONCAT( PROFESORD ,' ',PROFESOR) as PROFESORD from vcargasprof where CICLO='"+
 										$("#selCiclos").val()+"' and CARRERA not in (12) ORDER BY PROFESORD","BUSQUEDA");
 										
 			
