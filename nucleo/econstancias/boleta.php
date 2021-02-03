@@ -126,7 +126,7 @@
                 $miConex = new Conexion();
                 $data=[];
 
-                $sql="select ID, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
+                $sql="select ID, MATERIA, MATERIAD, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
                 " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
                 " from vboleta a, falumnos b, eciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
                 " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
@@ -296,7 +296,7 @@
                             foreach($data as $row) {
                                 $this->setX(20);
                                 $opcion='1RA OPORTUNIDAD';
-                                if ($row["VECES"]>2) {$opcion='2DA OPORTUNIDAD';}
+                                if ($row["VECES"]>=1) {$opcion='2DA OPORTUNIDAD';}
                                // if ($row["TCAL"]>2) {$opcion='3RA OPORTUNIDAD';}
 
                                 $lacal="NA";
