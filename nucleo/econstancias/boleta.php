@@ -127,10 +127,10 @@
                 $data=[];
 
                 $sql="select ID, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
-                "PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
+                " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
                 " from vboleta a, falumnos b, eciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
-                "AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
-                "and PROFESOR=d.EMPL_NUMERO  and IFNULL(MATE_TIPO,'0') NOT IN ('I','OC','T') and e.BAJA='N' and CERRADO='S' ";
+                " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
+                " and PROFESOR=d.EMPL_NUMERO  and IFNULL(MATE_TIPO,'0') NOT IN ('I','OC','T') and e.BAJA='N' and CERRADO='S' ";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
