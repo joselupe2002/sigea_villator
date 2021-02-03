@@ -319,7 +319,7 @@
                             $this->Ln();
                             $this->setX(120);
                             $this->Cell(25,3,"PROMEDIO:",1,0,'R');
-                            if ($napr>0) {$promApr=round(($sumaapr/$napr),0);} else {$promApr=0;}
+                            if ($napr>0) {$promApr=round(($sumaapr/$nmat),0);} else {$promApr=0;}
                             $this->Cell(10,3,round(($promApr),0),1,1,'R');
                             $this->setX(120);
                             $this->Cell(25,3,"MAT. REPR:",1,0,'R');

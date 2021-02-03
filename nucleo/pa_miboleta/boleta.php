@@ -121,30 +121,24 @@
    	        var $eljefepsto="";
  
    	
-			function LoadDatosCursando()
-			{				
-                $miConex = new Conexion();
-                $data=[];
-                $sql="select e.ID, FECHAINS, TCACVE AS TCAL, e.ALUCTR as MATRICULA,e.PDOCVE AS CICLO, e.MATCVE AS MATERIA, ".
-                "f.MATE_DESCRIP AS MATERIAD, i.CICL_CUATRIMESTRE as SEM, IFNULL(i.CICL_CREDITO,0) as CREDITOS, ".            
-                " e.GPOCVE AS GRUPO,e.LISCAL, e.LISTC15 as PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD,".
-                "(select count(*) from dlista u where u.PDOCVE<e.PDOCVE and u.MATCVE=e.MATCVE and u.ALUCTR=e.ALUCTR) AS VECES".
-                " from dlista e ".
-                " join falumnos h on (ALUCTR=ALUM_MATRICULA)".
-                " left outer join eciclmate i on (h.ALUM_MAPA=i.CICL_MAPA and e.MATCVE=i.CICL_MATERIA ),".
-                " cmaterias f , pempleados g  where  ".
-                "e.LISTC15=g.EMPL_NUMERO and e.MATCVE=f.MATE_CLAVE".
-                " and PDOCVE='".$_GET["ciclo"]."'".  	                    
-                " AND e.ALUCTR='".$_GET["matricula"]."' and e.BAJA='N' ".   /*and CERRADO='S'*/
-                " order by PDOCVE DESC";
-                
-                
-				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
-				foreach ($resultado as $row) {
-					$data[] = $row;
-				}
-				return $data;
-			}
+			
+               function LoadDatosCursando()
+               {				
+                   $miConex = new Conexion();
+                   $data=[];
+   
+                   $sql="select ID, MATERIA, CICL_MATERIAD as MATERIAD, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
+                   " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
+                   " from vboleta a, falumnos b, veciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
+                   " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
+                   " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T') and BAJA='N' and CERRADO='S' ";
+                   
+                   $resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
+                   foreach ($resultado as $row) {
+                       $data[] = $row;
+                   }
+                   return $data;
+               }
 
             function LoadDatosCiclo()
 			{				
@@ -303,8 +297,8 @@
                         foreach($data as $row) {
                             $this->setX(20);
                             $opcion='1RA OPORTUNIDAD';
-                            if ($row["TCAL"]==2) {$opcion='2DA OPORTUNIDAD';}
-                            if ($row["TCAL"]>2) {$opcion='ESPECIAL';}
+                            if ($row["EXTRA"]>=1) {$opcion='2DA OPORTUNIDAD';}
+                            //if ($row["TCAL"]>2) {$opcion='ESPECIAL';}
 
                             $lacal="NA";
                             if ($row["LISCAL"]>=70) {$lacal=$row["LISCAL"]; $napr++; $sumaapr+=$row["LISCAL"]; $crapr+=$row["CREDITOS"]; }
@@ -326,7 +320,7 @@
                         $this->Ln();
                         $this->setX(120);
                         $this->Cell(25,5,"PROMEDIO:",1,0,'R');
-                        $this->Cell(10,5,round(($sumaapr/$napr),0),1,1,'R');
+                        $this->Cell(10,5,round(($sumaapr/$nmat),0),1,1,'R');
                         $this->setX(120);
                         $this->Cell(25,5,"MAT. REPR:",1,0,'R');
                         $this->Cell(10,5,$nrep,1,1,'R');
