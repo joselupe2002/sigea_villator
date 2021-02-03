@@ -126,9 +126,9 @@
                 $miConex = new Conexion();
                 $data=[];
 
-                $sql="select ID, MATERIA, MATERIAD, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
+                $sql="select ID, MATERIA, CICL_MATERIAD, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
                 " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
-                " from vboleta a, falumnos b, eciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
+                " from vboleta a, falumnos b, veciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
                 " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
                 " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T') and BAJA='N' and CERRADO='S' ";
                 
