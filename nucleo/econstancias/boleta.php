@@ -125,19 +125,12 @@
 			{				
                 $miConex = new Conexion();
                 $data=[];
-                $sql="select e.ID, FECHAINS, TCACVE AS TCAL, e.ALUCTR as MATRICULA,e.PDOCVE AS CICLO, e.MATCVE AS MATERIA, ".
-                "f.MATE_DESCRIP AS MATERIAD, i.CICL_CUATRIMESTRE as SEM, IFNULL(i.CICL_CREDITO,0) as CREDITOS, ".            
-                " e.GPOCVE AS GRUPO,e.LISCAL, e.LISTC15 as PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD,".
-                "(select count(*) from dlista u where u.PDOCVE<e.PDOCVE and u.MATCVE=e.MATCVE and u.ALUCTR=e.ALUCTR) AS VECES".
-                " from dlista e ".
-                " join falumnos h on (ALUCTR=ALUM_MATRICULA)".
-                " left outer join eciclmate i on (h.ALUM_MAPA=i.CICL_MAPA and e.MATCVE=i.CICL_MATERIA ),".
-                " cmaterias f , pempleados g  where  ".
-                "e.LISTC15=g.EMPL_NUMERO and e.MATCVE=f.MATE_CLAVE".
-                " and PDOCVE='".$_GET["ciclo"]."'".  	                    
-                " AND e.ALUCTR='".$_GET["matricula"]."' and e.BAJA='N' and CERRADO='S' and IFNULL(MATE_TIPO,'0') NOT IN ('I','OC','T')".
-                " order by PDOCVE DESC";
-                
+
+                $sql="select ID, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
+                "PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
+                "from vboleta a, falumnos b, eciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
+                "AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
+                "and PROFESOR=d.EMPL_NUMERO  and IFNULL(MATE_TIPO,'0') NOT IN ('I','OC','T') and e.BAJA='N' and CERRADO='S' ";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -303,8 +296,8 @@
                             foreach($data as $row) {
                                 $this->setX(20);
                                 $opcion='1RA OPORTUNIDAD';
-                                if ($row["TCAL"]==2) {$opcion='2DA OPORTUNIDAD';}
-                                if ($row["TCAL"]>2) {$opcion='3RA OPORTUNIDAD';}
+                                if ($row["VECES"]>2) {$opcion='2DA OPORTUNIDAD';}
+                               // if ($row["TCAL"]>2) {$opcion='3RA OPORTUNIDAD';}
 
                                 $lacal="NA";
                                 if ($row["LISCAL"]>=70) {$lacal=$row["LISCAL"]; $napr++; $sumaapr+=$row["LISCAL"]; $crapr+=$row["CREDITOS"]; }
