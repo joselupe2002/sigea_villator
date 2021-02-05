@@ -183,7 +183,7 @@
             function LoadDataEscolar($depto)
 			{				
                 $miConex = new Conexion();
-                $sql="SELECT * FROM pempleados where EMPL_DEPTO='".$depto."'";
+                $sql="SELECT * FROM pempleados, fures where URES_URES='".$depto."' AND URES_JEFE=EMPL_NUMERO";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
