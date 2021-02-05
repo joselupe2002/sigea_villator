@@ -98,7 +98,8 @@ function imprimeReporte(tipocons,consecutivo) {
 		if (tipocons=="3") {creaConsPer($("#selciclo").val(),$("#selAlumnos").val(),consecutivo,elanio); } 
 		if (tipocons=="4") {creaConsIns($("#selciclo").val(),$("#selAlumnos").val(),consecutivo,elanio); } 
 		if (tipocons=="5") {enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val(); abrirPesta(enlace,"Kardex"); }
-		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val(); abrirPesta(enlace,"Boleta"); }
+		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=0"; abrirPesta(enlace,"Boleta"); }
+		if (tipocons=="7") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=1"; abrirPesta(enlace,"Boleta"); }
 	}
 	if ($("#selTipoExp").val()==2) {
 		if (tipocons=="1") {enlace="nucleo/econstancias/conscal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio; abrirPesta(enlace,"Calif"); }
@@ -106,7 +107,8 @@ function imprimeReporte(tipocons,consecutivo) {
 		if (tipocons=="3") {enlace="nucleo/econstancias/consperiodo.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio; abrirPesta(enlace,"Periodo");  }
 		if (tipocons=="4") {enlace="nucleo/econstancias/conssincal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio;  abrirPesta(enlace,"SinCal"); }
 		if (tipocons=="5") {enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val(); abrirPesta(enlace,"Kardex"); }
-		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val(); abrirPesta(enlace,"Boleta"); }
+		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=0"; abrirPesta(enlace,"Boleta"); }
+		if (tipocons=="7") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=1"; abrirPesta(enlace,"Boleta"); }
 	}
 }
 

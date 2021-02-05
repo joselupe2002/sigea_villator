@@ -56,6 +56,9 @@
 			  <button title="Cerrar todas las asignaturas del Profesor" onclick="cerrarTodo()" class="btn btn-xs btn-white btn-danger btn-round">
 		         <i class="ace-icon  blue glyphicon glyphicon-folder-close bigger-140"></i> Cerrar Todo
 			  </button>
+			  <button title="Cerrar todas las asignaturas del Profesor" onclick="boletasAlum()" class="btn btn-xs btn-white btn-danger btn-round">
+		         <i class="ace-icon  blue glyphicon glyphicon-folder-close bigger-140"></i> Bol. Alum.
+			  </button>
 		 </div>
 	</div>
 	<div class="space-12"></div>

@@ -126,12 +126,12 @@
                 $miConex = new Conexion();
                 $data=[];
 
-                $sql="select ID, MATERIA, CICL_MATERIAD as MATERIAD, FECHAINS, LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
+                $sql="select ID, MATERIA, CICL_MATERIAD as MATERIAD, FECHAINS, IFNULL(LISCAL,'0') AS LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
                 " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
                 " from vboleta a, falumnos b, veciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
                 " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
-                " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T') and BAJA='N' and CERRADO='S' ";
-                
+                " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T') and BAJA='N' and CERRADO='S' ";            
+
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -178,7 +178,21 @@
 				}
 				return $data;
 			}
-			
+            
+           
+            function LoadDataEscolar($depto)
+			{				
+                $miConex = new Conexion();
+                $sql="SELECT * FROM pempleados where EMPL_DEPTO='".$depto."'";
+                
+				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+            }
+            
+            
 			function Header()
 			{
 				
@@ -213,6 +227,7 @@
                 $dataAlum = $this->LoadDatosAlumnos();
                 $data = $this->LoadDatosCursando();
                 $dataCiclo = $this->LoadDatosCiclo();
+                $dataGen=$this->LoadDatosGen();
             
                 $miutil = new UtilUser();                
 
@@ -313,7 +328,7 @@
                                 $n++;
                                 $nmat++;
                                 $totcred+=$row["CREDITOS"];
-                                $suma+=$row["LISCAL"];
+                                if (is_numeric ( $row["LISCAL"] )) { $suma+=$row["LISCAL"]; }
                             }
 
                             $this->Ln();
@@ -335,7 +350,18 @@
                         $miutil = new UtilUser();
                         $nombre=$miutil->getJefe('303');//Nombre del puesto de control escolar7
 
-                    
+
+                        
+                        //Firma y sello de contro escolar
+                        
+                        if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {
+                            $dataEsc = $this->LoadDataEscolar('303');			
+                            $this->Image($dataEsc[0]["EMPL_SELLO"],70,$linea+90,45);
+                            $this->Image($dataEsc[0]["EMPL_FIRMA"],20,$linea+95,40);                            
+                        }
+                        
+
+                                            
                         $this->SetFont('Montserrat-ExtraBold','',8);
                         
                         $this->setX(10);$this->setY(($linea+122));        
