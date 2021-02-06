@@ -150,27 +150,33 @@
 							   <div class="col-sm-12" >
 									<span class="btn btn-app btn-sm btn-light no-hover">
 										 <span id="prom_cr" class="line-height-1 bigger-170 blue"></span><br />
-										  <span class="line-height-1 smaller-90"> Prom.Rep. </span>
-									</span>
-									<span class="btn btn-app btn-sm btn-yellow no-hover">
-									      <span id="prom_sr" class="line-height-1 bigger-170">  </span><br />
 										  <span class="line-height-1 smaller-90"> Promedio </span>
-									</span>	
+									</span>
+									
 									<span class="btn btn-app btn-sm btn-danger no-hover">
 									      <span id="periodos" class="line-height-1 bigger-170">  </span><br />
 										  <span class="line-height-1 smaller-90"> Periodos </span>
+									</span>	
+
+									<span class="btn btn-app btn-sm btn-yellow no-hover" title="Número de materias del Plan de Estudio (No se incluye especialidad)">
+									      <span id="matPlan" class="line-height-1 bigger-170">  </span><br />
+										  <span class="line-height-1 smaller-90"> Mat. Plan </span>
 									</span>									
 							   </div>
 						 </div>
 						 <div class="row">   
 							   <div class="col-sm-12">
-							        <span class="btn btn-app btn-sm btn-pink no-hover">
-									      <span id="loscreditost"  class="line-height-1 bigger-170">  </span><br />
-										  <span class="line-height-1 smaller-90"> Cr&eacute;ditos </span>
+							        <span  class="btn btn-app btn-sm btn-pink no-hover" title="Número de materias de la especialidad (si tiene asignada alguna)">
+									      <span id="matEspe"  class="line-height-1 bigger-170">  </span><br />
+										  <span class="line-height-1 smaller-90"> Mat. Espec. </span>
 									</span>
-									<span class="btn btn-app btn-sm btn-success  no-hover">
-									      <span id="loscreditos" class="line-height-1 bigger-170">  </span><br />
-										  <span class="line-height-1 smaller-90"> Cursados </span>
+									<span class="btn btn-app btn-sm btn-success  no-hover" title="Número de materias que ha aprobado en su trayectoria">
+									      <span id="matCur" class="line-height-1 bigger-170">  </span><br />
+										  <span class="line-height-1 smaller-90"> Cursadas </span>
+									</span>
+									<span class="btn btn-app btn-sm btn-purple  no-hover" title="Número de materias que estan pendientes de cursar en su trayectoria">
+									      <span id="matPen" class="line-height-1 bigger-170">  </span><br />
+										  <span class="line-height-1 smaller-90"> Pendiente </span>
 									</span>
 							   </div>
 						</div>
@@ -184,27 +190,17 @@
 												<span id="etelavance"  class="percent"></span>%
 											</div>
 									</div>
-									<div class="infobox-data">
+									<div class="infobox-data" style="height:60px;">
 											<span class="infobox-text">Avance Cr&eacute;ditos</span>
-												<div class="infobox-content">
-													<span id="credpen" class=" text-danger bigger-60"></span>
+												<div class="infobox-content" >
+													<span id="credtot" class=" text-primary bigger-60"></span><br>													
 															
-													</div>
+												</div>
 									</div>
 								</div>
 							 </div>
 						</div>
-						<div class="row">   
-							 <div class="col-sm-12">   	  
-								<div class="infobox infobox-green">
-									<div class="infobox-icon"><i class="ace-icon fa fa-sitemap"></i></div>
-									<div class="infobox-data">
-											<span id="matcur" class="infobox-data-number"></span>
-											<div class="infobox-content">Mat. Aprobadas</div>
-									</div>
-									<div id="matavance" class="stat stat-success"></div>
-								</div>
-							  </div>				                           					 
+						<div class="row">   				                           					 
 	                     </div>	                    
                  </div><!-- /.modal-body -->
 		   </div><!-- /.modal-content -->         

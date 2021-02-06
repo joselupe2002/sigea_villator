@@ -356,8 +356,16 @@ var elalumno="";
 				//LLenamos datos del Perfil del Alumno 
 				misql="SELECT CONCAT(ALUM_NOMBRE,' ',ALUM_APEPAT,' ',ALUM_APEMAT) AS NOMBRE, "+
 				               "getPeriodos('"+elalumno+"',getciclo()) as PERIODOS,"+
-					           " CARR_DESCRIP as CARRERA, getavance('"+elalumno+"') as CREDITOS, getAvanceMat('"+elalumno+"') as MATERIAS, "+
-					           " getPromedio('"+elalumno+"','N') as PROMEDIO_SR, getPromedio('"+elalumno+"','S') as PROMEDIO_CR   FROM falumnos a, ccarreras b"+
+							   " CARR_DESCRIP as CARRERA, getavance('"+elalumno+"') as CREDITOS, "+
+							   " round(getavanceCred('"+elalumno+"')) as AVANCECRED, "+
+							   " getPromedio('"+elalumno+"','N') as PROMEDIO_SR, "+
+							   " getInfoPlan('"+elalumno+"','CURSADAS') as CURSADAS, "+
+							   " getInfoPlan('"+elalumno+"','MATPLAN') as MATPLAN, "+
+							   " getInfoPlan('"+elalumno+"','CREDPEN') as CREDPEN, "+
+							   " getInfoPlan('"+elalumno+"','CREDTOT') as CREDTOT, "+
+							   " getInfoPlan('"+elalumno+"','MATPEN') as MATPEN, "+
+							   " getInfoPlan('"+elalumno+"','MATESPE') as MATESPE "+
+							   "  FROM falumnos a, ccarreras b"+
 							   " where a.ALUM_MATRICULA='"+elalumno+"' and a.ALUM_CARRERAREG=b.CARR_CLAVE";				
 				
 				 parametros={sql:misql,dato:sessionStorage.co,bd:"Mysql"}			 
@@ -371,19 +379,20 @@ var elalumno="";
 			               jQuery.each(losdatos, function(clave, valor) { 				               
                                 $("#elnombre").html(valor.NOMBRE);
                                 $("#lacarrerainfo").html(valor.CARRERA);
-                                $("#elpromedio").html(valor.PROMEDIO);
-                                $("#loscreditost").html(valor.CREDITOS.split('|')[0]);
-                                $("#loscreditos").html(valor.CREDITOS.split('|')[1]);
-                                $("#etelavance").html(valor.CREDITOS.split('|')[2]);                               
-                                $('#elavance').data('easyPieChart').update(valor.CREDITOS.split('|')[2]);
-                                $("#credpen").html(valor.CREDITOS.split('|')[0]-valor.CREDITOS.split('|')[1]+" Cr&eacute;ditos pend."); 
-                                $("#matcur").html(valor.MATERIAS.split('|')[1]);
- 
-                                $("#matavance").html(valor.MATERIAS.split('|')[2]);
-                                $("#prom_cr").html(valor.PROMEDIO_CR);
-                                $("#prom_sr").html(valor.PROMEDIO_SR);
-
+						
+								$("#prom_cr").html(valor.PROMEDIO_SR);
 								$("#periodos").html(valor.PERIODOS);
+
+                                $("#matPlan").html(valor.MATPLAN);
+								$("#matEspe").html(valor.MATESPE);
+								$("#matCur").html(valor.CURSADAS);
+								$("#matPen").html(valor.MATPEN);
+
+
+								$("#etelavance").html(valor.AVANCECRED);                               
+								$('#elavance').data('easyPieChart').update(valor.AVANCECRED);
+								$("#credtot").html(valor.CREDPEN+" de "+valor.CREDTOT+" Cr&eacute;ditos"); 
+							
 
                                 $("#fondo").css("display","none");
                                 $("#info").css("display","block");
