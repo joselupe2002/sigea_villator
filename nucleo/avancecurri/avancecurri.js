@@ -361,7 +361,7 @@ var elalumno="";
 							   " getPromedio('"+elalumno+"','N') as PROMEDIO_SR, "+
 							   " getInfoPlan('"+elalumno+"','CURSADAS') as CURSADAS, "+
 							   " getInfoPlan('"+elalumno+"','MATPLAN') as MATPLAN, "+
-							   " getInfoPlan('"+elalumno+"','CREDPEN') as CREDPEN, "+
+							   " ifnull(getInfoPlan('"+elalumno+"','CREDPEN'),0) as CREDPEN, "+
 							   " getInfoPlan('"+elalumno+"','CREDTOT') as CREDTOT, "+
 							   " getInfoPlan('"+elalumno+"','MATPEN') as MATPEN, "+
 							   " getInfoPlan('"+elalumno+"','MATESPE') as MATESPE "+
