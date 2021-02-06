@@ -391,7 +391,7 @@ var elalumno="";
 
 								$("#etelavance").html(valor.AVANCECRED);                               
 								$('#elavance').data('easyPieChart').update(valor.AVANCECRED);
-								$("#credtot").html(valor.CREDPEN+" de "+valor.CREDTOT+" Cr&eacute;ditos"); 
+								$("#credtot").html("Pend: "+valor.CREDPEN+" de "+valor.CREDTOT+" Cred."); 
 							
 
                                 $("#fondo").css("display","none");
