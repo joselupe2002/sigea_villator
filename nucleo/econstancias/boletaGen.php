@@ -120,8 +120,24 @@
    	        var $eljefe="";
    	        var $eljefepsto="";
  
+
+               function loadAlumnos()
+               {				
+                   $miConex = new Conexion();
+                   $data=[];
+   
+                   $sql="select distinct(ALUM_MATRICULA) as MATRICULA from falumnos, dlista WHERE ALUCTR=ALUM_MATRICULA ".
+                   "  AND PDOCVE='".$_GET["ciclo"]."' and ALUM_CARRERAREG='".$_GET["carrera"]."'";
+                 
+                   $resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
+                   foreach ($resultado as $row) {
+                       $data[] = $row;
+                   }
+                   return $data;
+               }
+
    	
-			function LoadDatosCursando()
+			function LoadDatosCursando($matr)
 			{				
                 $miConex = new Conexion();
                 $data=[];
@@ -129,7 +145,7 @@
                 $sql="select ID, MATERIA, CICL_MATERIAD as MATERIAD, FECHAINS, IFNULL(LISCAL,'0') AS LISCAL, LISFALT, MATRICULA, NOMBRE, EXTRA, c.CICL_CUATRIMESTRE AS SEM, c.CICL_CREDITO as CREDITOS, ".
                 " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
                 " from vboleta a, falumnos b, veciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
-                " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
+                " AND MATRICULA='".$matr."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
                 " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T') and BAJA='N' and CERRADO='S' ";            
 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
@@ -151,16 +167,16 @@
 				return $data;
 			}
           
-            function LoadDatosAlumnos()
+            function LoadDatosAlumnos($matr)
 			{				
                 $miConex = new Conexion();
                 $sql="select ALUM_MATRICULA,  CONCAT(ALUM_NOMBRE, ' ',ALUM_APEPAT, ' ',ALUM_APEMAT) AS NOMBRE, ".
                 " ALUM_CARRERAREG AS CARRERA, ALUM_ACTIVO AS SITUACION, ALUM_CICLOTER AS CICLOTER, ".
                 " ALUM_CICLOINS AS CICLOINS, CARR_DESCRIP AS CARRERAD, ".
-                " PLACRED, PLAMAT,  c.CLAVEOF AS ESPECIALIDAD, ALUM_MAPA AS MAPA, getPeriodos('".$_GET["matricula"]."','".$_GET["ciclo"]."') as PERIODOS".
+                " PLACRED, PLAMAT,  c.CLAVEOF AS ESPECIALIDAD, ALUM_MAPA AS MAPA, getPeriodos('".$matr."','".$_GET["ciclo"]."') as PERIODOS".
                 " from falumnos a LEFT outer JOIN especialidad c on (a.ALUM_ESPECIALIDAD=c.ID), ccarreras b, mapas d where ".
                 " CARR_CLAVE=ALUM_CARRERAREG".
-                " and ALUM_MAPA=d.MAPA_CLAVE and a.ALUM_MATRICULA='".$_GET["matricula"]."'";
+                " and ALUM_MAPA=d.MAPA_CLAVE and a.ALUM_MATRICULA='".$matr."'";
         
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -223,9 +239,9 @@
 			}
 			
 		
-            function boleta($linea) {
-                $dataAlum = $this->LoadDatosAlumnos();
-                $data = $this->LoadDatosCursando();
+            function boleta($linea, $lamatr) {
+                $dataAlum = $this->LoadDatosAlumnos($lamatr);
+                $data = $this->LoadDatosCursando($lamatr);
                 $dataCiclo = $this->LoadDatosCiclo();
                 $dataGen=$this->LoadDatosGen();
             
@@ -398,10 +414,14 @@
 		$pdf->SetFont('Arial','',10);
 		$pdf->SetMargins(10, 25 , 25);
 		$pdf->SetAutoPageBreak(true,10); 
-        $pdf->AddPage();
-         
-        $pdf->boleta(0);
-        $pdf->boleta(135);
+       
+        $Alumnos = $pdf->LoadAlumnos();
+
+        foreach($Alumnos as $rowAl) {
+            $pdf->AddPage();            
+            $pdf->boleta(0,$rowAl["MATRICULA"]);
+            $pdf->boleta(135,$rowAl["MATRICULA"]);
+        }
  
         $pdf->Output(); 
 

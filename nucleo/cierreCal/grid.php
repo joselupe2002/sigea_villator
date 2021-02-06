@@ -35,7 +35,7 @@
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white; width:98%">
 	    
 	    
 	    
@@ -56,14 +56,23 @@
 			  <button title="Cerrar todas las asignaturas del Profesor" onclick="cerrarTodo()" class="btn btn-xs btn-white btn-danger btn-round">
 		         <i class="ace-icon  blue glyphicon glyphicon-folder-close bigger-140"></i> Cerrar Todo
 			  </button>
-			  <button title="Cerrar todas las asignaturas del Profesor" onclick="boletasAlum()" class="btn btn-xs btn-white btn-danger btn-round">
-		         <i class="ace-icon  blue glyphicon glyphicon-folder-close bigger-140"></i> Bol. Alum.
-			  </button>
+			 
 		 </div>
 	</div>
 	<div class="space-12"></div>
 	<div  class="table-responsive" id="contTabla">
 		 
+	</div>
+
+	<div  class="space-16" id="contTabla">  </div>
+	<div  class="row" id="contTabla" >
+			<div class="col-sm-6" id="contCarreras"> <span class="label label-success">Carrera</span> </div>
+			<div class="col-sm-6" style="padding-top:17px;" >
+				
+				<button title="Cerrar todas las asignaturas del Profesor" onclick="boletasAlum()" class="btn btn-xs btn-white btn-danger btn-round">
+		         <i class="ace-icon  blue glyphicon glyphicon-folder-close bigger-140"></i> Imprimir Boletas Carrera
+				</button>
+			</div>
 	</div>
 				
  
@@ -144,6 +153,7 @@
 			
 			addSELECT("selCiclos","contCiclos","CICLOS", "", "","BUSQUEDA"); 
 			addSELECT("selProfesores","contProfesores","PROPIO", "select EMPL_NUMERO, EMPL_NOMBRE FROM pempleados limit 1", "", "BUSQUEDA"); 
+			addSELECT("selCarreras","contCarreras","PROPIO", "select CARR_CLAVE, CARR_DESCRIP FROM ccarreras where CARR_ACTIVO='S' ORDER BY CARR_DESCRIP", "", "BUSQUEDA"); 
 			
 			
 	    });
@@ -404,6 +414,12 @@ function cerrarTodo() {
 			  });
 } 
 
+	function boletasAlum(){
+		if ($("#selCiclos").val()>0 && $("#selCarreras").val()>0) { 
+			enlace="nucleo/econstancias/boletaGen.php?carrera="+$("#selCarreras").val()+"&ciclo="+$("#selCiclos").val()+"&tipo=1"; 		
+			abrirPesta(enlace,"Boletas"); }
+		else {alert ("Debe elegir Ciclo Escolar y Carrera")}
+	}
 
 
 		</script>
