@@ -368,9 +368,9 @@
 
 
                         
-                        //Firma y sello de contro escolar
-                        
+                        //Firma y sello de contro escolar                        
                         if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {
+                            
                             $dataEsc = $this->LoadDataEscolar('303');			
                             $this->Image($dataEsc[0]["EMPL_SELLO"],70,$linea+90,45);
                             $this->Image($dataEsc[0]["EMPL_FIRMA"],20,$linea+95,40);                            

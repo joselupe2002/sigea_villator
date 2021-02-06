@@ -67,12 +67,15 @@
 	<div  class="space-16" id="contTabla">  </div>
 	<div  class="row" id="contTabla" >
 			<div class="col-sm-6" id="contCarreras"> <span class="label label-success">Carrera</span> </div>
-			<div class="col-sm-6" style="padding-top:17px;" >
-				
-				<button title="Cerrar todas las asignaturas del Profesor" onclick="boletasAlum()" class="btn btn-xs btn-white btn-danger btn-round">
-		         <i class="ace-icon  blue glyphicon glyphicon-folder-close bigger-140"></i> Imprimir Boletas Carrera
+			<div class="col-sm-6" style="padding-top:17px;" >				
+				<button title="Imprimir boletas de todos los alumnos" onclick="boletasAlum(0)" class="btn btn-xs btn-white btn-success btn-round">
+		         <i class="ace-icon  blue fa fa-th-large bigger-140"></i> Boletas Alumnos
+				</button>
+				<button title="Imprimir boletas de todos los alumnos" onclick="boletasAlum(1)" class="btn btn-xs btn-white btn-primary btn-round">
+		         <i class="ace-icon  green fa fa-th-large bigger-140"></i> Boletas Selladas
 				</button>
 			</div>
+
 	</div>
 				
  
@@ -414,9 +417,10 @@ function cerrarTodo() {
 			  });
 } 
 
-	function boletasAlum(){
+	function boletasAlum(tipo){
 		if ($("#selCiclos").val()>0 && $("#selCarreras").val()>0) { 
-			enlace="nucleo/econstancias/boletaGen.php?carrera="+$("#selCarreras").val()+"&ciclo="+$("#selCiclos").val()+"&tipo=1"; 		
+
+			enlace="nucleo/econstancias/boletaGen.php?tipo="+tipo+"&carrera="+$("#selCarreras").val()+"&ciclo="+$("#selCiclos").val(); 		
 			abrirPesta(enlace,"Boletas"); }
 		else {alert ("Debe elegir Ciclo Escolar y Carrera")}
 	}
