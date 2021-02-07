@@ -180,6 +180,14 @@ var miciclo="";
    }  
 
 
+   function agregaPDF(contenedor,mensaje,ruta) {
+	$("#"+contenedor).append("<span class=\" label label-success\">"+mensaje+"</span> <a title=\"Ver Archivo\" onclick=\"previewAdjunto('"+ruta+"');\">"+
+	"                  		<img src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
+	"           </a>");
+   }
+  
+
+
    function OpcionesServicio(){
 
 	var abierto=false;
@@ -220,13 +228,13 @@ var miciclo="";
 													"</div>");
 
 
-							elsql="SELECT IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSSOLSS'),'') AS RUTA_SSSOL, "+
-							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSCARTACOM'),'') AS RUTA_SSCARTACOM, "+
-							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM1'),'') AS RUTA_SSBIM1, "+
-							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM2'),'') AS RUTA_SSBIM2, "+
-							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM3'),'') AS RUTA_SSBIM3, "+
-							" IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSFINAL'),'') AS RUTA_SSFINAL, "+
-							"       IFNULL((select RUTA from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_INFORMEFIN'),'') AS RUTA_SSREPFIN FROM DUAL"; 
+							elsql="SELECT IFNULL((select concat(VALIDADO,'|',RUTA) from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSSOLSS'),'|') AS RUTA_SSSOLSS, "+
+							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSCARTACOM'),'|') AS RUTA_SSCARTACOM, "+
+							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM1'),'|') AS RUTA_SSBIM1, "+
+							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM2'),'|') AS RUTA_SSBIM2, "+
+							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM3'),'|') AS RUTA_SSBIM3, "+
+							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSFINAL'),'|') AS RUTA_SSFINAL "+
+							" FROM DUAL"; 
 	
 							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 							$.ajax({
@@ -234,36 +242,61 @@ var miciclo="";
 								data:parametros,
 								url:  "../base/getdatossqlSeg.php",
 								success: function(data){
+					
+									activaEliminar="";							
+
+									if ((JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[0]!='S'))  {	activaEliminar='S';}					
+									if (JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[0]!='S') {
+										dameSubirArchivoLocal("cont_sssol","Solicitud Firmada","sssol",'servicioSocial','pdf',
+										'ID',usuario,'SOLICITUD FIRMADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOLSS",JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSSOLSS");										
+									} else {
+										agregaPDF("cont_sssol","Solicitud Firmada",JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[1]);
+									}
+
 									activaEliminar="";
-									if (JSON.parse(data)[0]["RUTA_SS_SOL"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("cont_sssol","Solicitud Firmada","sssol",'servicioSocial','pdf',
-									'ID',usuario,'SOLICITUD FIRMADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOLSS",JSON.parse(data)[0]["RUTA_SSSOL"],activaEliminar,usuario+"_"+miciclo+"_SSSOL");
-										
+									if ((JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[0]!='S'))  {	activaEliminar='S';}					
+									if (JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[0]!='S') {				
+										dameSubirArchivoLocal("cont_sscartacom","Carta Compromiso","sscartacom",'servicioSocial','pdf',
+										'ID',usuario,'CARTA COMPROMISO','eadjresidencia','alta',usuario+"_"+miciclo+"_SSCARTACOM",JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSCARTACOM");
+									} else {
+										agregaPDF("cont_sscartacom","Carta Compromiso",JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[1]);
+									}
+
 									activaEliminar="";
-									if (JSON.parse(data)[0]["RUTA_SS_SOL"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("cont_sscartacom","Carta Compromiso","sscartacom",'servicioSocial','pdf',
-									'ID',usuario,'CARTA COMPROMISO','eadjresidencia','alta',usuario+"_"+miciclo+"_SSCARTACOM",JSON.parse(data)[0]["RUTA_SSCARTACOM"],activaEliminar,usuario+"_"+miciclo+"_SSCARTACOM");
-										
+									if ((JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[0]!='S'))  {	activaEliminar='S';}					
+									if (JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[0]!='S') {				
+										dameSubirArchivoLocal("cont_ssbim1","Reportes Bimestre 1","ssbim1",'servicioSocial','pdf',
+										'ID',usuario,'REPORTES BIMESTRE 1','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM1",JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSBIM1");
+									}else {
+										agregaPDF("cont_ssbim1","Reportes Bimestre 1",JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[1]);
+									}
+
 									activaEliminar="";
-									if (JSON.parse(data)[0]["RUTA_SSBIM1"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("cont_ssbim1","Reportes Bimestre 1","ssbim1",'servicioSocial','pdf',
-									'ID',usuario,'REPORTES BIMESTRE 1','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM1",JSON.parse(data)[0]["RUTA_SSBIM1"],activaEliminar,usuario+"_"+miciclo+"_SSBIM1");
-									
+									if ((JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[0]!='S'))  {	activaEliminar='S';}					
+									if (JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[0]!='S') {														
+										dameSubirArchivoLocal("cont_ssbim2","Reportes Bimestre 2","ssbim2",'servicioSocial','pdf',
+										'ID',usuario,'REPORTES BIMESTRE 2','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM2",JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSBIM2");
+									}else {
+										agregaPDF("cont_ssbim2","Reportes Bimestre 2",JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[1]);
+									}
+
 									activaEliminar="";
-									if (JSON.parse(data)[0]["RUTA_SSBIM2"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("cont_ssbim2","Reportes Bimestre 2","ssbim2",'servicioSocial','pdf',
-									'ID',usuario,'REPORTES BIMESTRE 2','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM2",JSON.parse(data)[0]["RUTA_SSBIM2"],activaEliminar,usuario+"_"+miciclo+"_SSBIM2");
-									
+									if ((JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[0]!='S'))  {	activaEliminar='S';}					
+									if (JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[0]!='S') {					
+										dameSubirArchivoLocal("cont_ssbim3","Reportes Bimestre 3","ssbim3",'servicioSocial','pdf',
+										'ID',usuario,'REPORTES BIMESTRE 3','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM3",JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSBIM3");
+									}else {
+										agregaPDF("cont_ssbim3","Reportes Bimestre 3",JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[1]);
+									}
+
 									activaEliminar="";
-									if (JSON.parse(data)[0]["RUTA_SSBIM3"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("cont_ssbim3","Reportes Bimestre 3","ssbim3",'servicioSocial','pdf',
-									'ID',usuario,'REPORTES BIMESTRE 3','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM3",JSON.parse(data)[0]["RUTA_SSBIM3"],activaEliminar,usuario+"_"+miciclo+"_SSBIM3");
-									
-									activaEliminar="";
-									if (JSON.parse(data)[0]["RUTA_FINAL"]!='') {	activaEliminar='S';}					
-									dameSubirArchivoLocal("cont_ssfinal","Documentos Finales","ssfinal",'servicioSocial','pdf',
-									'ID',usuario,'DOCUMENTOS FINALES','eadjresidencia','alta',usuario+"_"+miciclo+"_SSFINAL",JSON.parse(data)[0]["RUTA_SSFINAL"],activaEliminar,usuario+"_"+miciclo+"_SSFINAL");
-									
+									if ((JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[0]!='S'))  {	activaEliminar='S';}					
+									if (JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[0]!='S') {					
+										dameSubirArchivoLocal("cont_ssfinal","Documentos Finales","ssfinal",'servicioSocial','pdf',
+										'ID',usuario,'DOCUMENTOS FINALES','eadjresidencia','alta',usuario+"_"+miciclo+"_SSFINAL",JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSFINAL");
+									}else {
+										agregaPDF("cont_ssfinal","Documentos Finales",JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[1]);
+									}
 
 								}
 							});

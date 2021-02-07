@@ -148,7 +148,7 @@ function veradjss  (modulo,usuario,institucion, campus,essuper){
 
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
-		ss_mostrarAdjuntos(modulo,usuario,institucion, campus,essuper,table.rows('.selected').data()[0]["CICLO"]);
+		ss_mostrarAdjuntos(modulo,usuario,institucion, campus,essuper,table.rows('.selected').data()[0]["CICLO"],table.rows('.selected').data()[0]["MATRICULA"]);
 	}
 	else {
 		alert ("Debe seleccionar un Registro");

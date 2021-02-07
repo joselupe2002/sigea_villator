@@ -60,6 +60,7 @@
 		$pdf->AddFont('Montserrat-ExtraLight','I','Montserrat-ExtraLight.php');
 		$pdf->AddFont('Montserrat-ExtraLight','','Montserrat-ExtraLight.php');
 
+		/*
 		$pdf->SetFont('Montserrat-Black','',9);
 		$pdf->SetY(10);
 		$pdf->Cell(170,5,utf8_decode("TECNOLÓGICO NACIONAL DE MÉXICO"),0,1,'R');
@@ -72,7 +73,7 @@
 		$pdf->SetY(40);
 		$pdf->SetFont('Montserrat-Black','',11);
 		$pdf->Cell(174,5,utf8_decode("CONSTANCIA DE TERMINACIÓN DE SERVICIO SOCIAL"),0,1,'C');
-
+*/
 
 
 		$pdf->SetY(70);
@@ -112,7 +113,7 @@
 
 		$pdf->MultiCell(0,5,utf8_decode('Según documentos que obran en los archivos de esta Institución, el (la) C. ').utf8_decode($data[0]["NOMBRE"]).
 		' con matricula No. '.utf8_decode($data[0]["MATRICULA"]).utf8_decode(', de la carrera de ').utf8_decode($data[0]["CARRERAD"]).
-		utf8_decode(' realizó su Servicio Social  en la dependencia').utf8_decode($data[0]["EMPRESA"]).
+		utf8_decode(' realizó su Servicio Social  en la dependencia ').utf8_decode($data[0]["EMPRESA"]).
 		utf8_decode(', desarrollando las siguiente actividades: ').utf8_decode($lasact).
 		utf8_decode(', cubriendo un mínimo total de 500 horas, durante el período comprendido').$elperiodo.
 		utf8_decode(" con un nivel de desempeño ").utf8_decode($data[0]["CALIFICACION2"]." ".$data[0]["CALIFICACIONL"]),0,'J', false);

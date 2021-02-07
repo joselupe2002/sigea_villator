@@ -3582,11 +3582,9 @@ function residencia_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper
 
 
 /*=========================SOLO PARA EL MODULO DE SERVICIO SOCIAL ===============================*/
-function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo){
-	table = $("#G_"+modulo).DataTable();
-	miciclo=table.rows('.selected').data()[0]["CICLO"];
-	matricula=table.rows('.selected').data()[0]["MATRICULA"];
-	if (table.rows('.selected').data().length>0) {
+function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo,matricula){
+
+	
 			script="<div class=\"modal fade\" id=\"adjuntos\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" > "+
 		       "   <div class=\"modal-dialog modal-lg\" role=\"document\" >"+
 			   "      <div class=\"modal-content\">"+
@@ -3605,6 +3603,7 @@ function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo
 			   "                               <tr>"+	
 			   "                                   <th>Documento</th> "+
 			   "                             	   <th>PDF</th> "+ 
+			   "                             	   <th>VALIDAR</th> "+ 
 			   "                               </tr> "+
 			   "                         </thead>" +
 			   "                   </table>"+	
@@ -3627,17 +3626,17 @@ function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo
 		    
 		    $('#adjuntos').modal({show:true, backdrop: 'static'});
 
-			sqlAsp="SELECT 'SOLICITUD FIRMADA' AS REPORTE,IFNULL((select RUTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_SSSOLSS'),'') AS RUTA FROM DUAL  "+
+			sqlAsp="SELECT 'SSSOLSS' AS TIPO, 'SOLICITUD FIRMADA' as REPORTE FROM DUAL  "+
 					"UNION "+
-					"SELECT 'CARTA COMPROMISO' AS REPORTE,IFNULL((select RUTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_SSCARTACOM'),'') AS RUTA FROM DUAL  "+
+					"SELECT 'SSCARTACOM' AS TIPO, 'CARTA COMPROMISO' AS REPORTE FROM DUAL  "+
 					"UNION "+
-					"SELECT 'REPORTE BIMESTRE 1' AS REPORTE,IFNULL((select RUTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_SSBIM1'),'') AS RUTA FROM DUAL  "+
+					"SELECT 'SSBIM1' AS TIPO, 'REPORTE BIMESTRE 1' AS REPORTE FROM DUAL  "+
 					"UNION "+
-					"SELECT 'REPORTE BIMESTRE 2' AS REPORTE,IFNULL((select RUTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_SSBIM2'),'') AS RUTA FROM DUAL  "+
+					"SELECT 'SSBIM2' AS TIPO, 'REPORTE BIMESTRE 2' AS REPORTE FROM DUAL  "+
 					"UNION "+
-					"SELECT 'REPORTE FINAL' AS REPORTE,IFNULL((select RUTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_SSBIM3'),'') AS RUTA FROM DUAL  "+
+					"SELECT 'SSBIM3' AS TIPO, 'REPORTE FINAL' AS REPORTE FROM DUAL  "+
 					"UNION "+
-					"SELECT 'DOCUMENTOS FINALES' AS REPORTE,IFNULL((select RUTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_SSFINAL'),'') AS RUTA FROM DUAL  ";										
+					"SELECT 'SSFINAL' AS TIPO, 'DOCUMENTOS FINALES' AS REPORTE FROM DUAL  ";										
 
 
 			parametros={sql:sqlAsp,dato:sessionStorage.co,bd:"Mysql"}
@@ -3654,28 +3653,45 @@ function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo
 						  globalUni=1; 
 						  grid_data=JSON.parse(data);	  
 						  jQuery.each(grid_data, function(clave, valor) { 	
-							 
-								$("#cuerpoAsp").append("<tr id=\"rowAsp"+c+"\"></tr>");								
-								$("#rowAsp"+c).append("<td>"+valor.REPORTE+"</td>");	
-							   
-								cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_"+c+"\" href=\""+valor.RUTA+"\">"+
-												   " <img width=\"40px\" height=\"40px\" id=\"pdf"+c+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
-												   " </a>";		
+
+							sqlad="select IFNULL(RUTA,'') AS RUTA, IFNULL(VALIDADO,'N') AS VALIDADO, IFNULL(OBSVALIDADO,'') AS OBSVALIDADO, count(*) as ESTA from eadjresidencia where  AUX='"+matricula+"_"+miciclo+"_"+valor.TIPO+"'";
+							parametros={sql:sqlad,dato:sessionStorage.co,bd:"Mysql"}
+		   					$.ajax({
+								type: "POST",
+								data:parametros,
+								url:  "../base/getdatossqlSeg.php",
+								success: function(dataAdj){  
+									jQuery.each(JSON.parse(dataAdj), function(clave, valorAdj) {
+											$("#cuerpoAsp").append("<tr id=\"rowAsp"+c+"\"></tr>");								
+											$("#rowAsp"+c).append("<td>"+valor.REPORTE+"</td>");
+											grid_data=JSON.parse(data);
+
+											cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_"+c+"\" href=\""+valorAdj.RUTA+"\">"+
+														" <img width=\"40px\" height=\"40px\" id=\"pdf"+c+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
+														" </a>";	
+											$("#rowAsp"+c).append("<td style=\"text-align: center; vertical-align: middle;\">"+cadEnc+"</td>");
 									
-							   $("#rowAsp"+c).append("<td style=\"text-align: center; vertical-align: middle;\">"+cadEnc+"</td>");					
-									
-							   
-								if ((valor.RUTA=='')||(valor.RUTA==null)) { 				    
-									   $('#enlace_'+c).attr('disabled', 'disabled');
-									   $('#enlace_'+c).attr('href', '..\\..\\imagenes\\menu\\pdfno.png');
-									   $('#pdf'+c).attr('src', "..\\..\\imagenes\\menu\\pdfno.png");
-									 }
-				   
-								   c++;
-									  globalUni=c;
-				   
+											if (valorAdj.VALIDADO=='S') {cadValor='N'; mensajebtn="No Validar"; } else {cadValor='S'; mensajebtn="Validar";}
+
+											evento="ss_validaradj('"+valor.TIPO+"','"+miciclo+"','"+matricula+"','"+cadValor+"','"+valorAdj.OBSVALIDADO+"','"+valor.REPORTE+"');";
+											$("#rowAsp"+c).append( "<td><button type=\"button\" class=\"btn btn-white  btn-primary btn-round\" "+
+																"onclick=\""+evento+"\"><strong>"+mensajebtn+"</strong></button><td>");		
+												
+											if ((valorAdj.RUTA=='')||(valorAdj.RUTA==null)) { 				    
+													$('#enlace_'+c).attr('disabled', 'disabled');
+													$('#enlace_'+c).attr('href', '..\\..\\imagenes\\menu\\pdfno.png');
+													$('#pdf'+c).attr('src', "..\\..\\imagenes\\menu\\pdfno.png");
+											}
+												
+											c++;
+											globalUni=c;
+										});
+								
+								}
+							});
+
 									  
-								  });
+						});
 				   
 					   $('.fileSigea').ace_file_input({
 						   no_file:'Sin archivo ...',
@@ -3696,14 +3712,54 @@ function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo
 		                      alert('ERROR: '+data);
 		                  }
 		   });		
-	}
-	else {
-		alert ("Debe seleccionar un Registro");
-		return 0;
-
-		}
 	
 }
+
+function ss_validaradj(tipo,ciclo,matricula,valor,obs, reporte){
+	 $("#confVal").empty();
+	 mostrarConfirm("confVal", "adjuntos",  "Proceso de Cotejo",
+	 "<span class=\"label label-success\">Observaciones "+reporte+"</span>"+
+	 "     <textarea id=\"ss_obsValidado\" style=\"width:100%; height:100%; resize: none;\">"+obs+"</textarea>",
+	 "¿Marcar como Validado? "+
+	 "<SELECT id=\"ss_validado\"><OPTION value=\"S\">SI</OPTION><OPTION value=\"N\">NO</OPTION></SELECT>"
+	 ,"Finalizar Proceso", "ss_btnValidarAdj('"+ciclo+"','"+matricula+"','"+valor+"','"+tipo+"','"+reporte+"');","modal-sm");
+}
+
+
+function ss_btnValidarAdj(ciclo,matricula,valor,tipo, reporte){
+
+	   parametros={
+		   tabla:"eadjresidencia",
+		   campollave:"AUX",
+		   bd:"Mysql",
+		   valorllave:matricula+"_"+ciclo+"_"+tipo,
+		   VALIDADO: valor,
+		   OBSVALIDADO:$("#ss_obsValidado").val()
+		};
+
+	   $.ajax({
+	   type: "POST",
+	   url:"actualiza.php",
+	   data: parametros,
+	   success: function(data){
+		   $('#dlgproceso').modal("hide"); 
+		   status="<span style=\"color:red\"><b>NO VALIDADO</b></span>"; 
+		   cadObs="<b>Favor de Revisar la siguiente Observación:<b><br>"+$("#obsCotejado").val();
+		   if ($("#ss_validado").val()=='S') {status="<span style=\"color:green\"><b> VALIDADO</b></span>"; cadObs="";}
+
+		   correoalAlum(matricula, "<html>Servicio Social: "+reporte+" "+status+
+								"</b></span>."+cadObs
+								,"STATUS DE SOLICITUD SERVICIO SOCIAL "+matricula);
+			$("#adjuntos").modal("hide");
+			$("#confVal").modal("hide");
+			
+			
+			//ss_mostrarAdjuntos("vss_alumnos","","","","",ciclo,matricula);
+
+	   		}					     
+	   });    	
+}
+
 
 /*===================================COMITE ACADEMICOS ===========================================*/
 function addStatusComite(idsol,elestatus,usuario,INSTITUCION,CAMPUS) {
