@@ -1,12 +1,5 @@
 
 
-function changeCALIFICACIONL(elemento, usuario, institucion, campus){
-    
- $("#CALIFICACION2").val($("#CALIFICACIONL option:selected").text().split("-")[0]);
- $('#CALIFICACION2').prop('disabled', 'disabled');
-
-}
-
 function calculaCalif(){
     var prom=60;
     var cal1=((parseFloat($("#REP1EVAL").val())*0.9)+(parseFloat($("#REP1AUTO").val())*0.1)).toFixed(2);
@@ -46,12 +39,6 @@ function calculaCalif(){
                     $('#CALIFICACION2').prop('disabled', 'disabled');																																												
 			    }
 	});	      	      			
-
-    
-
-
-    
-
 }
 
 function changeREP1EVAL(elemento, usuario, institucion, campus){
@@ -68,10 +55,20 @@ function changeREP1AUTO(elemento, usuario, institucion, campus){
 function changeREP2AUTO(elemento, usuario, institucion, campus){
     calculaCalif();
    }
+
    function changeREP3EVAL(elemento, usuario, institucion, campus){
     calculaCalif();
    }
 
 function changeREP3AUTO(elemento, usuario, institucion, campus){
+    calculaCalif();
+   }
+
+
+   function changeREPFEVAL(elemento, usuario, institucion, campus){
+    calculaCalif();
+   }
+
+function changeREPFAUTO(elemento, usuario, institucion, campus){
     calculaCalif();
    }
