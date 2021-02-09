@@ -22,7 +22,7 @@
        }
    
     
-       //echo $sql;
+       echo $sql;
        $res=$miConex->getConsulta($_POST["bd"],$sql);
        
        foreach ($res as $lin) {       	  
