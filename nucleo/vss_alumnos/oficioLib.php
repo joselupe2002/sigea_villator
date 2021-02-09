@@ -124,7 +124,7 @@
 	
 
 		$fechadecof=strtotime($miutil->formatFecha($data[0]["FECHAOF"]));
-		$fechaof=date("d",$fechadecof)." días del mes  de ".$miutil->getMesLetra(date("m",$fechadecof))." de ". $miutil->aletras(date("Y",$fechadecof));
+		$fechaof=date("d",$fechadecof).utf8_decode(" días del mes  de ").$miutil->getMesLetra(date("m",$fechadecof))." de ". $miutil->aletras(date("Y",$fechadecof));
         $pdf->Ln(5);
    
 
