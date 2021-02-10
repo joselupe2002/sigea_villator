@@ -56,19 +56,20 @@
 			
 				$this->SetX(10);$this->SetY(-45);
 				$this->SetFont('Montserrat-ExtraBold','B',8);
-				$this->Cell(50,0,utf8_decode($this->responsable),0,0,'C');
+				//$this->Cell(50,0,utf8_decode($this->responsable),0,0,'C');
 				
 				$this->SetX(10);$this->SetY(-40);
 				$this->Cell(50,0,utf8_decode("RESPONSABLE DE ACTIVIDAD"),0,1,'C');
 			
-				/*
+				
 				$this->SetX(100);$this->SetY(-45);
 				$this->SetFont('Montserrat-ExtraBold','B',8);
 				$this->Cell(250,0,utf8_decode($this->eljefe),0,0,'C');
 				
 				$this->SetX(10);$this->SetY(-40);
 				$this->Cell(250,0,utf8_decode($this->eljefepsto),0,1,'C');
-				*/
+			
+			
 				
 				
 				$this->SetX(10);$this->SetY(-30);
