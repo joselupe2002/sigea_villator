@@ -152,8 +152,8 @@
         $pdf->Ln(5);
        
 		$nombre=$miutil->getJefe('403');//Nombre de actividades complementaras
-        $pdf->eljefe=$jefediv;
-        $pdf->responsable=$nombre;
+        $pdf->eljefe=$nombre;
+        $pdf->responsable=$data[0]["RESPONSABLED"];
         $pdf->eljefepsto="OFICINA DE ACTIVIDADES COMPLEMENTARIAS";
 		
 		/*
