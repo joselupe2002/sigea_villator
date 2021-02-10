@@ -151,10 +151,10 @@
         $pdf->MultiCell(0,8,utf8_decode("Se extiende la presente en la ciudad de Santa María de El Oro, Durango a los ").$eldia.utf8_decode(" días del mes de ").$elmes." de ".$elanio,0,'J', false);
         $pdf->Ln(5);
        
-        
+		$nombre=$miutil->getJefe('403');//Nombre de actividades complementaras
         $pdf->eljefe=$jefediv;
-        $pdf->responsable=$data[0]["RESPONSABLED"];
-        $pdf->eljefepsto=$elpsto;
+        $pdf->responsable=$nombre;
+        $pdf->eljefepsto="OFICINA DE ACTIVIDADES COMPLEMENTARIAS";
 		
 		/*
 
