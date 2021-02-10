@@ -142,6 +142,30 @@ function impLib(modulo,usuario,institucion, campus,essuper){
 }
 
 
+function cartaFin(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+	if (table.rows('.selected').data().length>0) {
+
+		if (table.rows('.selected').data()[0]["FINALIZADO"]=='S') {
+			enlace="nucleo/vss_alumnos/cartafin.php?id="+table.rows('.selected').data()[0]["ID"];
+			abrirPesta(enlace,'Carta Fin.');}
+		else {
+			alert ("El registro de  "+table.rows('.selected').data()[0]["MATRICULA"]+" "+table.rows('.selected').data()[0]["NOMBRE"]+" No esta  Finalizado");
+		}
+
+
+	}
+	else {
+		alert ("Debe seleccionar un registro");
+		return 0;
+
+		}
+
+}
+
+
+
+
 
 	
 function veradjss  (modulo,usuario,institucion, campus,essuper){

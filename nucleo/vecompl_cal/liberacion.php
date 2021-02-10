@@ -157,8 +157,6 @@
         $pdf->eljefepsto="OFICINA DE ACTIVIDADES COMPLEMENTARIAS";
 		
 		/*
-
-		
 		$pdf->eljefe=$data[0]["COMI_AUTORIZOABREVIA"]." ".$data[0]["COMI_AUTORIZOD"];
 		$pdf->eljefepsto=$data[0]["COMI_AUTORIZOFIRMAOF"];
 		*/
