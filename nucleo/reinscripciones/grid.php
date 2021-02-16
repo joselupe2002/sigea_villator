@@ -107,8 +107,8 @@
 											<i class="glyphicon glyphicon-sunglasses blue bigger-140"></i> <span class="btn-small"> Propuesta</span>            
 										</button>
 
-										<button title="Imprimir boleta de reinscripción" onclick="imprimeBoleta();" class="btn btn-white btn-purple  btn-round"> 
-											<i class="ace-icon text-warning fa fa-clipboard bigger-140"></i>Boleta<span class="btn-small"></span>            
+										<button title="Imprimir Horario de reinscripción" onclick="imprimeBoleta();" class="btn btn-white btn-purple  btn-round"> 
+											<i class="ace-icon text-warning fa fa-clipboard bigger-140"></i>Horario<span class="btn-small"></span>            
 										</button>
 
 										<button title="Agregar asignaturas de otros periodos con condiciones" onclick="agregarCondiciones();" class="btn btn-white btn-info btn-round" value="Agregar"> 

@@ -158,6 +158,20 @@
 				return $data;
             }
             
+
+            function LoadJefe()
+			{				
+                $miConex = new Conexion();
+                $sql="SELECT concat(EMPL_ABREVIA,' ',EMPL_MNOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS NOMBRE, EMPL_FRIMAOF AS FIRMAOF FROM falumnos, ccareras, pemepleados where ALUM_MATRICULA='".$_GET["matricula"]."'".
+                " and CARR_CLAVE=ALUM_CARRERAREG and EMPL_NUMERO=CARR_JEFE ";
+                
+				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+			}
+
             function LoadDatosCiclo()
 			{				
                 $miConex = new Conexion();
@@ -219,6 +233,9 @@
 				$this->Ln(5);	
 			}
 			
+          
+            
+
 			
 
 			function Footer()
@@ -245,6 +262,7 @@
                 $dataCiclo = $this->LoadDatosCiclo();
                 $dataCreditos = $this->LoadDatosCreditos();
                 $dataGen = $this->LoadDatosGen();
+                $dataJefe = $this-> LoadJefe();
 
             
                 $miutil = new UtilUser();                
@@ -347,11 +365,14 @@
 
                 $this->SetFont('Montserrat-ExtraBold','',8);
                 
-                $this->setX(10);$this->setY(($linea+122));        
+                $this->setX(10);$this->setY(($linea+122));     
+                
+                $nombre= $dataJefe[0]["NOMBRE"];
+                $psto= $dataJefe[0]["PUESTO"];
                 $this->Cell(80,5,utf8_decode($nombre),'T',0,'L');
                 $this->setX(10);$this->setY(($linea+125));
-                $this->SetFont('Montserrat-SemiBold','',8);
-                $this->Cell(0,5,"JEFE(A) DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",'',0,'L');
+                $this->SetFont('Montserrat-SemiBold','',8);                
+                $this->Cell(0,5,$psto,'',0,'L');
 
                /*
                 $this->setX(0);$this->setY(140);
