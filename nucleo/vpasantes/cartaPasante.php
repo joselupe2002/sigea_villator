@@ -253,7 +253,7 @@
         $pdf->Ln(10);
         $pdf->SetFont('Montserrat-Medium','B',10);     
         $pdf->MultiCell(0,5,utf8_decode("DE ACUERDO CON LO QUE ESTABLECE LA LEY GENERAL DE PROFESIONES Y EL REGLAMENTO ".
-        "RESPECTIVO, EXPIDIÉNDOSE LA PRESENTE EN LA CIUDAD DE EL ORO, ESTADO DE DURANGO, A LOS ".strtoupper($fechapie)),0,'J',FALSE);
+        "RESPECTIVO, EXPIDIÉNDOSE LA PRESENTE EN LA CIUDAD SANTA MARÍA DEL ORO, ESTADO DE DURANGO, A LOS ".strtoupper($fechapie)),0,'J',FALSE);
         $pdf->Ln(5);
 
         $pdf->setX(10);
@@ -300,7 +300,7 @@
 				  $miutil->getMesLetra(date("m", strtotime($fechadecof)))." DEL AÑO ". 
 				  $miutil->aletras(date("Y", strtotime($fechadecof)));
         $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE EL ORO, ESTADO DE DURANGO A LOS ".
+        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE SANTA MARÍA DEL ORO, ESTADO DE DURANGO A LOS ".
 		strtoupper($fechapie).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
 	
         $pdf->Ln(5);
