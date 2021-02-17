@@ -49,9 +49,10 @@ function changeCICL_MAPA(DATO, usuario, institucion, campus){
                  $("#CVEMAPASIE").prop('disabled', true);                                  
            
                });
-
+              
                agregarEspera("imggif_CVEESP",null);
-               elsql="SELECT ID, CONCAT(CLAVE,' ',DESCRIP) FROM especialidad u where u.MAPA='"+$("#CICL_MAPA").val()+"'";   
+               elsql="SELECT ID, CONCAT(CLAVE,' ',DESCRIP,' ',CLAVEOF) FROM especialidad u where u.MAPA='"+$("#CICL_MAPA").val()+"' UNION SELECT '0','NO ES DE ESPECIALIDAD' FROM DUAL ORDER BY 1 DESC";   
+            
             
                parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql",sel:'0'}
                $.ajax({
@@ -63,8 +64,10 @@ function changeCICL_MAPA(DATO, usuario, institucion, campus){
                    $("#CVEESP").html(data);                               
                    $('#CVEESP').trigger("chosen:updated");                   
                    quitarEspera("imggif_CVEESP",null);
+                   
                   }
                });
+            
 
          },
          error: function(data) {

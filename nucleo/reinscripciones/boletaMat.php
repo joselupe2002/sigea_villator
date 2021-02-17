@@ -162,7 +162,8 @@
             function LoadJefe()
 			{				
                 $miConex = new Conexion();
-                $sql="SELECT concat(EMPL_ABREVIA,' ',EMPL_MNOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS NOMBRE, EMPL_FRIMAOF AS FIRMAOF FROM falumnos, ccareras, pemepleados where ALUM_MATRICULA='".$_GET["matricula"]."'".
+                $sql="SELECT concat(EMPL_ABREVIA,' ',EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS NOMBRE, EMPL_FIrMAOF AS ".
+                " PUESTO FROM falumnos, ccarreras, pempleados where ALUM_MATRICULA='".$_GET["matricula"]."'".
                 " and CARR_CLAVE=ALUM_CARRERAREG and EMPL_NUMERO=CARR_JEFE ";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
@@ -372,7 +373,7 @@
                 $this->Cell(80,5,utf8_decode($nombre),'T',0,'L');
                 $this->setX(10);$this->setY(($linea+125));
                 $this->SetFont('Montserrat-SemiBold','',8);                
-                $this->Cell(0,5,$psto,'',0,'L');
+                $this->Cell(0,5,utf8_decode($psto),'',0,'L');
 
                /*
                 $this->setX(0);$this->setY(140);
