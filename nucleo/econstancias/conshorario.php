@@ -263,7 +263,7 @@
         str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$loscre."|AVANCE:".$dataAlum[0]["AVANCE"];     
         $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,40,28,28); 
 
-        /*
+        
         $miutil = new UtilUser();
         $elsem=$miutil->dameCardinal($dataAlum[0]["PERIODOS"]);
         $pdf->MultiCell(0,5,utf8_decode("LA (EL) QUE SUSCRIBE, HACE CONSTAR, QUE SEGÚN EL ARCHIVO ESCOLAR, LA (EL) ".
@@ -324,7 +324,7 @@
         
         $pdf->Ln(5);
 
-       */
+       
          $pdf->Output(); 
 
 
