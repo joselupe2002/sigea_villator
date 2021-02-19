@@ -2363,7 +2363,8 @@ function grabafechaplan(materia,grupo,ciclo,tema,subtema,id){
 			 type: "POST",
 			 url:"../base/grabadetalle.php",
 			 data: parametros,
-			 success: function(data){		
+			 success: function(data){	
+				 console.log("SUCCESS: "+data);	
 				 if (data.length>0) {alert ("Ocurrio un error: "+data);}					                      	                                        					          
 			 }					     
 		 });    	 
