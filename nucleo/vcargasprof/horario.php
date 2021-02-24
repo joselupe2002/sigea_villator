@@ -356,10 +356,8 @@
 		$dataEmpl = $pdf->getDatosPersona($_GET["ID"]);
 		$dataCiclo = $pdf->LoadCiclo();
 		
-
-	
-		$logo = file_get_contents($dataEmpl[0]["EMPL_FOTO"]);
-		$pdf->MemImage($logo,10,40,20);
+		//$logo = file_get_contents($dataEmpl[0]["EMPL_FOTO"]);
+		//$pdf->MemImage($logo,10,40,20);
 
 		
 		$pdf->Ln(10);
