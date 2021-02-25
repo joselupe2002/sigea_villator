@@ -279,7 +279,7 @@
         $pdf->SetFont('Montserrat-Medium','',10);
         $fechadecof=$miutil->formatFecha($dataCom[0]["FECHACOMITE"]);
         $fechaof=date("d", strtotime($fechadecof))." DE ".$miutil->getFecha($fechadecof,'MES'). " DEL ".date("Y", strtotime($fechadecof));
-        $fechaof2=$miutil->utf8_decode(aletras(date("d",strtotime($fechadecof)))).utf8_decode(" DÍAS DEL MES DE ").
+        $fechaof2=$miutil->aletras(date("d",strtotime($fechadecof))).utf8_decode(" DÍAS DEL MES DE ").
                             $miutil->getFecha($fechadecof,'MES'). utf8_decode(" DEL AÑO "). $miutil->aletras(date("Y", strtotime($fechadecof)));
 
         $pdf->Cell(0,5,strtoupper(utf8_decode($fechaof)),0,0,'C');

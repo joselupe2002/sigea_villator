@@ -288,9 +288,9 @@ class UtilUser {
 	function basico($numero) {
 		$valor = array ('uno','dos','tres','cuatro','cinco','seis','siete','ocho',
 		'nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho',
-		'diecinueve','veinte','veintiuno','veintidós','veintitrés',
+		'diecinueve','veinte','veintiuno','veintidos','veintitres',
 		 'veinticuatro','veinticinco',
-		'veintiséis','veintisiete','veintiocho','veintinueve');
+		'veintiseis','veintisiete','veintiocho','veintinueve');
 		return $valor[$numero - 1];
 		}
 		
@@ -335,13 +335,13 @@ class UtilUser {
 		}
 		
 	function millones($n) {
-		if($n == 1000000) {return 'un millón';}
+		if($n == 1000000) {return 'un millon';}
 		else {
 		$l = strlen($n);
 		$c = (int)substr($n,0,$l-6);
 		$x = (int)substr($n,-6);
 		if($c == 1) {
-		$cadena = ' millón ';
+		$cadena = ' millon ';
 		} else {
 		$cadena = ' millones ';
 		}
