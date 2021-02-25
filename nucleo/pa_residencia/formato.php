@@ -169,7 +169,7 @@
 			function Header()
 			{
 				
-
+               /*
 				$this->SetY(20);$this->SetX(20);
 				$this->Cell(45,18,"",1,0,'L',false); //donde esta el logo
 				$this->SetFont('Times','B',11);
@@ -199,6 +199,18 @@
 				$this->Cell(40,3,"08 DE ENERO 2020","",0,'C',false);
 				$this->SetY(35);$this->SetX(155);
 				$this->Cell(40,3,"VERSION 2015","BR",0,'C',false);
+				*/
+
+				$miutil = new UtilUser();
+				$miutil->getEncabezado($this,'V');		
+				
+			}
+		
+			function Footer()
+			{				
+				$miutil = new UtilUser();
+				$miutil->getPie($this,'V');
+			
 				
 			}
 		
@@ -221,6 +233,12 @@
 
 		$data = $pdf->LoadData();
 		$pdf->SetFont('Times','',10);
+
+	
+		$pdf->SetFont('Times','B',10);
+		$pdf->Cell(0,0,utf8_decode("SOLICITUD DE ANTEPROYECTO DE RESIDENCIA PROFESIONAL"),"",0,'C',false);
+		$pdf->Ln(5);
+
 		$pdf->SetWidths(array(60, 115));
 		$pdf->Row(array(utf8_decode("NOMBRE DEL PROYECTO"),utf8_decode($data[0]["PROYECTO"])));
 
