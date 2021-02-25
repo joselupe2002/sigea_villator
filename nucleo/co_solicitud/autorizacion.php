@@ -18,6 +18,17 @@
    	        var $eljefe="";
    	        var $eljefepsto="";
  
+
+			function LoadPresidente()
+			{				
+				$miConex = new Conexion();
+				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT NOMBRE FROM co_integrantes where PUESTO='PRESIDENTE'");				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+			}
+
    	
 			function LoadData()
 			{				
@@ -106,6 +117,7 @@
 	
 		
 		$dataGen = $pdf->LoadDatosGen();
+		$dataPres = $pdf->LoadPresidente();
 	
 		
 		$dataof=$miutil->verificaOficio('101',"AUTCOMITE",$_GET["id"]);
@@ -115,7 +127,9 @@
 		
 		
 		$dirgen=$miutil->getJefe('101');
-		$diracad=$miutil->getJefe('301');
+		
+		//$diracad=$miutil->getJefe('301');
+		
 
 	
 		if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {			
@@ -131,7 +145,7 @@
 		$pdf->Cell(0,0,'OFICIO No. '.utf8_decode($dataof[0]["CONT_NUMOFI"]),0,1,'R');
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Ln(20);
-		$pdf->Cell(0,0,utf8_decode($diracad),0,1,'L');
+		$pdf->Cell(0,0,utf8_decode($dataPres[0]["NOMBRE"]),0,1,'L');
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,utf8_decode("PRESIDENTE DEL COMITÉ ACADÉMICO"),0,1,'L');
 		$pdf->Ln(10);

@@ -365,12 +365,12 @@
 		$miutil = new UtilUser();
         $subacad=$miutil->getJefe('304');//Nombre del puesto de Recursos Humanos
 		
-		
+		/*
 		$pdf->Ln(5);		
 		$pdf->Cell(175,5,utf8_decode("Vo. Bo."),"",1,'C',false);
 		$pdf->Cell(50,5,"","",0,'C',false); $pdf->Cell(75,5,utf8_decode($subacad),"T",0,'C',false);$pdf->Cell(50,5,"","",1,'C',false); 
 		$pdf->Cell(50,5,"","",0,'C',false); $pdf->Cell(75,5,utf8_decode("Nombre y Firma (Subdirector(a) Académico)"),"",0,'C',false);$pdf->Cell(50,5,"","",1,'C',false); 
-
+        */
 
 		$pdf->Output();
 

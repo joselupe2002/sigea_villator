@@ -285,7 +285,7 @@
         $pdf->Cell(0,5,strtoupper(utf8_decode($fechaof)),0,0,'C');
 
         $pdf->Ln(5);
-        $cad="EN LA CIUDAD DE ".utf8_decode($dataGen[0]["inst_fechaof"])." A LOS ".$fechaof2. " SIENDO LAS ".$dataCom[0]["HORAINI"]." HORAS".
+        $cad="EN LA CIUDAD DE ".utf8_decode($dataGen[0]["inst_fechaof"])." A LOS ".utf8_decode($fechaof2). " SIENDO LAS ".$dataCom[0]["HORAINI"]." HORAS".
         ", SE REUNEN EN ".utf8_decode($dataCom[0]["LUGAR"])." A FIN DE CELEBRAR LA ".utf8_decode($dataCom[0]["COMITED"]).utf8_decode(", DEL COMITÉ ACADÉMICO, DEL ").
         utf8_decode($dataGen[0]["inst_razon"]." ");
 
