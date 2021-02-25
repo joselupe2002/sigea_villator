@@ -466,8 +466,8 @@ function guardarPag1(){
 	parametros={
 		tabla:"aspirantes",
 		bd:"Mysql",
-		campollave:"CURP",
-		valorllave:$("#CURP").val().toUpperCase(),		
+		campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,	
 			APEPAT:$("#APEPAT").val().toUpperCase(),
 			APEMAT:$("#APEMAT").val().toUpperCase(),
 			NOMBRE:$("#NOMBRE").val().toUpperCase(),
@@ -491,8 +491,8 @@ function guardarPag2(){
 		parametros={
 			tabla:"aspirantes",
 			bd:"Mysql",
-			campollave:"CURP",
-			valorllave:$("#CURP").val().toUpperCase(),
+			campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,
 			NACIONALIDAD: $("#NACIONALIDAD").val(),	
 			NACIONALIDAD_ADD : $("#NACIONALIDAD_ADD").val().toUpperCase(),
 			FECHANAC: $("#FECHANAC").val(),
@@ -525,8 +525,8 @@ function guardarPag3(){
 	parametros={
 		tabla:"aspirantes",
 		bd:"Mysql",
-		campollave:"CURP",
-		valorllave:$("#CURP").val().toUpperCase(),
+		campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,
 		
 		ESTESCPROC: $("#ESTESCPROC").val() ,
 	    ESCPROC: $("#ESCPROC").val() , 
@@ -555,8 +555,8 @@ function guardarPag4(){
 	parametros={
 		tabla:"aspirantes",
 		bd:"Mysql",
-		campollave:"CURP",
-		valorllave:$("#CURP").val().toUpperCase(),
+		campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,
 		
 		    ESTRES: $("#ESTRES").val() , 
 			MUNRES: $("#MUNRES").val() , 
@@ -591,8 +591,8 @@ function guardarPag5(){
 	parametros={
 		tabla:"aspirantes",
 		bd:"Mysql",
-		campollave:"CURP",
-		valorllave:$("#CURP").val().toUpperCase(),
+		campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,
 		
 		SM : $("#SM").val() ,
 		SMNUMERO: $("#SMNUMERO").val() ,
@@ -623,8 +623,8 @@ function guardarPag6(){
 	parametros={
 		tabla:"aspirantes",
 		bd:"Mysql",
-		campollave:"CURP",
-		valorllave:$("#CURP").val().toUpperCase(),
+		campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,
 		TUTOR: $("#TUTOR").val().toUpperCase() , 
 		ESTTUTOR: $("#ESTTUTOR").val() ,
 		MUNTUTOR: $("#MUNTUTOR").val() ,
@@ -657,8 +657,8 @@ function finalizar(){
 	parametros={
 		tabla:"aspirantes",
 		bd:"Mysql",
-		campollave:"CURP",
-		valorllave:$("#CURP").val().toUpperCase(),
+		campollave:"CONCAT(CURP,CICLO)",
+		valorllave:$("#CURP").val().toUpperCase()+elciclo,
 		FINALIZADO:"S"
 		};
 
