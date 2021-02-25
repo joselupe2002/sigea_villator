@@ -12,12 +12,11 @@ var elciclo="";
 			data:parametros,
 			url:  "../nucleo/base/getdatossqlSeg.php",
 			success: function(data){	
-		 
+		 				
 					if (!(JSON.parse(data)[0]["hay"]>0)) {window.location.href="cerrado.php";}
-
-				   jQuery.each(JSON.parse(data), function(clave, valor) { 	
-					  elciclo=valor.CICL_CLAVE;							  	  
-								   }); 				   
+					elciclo=JSON.parse(data)[0]["CICL_CLAVE"];		
+					
+							   
 				  },
 			error: function(data) {	                  
 					   alert('ERROR: '+data);
@@ -430,9 +429,7 @@ var elciclo="";
 	});
 	
 function guardarGen(){
-
-	var f = new Date();
-	
+	var f = new Date();	
 	fechacap=pad(f.getDate(),2) + "/" + pad((f.getMonth() +1),2) + "/" + f.getFullYear()+" "+ f.getHours()+":"+ f.getMinutes()+":"+ f.getSeconds();
 	var laclave = pad(f.getDate(),2)+pad((f.getMonth() +1),2) +f.getFullYear()+Math.floor(Math.random()*1000);
 
@@ -729,7 +726,7 @@ function cargarAdjuntos() {
 	contFila=0;
 	contDatos=1;
 	elsqlAdj="select IDDOC, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, "+
-			 " (SELECT CICL_CLAVE FROM ciclosesc where CICL_ADMISION='S' ORDER BY CICL_ORDEN DESC LIMIT 1) AS CICLO "+
+			 " (SELECT CICL_CLAVE FROM ciclosesc where CICL_REGISTROLINEA='S' ORDER BY CICL_ORDEN DESC LIMIT 1) AS CICLO "+
 	         " from documaspirantes a "+
 	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat(a.CLAVE,'_','"+$("#CURP").val()+"','_','"+elciclo+"'))"+
 			 " WHERE a.ENLINEA='S' and a.MODULO='REGISTRO' order by TIPOADJ, DOCUMENTO";
