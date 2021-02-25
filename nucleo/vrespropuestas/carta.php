@@ -14,6 +14,18 @@
    	        var $eljefe="";
    	        var $eljefepsto="";
  
+
+			function LoadJefe($mat)
+			   {				
+				   $miConex = new Conexion();
+				   $resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT CONCAT(EMPL_ABREVIA,' ',EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS NOMBRE, EMPL_FIRMAOF from falumnos, ccarreras, pempleados ".
+				   " where ALUM_MATRICULA='".$mat."' and ALUM_CARRERAREG=CARR_CLAVE AND EMPL_NUMERO=CARR_JEFE ");				
+				   foreach ($resultado as $row) {
+					   $data[] = $row;
+				   }
+				   return $data;
+			   }
+
 			function LoadData()
 			{				
 				$miConex = new Conexion();
@@ -55,10 +67,6 @@
 				$this->SetFont('Montserrat-ExtraLight','I',8);
 				$this->Cell(0,0,utf8_decode('Excelencia en Educación Tecnológica'),0,1,'L');
 
-				$this->SetX(10);$this->SetY(-52);
-				$this->SetFont('Montserrat-ExtraLight','I',8);
-				$this->Cell(0,0,utf8_decode('Habilidad-actitud-conocimiento'),0,1,'L');
-
 				
 				$this->SetX(10);$this->SetY(-45);
 				$this->SetFont('Montserrat-ExtraBold','B',10);
@@ -89,6 +97,8 @@
 		 
 		$data = $pdf->LoadData();
 		$miutil = new UtilUser();
+
+		$dataJefe=$pdf->LoadJefe($data[0]["MATRICULA"]);
 		$fechadec=$miutil->formatFecha($data[0]["INICIA"]);
 		$fechaini=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
 		
@@ -105,10 +115,10 @@
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
 		
 		
-		$ss=$miutil->getJefe('521'); //empleado servicio social y residencia
-		$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMAOF");
-		$pdf->eljefe=$ss;
-		$pdf->eljefepsto=$elpsto;
+		//$ss=$miutil->getJefe('521'); //empleado servicio social y residencia
+		//$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMAOF");
+		$pdf->eljefe=$dataJefe[0]["NOMBRE"];
+		$pdf->eljefepsto=$dataJefe[0]["EMPL_FIRMAOF"];
 		
 		
 		$pdf->SetFont('Montserrat-Medium','',9);
