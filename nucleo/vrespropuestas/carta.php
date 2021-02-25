@@ -115,10 +115,10 @@
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
 		
 		
-		//$ss=$miutil->getJefe('521'); //empleado servicio social y residencia
-		//$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMAOF");
-		$pdf->eljefe=$dataJefe[0]["NOMBRE"];
-		$pdf->eljefepsto=$dataJefe[0]["EMPL_FIRMAOF"];
+		$ss=$miutil->getJefe('521'); //empleado servicio social y residencia
+		$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMAOF");
+		//$pdf->eljefe=$dataJefe[0]["NOMBRE"];
+		//$pdf->eljefepsto=$dataJefe[0]["EMPL_FIRMAOF"];
 		
 		
 		$pdf->SetFont('Montserrat-Medium','',9);
