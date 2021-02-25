@@ -117,6 +117,10 @@
 		
 		$ss=$miutil->getJefe('521'); //empleado servicio social y residencia
 		$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMAOF");
+		$pdf->eljefe=$ss;
+		$pdf->eljefepsto=$elpsto;
+
+
 		//$pdf->eljefe=$dataJefe[0]["NOMBRE"];
 		//$pdf->eljefepsto=$dataJefe[0]["EMPL_FIRMAOF"];
 		
