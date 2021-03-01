@@ -256,10 +256,7 @@
                 $this->SetFont('Montserrat-Black','B',9);
                 $this->Ln(6);
                 $this->Cell(0,0,utf8_decode('Instituto Tecnológico Superior de Santa María El Oro'),0,0,'R');
-                
-                $this->SetFont('Montserrat-Medium','B',8);
-                $this->Ln(6);
-                $this->Cell(0,0,utf8_decode('"2020, Año de Leona Vicario, Benemérita Madre de la Patria"'),0,0,'C');
+            
 			}
 			
 			
