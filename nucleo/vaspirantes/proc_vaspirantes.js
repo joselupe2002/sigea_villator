@@ -197,7 +197,7 @@ function verPago(modulo,usuario,essuper){
 
 		    
 			sqlAsp="SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where "+
-				   " b.AUX=CONCAT(PAGO_','"+table.rows('.selected').data()[0]["CURP"]+"_','"+table.rows('.selected').data()[0]["CICLO"]+"')";		          
+				   " b.AUX=CONCAT('PAGO_','"+table.rows('.selected').data()[0]["CURP"]+"_','"+table.rows('.selected').data()[0]["CICLO"]+"')";		          
 			parametros={sql:sqlAsp,dato:sessionStorage.co,bd:"Mysql"}
 		    $.ajax({
 				   type: "POST",
@@ -659,7 +659,8 @@ function setInscrito(id,valor, ciclo){
 function inscribirAspirante(lafila,modulo,institucion, campus) {
 	res="";
 	var table = $("#G_"+modulo).DataTable();	
-	var hoy= new Date();		
+	var hoy= new Date();	
+	alert (lafila[0]["CICLO"]);	
 	
 	elanio="20"+lafila[0]["CICLO"].substring(1,3);
 	elaniomat=elanio.toString().substring(2,4);
