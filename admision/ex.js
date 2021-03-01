@@ -74,9 +74,6 @@ function cargarResultados(resultado) {
 		"inscripción será nula, en cualquier momento, aunque haya realizado el pago por concepto de inscripción "+
 		"o cursado asignaturas, y las consecuencias que deriven de lo anterior solo son imputables a quien realiza el pago.<br><br>"+
 
-		"<span class=\"badge badge-danger \" style=\"font-size:18px;\"><b> Fecha de Inscripción en línea : A partir de la presente fecha hasta el día 28 de Agosto del presente año.</b></span><br><br>"+
-
-
 		"Como primer paso para su inscripción debe adjuntar la siguiente documentación "+
 		" es necesario que suba en el sistema la siguiente documentación:"+
 		"<div class=\"alert alert-danger\">"+
@@ -663,7 +660,7 @@ function cargarAdjuntos() {
 	elsqlAdj="select IDDOC, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, "+
 			 " (SELECT CICL_CLAVE FROM ciclosesc where CICL_ADMISION='S' ORDER BY CICL_ORDEN DESC LIMIT 1) AS CICLO "+
 	         " from documaspirantes a "+
-	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat(a.CLAVE,'"+usuario+"'))"+
+	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat(a.CLAVE,'_','"+usuario+"','_','"+elciclo+"'))"+
 			 " WHERE a.ENLINEA='S' and a.MODULO='INSCRIPCION' order by TIPOADJ, DOCUMENTO";
 			 parametros={sql:elsqlAdj,dato:sessionStorage.co,bd:"Mysql"}
 	$.ajax({
@@ -735,9 +732,9 @@ function cargarAdjuntos() {
 					cadFile="<div class=\"col-sm-4\">"+											
 					"            <span class=\"text-primary\"><strong>"+utf8Decode(valor.DOCUMENTO)+"</strong></span>"+											
 					"            <input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
-					"                   onchange=\"subirPDFDriveSaveAsp('file_"+valor.CLAVE+"','ASPIRANTES_"+valor.CICLO+"','pdf_"+
+					"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','docAspira','pdf_"+
 												  valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+
-												  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+valor.CLAVE+usuario+"');\">"+
+												  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+valor.CLAVE+"_"+$("#CURP").val()+"_"+elciclo+"','"+valor.CLAVE+"_"+$("#CURP").val()+"_"+elciclo+"');\">"+
 					"           <input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
 					"        </div>"+
 					"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
@@ -745,9 +742,9 @@ function cargarAdjuntos() {
 					"                 <img class=\"imgadj\" cargado=\"S\" width=\"40px\" height=\"40px\" id=\"pdf_"+valor.CLAVE+"\" name=\"pdf_"+valor.CLAVE+"\" src=\"..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
 					"           </a>"+
 					"           <i style=\""+stElim+"\"  id=\"btnEli_RUTA_"+valor.CLAVE+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
-					"            onclick=\"eliminarEnlaceDriveAsp('file_"+valor.CLAVE+"','ASPIRANTES_"+valor.CICLO+"',"+
+					"            onclick=\"eliminarEnlaceCarpeta('file_"+valor.CLAVE+"','docAspira',"+
 					"                      'pdf_"+valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
-					"                      'adjaspirantes','alta','"+valor.CLAVE+usuario+"');\"></i> "+              				                        
+					"                      'adjaspirantes','alta','"+valor.CLAVE+"_"+$("#CURP").val()+"_"+elciclo+"','PDF');\"></i> "+              				                        
 					"      </div> ";
 
 					
