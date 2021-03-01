@@ -233,32 +233,16 @@
 
 			
 			function Header()
-			{
-                $miutil = new UtilUser();    
-                $left2=120; $left3=170;         
-                $this->Image('../imagenes/empresa/enc1.png',20,8,85);
-                $this->Image('../imagenes/empresa/enc2.png',$left2,6,40);
-                $this->Image('../imagenes/empresa/enc3.png',$left3,8,10);
-                $this->Image('../imagenes/empresa/fondo.png',0,0,187,275);
-                
-                $this->AddFont('Montserrat-Black','B','Montserrat-Black.php');
-                $this->AddFont('Montserrat-Black','','Montserrat-Black.php');
-                $this->AddFont('Montserrat-Medium','B','Montserrat-Medium.php');
-                $this->AddFont('Montserrat-Medium','','Montserrat-Medium.php');
-                $this->AddFont('Montserrat-SemiBold','','Montserrat-SemiBold.php');
-                $this->AddFont('Montserrat-SemiBold','B','Montserrat-SemiBold.php');
-                $this->AddFont('Montserrat-ExtraBold','B','Montserrat-ExtraBold.php');
-                $this->AddFont('Montserrat-ExtraBold','','Montserrat-ExtraBold.php');
-                $this->AddFont('Montserrat-ExtraBold','I','Montserrat-ExtraBold.php');
-                $this->AddFont('Montserrat-ExtraLight','I','Montserrat-ExtraLight.php');
-                $this->AddFont('Montserrat-ExtraLight','','Montserrat-ExtraLight.php');
-                
-                $this->SetFont('Montserrat-Black','B',9);
-                $this->Ln(6);
-                $this->Cell(0,0,utf8_decode('Instituto Tecnológico Superior de Santa María El Oro'),0,0,'R');
-            
+			{     
+                $miutil = new UtilUser();
+                $miutil->getEncabezado($this,'V2');	                 
 			}
 			
+            function Footer()
+			{				
+				$miutil = new UtilUser();
+				$miutil->getPie($this,'H2');
+            }
 			
             
             function ficha() {

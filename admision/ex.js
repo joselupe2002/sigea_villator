@@ -21,8 +21,9 @@ var arr_preguntas=[];
 	    window.location.hash="Red" //chrome
 		window.onhashchange=function(){window.location.hash="red";}
 		
-		
+	
 		cargarFoto();
+
 
 		if ((aceptado=='N') && (abiertoExa=='S')) {			
 			cargarExamenes();
@@ -30,12 +31,14 @@ var arr_preguntas=[];
 		else if ((abiertoRes=='S')) {
 			elsql="select ACEPTADO, ENVIODOCINS, CICLO from aspirantes, ciclosesc  where CICLO=CICL_CLAVE AND CICL_ACIERTORES='S' AND  CURP='"+usuario+"'";
 
+			
 			parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 			$.ajax({
 				type: "POST",
 				data:parametros,
 				url:  "../nucleo/base/getdatossqlSeg.php",
 				success: function (dataExa) {
+					
 					elciclo=JSON.parse(dataExa)[0][2];
 					enviodocins=JSON.parse(dataExa)[0][1];
 					cargarResultados(JSON.parse(dataExa)[0][0]);
@@ -655,7 +658,7 @@ function cambioRespuesta(idpreg,num,opcion,puntaje,idexa,idaplica){
 /*============================CARGA DE DATOS ADJUNTOS ===============================*/
 
 function cargarAdjuntos() {
-	alert (elciclo);
+
 	contFila=0;
 	contDatos=1;
 	elsqlAdj="select IDDOC, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, "+
