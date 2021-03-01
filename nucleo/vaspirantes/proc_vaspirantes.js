@@ -212,7 +212,7 @@ function verPago(modulo,usuario,essuper){
 						   });			
 						   
 						   if (entre) {
-							previewAdjunto(ruta;							   
+							previewAdjunto(ruta);							   
 						   }
 						   else {alert ("No se adjunto documento de pago");}
 		        	        		        	    
