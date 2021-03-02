@@ -87,7 +87,7 @@ function veradjprop  (modulo,usuario,institucion, campus,essuper){
 
 }
 
-
+/*============================SUBIR CARTA DE PRESENTACION ]=============================*/
 function subirCarta(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
 	ladefault="..\\..\\imagenes\\menu\\pdf.png";

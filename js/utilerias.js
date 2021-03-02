@@ -3629,6 +3629,10 @@ function ss_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper,miciclo
 
 			sqlAsp="SELECT 'SSSOLSS' AS TIPO, 'SOLICITUD FIRMADA' as REPORTE FROM DUAL  "+
 					"UNION "+
+					"SELECT 'SSCARTAPRES' AS TIPO, 'CARTA DE PRESENTACIÓN SELLADA' AS REPORTE FROM DUAL  "+
+					"UNION "+
+					"SELECT 'SSCARTAACEP' AS TIPO, 'CARTA DE ACEPTACIÓN SELLADA' AS REPORTE FROM DUAL  "+
+					"UNION "+
 					"SELECT 'SSCARTACOM' AS TIPO, 'CARTA COMPROMISO' AS REPORTE FROM DUAL  "+
 					"UNION "+
 					"SELECT 'SSBIM1' AS TIPO, 'REPORTE BIMESTRE 1' AS REPORTE FROM DUAL  "+
@@ -3975,3 +3979,4 @@ function previewAdjunto(enlace) {
 	var newstr = str.replace(re, "");
 	abrirPesta(newstr, "Adjunto");
 }
+

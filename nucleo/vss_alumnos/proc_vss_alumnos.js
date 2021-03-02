@@ -181,3 +181,5 @@ function veradjss  (modulo,usuario,institucion, campus,essuper){
 		}
 
 }
+
+
