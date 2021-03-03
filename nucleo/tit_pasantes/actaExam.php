@@ -210,7 +210,7 @@
 		$pdf->SetTextColor(12, 30, 97 );
 		$pdf->SetDrawColor(146, 133, 35);
 		$pdf->SetLineWidth(0.7);
-		$pdf->Cell(0,10,utf8_decode("Instituto Tecnológico Superior de Santa María de El Oro"),"B",1,'C');	
+		$pdf->Cell(0,10,utf8_decode($dataGen[0]["inst_razon"]),"B",1,'C');	
 		$pdf->Ln(5);
 		$pdf->SetTextColor(0);
 		$pdf->Cell(0,0,utf8_decode("ACTA DE EXÁMEN PROFESIONAL"),0,1,'C');	
@@ -220,12 +220,12 @@
 		$pdf->SetFont('Eureka-Sans-Light-Regular','',18);
 		$pdf->SetTextColor(0);
 		$pdf->SetFont('Times','',12);
-		$pdf->MultiCell(0,7,utf8_decode("El suscrito Director General del Instituto Tecnológico Superior de Santa María de El Oro, ".
+		$pdf->MultiCell(0,7,utf8_decode("El suscrito Director General del ".$dataGen[0]["inst_razon"].", ".
 		"certifica que en el Libro de Actas de Examen Profesional No.".$dataP[0]["LIBRO"]." a las ".$dataP[0]["FOJA"]." fojas, ".
 		"se encuentra asentada el acta  No. ".$dataP[0]["ACTA"]." que a la letra dice:". 
-		" En la ciudad de Santa María del Oro, Dgo., el día ".$eldia." del mes de ".$elmes."  del año ".$elanio.", ".
+		" En la ciudad de ".$dataGen[0]["inst_extiende"].", el día ".$eldia." del mes de ".$elmes."  del año ".$elanio.", ".
 		"siendo las ".$dataP[0]["HORA_TITA"]." horas, se reunieron en las instalaciones ".
-		"del Instituto Tecnológico Superior de Santa María de El Oro, clave 10EIT0004E los integrantes del jurado: "),0,'J',FALSE);
+		"del ".$dataGen[0]["inst_razon"].", clave ".$dataGen[0]["inst_claveof"]." los integrantes del jurado: "),0,'J',FALSE);
 
 		$pdf->Ln(7);
 		$pdf->Cell(30,7,utf8_decode("Presidente(a):"),0,0,'L');	
@@ -257,8 +257,8 @@
 		"el Código de Ética Profesional y le tomó la Protesta de Ley.  Dándose por terminado el Acto a las ".$dataP[0]["HORA_TITAT"].
 		" horas, y una vez escrita, leída y aprobada la firmaron para constancia las personas que el acto intervinieron."),0,'J',FALSE);
 
-		$pdf->MultiCell(0,7,utf8_decode("Para los usos legales correspondientes se expide la presente en la ciudad de Santa María del Oro,". 
-		" Durango, a los ".$eldiaA." días del mes de ".$elmesA." del año ".$elanioA."."),0,'J',FALSE);
+		$pdf->MultiCell(0,7,utf8_decode("Para los usos legales correspondientes se expide la presente en la ciudad de ".$dataGen[0]["inst_extiende"].
+		", a los ".$eldiaA." días del mes de ".$elmesA." del año ".$elanioA."."),0,'J',FALSE);
 			
 		$pdf->Output();
 

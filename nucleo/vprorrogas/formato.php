@@ -178,13 +178,14 @@
 		
             function formato() {
                 $data = $this->LoadDatos();
+                $dataGen = $this->LoadDatosGen();
                 $miutil = new UtilUser();            
 
                 $fechadecof=$miutil->formatFecha($data[0]["FECHAUS"]);
                 $fechaof=date("d", strtotime($fechadecof))." de ".$miutil->getFecha($fechadecof,'MES'). " del ".date("Y", strtotime($fechadecof));
               
                 $this->SetFont('Montserrat-Medium','',10);  
-                $this->Cell(0,5,"Santa María de El Oro, Durango a ".$fechaof,0,1,'R');	  
+                $this->Cell(0,5,$dataGen[0]["inst_fechaof"]." ".$fechaof,0,1,'R');	  
                 $this->Cell(0,5,utf8_decode("Asunto: Solicitud de prórroga"),0,1,'R');	   
                 $this->Ln(5);
                 $this->SetFont('Montserrat-Black','B',10);    
@@ -195,7 +196,7 @@
                 $this->SetFont('Montserrat-SemiBold','',12);
                 $this->MultiCell(0,5,utf8_decode('El que suscribe C. ').utf8_decode($data[0]["NOMBRE"]).
                 utf8_decode(', con número de control ').utf8_decode($data[0]["MATRICULA"]).' de la carrera de '.utf8_decode($data[0]["CARRERAD"]).
-                utf8_decode(" del Instituto Tecnológico Superior de Santa María de El Oro, le solicito de manera respetuosa, se me autorice la PRORROGA PARA GENERAR PAGO DE ").utf8_decode($data[0]["TIPOPAGOD"]).
+                utf8_decode(" del ".$dataGen[0]["inst_razon"].", le solicito de manera respetuosa, se me autorice la PRORROGA PARA GENERAR PAGO DE ").utf8_decode($data[0]["TIPOPAGOD"]).
                 utf8_decode(" con el único fin de no perder la reinscripción, toda vez que de momento me es imposible cubrir la cuota en su totalidad, por lo que solicito realizarla en ").$data[0]["PAGOS"].utf8_decode(" Pago(s). Estableciendo las siguientes fechas Compromisos.") ,0,'J', false);
                 
             

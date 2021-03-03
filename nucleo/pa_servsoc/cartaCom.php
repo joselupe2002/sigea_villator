@@ -183,7 +183,7 @@
 		
 		$pdf->SetY(50);
 		$data = $pdf->LoadData();
-		
+		$dataGen=$pdf->LoadDatosGen();
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,3,utf8_decode("CARTA COMPROMISO DE SERVICIO SOCIAL"),"",1,'C',false);
 		$pdf->Cell(0,5,utf8_decode("DEPARTAMENTO DE VINCULACIÓN"),"",1,'C',false);
@@ -235,8 +235,8 @@
 		$fechapie=date("d", strtotime($fechadecof))." de ".strtolower($miutil->getMesLetra(date("m", strtotime($fechadecof))))." del ". date("Y", strtotime($fechadecof));
 
 		$pdf->Ln(5);
-		$pdf->MultiCell(170,5,utf8_decode("En la ciudad de Santa María del Oro, El Oro, Dgo.,".
-		"de la fecha ".$fechapie),"",'J',false);
+		$pdf->MultiCell(170,5,utf8_decode("En la ciudad de ".$dataGen[0]["inst_extiende"].",".
+		" de la fecha ".$fechapie),"",'J',false);
 		
 		
 

@@ -312,7 +312,7 @@
         $pdf->setX($margeniz);
         $pdf->MultiCell(0,3,utf8_decode("SE EXTIENDE EL PRESENTE CERTIFICADO QUE AMPARA ".$totcred.
         " CRÉDITOS DE UN TOTAL DE ".$dataAlum[0]["PLACRED"]." QUE INTEGRAN EL PLAN DE ESTUDIO CLAVE ".
-        $dataAlum[0]["MAPA"].", EN EL ORO DURANGO A LOS ".strtoupper($fechadecexp) ) ,0,'J');
+        $dataAlum[0]["MAPA"].", EN ".strtoupper($data2[0]["inst_extiende"])." A LOS ".strtoupper($fechadecexp) ) ,0,'J');
         $pdf->Ln(10);
 
         $pdf->setX($margeniz);

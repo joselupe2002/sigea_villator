@@ -253,7 +253,7 @@
         $pdf->Ln(10);
         $pdf->SetFont('Montserrat-Medium','B',10);     
         $pdf->MultiCell(0,5,utf8_decode("DE ACUERDO CON LO QUE ESTABLECE LA LEY GENERAL DE PROFESIONES Y EL REGLAMENTO ".
-        "RESPECTIVO, EXPIDIÉNDOSE LA PRESENTE EN LA CIUDAD SANTA MARÍA DEL ORO, ESTADO DE DURANGO, A LOS ".strtoupper($fechapie)),0,'J',FALSE);
+        "RESPECTIVO, EXPIDIÉNDOSE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"]).", A LOS ".strtoupper($fechapie)),0,'J',FALSE);
         $pdf->Ln(5);
 
         $pdf->setX(10);
@@ -267,47 +267,7 @@
         $pdf->SetFont('Montserrat-medium','B',6);
         $pdf->MultiCell(30,3,utf8_decode($escolares),0,'J',false);
 
-       /* 
-        $pdf->SetFont('Montserrat-ExtraBold','B',11);
-		$pdf->Cell(35,5,"ACTIVIDADES",0,0,'L');
-		$pdf->Ln(5);
-        $pdf->SetX(120);
-        $pdf->Cell(35,5,'        ',0,0,'L');
-        $pdf->SetFont('Montserrat-ExtraBold','B',11);
-		$pdf->Cell(35,5,"COMPLEMENTARIAS",0,0,'L');
-		
-
-		$pdf->SetFont('Montserrat-ExtraBold','B',10);
-        $pdf->Ln(15);
-        $pdf->Cell(0,5,utf8_decode("C. ".$data[0]["ALUM_NOMBRE"].' '.$data[0]["ALUM_APEPAT"].' '.$data[0]["ALUM_APEMAT"]),0,0,'L');
-        $pdf->Ln(5);
-        $pdf->Cell(0,5,utf8_decode("NÚMERO DE CONTROL: ".$data[0]["ALUM_MATRICULA"]),0,0,'L');
-        $pdf->Ln(5);
-        $pdf->Cell(0,5,utf8_decode("PLAN DE ESTUDIOS CLAVE: ".$data[0]["ALUM_MAPA"]),0,0,'L');
-        $pdf->Ln(5);
-		$pdf->Cell(0,5,utf8_decode($data[0]["CARR_DESCRIP"]),0,0,'L');
-		$pdf->Ln(5);
-		$pdf->Cell(0,5,utf8_decode("PRESENTE"),0,0,'L');
-		$pdf->SetFont('Montserrat-Medium','',10);
-
-        $pdf->Ln(15);
-		$pdf->MultiCell(0,5,utf8_decode("POR MEDIO DEL PRESENTE LE COMUNICO QUE HA SIDO LIBERADA SU ACTIVIDAD COMPLEMENTARIA ".
-		"CON EL NIVEL DE DESEMPEÑO ".$data[0]["CALLET"]." Y UN VALOR NUMÉRICO DE ".$data[0]["CALCER"].", ".
-		"DURANTE EL PERÍODO ESCOLAR ".$data[0]["CICL_INICIOR"]." AL ".$data[0]["CICL_FINR"]."  CON UN VALOR CURRICULAR DE ".
-		" 05 CRÉDITOS."),0,'J',FALSE);
-
-		$fechapie=$miutil->aletras(date("d", strtotime($fechadecof)))." DÍAS DEL MES DE ".
-				  $miutil->getMesLetra(date("m", strtotime($fechadecof)))." DEL AÑO ". 
-				  $miutil->aletras(date("Y", strtotime($fechadecof)));
-        $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE SANTA MARÍA DEL ORO, ESTADO DE DURANGO A LOS ".
-		strtoupper($fechapie).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
-	
-        $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode(" SIN MÁS POR EL MOMENTO."),0,'J',FALSE);
-        $pdf->Ln(5);
-
-		*/
+      
 		$pdf->Output(); 
  } else {header("Location: index.php");}
  

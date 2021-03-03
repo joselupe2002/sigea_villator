@@ -156,10 +156,10 @@
 		$eldeptomaestro=utf8_decode($data[0]["DEPTOD"]);
 		
 		$pdf->SetFont('Montserrat-SemiBold','',10);
-		$pdf->MultiCell(0,5,'De conformidad con las atribuciones conferidas y encomendadas por el M.A.T.I. Leonardo Rafael Bojorges G�ere�a, Director General del Instituto Tecnol�gico Superior  de Santa María de El Oro,'.
-                            'en t�rminos del art�culo 13, fracci�n III, VIII y XIV de la Ley que Crea el Instituto Tecnol�gico Superior de Santa María de El Oro, artículo 11, '.
-				            'fracci�n II y X, art�culo 16, fracci�n VIII, X y las dem�s aplicables del Reglamento Interior del Instituto Tecnol�gico Superior '.
-				            'de Santa María de El Oro, me dirijo a Usted con la oportunidad de hacerle el presente llamado de atenci�n por escrito, debido a su actuaci�n de los d�as: ',0,'J', false);
+		$pdf->MultiCell(0,5,utf8_decode('De conformidad con las atribuciones conferidas y encomendadas por el '.$dataGen[0]["inst_director"].', Director General del ,'.$dataGen[0]["inst_razon"].
+                            'en términos del artículo 13, fracción III, VIII y XIV de la Ley que Crea el '.$dataGen[0]["inst_razon"].', artículo 11, '.
+				            'fracción II y X, artículo 16, fracción VIII, X y las demás aplicables del Reglamento Interior del '.$dataGen[0]["inst_razon"].
+				            ', me dirijo a Usted con la oportunidad de hacerle el presente llamado de atención por escrito, debido a su actuación de los días: ',0,'J', false);
 		
 		$pdf->Ln(5);
 		$headerdes = array('FECHA','MATERIA','AULA','HORARIO');
@@ -168,11 +168,11 @@
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-SemiBold','',10);
 		$pdf->MultiCell(0,5,'Cuando Usted falto injustificadamente a su jornada de trabajo en el '.
-				$eldeptomaestro.' del Instituto Tecnol�gico Superior de de Santa María de El Oro, sin tomar las precauciones debido a las importantes funciones que usted realiza, no notificando con tiempo a su superior jer�rquico. ',0,'J', false);
+				$eldeptomaestro.' del '.$dataGen[0]["inst_razon"].', sin tomar las precauciones debido a las importantes funciones que usted realiza, no notificando con tiempo a su superior jerárquico. ',0,'J', false);
 		$pdf->Ln(5);
-		$pdf->MultiCell(0,5,'Esto crea una imagen de falta de seriedad en su persona y por extensi�n, de nuestra Instituci�n Educativa. Por lo anterior, '.
+		$pdf->MultiCell(0,5,utf8_decode('Esto crea una imagen de falta de seriedad en su persona y por extensión, de nuestra Institución Educativa. Por lo anterior, '.
 				'se le exhorta para que corrija su comportamiento, y en lo futuro notifique previamente a su jefe inmediato cuando tenga la necesidad de ausentarse de sus labores, '.
-				'pues de lo contrario, nos veremos en la obligaci�n de tomar otro tipo de acciones legales.',0,'J', false);
+				'pues de lo contrario, nos veremos en la obligación de tomar otro tipo de acciones legales.'),0,'J', false);
 		$pdf->Ln(5);
 		
 		
@@ -183,7 +183,7 @@
 		$pdf->Cell(0,0,'A T E N T A M E N T E',0,1,'L');
 		$pdf->setX(25);$pdf->setY(225);
 		$pdf->SetFont('Montserrat-ExtraLight','I',8);
-		$pdf->Cell(0,0,'Excelencia en Educaci�n Tecnol�gica',0,1,'L');
+		$pdf->Cell(0,0,utf8_decode('Excelencia en Educación Tecnológica'),0,1,'L');
 		$pdf->setX(25);$pdf->setY(236);
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,0,utf8_decode($data[0]["JEFED"]),0,1,'L');
@@ -192,34 +192,10 @@
 		
 		$pdf->setX(25);$pdf->setY(245);
 		$pdf->SetFont('Montserrat-Medium','',7);
-		$pdf->Cell(0,0,"C.c.p. ".utf8_decode($subdir)."; Subdirecci�n acad�mica.",0,1,'L');
+		$pdf->Cell(0,0,"C.c.p. ".utf8_decode($subdir).utf8_decode("; Subdirección académica."),0,1,'L');
 		
 
 		
-		
-		/*
-		$pdf->Ln(5);
-		$pdf->SetFont('Montserrat-SemiBold','',10);
-		$pdf->MultiCell(0,8,'Agradecer� se envie copia del exhorto a esta jefatura de divisi�n.',0,'J', false);
-		$pdf->Ln(5);
-		$pdf->MultiCell(0,8,'Sin m�s por el momento aprovecho para enviarle un cordial saludo.',0,'J', false);
-		$pdf->Ln(40);
-		$pdf->SetFont('Montserrat-ExtraBold','B',10);
-		$pdf->Cell(0,0,'A T E N T A M E N T E',0,1,'L');
-		$pdf->Ln(5);
-		$pdf->SetFont('Montserrat-ExtraLight','I',8);
-		$pdf->Cell(0,0,'Excelencia en Educaci�n Tecnol�gica',0,1,'L');
-		$pdf->Ln(10);
-		$pdf->SetFont('Montserrat-ExtraBold','B',10);
-		$pdf->Cell(0,0,utf8_decode($data[0]["JEFED"]),0,1,'L');
-		$pdf->Ln(5);
-		$pdf->Cell(0,0,utf8_decode($data[0]["FIRMAOF"]),0,1,'L');
-		$pdf->Ln(55);
-		$pdf->SetFont('Montserrat-Medium','',8);
-		$pdf->setX(25);$pdf->setY(240);
-		$pdf->Cell(0,0,utf8_decode($subdir)."; Subdirecci�n acad�mica.",0,1,'L');
-		
-	*/
 			
 		$pdf->Output();
 

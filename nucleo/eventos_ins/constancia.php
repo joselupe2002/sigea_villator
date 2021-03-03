@@ -180,7 +180,7 @@
 		$pdf->Cell(0,0,utf8_decode("EL TECNOLÓGICO NACIONAL DE MÉXICO"),0,1,'C');
 		$pdf->ln(10);
 		$pdf->SetFont('Montserrat-ExtraBold','B',14);
-		$pdf->Cell(0,0,utf8_decode("A TRAVÉS DEL INSTITUTO TECNOLÓGICO SUPERIOR DE MARÍA DE EL ORO"),0,1,'C');
+		$pdf->Cell(0,0,utf8_decode("A TRAVÉS DEL ".$dataGen[0]["inst_razon"]),0,1,'C');
 
 		
 		//$pdf->SetTextColor(5,27,149);

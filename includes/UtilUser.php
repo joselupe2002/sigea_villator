@@ -1339,11 +1339,16 @@ class UtilUser {
 
 	public function convTitulo($cad) {
 		$cadRes="";
-		for($i=0;$i<strlen($cad);$i++) {
-			if ($cad[$i]==" ") { $cadRes.=" ".strtoupper($cad[$i+1]);$i++;}
-			else { $cadRes.=strtolower($cad[$i]);} 
+		if (!($cad=='')) {			
+			for($i=0;$i<strlen($cad)-1;$i++) {
+				
+				if ($cad[$i]==" ") { $cadRes.=" ".strtoupper($cad[$i+1]);$i++;}
+				else { $cadRes.=strtolower($cad[$i]);} 
+			}
+			
+			$cadRes[0]=strtoupper($cadRes[0]);
 		}
-		$cadRes[0]=strtoupper($cadRes[0]);
+		else {$cadRes="";}
 		return $cadRes;
 	}
 

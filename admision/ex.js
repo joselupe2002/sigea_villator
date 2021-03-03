@@ -73,76 +73,62 @@ var arr_preguntas=[];
 		}
 
 function cargarResultados(resultado) {
-	if (resultado=='S') {
-	cad="Para el <strong> Instituto Tecnológico Superior de Santa María de El Oro</strong>, es un honor y privilegio informarle que ha sido "+
-		"<span class=\"text-success\"><strong>ACEPTADO</strong></span>"+" en nuestra casa de estudios para cursar la "+
-		" carrera de <strong>"+utf8Decode(carrerad)+".</strong><br/>";
-	
-	cadPol="El procedimiento de inscripción está sujeto a la normatividad aplicable emitida por el "+
-		"<b>Tecnológico Nacional de México</b>, por lo que su observancia es obligatoria para quienes desean "+
-		"ingresar a una institución del sistema, como lo es el Instituto Tecnológico Superior de Santa María de El Oro.<br><br>"+
-
-		"En consecuencia, la falta de un requisito, por ejemplo, <span class=\"text-danger\"><b>no haber concluido sus estudios de bachillerato "+	
-		"(adeudo de materias) u otras análogas; </b></span>para realizar su inscripción, produce la invalidación de su procedimiento "+
-		"de inscripción en esta institución; por ello, se le invita a que realice el "+
-		" <a href=\"https://servicios.spf.tabasco.gob.mx/re_serviciosinternet/faces/servicios?_adf.ctrl-state=5u37dhue6_3\"> pago </a> de inscripción <span class=\"text-success\"><b>SOLO SI</b></span>, "+
-		"cuenta con la documentación y requisitos solicitados para su inscripción<br><br>"+
-
-		"En caso contrario, lo hace Usted, bajo su más estricta responsabilidad en el entendido de que su "+
-		"inscripción será nula, en cualquier momento, aunque haya realizado el pago por concepto de inscripción "+
-		"o cursado asignaturas, y las consecuencias que deriven de lo anterior solo son imputables a quien realiza el pago.<br><br>"+
-
-		"Como primer paso para su inscripción debe adjuntar la siguiente documentación "+
-		" es necesario que suba en el sistema la siguiente documentación:"+
-		"<div class=\"alert alert-danger\">"+
-		"     <a href=\"https://drive.google.com/file/d/11_YKcVydDV4FGTCfyXe_OaX0NrJFKGSo/view?usp=sharing\" target=\"_blank\"> "+
-		"          Guía para Realizar el Pago</a><br/>"+
-		"     <a href=\"https://servicios.spf.tabasco.gob.mx/re_serviciosinternet/faces/servicios?_adf.ctrl-state=5u37dhue6_3\" target=\"_blank\"> "+
-		"          Página para Realizar Pago</a><br/>"+	
-		" <span class=\"fontRobotoB bigger-160\"> Tu número de Ficha es: </span><span class=\"badge badge-success bigger-160\"> "+idasp+"</span>"+	
-		"</div>";
 
 
+	elsql="SELECT * from aspobserva where TIPO='RESULTADO' ORDER BY orden";			
+	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+	$.ajax({
+			type: "POST",
+			data:parametros,
+			url:  "../nucleo/base/getdatossqlSeg.php",
+			success: function (data) {
 
-	}
-	else {
-		cad="Lamentamos informarle que ha sido "+
-			"<span class=\"text-danger\"><strong>NO ACEPTADO</strong></span>"+" en este primer proceso para ingresar a nuestra casa de estudios para cursar la "+
-			" carrera de <strong>"+utf8Decode(carrerad)+". Te pedimos estar pendiente a tu correo electrónico donde se te informará de otra oportunidad para presentar tu examen de admisión.</strong>";
-		cadPol="";
-		}
+				if (resultado=='S') {
+					cad=JSON.parse(data)[0]["OBSERVACION"].replace(/{CARRERA}/gi,carrerad);
+					cad=cad.replace(/{IDASP}/gi,utf8Decode(idasp));
+
+					cadPol=JSON.parse(data)[1]["OBSERVACION"].replace(/{CARRERA}/gi,utf8Decode(carrerad));
+					cadPol=cadPol.replace(/{IDASP}/gi,utf8Decode(idasp));
+				}
+				else {
+					cad=JSON.parse(data)[2]["OBSERVACION"].replace(/{CARRERA}/gi,utf8Decode(carrerad));
+					cad=cad.replace(/{IDASP}/gi,utf8Decode(idasp));
+					cadPol="";
+					}
 
 
-	$("#contenidoAsp").append("<div class='space-7'></div>"+
-	"   <div class=\"row\">"+
-	"        <div class=\"col-sm-18 text-center\">"+
-	"              <span class=\"fontAmaranthB text-danger bigger-200\">"+
-	"                    <strong>RESULTADO DE EXÁMEN DE ADMISIÓN</strong>"+
-	"              </span>"+ 
-	"        </div>"+
-	"   </div>"+
-	"   <div class=\"row\"> "+
-	"        <div class=\"col-sm-1\"></div>"+
-	"        <div class=\"col-sm-10\" style=\"text-align:justify;\">"+
-	"             <span class=\"fontRoboto text-light bigger-180\">"+cad+
-	"             </span> <div class='space-20'></div>"+
-	"             <span class=\"fontRoboto text-light bigger-120\">"+cadPol+
-	"             </span> "+
-	"        </div>"+
-	"        <div class=\"col-sm-1\"></div>"+
-	"   </div><br/>"+
-	"   <div class=\"row\">"+
-	"        <div class=\"col-sm-1\"></div>"+
-	"        <div id=\"listaadj\" class=\"col-sm-10\"></div>"+
-	"        <div class=\"col-sm-1\"></div>"+
-	"   </div>"
-	);
+				$("#contenidoAsp").append("<div class='space-7'></div>"+
+				"   <div class=\"row\">"+
+				"        <div class=\"col-sm-18 text-center\">"+
+				"              <span class=\"fontAmaranthB text-danger bigger-200\">"+
+				"                    <strong>RESULTADO DE EXÁMEN DE ADMISIÓN</strong>"+
+				"              </span>"+ 
+				"        </div>"+
+				"   </div>"+
+				"   <div class=\"row\"> "+
+				"        <div class=\"col-sm-1\"></div>"+
+				"        <div class=\"col-sm-10\" style=\"text-align:justify;\">"+
+				"             <span class=\"fontRoboto text-light bigger-180\">"+cad+
+				"             </span> <div class='space-20'></div>"+
+				"             <span class=\"fontRoboto text-light bigger-120\">"+cadPol+
+				"             </span> "+
+				"        </div>"+
+				"        <div class=\"col-sm-1\"></div>"+
+				"   </div><br/>"+
+				"   <div class=\"row\">"+
+				"        <div class=\"col-sm-1\"></div>"+
+				"        <div id=\"listaadj\" class=\"col-sm-10\"></div>"+
+				"        <div class=\"col-sm-1\"></div>"+
+				"   </div>"
+				);
 
-	if (resultado=='S') {
-		if (enviodocins=='N') {cargarAdjuntos();}
-		if (enviodocins=='S') {cargaMensajeEnvio();}
-		
-	}
+				if (resultado=='S') {
+					if (enviodocins=='N') {cargarAdjuntos();}
+					if (enviodocins=='S') {cargaMensajeEnvio();}
+					
+				}
+			}
+		});
 }
 
 function cargarFoto(){

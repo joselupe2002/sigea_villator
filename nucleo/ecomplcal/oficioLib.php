@@ -278,83 +278,13 @@
 				  $miutil->getMesLetra(date("m", strtotime($fechadecof)))." DEL AÑO ". 
 				  $miutil->aletras(date("Y", strtotime($fechadecof)));
         $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE SANTA MARÍA DEL ORO, ESTADO DE DURANGO A LOS ".
+        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
 		strtoupper($fechapie).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
 	
         $pdf->Ln(5);
         $pdf->MultiCell(0,5,utf8_decode(" SIN MÁS POR EL MOMENTO."),0,'J',FALSE);
         $pdf->Ln(5);
 
-		
-/*
-		
-		$pdf->eljefe=$dataDepto[0]["EMPL_ABREVIA"]." ".$dataDepto[0]["NOMBRE"];
-		$pdf->eljefepsto=$dataDepto[0]["EMPL_FIRMAOF"];
-		
-		
-		$pdf->SetFont('Montserrat-SemiBold','',10);		
-
-		
-		$pdf->MultiCell(0,5,'La(El) que suscribe : '.utf8_decode($dataDepto[0]["NOMBRE"])." ".utf8_decode($dataDepto[0]["EMPL_FIRMAOF"]). ", por este medio se permite hacer de su ".
-		utf8_decode("conocimiento que lo(s) estudiantes que se enlistan a continuación de la carrera de ").utf8_decode($_GET["carrerad"])." han cumplido un total de ".
-		utf8_decode(" CINCO créditos."),0,'J', false);
-		$pdf->ln();
-		
-		
-		
-		$data = $pdf->LoadData();
-		
-	
-		$lasmatricula="";
-		foreach($data as $rowdes)
-		{
-			$pdf->SetFont('Montserrat-SemiBold','',10);
-			$pdf->MultiCell(0,5,$rowdes["MATRICULA"]." ".$rowdes["NOMBRE"],0,'J', false);
-			$dataCompl=$pdf->lasComplementarias($rowdes["MATRICULA"]);			
-			$header = array('ACTIVIDAD', 'RESPONSABLE', utf8_decode('CREDITOS'),'CAL.','LETRA');
-			
-			$pdf->SetFont('Montserrat-ExtraBold','B',8);
-			$pdf->SetWidths(array(60,60,15,15,18));
-			$pdf->SetAligns(array('J','J','C','C','C'));
-			$pdf->SetFillColor(172,31,6);
-			$pdf->SetTextColor(255);
-			$pdf->SetDrawColor(0,0,0);
-			$pdf->SetLineWidth(.2);
-			$w = array(60,60,15,15,18);
-			for($i=0;$i<count($header);$i++) {$pdf->Cell($w[$i],7,$header[$i],1,0,'C',true);}
-			$pdf->Ln();
-			// Restauraci�n de colores y fuentes
-			$pdf->SetFillColor(255,255,255);
-			$pdf->SetTextColor(0);
-			$pdf->SetFont('');
-			// Datos
-			$fill = false;
-			$pdf->SetFont('Montserrat-Medium','',7);
-			$suma=0;
-			$alto=3;
-			
-			if ($dataCompl) {
-			     foreach($dataCompl as $rowcomp){ 	
-							$pdf->Row(array(utf8_decode($rowcomp[0]),utf8_decode($rowcomp[1]),utf8_decode($rowcomp[2]),
-							utf8_decode($rowcomp[3]),utf8_decode($rowcomp[4])
-							));				   
-			     }									
-			}
-			$pdf->Ln(5);
-
-			$lasmatricula.=$rowdes["MATRICULA"].",";
-			
-		}
-		$pdf->Ln(5);
-		
-		$elsql="UPDATE contoficios set ".
-		"CONT_INFO='".substr($lasmatricula,0,strlen($lasmatricula)-1)."' WHERE CONT_CONTROL='".$depto."-".date("dmY")."'".
-		" and CONT_SOLO='".$dataof[0]["CONT_SOLO"]."'";
-
-		//echo $elsql;
-		$res=$miConex->afectaSQL($_SESSION['bd'],$elsql);	    
-		
-*/
 		$pdf->Output(); 
  } else {header("Location: index.php");}
  

@@ -128,7 +128,7 @@
         $pdf->Ln(5);
    
 
-        $pdf->MultiCell(0,5,utf8_decode("Se extiende la presente para los fines legales que al interesado convengan en la ciudad de Santa María de El Oro, Dgo., a los ".
+        $pdf->MultiCell(0,5,utf8_decode("Se extiende la presente para los fines legales que al interesado convengan en la ciudad de ".$dataGen[0]["inst_extiende"].", a los ".
 		strtolower($fechaof)).".",0,'J',FALSE);
 		
 

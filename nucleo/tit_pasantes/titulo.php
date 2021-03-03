@@ -187,10 +187,10 @@
 		$pdf->SetFont('book-antiqua','B',16);
 		$pdf->SetY(20);
 		$pdf->Cell(28,5,"",0,0,'C'); //debe ser 48 pero se suman los 20 del margen izquierdo
-		$pdf->Cell(120,5,utf8_decode("EL INSTITUTO TECNOLÓGICO SUPERIOR"),0,0,'C');	
-		$pdf->SetY(25);
-		$pdf->Cell(28,5,"",0,0,'C');
-		$pdf->Cell(120,5,utf8_decode("DE SANTA MARÍA DE EL ORO"),0,0,'C');	
+		$pdf->Multicell(120,5,utf8_decode($dataGen[0]["inst_razon"]),0,'C');	
+		//$pdf->SetY(25);
+		//$pdf->Cell(28,5,"",0,0,'C');
+		//$pdf->Cell(120,5,utf8_decode("DE ....."),0,0,'C');	
 
 		$pdf->SetY(60); $pdf->SetX(67);
 		$pdf->SetFont('MervaleScript-Regular','B',16);		
@@ -236,7 +236,7 @@
 		
 		$pdf->SetY(180);$pdf->SetX(52);
 		$pdf->SetFont('MervaleScript-Regular','B',16);
-		$pdf->Cell(138,5,utf8_decode("Santa María del Oro, El oro, Durango, a los "),0,0,'C');
+		$pdf->Cell(138,5,utf8_decode($dataGen[0]["inst_extiende"].", a los "),0,0,'C');
 		$pdf->SetY(185);$pdf->SetX(52);
 		$pdf->SetFont('MervaleScript-Regular','B',16);
 		$pdf->Cell(138,5,utf8_decode($eldia_tit." días del mes de ".$elmes_tit." de ".$elanio_tit),0,0,'C');
@@ -300,7 +300,7 @@
 		//FECHA 
 			$pdf->Cell(5,5,"","L",0,'L');
 			$pdf->SetFont('Arial','',6);
-			$pdf->Cell(30,5,utf8_decode("Santa María del Oro, Dgo."),"",0,'C');
+			$pdf->Cell(30,5,utf8_decode($dataGen[0]["inst_fechaof"]),"",0,'C');
 			$pdf->SetFont('Arial','B',11);
 			$pdf->Cell(10,5,$eldia_titn,"B",0,'C');
 

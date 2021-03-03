@@ -46,7 +46,6 @@
 		foreach ($resultado as $row) {$titulo= $row["inst_tituloasp"]; }		
 	?>
 
-
 	<div style="height:10px; background-color: #C18900;"> </div>
 	<div class="container-fluid informacion" style="background-color: #DBEEEA;">   
          <div class="row">
@@ -60,7 +59,7 @@
 			  </div>
               <div class="col-md-4" style="padding-top: 20px; text-align: right;">
                   <img class="imgRedonda" id="fotoAsp" src="" width="35px" height="40px"></img> 
-			      <span class="fontAmaranthB" style="color:lavenderblush; font-size:10px;"><?php echo $_SESSION["nombre"]; ?></span>
+			      <span class="fontAmaranthB" style="color:black; font-size:10px;"><?php echo $_SESSION["nombre"]; ?></span>
 				 <br/> 
 				  <span id="cierra" onclick="window.open('cierraSesion.php','_self');" class="badge badge-warning fontAmaranthB" 
 				        style="cursor:pointer;"><i class="fa fa-reply-all bigger-110"></i> Cerrar Sesión</span>
