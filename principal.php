@@ -58,6 +58,12 @@
             }
             
             $logouser=str_replace('../../','',$logouser);
+
+					
+			$resultado=$miConex->getConsulta("SQLite","SELECT * from INSTITUCIONES where inst_clave='".$_SESSION["INSTITUCION"]."'");
+			foreach ($resultado as $row) {$lamision= $row["inst_aux1"]; }		
+
+
            
          ?>
 	</head>
@@ -159,8 +165,8 @@
 
 						   			<div class="row">
 										     <div class="col-xs-5" style="border-left: 5px solid #B07D06; text-align:justify;">
-										          <h1 class="text-primary fontRobotoB"><strong>Misión ITSSMO</strong></h1>
-												     <h5 class="fontRoboto">Formar integralmente profesionales competitivos de la ciencia, la tecnología y otras áreas de conocimiento, comprometidos con el desarrollo económico, socia, cultural y con la sustentabilidad del país.</h5>												  												  
+										          <h1 class="text-primary fontRobotoB"><strong>Misión</strong></h1>
+												     <h5 class="fontRoboto"><?php echo $lamision;?></h5>												  												  
 													 
 											 </div>
 											 <div class="col-xs-2" style="text-align: center;"></div>
