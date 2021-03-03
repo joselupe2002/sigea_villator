@@ -21,6 +21,7 @@ var arr_preguntas=[];
 	    window.location.hash="Red" //chrome
 		window.onhashchange=function(){window.location.hash="red";}
 		
+		console.log("Aceptado="+aceptado+"|abiertoExa="+abiertoExa+"|abiertoRes="+abiertoRes);
 	
 		cargarFoto();
 
@@ -56,6 +57,20 @@ var arr_preguntas=[];
 		}); 
 
 
+		function cargarMensajeEspera(resultado) {
+			
+		
+			$("#contenidoAsp").append("<div class='space-7'></div>"+
+			"   <div class=\"row\">"+
+			"        <div class=\"col-sm-18 text-center\">"+
+			"              <span class=\"fontAmaranthB text-danger bigger-200\">"+
+			"                    <strong>NO SE ENCUENTRA ABIERTO EL PROCESO DE EXÁMEN Y/O RESULTADOS </strong>"+
+			"              </span>"+ 
+			"        </div>"+
+			"   </div>"
+			);
+			
+		}
 
 function cargarResultados(resultado) {
 	if (resultado=='S') {
