@@ -310,7 +310,7 @@
 		$pdf->Row(array(utf8_decode("Domicilio:"),utf8_decode($dataAlum[0]["ALUM_DIRECCION"])));
 
 		$pdf->SetWidths(array(30,65,30,50));
-		$pdf->Row(array(utf8_decode("E-mail:"),utf8_decode($dataAlum[0]["ALUM_CORREOINS"]),
+		$pdf->Row(array(utf8_decode("E-mail:"),utf8_decode($dataAlum[0]["ALUM_CORREO"]),
 						utf8_decode("No. de Servicio Médico:"),utf8_decode($dataAlum[0]["ALUM_SEGUROORD"])));
 		
 		$pdf->SetWidths(array(30,65,30,50));
