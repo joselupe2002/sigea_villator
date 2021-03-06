@@ -263,6 +263,7 @@ var elciclo="";
 					ESTESCPROC:{min: 1},
 					ESCPROC:{min: 1},
 					PROMBAC : {required : true,number: true, min:60, max:100},
+					EGRESOBAC : {required : true,number: true},
 					SMNUMERO: {required : true,number: true, maxlength:11, minlength:11},
 					AREACONOC:{min: 1},
 
@@ -303,6 +304,7 @@ var elciclo="";
 					           maxlength:"El número de afiliación debe ser de 11 carácteres",
 							   minlength:"El número de afiliación debe ser de 11 carácteres"},
 					AREACONOC:"Debe elegir una opción de area de conocimiento de bachiller",
+					EGRESOBAC:"Debe escribir año de egreso del bachiller",
 
 					EDORES: "Debe elegir su estado de Residencia actual",
 					MUNIRES: "Debe elegir su municipio de Residencia actual",
