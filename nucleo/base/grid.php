@@ -47,7 +47,7 @@
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" class="sigeaPrin" style="background-color: white;">
 	
 	    
 	    <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>
@@ -389,6 +389,7 @@
 	                 			} );
 
 	                 		   
+								 $('body').find('.dataTables_scrollBody').addClass("sigeaPrin");
 	                 			
 	                 			myTable.buttons().container().appendTo( $('.tableTools-container') );
 

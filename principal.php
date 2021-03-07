@@ -69,7 +69,7 @@
 	</head>
 
 
-	<body id="sigea" class="no-skin">
+	<body id="sigea" class="no-skin sigeaPrin" style="overflow-x:hidden; ">
 		<div id="navbar" class="navbar navbar-default ace-save-state" >
 			<div class="navbar-container ace-save-state" id="navbar-container">	
 			<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" name="menu-toggler" data-target="#sidebar">
@@ -81,7 +81,7 @@
 		    </button>			
 				<div>
 					<a href="#" class="navbar-brand" style="padding:0px; margin:5px;">
-					   <small class="fontRobotoB"><img class="iconoMenu" src="imagenes/login/sigea.png" style="width:30px; height:30px;"> SiGEA-ITSSMO</small>
+					   <small class="fontRobotoB"><img class="iconoMenu" src="imagenes/login/sigea.png" style="width:30px; height:30px;"> SiGEA</small>
 					</a>
 				</div>
 				
@@ -149,9 +149,9 @@
 				</div>
 			</div>
 			
-			<div class="main-content">
-				<div class="main-content-inner"> 		
-					<div id="myTab" class="easyui-tabs" style="width:100%; height:600px; overflow-y: hidden;">
+			<div class="main-content sigeaPrin">
+				<div class="main-content-inner sigeaPrin"> 		
+					<div id="myTab"  style="width:100%; height:700px; overflow-y: hidden;" class="easyui-tabs sigeaPrin">
 					       <div title="Inicio" style="padding:20px;">	
 
 
@@ -426,7 +426,7 @@
 		function cambioClave(){	
 			   var url="modClave.php";
 			   var alto=$(window).height()+"px";
-			   var content = '<iframe frameborder="0" id="cambioClave" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';
+			   var content = '<iframe scrolling = "auto"  frameborder="0" id="cambioClave" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';
 			     $('#myTab').tabs('add',{
 			    	    title:"Clave",
 			    	    content:content,
@@ -439,7 +439,7 @@
 		function generales(){	
 			   var url="generales.php";
 			   var alto=$(window).height()+"px";
-			   var content = '<iframe frameborder="0" id="cambioClave" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
+			   var content = '<iframe scrolling = "auto"  frameborder="0" id="cambioClave" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
 			     $('#myTab').tabs('add',{
 			    	    title:"Generales",
 			    	   content:content,
@@ -462,7 +462,7 @@
 	    	      		  url="nucleo/"+modulo+"/grid.php?modulo="+modulo+"&nombre="+nombre+"&padre="+"SIGEA&limitar=N"+"&automatico="+automatico+"&bd="+bd+"&restr="+restr;
 	    	      	   }
 	    	      	  		
-	    	          var content = '<iframe frameborder="0" id="FR'+modulo+'" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
+	    	          var content = '<iframe scrolling = "auto"  frameborder="0" id="FR'+modulo+'" src="'+url+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
 				     $('#myTab').tabs('add',{
 				    	    title:nombre,
 				    	   // href:"nucleo/grid.php?modulo="+modulo,
@@ -480,7 +480,7 @@
 			 var alto=$(window).height()+"px";
 				
              if (tipo=="P") {
-			         var content = '<iframe frameborder="0" id="FRNoti" src="'+enlace+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
+			         var content = '<iframe scrolling = "auto"  frameborder="0" id="FRNoti" src="'+enlace+'" style="overflow-x:hidden;width:100%;height:'+alto+';"></iframe></div>';	
 				     $('#myTab').tabs('add',{
 				    	    title:'Notificacion',
 				    	   // href:"nucleo/grid.php?modulo="+modulo,
