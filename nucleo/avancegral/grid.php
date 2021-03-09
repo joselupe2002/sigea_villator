@@ -37,7 +37,7 @@
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white; width:98%;">
 	   
 	    
 	<div class="widget-box widget-color-green" id="principal">
@@ -75,7 +75,7 @@
 					   </div>
 					   
 				       <div class="row">	
-					       <div id="losAvances" class="col-sm-12" style="overflow-x: scroll; height:370px;" >    
+					       <div id="losAvances" class="col-sm-12 sigeaPrin" style="overflow-x: scroll; height:370px;" >    
 						   </div>
                        </div>
                     </div>
