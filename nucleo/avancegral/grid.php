@@ -37,7 +37,7 @@
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white; width:98%;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" class="sigeaPrin" style="background-color: white; width:98%;">
 	   
 	    
 	<div class="widget-box widget-color-green" id="principal">
