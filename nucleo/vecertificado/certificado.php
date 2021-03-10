@@ -269,14 +269,14 @@
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell($margeniz,5,'',0,0,'C');
         $pdf->Cell(87,5,'MATERIA','TBL',0,'L');
-        $pdf->Cell(12,5,'CALIF.','TBR',0,'C');
+        $pdf->Cell(19,5,'CALIF.','TBR',0,'C');
         $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
-        $pdf->Cell(27,5,'CR',1,0,'C');
+        $pdf->Cell(20,5,'CR',1,0,'C');
 
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
         $pdf->SetFont('Arial','',6);
-        $pdf->SetWidths(array($margeniz,87, 12,32,27));
+        $pdf->SetWidths(array($margeniz,87, 19,32,20));
         $pdf->SetAligns(array('L','L', 'C','J','C'));
         $pdf->SetBorder(array('','L', '','L','LR'));
         
@@ -310,7 +310,7 @@
     
         /*=======================colacamos el promedio ==========================*/
         $promedio=round($sumacal/($n));
-        $pdf->SetWidths(array($margeniz,87, 12,32,27));
+        $pdf->SetWidths(array($margeniz,87, 19,32,20));
         $pdf->SetBorder(array('','TBL', 'TBR','1','1'));
         $pdf->SetAligns(array('L','L', 'R','J','C'));
         $pdf->SetFillColor(231,230,227);
