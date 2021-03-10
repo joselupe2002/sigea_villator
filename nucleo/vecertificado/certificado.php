@@ -369,7 +369,7 @@
         
         $pdf->setY(252);
         $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'FOLIO','',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'00000','',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,$dataCer[0]["FOLIO"],'',1,'C');
 
         $pdf->Image("../../imagenes/empresa/logo2.png",23,228,3);
 
