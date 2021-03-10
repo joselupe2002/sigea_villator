@@ -3,7 +3,7 @@
 function changeMATRICULA(DATO, usuario, institucion, campus){
    elsql=" SELECT "+
          "       getInfoPlan('"+$("#MATRICULA").val()+"','CREDCURSADOS') AS CREDITOS,"+
-         "       getPromedio('"+$("#MATRICULA").val()+"','N') AS PROM"+
+         "       getPromedio('"+$("#MATRICULA").val()+"','N') AS PROM,"+
          "       (SELECT getavanceMatCiclo('"+$("#MATRICULA").val()+"',getciclo()) from dual) AS AVANCE"+
          " FROM DUAL "; 
 
