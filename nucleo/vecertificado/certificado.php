@@ -208,13 +208,25 @@
 		$pdf = new PDF('P','mm','Legal');
 		header("Content-Type: text/html; charset=UTF-8");
 		
-		$pdf->SetFont('Arial','',8);
-		$pdf->SetMargins(10, 20 , 35);
+        
+        $pdf->AddFont('lucida-sans-unicode_[allfont.es]','B','lucida-sans-unicode_[allfont.es].php');
+      
+	
+		$pdf->SetMargins(0, 2.5, 12);
+        $margeniz=45;
 		$pdf->SetAutoPageBreak(true,20); 
         $pdf->AddPage();
+        $pdf->SetFont('lucida-sans-unicode_[allfont.es]','B',16);
+        $pdf->SetTextColor(47, 60, 179);
 
-        $margeniz=50;
+        $pdf->Cell($margeniz,5,'',0,0,'C');
+        $pdf->Cell(0,5,utf8_decode('Instituto Tecnológico Superior de Santa María de El Oro'),0,1,'C');
+        $pdf->SetFont('Arial','',8);
+
+        $pdf->Image("../../imagenes/empresa/logo2.png",12,12,23);
+
       		 
+        $pdf->SetTextColor(0);
         $dataAlum = $pdf->LoadDatosAlumnos();
         $data = $pdf->LoadDatosCursadas();
         $data2 = $pdf->LoadDatosGen();
@@ -232,32 +244,39 @@
 
 		
         $pdf->setX($margeniz);
+        $pdf->setY(14);
+
+        $pdf->Cell($margeniz,5,'',0,0,'C');
+        $pdf->MultiCell(0,3,utf8_decode("INSTITUCIÓN DE EDUCACIÓN SUPERIOR, CON CARÁCTER DE ORGANISMO PÚBLICO ".
+        "DESCENTRALIZADO POR DECRETO DE CREACIÓN, PUBLICADO EN EL PERIÓDICO OFICIAL DEL GOBIERNO CONSTITUCIONAL ".
+        "DEL ESTADO DE DURANGO NO. 34 TOMO CCXIX; DE FECHA DOMINGO 26 DE OCTUBRE DE 2008 Y POR AUTORIZACIÓN MEDIANTE ".
+        "OFICIO 513.3-1/0508/08 EMITIDO POR LA DGEST."),0,'J');
+
+        $pdf->Cell($margeniz,5,'',0,0,'C');
         $pdf->MultiCell(0,3,utf8_decode("EL C. ".$nombre." DIRECTOR GENERA DEL ". $data2[0]["inst_razon"].
-        " CLAVE ". $data2[0]["inst_claveof"].", CERTIFICA, QUE SEGÚN CONSTANCIAS QUE EXISTEN EN EL ARCHIVO ESCOLAR, EL C. ".
+        " CLAVE ". $data2[0]["inst_claveof"].", CERTIFICA, QUE SEGÚN CONSTANCIAS QUE EXISTEN EN ESTE INSTITUTO, EL (LA) C. ".
         $dataAlum[0]["NOMBRE"]." CURSO LAS ASIGNATURAS QUE INTEGRAN EL PLAN DE ESTUDIOS DE ".$dataAlum[0]["CARRERAD"].
-        "(".$dataAlum[0]["MAPA"]."-".$dataAlum[0]["PLACRED"].") DE ". $cadInicio." A ".$finCiclo.
-        ", CON LOS RESULTADOS QUE A CONTINUACIÓN SE ENLISTAN") ,0,'J');
+        "(".$dataAlum[0]["MAPA"]."-".$dataAlum[0]["PLACRED"].") EN EL PERIODO DE ". $cadInicio." A ".$finCiclo.
+        ", CON LOS RESULTADOS QUE A CONTINUACIÓN SE ANOTAN") ,0,'J');
         $pdf->Ln();
 
-        $pdf->setY(25);
-        $pdf->Cell(10,5,'',0,0,'C');$pdf->Cell(20,5,'MATRICULA',1,1,'C');
-        $pdf->Cell(10,5,'',0,0,'C');$pdf->Cell(20,5,$dataCer[0]["MATRICULA"],1,0,'C');
 
-        $pdf->setX($margeniz);
+        $pdf->setY(40);
+        $pdf->Cell(8,5,'',0,0,'C');$pdf->Cell(30,5,'NO. DE CONTROL',1,1,'C');
+        $pdf->Cell(8,5,'',0,0,'C');$pdf->Cell(30,5,$dataCer[0]["MATRICULA"],1,0,'C');
+
         $pdf->setY(50);
-        $pdf->SetFont('Arial','B',6);
-        $pdf->Cell(40,5,'',0,0,'C');
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($margeniz,5,'',0,0,'C');
         $pdf->Cell(87,5,'MATERIA','TBL',0,'L');
-        $pdf->Cell(15,5,'CALIF.','TBR',0,'C');
-        $pdf->SetFont('Arial','B',5);
-        $pdf->Cell(25,5,'OBSERVACIONES',1,0,'C');
-        $pdf->SetFont('Arial','B',6);
-        $pdf->Cell(8,5,'CR',1,0,'C');
+        $pdf->Cell(12,5,'CALIF.','TBR',0,'C');
+        $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
+        $pdf->Cell(27,5,'CR',1,0,'C');
 
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
         $pdf->SetFont('Arial','',6);
-        $pdf->SetWidths(array(40,87, 15,25,8));
+        $pdf->SetWidths(array($margeniz,87, 12,32,27));
         $pdf->SetAligns(array('L','L', 'C','J','C'));
         $pdf->SetBorder(array('','L', '','L','LR'));
         
@@ -291,7 +310,7 @@
     
         /*=======================colacamos el promedio ==========================*/
         $promedio=round($sumacal/($n));
-        $pdf->SetWidths(array(40,87, 15,25,8));
+        $pdf->SetWidths(array($margeniz,87, 12,32,27));
         $pdf->SetBorder(array('','TBL', 'TBR','1','1'));
         $pdf->SetAligns(array('L','L', 'R','J','C'));
         $pdf->SetFillColor(231,230,227);
@@ -324,27 +343,40 @@
 
         $pdf->SetFont('Arial','',6);
         $fechacer= date("Y", strtotime($fechaexp))."-".$miutil->getMesRomano(date("m", strtotime($fechaexp)))."-".date("d", strtotime($fechaexp));
-        $pdf->setY(225);
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'','TLR',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'REGISTRADO EN EL','LR',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'DEPARTAMENTO DE','LR',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'SERVICIOS ESCOLARES','LR',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'','LRB',1,'C');
+      
+        $pdf->setY(180);
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'','TLR',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'REGISTRADO EN EL','LR',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'DEPARTAMENTO','LR',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'DE SERVICIOS ESCOLARES','LR',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'ESCOLARES','LR',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'','LRB',1,'C');
 
-        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(28,4,'','TLR',1,'C');
-        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(10,4,'CON NO.','L',0,'L'); $pdf->Cell(18,4, $dataCer[0]["FOLIO"],'RB',1,'C');
-        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(18,4,'CON EL LIBRO','L',0,'L'); $pdf->Cell(10,4, $dataCer[0]["LIBRO"],'RB',1,'C');
-        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(10,4,'A FOJAS','L',0,'L'); $pdf->Cell(18,4, $dataCer[0]["FOJA"],'RB',1,'C');
+        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(30,4,'','TLR',1,'C');
+        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(10,4,'CON NO.','L',0,'L'); $pdf->Cell(20,4, $dataCer[0]["FOLIO"],'RB',1,'C');
+        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(18,4,'CON EL LIBRO','L',0,'L'); $pdf->Cell(12,4, $dataCer[0]["LIBRO"],'RB',1,'C');
+        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(10,4,'A FOJAS','L',0,'L'); $pdf->Cell(20,4, $dataCer[0]["FOJA"],'RB',1,'C');
+        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(10,4,'FECHA','BL',0,'L'); $pdf->Cell(20,4, $fechacer,'RB',1,'C');
 
-        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(2,4,'','L',0,'C');$pdf->Cell(24,4,$fechacer,'B',0,'C'); $pdf->Cell(2,4,'','R',1,'C');
-        $pdf->Cell(10,4,'',0,0,'C');$pdf->Cell(2,4,'','LB',0,'C');$pdf->Cell(24,4,"FECHA",'B',0,'C'); $pdf->Cell(2,4,'','RB',1,'C');
-  
-        $pdf->Cell(10,5,'',0,0,'C');$pdf->Cell(28,5,'COTEJO','',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'JEFE DEL DEPARTAMENTO','',1,'C');
-        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(28,2,'DE SERVICIOS ESCOLARES','',1,'C');
+        $pdf->setY(216);
+        $pdf->Cell(10,5,'',0,0,'C');$pdf->Cell(30,5,'COTEJO','TLR',1,'C');
+        $pdf->Cell(10,11,'',0,0,'C');$pdf->Cell(30,11,'','LRB',1,'C');
+
+        $pdf->setY(235);
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'JEFE DEL','',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'DEPARTAMENTO DE','',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'SERVICIOS ESCOLARES','',1,'C');
         
+        $pdf->setY(252);
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'FOLIO','',1,'C');
+        $pdf->Cell(10,2,'',0,0,'C');$pdf->Cell(30,2,'00000','',1,'C');
+
+        $pdf->Image("../../imagenes/empresa/logo2.png",23,228,3);
+
+        /*
         $pdf->Ln(5);
         $pdf->Cell(10,2,'',0,0,'C');$pdf->MultiCell(28,2,$nombreEsc,0,'C',false);
+        */
 
 /*=========================COLOCAMOS LAS OBSERVACIONES ===============================*/
         $pdf->setY(56);
