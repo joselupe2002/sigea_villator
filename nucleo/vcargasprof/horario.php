@@ -223,7 +223,7 @@
 				$this->SetLineWidth(.3);
 				
 	
-				$w = array(82, 10, 19,19,19,19,19,19,19,19,10);
+				$w = array(82, 19, 10,19,19,19,19,19,19,19,10);
 				$this->SetFont('Montserrat-ExtraBold','B',8);
 				for($i=0;$i<count($header);$i++)
 					$this->Cell($w[$i],7,$header[$i],1,0,'C',true);
@@ -357,7 +357,7 @@
 		$dataCiclo = $pdf->LoadCiclo();
 		
 		if (($dataEmpl[0]["EMPL_FOTO"]!='../../imagenes/menu/default.png')  && ($dataEmpl[0]["EMPL_FOTO"]!=''))  {
-			$pdf->Image($dataEmpl[0]["EMPL_FOTO"],10,40,20);
+			$pdf->Image($dataEmpl[0]["EMPL_FOTO"],10,40,20,20);
 		 }
 
 
