@@ -2,8 +2,8 @@
 
 function changeMATRICULA(DATO, usuario, institucion, campus){
    elsql=" SELECT "+
-         "       (SELECT sum(l.CREDITO) FROM kardexcursadas l where l.MATRICULA='"+$("#MATRICULA").val()+"') AS CREDITOS,"+
-         "       (SELECT ROUND(avg(l.CAL)) FROM kardexcursadas l where l.MATRICULA='"+$("#MATRICULA").val()+"' AND l.TIPOMAT NOT IN ('SS','AC')) AS PROM,"+
+         "       getInfoPlan('"+$("#MATRICULA").val()+"','CREDCURSADOS') AS CREDITOS,"+
+         "       getPromedio('"+$("#MATRICULA").val()+"','N') AS PROM"+
          "       (SELECT getavanceMatCiclo('"+$("#MATRICULA").val()+"',getciclo()) from dual) AS AVANCE"+
          " FROM DUAL "; 
 
