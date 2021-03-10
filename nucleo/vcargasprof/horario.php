@@ -396,7 +396,7 @@
 		
 		$pdf->eljefe=$dataEmpl[0]["EMPL_JEFEABREVIA"]." ".$dataEmpl[0]["EMPL_JEFED"];
 		
-		$header = array(utf8_decode('I. Carga Académica'), 'Paq.', 'Grupo','Lunes','Martes',utf8_decode('Miércoles'),'Jueves','Viernes','Sabado','Domingo', 'TH');
+		$header = array(utf8_decode('I. Carga Académica'), 'CVE', 'Grupo','Lunes','Martes',utf8_decode('Miércoles'),'Jueves','Viernes','Sabado','Domingo', 'TH');
 		
 		$data = $pdf->cargaAcademica();
 		$pdf->imprimeCargaAcad($header,$data);
