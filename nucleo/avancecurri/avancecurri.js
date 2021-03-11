@@ -232,10 +232,11 @@ var elalumno="";
 										 
 						 
 						//alert (valor.CICL_MATERIA.replace(rtrim, ''));
+						
                          cad="<div id=\""+valor.CICL_MATERIA.replace(rtrim, '')+"\""+estiloPadre+">"+                                     
 		                            "<div "+estiloAsignatura+">"+valor.CICL_MATERIAD+" ("+valor.CICL_CLAVEMAPA+")"+
 		                            "</div>"+
-		                            "<div title=\"Calificaci&oacute;n con la que aprobo la asignatura\" id=\""+valor.CICL_MATERIA.replace(rtrim, '')+"_CAL\" style=\"font-size:9px; font-weight:bold; text-align: center; color:blue; position: absolute; left: 0mm; top: "+altoasig+"mm; width:"+eltam+"mm; height:"+(alto-altoasig)+"mm; border-top: 0.1mm solid black;\"></div>"+
+		                            "<div title=\"Calificaci&oacute;n con la que aprobo la asignatura\" id=\""+valor.CICL_MATERIA.replace(rtrim, '')+"_CAL\" style=\"font-size:9px;"+et+" font-weight:bold; text-align: center; color:blue; position: absolute; left: 0mm; top: "+altoasig+"mm; width:"+eltam+"mm; height:"+(alto-altoasig)+"mm; border-top: 0.1mm solid black;\"></div>"+
 		                            "<div title=\"Numero de veces que ha cursado la asignatura\"id=\""+valor.CICL_MATERIA.replace(rtrim, '')+"_NVE\" style=\"font-size:9px; font-weight:bold; text-align: center; color:green;  position: absolute; left: "+eltam+"mm; top: "+altoasig+"mm; width:"+eltam+"mm; height:"+(alto-altoasig)+"mm; border-top: 0.1mm solid black;\"></div>"+
 		                            "<div title=\"Ciclo en el que se aprobo la asignatura\" id=\""+valor.CICL_MATERIA.replace(rtrim, '')+"_BAN\" style=\"font-size:9px; font-weight:bold; text-align: center; color:red;  position: absolute; left: "+eltam*2+"mm; top: "+altoasig+"mm; width:"+(tamfin-0.1)+"mm; height:"+(alto-altoasig)+"mm; border-top: 0.1mm solid black;\"></div>"+		                      
 		                          "</div>";
@@ -477,3 +478,25 @@ var elalumno="";
 
    }
  
+
+
+
+function getSeriadas(materia, mapa){
+	elsql="select * from eseriacion, cmaterias "+
+				"where SERI_MATERIAP=MATE_CLAVE and SERI_MAPA='"+mapa+"' and SERI_MATERIA='"+materia+"'";
+	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+	$.ajax({
+		type: "POST",
+		data:parametros,
+        url:  "../base/getdatossqlSeg.php",
+        success: function(dataSeriacion){  
+        losdatosSer=JSON.parse(dataSeriacion);  
+            jQuery.each(losdatosSer, function(claveSer, valorSer) {
+            	 $("#"+valorSer.SERI_MATERIAP).css("background-color","#ED4E13");
+            	 $("#"+valorSer.SERI_MATERIAP).css("color","white");
+                 $("#"+valorSer.SERI_MATERIAP).attr("seleccionado","1");
+
+                });			             
+	       }
+    });
+}

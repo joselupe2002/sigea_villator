@@ -25,14 +25,14 @@
         <link href="imagenes/login/sigea.png" rel="image_src" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/ui.jqgrid.min.css" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/jquery.gritter.min.css" />
-
+		<link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
         
 
         <style type="text/css">table.dataTable tbody tr.selected {color: blue; font-weight:bold; }</style>
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" class="sigeaPrin"  style="background-color: white; width:98%;">
 	   	    
 	      <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>
 	      
@@ -71,8 +71,8 @@
 				   <div class="widget-main">
 				       <div class="row" style=" overflow-x: scroll;">	
                            <div class="col-sm-12" >
-                               <div id="carta" style="width: 289mm; height: 226mm; border: 0px solid;  overflow-x: scroll; padding:0px; margin:0px; ">
-                               <div id="mihoja" style="position: absolute; left: 2mm; top: 1mm; width: 269mm; height: 206mm; border: 0px solid;">             
+                               <div id="carta" class="sigeaPrin" style="width: 289mm; height: 226mm; border: 0px solid;  overflow-x: scroll; padding:0px; margin:0px; ">
+                               <div id="mihoja" class="sigeaPrin"  style="position: absolute; left: 2mm; top: 1mm; width: 269mm; height: 206mm; border: 0px solid;">             
                            </div>
                        </div>
                     </div>
