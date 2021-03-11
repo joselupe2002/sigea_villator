@@ -454,7 +454,8 @@
 
         $pdf->parseVar('{matapr}',$materiasaprobadas); // convertimos la variable.
         $pdf->parseVar('{promreprobadas}',round($sumacursadas/($cursadas),0)); // Sacamos el promedio con materias reprobadas
-        $pdf->parseVar('{matcursadas}',$cursadas); // convertimos la variable de materias cursadas
+       // $pdf->parseVar('{matcursadas}',$cursadas); // convertimos la variable de materias cursadas
+       $pdf->parseVar('{matcursadas}',$materiasaprobadas); // convertimos la variable de materias cursadas
  
 
 //=====================================================================================================
