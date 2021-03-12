@@ -208,7 +208,7 @@
 		$elpsto="DEPARTAMENTO DE SERVICIOS ESCOLARES";
         
 		//Para el numero de oficio 
-		$dataof=$miutil->getConsecutivoDocumento("INCOVENIENCIA",$dataP[0]["MATRICULA"]);	
+		$dataof=$miutil->getConsecutivoDocumento("INCONVENIENCIA",$dataP[0]["MATRICULA"]);	
 		$fechadecof=$miutil->formatFecha($dataof[0]["FECHA"]);
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
     
