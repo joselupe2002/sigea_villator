@@ -209,7 +209,7 @@
 		$dataCiclo=$pdf->LoadCiclo($data[0]["CICLOTER"]);
 
 		$pdf->Ln();
-		$pdf->SetFont('Montserrat-ExtraBold','',22);
+		$pdf->SetFont('Montserrat-ExtraBold','',16);
 		$pdf->Image('../../imagenes/empresa/logo2.png',26,20,35,35);
 		$pdf->Cell(30,5,"","",0,'C',false);
 		$pdf->MultiCell(140,10,utf8_decode($dataGen[0]["inst_razon"]),0,'R',false);
