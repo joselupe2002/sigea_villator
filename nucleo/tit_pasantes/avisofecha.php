@@ -139,30 +139,11 @@
 			{
 				
 
-				$this->SetY(20);$this->SetX(25);
-				$this->Cell(40,15,"",1,0,'L',false);
-				$this->SetFont('Times','B',9);
-				$this->Cell(90,3,utf8_decode("FORMATO DE AVISO DE HORA Y FECHA DE "),"TRL",0,'C',false);
-				$this->Cell(40,15,"",1,0,'L',false);
-				
-				$this->SetY(23);$this->SetX(65);
-				$this->Cell(90,3,utf8_decode("REALIZACIÓN DE ACTO PROFESIONAL"),"B",0,'C',false);
-				$this->SetY(26);$this->SetX(65);
-				$this->SetFillColor(242,242,242);
-				$this->Cell(90,9,utf8_decode("IT-ACA-02-F2"),1,0,'C',true);
-				$this->Image('../../imagenes/empresa/pie1.png',28,22,23,11);
-				
-				$this->SetFont('Times','',9);
-				$this->SetY(20);$this->SetX(155);
-				$this->Cell(40,3,utf8_decode("PÁG. 1 DE 2"),"TRL",0,'C',false);
-				$this->SetY(23);$this->SetX(155);
-				$this->Cell(40,3,utf8_decode("REVISIÓN NO. 02"),"B",0,'C',false);
-				$this->SetY(26);$this->SetX(155);
-				$this->Cell(40,3,"VIGENTE A PARTIR DEL","",0,'C',false);
-				$this->SetY(29);$this->SetX(155);
-				$this->Cell(40,3,"8 DE ENERO 2020","",0,'C',false);
-				$this->SetY(32);$this->SetX(155);
-				$this->Cell(40,3,utf8_decode("VERSIÓN 2015"),"",0,'C',false);
+				$miutil = new UtilUser();
+                $miutil->getEncabezado($this,'V');			
+                //Para que cuando se cambie a la otra pagina empiece a la derecha y la stablas no se descuadren
+                $this->SetX(10);
+                $this->Ln(5);	
 				
 				
 			}
@@ -172,6 +153,11 @@
 			{
 				
 		
+				$miutil = new UtilUser();
+                $nombre=$miutil->getJefe('303');//Nombre del puesto de Recursos Humanos
+                $miutil->getPie($this,'V');
+
+				
 				$miutil = new UtilUser();
 				$pstotit=$miutil->getJefe('701');
 				$pstosub=$miutil->getJefe('304');

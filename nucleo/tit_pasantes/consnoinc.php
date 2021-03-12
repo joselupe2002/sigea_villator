@@ -174,7 +174,6 @@
                 $this->Cell(0,5,"Atentamente",0,1,'L');
                 $this->setY(-65);
                 $this->SetFont('Montserrat-ExtraLight','I',11);
-                $this->Cell(0,5,"Habilidad, Actitud, Conocimiento",0,1,'L');
 
                 $this->setY(-50);
                 $this->SetFont('Montserrat-ExtraBold','I',11);
