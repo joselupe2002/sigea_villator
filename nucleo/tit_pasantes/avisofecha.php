@@ -231,8 +231,8 @@
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,utf8_decode("VOCAL: ".$dataP[0]["VOCALD"]),0,1,'L');	
 		$pdf->Ln(5);
-		$pdf->Cell(0,0,utf8_decode("VOCAL SUPLENTE: ".$dataP[0]["VOCALSUPLENTED"]),0,1,'L');	
-		$pdf->Ln(5);
+		//$pdf->Cell(0,0,utf8_decode("VOCAL SUPLENTE: ".$dataP[0]["VOCALSUPLENTED"]),0,1,'L');	
+		//$pdf->Ln(5);
 		$pdf->Ln(5);
 
 		$pdf->SetFont('Times','',12);
