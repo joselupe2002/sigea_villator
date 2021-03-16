@@ -444,6 +444,8 @@ function constnoincov(modulo,usuario,essuper){
 			if (table.rows('.selected').data().length>0) {
 				enlace="nucleo/tit_pasantes/docprotocolo.php?alumno="+table.rows('.selected').data()[0]["MATRICULA"];
 				abrirPesta(enlace, "Protocolo");
+				enlace2="nucleo/tit_pasantes/juramento.php?alumno="+table.rows('.selected').data()[0]["MATRICULA"];
+				abrirPesta(enlace2, "Juramento");
 		
 			}
 			else {

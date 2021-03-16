@@ -290,7 +290,8 @@ var tramini=false;
 
 	function  iniciarTramite(){
 
-		elsql="SELECT count(*) as HAY FROM encrespuestas a where a.IDRESPONDE='"+usuario+"' and a.IDENC='2'";
+		//elsql="SELECT count(*) as HAY FROM encrespuestas a where a.IDRESPONDE='"+usuario+"' and a.IDENC='2'";
+		elsql="SELECT 1 as HAY FROM dual";
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 				$.ajax({
 					type: "POST",

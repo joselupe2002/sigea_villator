@@ -350,126 +350,7 @@
             }
 
 
-            function juramento() {
-                $this->AddPage();       
-                $dataP = $this->LoadDatosPas();
-                $dataGen =$this->LoadDatosGen();           
-                $miutil = new UtilUser();
-                $this->eljefe=$dataP[0]["NOMBREJEFE"];
-                $this->eljefepsto=$dataP[0]["FIRMAOF"];
-                $fechadec=$miutil->formatFecha($dataP[0]["FECHA_TIT"]);
-                $eldia=date("d", strtotime($fechadec));
-                $elmes=$miutil->getFecha($fechadec,'MES');
-                $elanio=date("Y", strtotime($fechadec));
-                 
-
-                $this->SetFont('Montserrat-ExtraBold','B',14);
-                $this->Ln(10);
-                $this->Cell(0,0,utf8_decode("JURAMENTO DE ETICA PROFESIONAL"),0,1,'C');
-                $this->Ln(10);
-                
-                $this->SetFont('Montserrat-ExtraBold','B',12);
-                $this->MultiCell(0,8,utf8_decode("Como Ingeniero de profesión, dedico mis conocimientos profesionales al progreso y mejoramiento del bienestar humano. Me comprometo: a dar  un rendimiento máximo, a participar tan solo en empresas dignas, a vivir de acuerdo con las leyes propias del hombre y el más elevado nivel de conducta profesional, a preferir el servicio al provecho, el honor y la calidad de la profesión a la ventaja personal, el bien público a toda consideración.")
-                ,0,'J',FALSE);
-
-                $this->Ln(5);
-
-                $this->SetFont('Montserrat-Medium','',10);
-                $this->Ln(15);
-                $this->Cell(0,0,utf8_decode($dataGen[0]["inst_fechaof"]." a ".$eldia." de ".$elmes. " de ". $elanio),0,1,'R');
-                
-                $this->Ln(15);
-                $this->SetFont('Montserrat-ExtraBold','U',12);
-                $this->Cell(0,0,utf8_decode($dataP[0]["PASANTE"]),0,1,'C');
-                $this->Ln(5);
-                $this->SetFont('Montserrat-Medium','',12);
-                $this->Cell(0,0,utf8_decode("NOMBRE Y FIRMA"),0,1,'C');
-
-                $this->Ln(15);
-                $this->SetFont('Montserrat-ExtraBold','B',14);
-                $this->Cell(0,0,utf8_decode("JURADO"),0,1,'C');
-
-                $this->Ln(15);
-                $this->SetFont('Montserrat-ExtraBold','U',12);
-                $this->Cell(0,0,utf8_decode($dataP[0]["PRESIDENTED"]),0,1,'C');
-                $this->Ln(5);
-                $this->SetFont('Montserrat-Medium','',10);
-                $this->Cell(0,0,utf8_decode("PRESIDENTE"),0,1,'C');
-                
-
-                $this->Ln(15);
-                $this->SetFont('Montserrat-ExtraBold','U',12);
-                $this->setX(20);
-                $this->Cell(88,0,utf8_decode($dataP[0]["SECRETARIOD"]),0,0,'C');
-                $this->Cell(88,0,utf8_decode($dataP[0]["VOCALD"]),0,0,'C');
-                $this->Ln(5);
-                $this->setX(20);
-                $this->SetFont('Montserrat-Medium','',10);
-                $this->Cell(88,0,utf8_decode("SECRETARIO"),0,0,'C');
-                $this->Cell(88,0,utf8_decode("VOCAL"),0,0,'C');
-
-            }
-
-
-            function juramento2() {
-                $this->AddPage();       
-                $dataP = $this->LoadDatosPas();
-                $dataGen =$this->LoadDatosGen();                           
-                $miutil = new UtilUser();
-
-                $this->AddFont('brush script mt kursiv','B','brush script mt kursiv.php');
-                $this->AddFont('brush script mt kursiv','','brush script mt kursiv.php');
-          
-
-                $this->eljefe=$dataP[0]["NOMBREJEFE"];
-                $this->eljefepsto=$dataP[0]["FIRMAOF"];
-                $fechadec=$miutil->formatFecha($dataP[0]["FECHA_TIT"]);
-                $eldia=date("d", strtotime($fechadec));
-                $elmes=$miutil->getFecha($fechadec,'MES');
-                $elanio=date("Y", strtotime($fechadec));
-                 
-
-                $this->SetFont('brush script mt kursiv','B',16);
-                $this->Ln(10);
-                $this->Cell(0,0,utf8_decode("JURAMENTO DE ETICA PROFESIONAL"),0,1,'C');
-                $this->Ln(10);
-                
-                $this->SetFont('brush script mt kursiv','',16);
-                $this->MultiCell(0,8,utf8_decode("Como Ingeniero de profesión, dedico mis conocimientos profesionales al progreso y mejoramiento del bienestar humano. Me comprometo: a dar  un rendimiento máximo, a participar tan solo en empresas dignas, a vivir de acuerdo con las leyes propias del hombre y el más elevado nivel de conducta profesional, a preferir el servicio al provecho, el honor y la calidad de la profesión a la ventaja personal, el bien público a toda consideración.")
-                ,0,'J',FALSE);
-
-                $this->Ln(5);
-
-                $this->SetFont('brush script mt kursiv','',16);
-                $this->Ln(15);
-                $this->Cell(0,0,utf8_decode($dataGen[0]["inst_fechaof"]." a ".$eldia." de ".$elmes. " de ". $elanio),0,1,'R');
-                
-
-                $this->Ln(15);
-                $this->Cell(0,0,utf8_decode($miutil->convTitulo($dataP[0]["PASANTE"])),0,1,'C');
-                $this->Ln(5);
-                $this->Cell(0,0,utf8_decode("Nombre y Firma"),0,1,'C');
-
-                $this->Ln(15);
-                $this->Cell(0,0,utf8_decode("JURADO"),0,1,'C');
-
-                $this->Ln(15);
-                $this->Cell(0,0,utf8_decode($miutil->convTitulo($dataP[0]["PRESIDENTED"])),0,1,'C');
-                $this->Ln(5);
-                $this->Cell(0,0,utf8_decode("Presidente"),0,1,'C');
-                
-
-                $this->Ln(15);
-                $this->setX(20);
-                $this->Cell(88,0,utf8_decode($miutil->convTitulo($dataP[0]["SECRETARIOD"])),0,0,'C');
-                $this->Cell(88,0,utf8_decode($miutil->convTitulo($dataP[0]["VOCALD"])),0,0,'C');
-                $this->Ln(5);
-                $this->setX(20);
-                $this->Cell(88,0,utf8_decode("Secretario"),0,0,'C');
-                $this->Cell(88,0,utf8_decode("Vocal"),0,0,'C');
-
-            }
-
+         
 		}
         
         
@@ -488,8 +369,6 @@
         $pdf->protesta();
         $pdf->protocolo();        
         $pdf->lista();
-        $pdf->juramento();
-        $pdf->juramento2();
         
          $pdf->Output(); 
 
