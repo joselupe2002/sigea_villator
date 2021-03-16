@@ -636,6 +636,7 @@ var miciclo="";
 					TERMINO:$("#termino").val(),
 					EMPRESA:$("#empresa").val(),
 					PUESTO:$("#puesto").val(),
+					RESPONSABLEPROG:$("#RESPONSABLEPROG").val().toUpperCase(),
 					HORARIO:"LUNES A VIERNES 08:00 - 16:00",
 					HORAS:"500",
 					REPRESENTANTE:$("#representante").val(),
