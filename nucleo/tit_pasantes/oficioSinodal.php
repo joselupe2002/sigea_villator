@@ -188,7 +188,7 @@
                 $this->Cell(0,5,"Atentamente",0,1,'L');
                 $this->setY(-65);
                 $this->SetFont('Montserrat-ExtraLight','I',11);
-                $this->Cell(0,5,"Habilidad, Actitud, Conocimiento",0,1,'L');
+               // $this->Cell(0,5,"Habilidad, Actitud, Conocimiento",0,1,'L');
 
                 $this->setY(-50);
                 $this->SetFont('Montserrat-ExtraBold','I',11);
@@ -271,11 +271,11 @@
                 $this->SetFont('Montserrat-Medium','',12);
 
                 $this->Ln(5);
-                $this->MultiCell(0,5,utf8_decode("Del cual se anexa el trabajo profesional."),0,'J',FALSE);
+               // $this->MultiCell(0,5,utf8_decode("Del cual se anexa el trabajo profesional."),0,'J',FALSE);
                 $this->Ln(5);
-                $this->MultiCell(0,5,utf8_decode("Posteriormente se le indicará la fecha, hora y lugar del examen profesional ".                
-                "el cual no podrá realizarse sin su presencia, sin otro particular por el momento, le reitero un cordial saludo."),0,'J',FALSE);
-                $this->Ln(5);
+              //  $this->MultiCell(0,5,utf8_decode("Posteriormente se le indicará la fecha, hora y lugar del examen profesional ".                
+              //  "el cual no podrá realizarse sin su presencia, sin otro particular por el momento, le reitero un cordial saludo."),0,'J',FALSE);
+             //   $this->Ln(5);
                 $this->MultiCell(0,5,utf8_decode("Agradeciendo de antemano su puntual asistencia, quedo de usted."),0,'J',FALSE);
 
 
@@ -293,7 +293,7 @@
         $pdf->imprimeOficio("PRESIDENTE","PRES","PRESIDENTED");
         $pdf->imprimeOficio("SECRETARIO","SEC","SECRETARIOD");
         $pdf->imprimeOficio("VOCAL","VOC","VOCALD");
-        $pdf->imprimeOficio("VOCAL SUPLENTE","VOC_S","VOCALSUPLENTED");
+       // $pdf->imprimeOficio("VOCAL SUPLENTE","VOC_S","VOCALSUPLENTED");
        
          $pdf->Output(); 
 
