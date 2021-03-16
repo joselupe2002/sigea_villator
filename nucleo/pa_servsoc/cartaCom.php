@@ -219,7 +219,7 @@
 		$pdf->Cell(120,5,utf8_decode($data[0]["DIREMPRESA"]),"B",0,'L',false);
 		$pdf->Ln(5);
 		$pdf->Cell(50,5,utf8_decode("Responsable del programa:"),"",0,'L',false);
-		$pdf->Cell(120,5,utf8_decode($data[0]["REPRESENTANTE"]),"B",0,'L',false);
+		$pdf->Cell(120,5,utf8_decode($data[0]["RESPONSABLEPROG"]),"B",0,'L',false);
 		$pdf->Ln(5);
 		$pdf->Cell(30,5,utf8_decode("Fecha de Inicio:"),"",0,'L',false);
 		$pdf->Cell(45,5,utf8_decode($data[0]["INICIO"]),"B",0,'L',false);

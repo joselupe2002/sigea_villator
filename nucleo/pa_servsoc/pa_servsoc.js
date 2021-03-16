@@ -461,7 +461,7 @@ var miciclo="";
 		elsql="select ifnull(ID,'0') as ID,ifnull( MATRICULA,'') AS MATRICULA,ifnull( CICLO,'') AS CICLO,ifnull( INICIO,'') AS INICIO,"+
 		"ifnull( PROGRAMA,'') AS PROYECTO,ifnull( TERMINO,'') AS TERMINO,ifnull( EMPRESA,'') AS EMPRESA,"+
 		"ifnull( REPRESENTANTE,'') AS REPRESENTANTE,ifnull( PUESTO,'') AS PUESTO,ifnull(PROGRAMA,'') AS PROGRAMA,"+
-		"ifnull( MODALIDAD,'') AS MODALIDAD,ifnull( ACTIVIDADES,'') AS ACTIVIDADES,ifnull( DIRECCION,'') AS DIRECCION,"+
+		"ifnull( RESPONSABLEPROG,'') AS RESPONSABLEPROG,ifnull( MODALIDAD,'') AS MODALIDAD,ifnull( ACTIVIDADES,'') AS ACTIVIDADES,ifnull( DIRECCION,'') AS DIRECCION,"+
 		"ifnull( TIPOPROG,'') AS TIPOPROG,ifnull(ENVIADA,'') AS ENVIADA, ifnull( TIPOPROGADD,'') AS TIPOPROGADD, ifnull( FECHACOM,'') AS FECHACOM, VALIDADO AS VALIDADO,"+
 		"count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"'"+
 		" and MATRICULA='"+usuario+"'";
@@ -509,10 +509,13 @@ var miciclo="";
 						"</div>"+						
 					"</div>"+
 					"<div class=\"row\">"+
-						"<div class=\"col-sm-9\">"+
+						"<div class=\"col-sm-5\">"+
 							"<label class=\"fontRobotoB\">Nombre del Programa </label><input class=\"form-control captProy\" value=\""+misdatos[0]["PROGRAMA"]+"\" id=\"programa\"></input>"+
 						"</div>"+
-						"<div class=\"col-sm-3\">"+
+						"<div class=\"col-sm-5\">"+
+							"<label class=\"fontRobotoB\">Responsable del Programa </label><input class=\"form-control captProy\" value=\""+misdatos[0]["RESPONSABLEPROG"]+"\" id=\"RESPONSABLEPROG\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-2\">"+
 							"<label class=\"fontRobotoB\">Modalidad</label><select class=\"form-control captProy\"  id=\"modalidad\"></select>"+
 						"</div>"+					
 					"</div>"+
@@ -581,6 +584,7 @@ var miciclo="";
 					EMPRESA:$("#empresa").val().toUpperCase(),
 					MODALIDAD:$("#modalidad").val(),
 					PUESTO:$("#puesto").val().toUpperCase(),
+					RESPONSABLEPROG:$("#RESPONSABLEPROG").val().toUpperCase(),
 					REPRESENTANTE:$("#representante").val().toUpperCase(),
 					PROGRAMA:$("#programa").val(),
 					TIPOPROG:$("#tipoprog").val(),
