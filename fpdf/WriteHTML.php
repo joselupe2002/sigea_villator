@@ -106,5 +106,7 @@ class PDF_HTML extends FPDF
 		$this->SetStyle('U',false);
 		$this->SetTextColor(0);
 	}
+
+	
 }
 ?>
