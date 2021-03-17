@@ -369,7 +369,7 @@
 
         $pdf->setY(180);
         $pdf->setX(9); $pdf->Cell(30,2,'','TLR',1,'C');
-        $pdf->SetFont('Arial','B',7);
+        $pdf->SetFont('Arial','B',6);
         $pdf->setX(9); $pdf->Cell(30,2,'REGISTRADO EN EL','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'DEPARTAMENTO','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'DE SERVICIOS ESCOLARES','LR',1,'C');
@@ -385,7 +385,7 @@
 
         $pdf->setY(216);
         $pdf->SetFont('Arial','B',7);
-        $pdf->setX(9); $pdf->Cell(30,5,'COTEJÓ','TLR',1,'C');
+        $pdf->setX(9); $pdf->Cell(30,5,utf8_decode('COTEJÓ'),'TLR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,11,'','LRB',1,'C');
 
         $pdf->SetFont('Arial','',6);
