@@ -336,7 +336,7 @@
         $pdf->Ln();
 
         
-        $txt=utf8_decode("<p>SE EXTIENDE EL <vb>PRESENTE CERTIFICADO COMPLETO</vb> QUE AMPARA <vb>".$totcred.
+        $txt=utf8_decode("<p>SE EXPIDE EL <vb>PRESENTE CERTIFICADO COMPLETO</vb> QUE AMPARA <vb>".$totcred.
         "</vb> CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE <vb>".
         $dataAlum[0]["MAPA"]."</vb>, EN <vb>".strtoupper($data2[0]["inst_extiende"])."</vb> A LOS ".strtoupper($fechadecexp)."</p>");
 
