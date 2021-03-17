@@ -234,7 +234,7 @@
                 $this->SetTextColor(0);
                 $this->setY(74);
                 $this->SetFont('myriadpro-regular','B',20);
-                $this->Cell(0,0,utf8_decode("JURAMENTO DE ETICA PROFESIONAL"),0,1,'C');
+                $this->Cell(0,0,utf8_decode("JURAMENTO DE ÉTICA PROFESIONAL"),0,1,'C');
 
                 
                 $this->SetTextColor(0);
@@ -263,13 +263,13 @@
                 ,0,'C',FALSE);
 
                 $this->Ln(20);
-                $this->MultiCell(0,5,utf8_decode("Con respeto y horadez, hago el presente juramento.")
+                $this->MultiCell(0,5,utf8_decode("Con respeto y honradez, hago el presente juramento.")
                 ,0,'C',FALSE);
 
                 $this->Ln(25);
 
 
-                $this->SetDash(2,2); //5mm on, 5mm off
+               // $this->SetDash(2,2); //5mm on, 5mm off
                 $this->Cell(10,0,"","",0,'C');$this->Cell(173,0,"","T",0,'C');
                 $this->Ln(5);
                 $this->SetFont('Montserrat-ExtraBold','',14);

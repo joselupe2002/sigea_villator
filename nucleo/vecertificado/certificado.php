@@ -246,6 +246,7 @@
         $pdf->setX($margeniz);
         $pdf->setY(14);
 
+        $pdf->SetFont('Arial','',8);
         $pdf->Cell($margeniz,5,'',0,0,'C');
         $pdf->MultiCell(0,3,utf8_decode("INSTITUCIÓN DE EDUCACIÓN SUPERIOR, CON CARÁCTER DE ORGANISMO PÚBLICO ".
         "DESCENTRALIZADO POR DECRETO DE CREACIÓN, PUBLICADO EN EL PERIÓDICO OFICIAL DEL GOBIERNO CONSTITUCIONAL ".
