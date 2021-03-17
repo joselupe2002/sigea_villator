@@ -335,10 +335,10 @@
         $pdf->SetFont('Arial','',8);
         $pdf->Ln();
 
-        
-        $txt=utf8_decode("<p>SE EXPIDE EL <vb>PRESENTE CERTIFICADO COMPLETO</vb> QUE AMPARA <vb>".$totcred.
+        $cadCer="CERTIFICADO COMPLETO"; if ($dataAlum[0]["PLACRED"]>$totcred)  {$cadCer="CERTIFICADO PARCIAL"; }
+        $txt=utf8_decode("<p>SE EXPIDE EL PRESENTE <vb>".$cadCer."</vb> QUE AMPARA <vb>".$totcred.
         "</vb> CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE <vb>".
-        $dataAlum[0]["MAPA"]."</vb>, EN <vb>".strtoupper($data2[0]["inst_extiende"])."</vb> A LOS ".strtoupper($fechadecexp)."</p>");
+        $dataAlum[0]["MAPA"]."</vb>, EN <vb>SANTA MARÍA DEL ORO, EL ORO, DGO.</vb> A LOS ".strtoupper($fechadecexp)."</p>");
 
 
         $pdf->WriteTag(0,4,$txt,0,"J",0,0);
@@ -349,9 +349,9 @@
 
         $pdf->setX($margeniz);
         $pdf->Cell(0,0,utf8_decode($nombre),0,1,'C');
-        $pdf->Ln(10);
+        $pdf->Ln(3);
         $pdf->setX($margeniz);
-        $pdf->Cell(0,0,"DIRECTOR GENERAL",0,1,'C');
+        $pdf->Cell(0,0,"DIRECTOR(A) GENERAL",0,1,'C');
 
 
         $pdf->SetFont('Arial','',6);
