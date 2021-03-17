@@ -219,7 +219,7 @@
 		$pdf->SetAutoPageBreak(true,10); 
         $pdf->AddPage();
         $pdf->SetFont('lucida-sans-unicode_[allfont.es]','B',16);
-        $pdf->SetTextColor(79, 129, 189);
+        $pdf->SetTextColor(36, 64, 97);
 
   
         $pdf->Cell(0,5,utf8_decode('Instituto Tecnológico Superior de Santa María de El Oro'),0,1,'C');
