@@ -362,8 +362,10 @@
         
 
         $pdf->SetFont('Arial','',6);
-        $fechacer= date("Y", strtotime($fechaexp))."-".$miutil->getMesRomano(date("m", strtotime($fechaexp)))."-".date("d", strtotime($fechaexp));
+        //$fechacer= date("Y", strtotime($fechaexp))."-".date("m", strtotime($fechaexp))."-".date("d", strtotime($fechaexp));
       
+        $fechacer=$dataCer[0]["FECHAEXP"];
+
         $pdf->setY(180);
         $pdf->setX(9); $pdf->Cell(30,2,'','TLR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'REGISTRADO EN EL','LR',1,'C');
