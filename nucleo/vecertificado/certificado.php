@@ -279,7 +279,7 @@
         $pdf->Cell(85,5,'MATERIA','TBL',0,'L');
         $pdf->Cell(13,5,'CALIF.','TBR',0,'C');
         $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
-        $pdf->Cell(28,5,'CRÉDITOS',1,0,'C');
+        $pdf->Cell(28,5,utf8_decode('CRÉDITOS'),1,0,'C');
 
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
