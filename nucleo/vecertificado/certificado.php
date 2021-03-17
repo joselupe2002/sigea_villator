@@ -384,7 +384,7 @@
         $pdf->setX(9); $pdf->Cell(30,2,'FOLIO','',1,'C');
         $pdf->SetFont('Britannic Bold Regular','B',16);
         $pdf->SetTextColor(255, 0, 0);
-        $pdf->setY(255);
+        $pdf->setY(256);
         $pdf->setX(9); $pdf->Cell(30,2,$dataCer[0]["FOLIO"],'',1,'C');
 
         $pdf->Image("../../imagenes/empresa/logo2.png",23,228,3);
