@@ -279,7 +279,7 @@
         $pdf->Cell(85,5,'MATERIA','TBL',0,'L');
         $pdf->Cell(13,5,'CALIF.','TBR',0,'C');
         $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
-        $pdf->Cell(28,5,'CR',1,0,'C');
+        $pdf->Cell(28,5,'CRÉDITOS',1,0,'C');
 
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
@@ -369,12 +369,14 @@
 
         $pdf->setY(180);
         $pdf->setX(9); $pdf->Cell(30,2,'','TLR',1,'C');
+        $pdf->SetFont('Arial','B',7);
         $pdf->setX(9); $pdf->Cell(30,2,'REGISTRADO EN EL','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'DEPARTAMENTO','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'DE SERVICIOS ESCOLARES','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'ESCOLARES','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'','LRB',1,'C');
 
+        $pdf->SetFont('Arial','',7);
         $pdf->setX(9); $pdf->Cell(30,4,'','TLR',1,'C');
         $pdf->setX(9); $pdf->Cell(10,4,'CON NO.','L',0,'L'); $pdf->Cell(20,4, $dataCer[0]["FOLIO"],'RB',1,'C');
         $pdf->setX(9); $pdf->Cell(18,4,'CON EL LIBRO','L',0,'L'); $pdf->Cell(12,4, $dataCer[0]["LIBRO"],'RB',1,'C');
@@ -382,9 +384,11 @@
         $pdf->setX(9); $pdf->Cell(10,4,'FECHA','BL',0,'L'); $pdf->Cell(20,4, $fechacer,'RB',1,'C');
 
         $pdf->setY(216);
-        $pdf->setX(9); $pdf->Cell(30,5,'COTEJO','TLR',1,'C');
+        $pdf->SetFont('Arial','B',7);
+        $pdf->setX(9); $pdf->Cell(30,5,'COTEJÓ','TLR',1,'C');
         $pdf->setX(9); $pdf->Cell(30,11,'','LRB',1,'C');
 
+        $pdf->SetFont('Arial','',6);
         $pdf->setY(235);
         $pdf->setX(9); $pdf->Cell(30,2,'JEFE DEL','',1,'C');
         $pdf->setX(9); $pdf->Cell(30,2,'DEPARTAMENTO DE','',1,'C');
