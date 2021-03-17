@@ -353,6 +353,7 @@
         $pdf->setX($margeniz);
         $pdf->Cell(0,0,"DIRECTOR(A) GENERAL",0,1,'C');
 
+        $pdf->Line(26, 170, 26, 105);
         $pdf->TextWithRotation(30,160,'FIRMA DEL INTERESADO',90,0);
         $pdf->SetFont('Arial','',5);
         $pdf->TextWithRotation(32,164,utf8_decode('CERTIFICADO VÁLIDO EN LOS ESTADOS UNIDOS'),90,0);
