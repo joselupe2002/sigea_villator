@@ -116,6 +116,16 @@
                     return $nl;
         }
 
+        
+    function SetDash($black=null, $white=null)
+    {
+        if($black!==null)
+            $s=sprintf('[%.3F %.3F] 0 d',$black*$this->k,$white*$this->k);
+        else
+            $s='[] 0 d';
+        $this->_out($s);
+    }
+
 /*===================================================================================================================*/
    	        var $eljefe="";
    	        var $eljefepsto="";
@@ -175,10 +185,16 @@
                 $this->AddFont('Montserrat-ExtraLight','I','Montserrat-ExtraLight.php');
                 $this->AddFont('Montserrat-ExtraLight','','Montserrat-ExtraLight.php');
 
-				$this->Image('../../imagenes/empresa/fondo.png',0,0,187,275);
-		        $this->Image('../../imagenes/empresa/encabezado.png',20,8,150);
+                $this->AddFont('myriadpro-regular','','myriadpro-regular.php');
+                $this->AddFont('myriadpro-regular','B','myriadpro-regular.php');
+                $this->AddFont('EdwardianScriptITC','','EdwardianScriptITC.php');
 
-               
+                
+				$this->Image('../../imagenes/empresa/fondo.png',0,0,187,275);
+                $this->Image('../../imagenes/empresa/tit_sep.png',7,15,59,12);
+		        $this->Image('../../imagenes/empresa/tit_tecnm.png',87,13,37,16);
+                $this->Image('../../imagenes/empresa/tit_estado.png',139,13,30,16);
+                $this->Image('../../imagenes/empresa/logo2.png',190,13,16,16);
 
 			}
 			
@@ -208,21 +224,26 @@
                 $elanio=date("Y", strtotime($fechadec));
                  
 
-                $this->SetFont('Montserrat-ExtraBold','B',18);
-                $this->Ln(10);
+                $this->SetFont('myriadpro-regular','',20);
+                $this->SetTextColor(126,124,126);
+                $this->setY(44);
                 $this->Cell(0,0,utf8_decode("TECOLÓGICO NACIONAL DE MÉXICO"),0,1,'C');                
-                $this->Ln(10);
+                $this->Ln(8);
                 $this->Cell(0,0,utf8_decode("CAMPUS SANTA MARÍA DE EL ORO"),0,1,'C');
-                $this->Ln(10);
-
-                $this->SetFont('Montserrat-ExtraBold','B',14);
-                $this->Ln(10);
+               
+                $this->SetTextColor(0);
+                $this->setY(74);
+                $this->SetFont('myriadpro-regular','B',20);
                 $this->Cell(0,0,utf8_decode("JURAMENTO DE ETICA PROFESIONAL"),0,1,'C');
-                $this->Ln(10);
+
                 
-                $this->SetFont('Montserrat-Medium','',12);
-                $this->MultiCell(0,5,utf8_decode("Como profesionista, dedico mis conocimientos profesionales ".
-                "al progreso y mejoramiento del bienestar humano. ")
+                $this->SetTextColor(0);
+                $this->setY(94);
+                $this->SetFont('Montserrat-Medium','',16);
+                $this->MultiCell(0,5,utf8_decode("Como profesionista, dedico mis conocimientos profesionales ")
+                ,0,'C',FALSE);
+
+                $this->MultiCell(0,5,utf8_decode("al progreso y mejoramiento del bienestar humano. ")
                 ,0,'C',FALSE);
 
                 $this->Ln(5);
@@ -241,21 +262,24 @@
                 $this->MultiCell(0,5,utf8_decode("el bien público a toda consideración.")
                 ,0,'C',FALSE);
 
-                $this->Ln(10);
+                $this->Ln(20);
                 $this->MultiCell(0,5,utf8_decode("Con respeto y horadez, hago el presente juramento.")
                 ,0,'C',FALSE);
 
+                $this->Ln(25);
+
+
+                $this->SetDash(2,2); //5mm on, 5mm off
+                $this->Cell(10,0,"","",0,'C');$this->Cell(173,0,"","T",0,'C');
                 $this->Ln(5);
-
-
-                $this->Ln(15);
-                $this->SetFont('Montserrat-ExtraBold','U',12);
+                $this->SetFont('Montserrat-ExtraBold','',14);
                 $this->Cell(0,0,utf8_decode($dataP[0]["PASANTE"]),0,1,'C');
                 $this->Ln(5);
-                $this->SetFont('Montserrat-Medium','',12);
+                $this->SetFont('Montserrat-Medium','',10);
                 $this->Cell(0,0,utf8_decode($dataP[0]["CARRERAD"]),0,1,'C');
                 $this->Ln(5);
               
+                $this->SetDash(0,0); //5mm on, 5mm off
                 $this->setX(0);
                 $this->SetLineWidth(1);
                 $this->SetDrawColor(191, 142, 10 );
@@ -265,14 +289,15 @@
 
                
                
-                $this->Ln(15);
-                $this->SetFont('Montserrat-ExtraBold','',18);
-                $this->Cell(0,0,utf8_decode("Excelencia en Educatión Tecnológica"),0,1,'C');
-                $this->Ln(5);
+                $this->setY(229);
+                $this->SetFont('EdwardianScriptITC','',18);
+                $this->SetLineWidth(0.1);
+                $this->Cell(20,10,"","",0,'C');$this->Cell(153,10,utf8_decode("Excelencia en Educación Tecnológica"),"B",1,'C');
+
 
            
-                $this->SetFont('Montserrat-Medium','',10);
-                $this->Ln(15);
+                $this->SetFont('Montserrat-Medium','',12);
+                $this->Ln(10);
                 $this->Cell(0,0,utf8_decode("Santa María del Oro, Dgo., a ".$eldia." de ".$elmes. " de ". $elanio),0,1,'R');
                 
 
@@ -287,7 +312,7 @@
 		header("Content-Type: text/html; charset=UTF-8");
 		
 		$pdf->SetFont('Arial','',10);
-		$pdf->SetMargins(25, 25 , 25);
+		$pdf->SetMargins(10, 10 , 10);
 		$pdf->SetAutoPageBreak(true,30); 
        
         $miutil = new UtilUser();
