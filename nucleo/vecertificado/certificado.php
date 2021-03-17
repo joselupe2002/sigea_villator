@@ -134,8 +134,8 @@
 			{				
                 $miConex = new Conexion();
                 $sql="SELECT MATRICULA, NOMBRE,MATERIA, MATERIAD, SEMESTRE, GPOCVE,". 
-                "(CASE WHEN TIPOMAT='AC' THEN (select CALLET from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1)".
-                "      WHEN TIPOMAT='SS' THEN (select CALLET from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1) ".
+                "(CASE WHEN TIPOMAT='AC' THEN (select SUBSTRING(CALLET,1,3) from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1)".
+                "      WHEN TIPOMAT='SS' THEN (select SUBSTRING(CALLET,1,3) from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1) ".
                 " ELSE CAL END) AS CAL,".
                 "TCAL,CICLO,CREDITO,TIPOMAT, VECES, PRIMERA, SEGUNDA, TERCERA FROM kardexcursadas a ".
                 " where MATRICULA='".$_GET["matricula"]."' AND CAL>=70 AND CERRADO='S' AND CERRADO='S' ORDER BY SEMESTRE, MATERIAD";
@@ -348,10 +348,10 @@
         $pdf->Ln(10);
 
         $pdf->setX($margeniz);
-        $pdf->Cell(0,0,"DIRECTOR GENERAL",0,1,'C');
+        $pdf->Cell(0,0,utf8_decode($nombre),0,1,'C');
         $pdf->Ln(10);
         $pdf->setX($margeniz);
-        $pdf->Cell(0,0,utf8_decode($nombre),0,1,'C');
+        $pdf->Cell(0,0,"DIRECTOR GENERAL",0,1,'C');
 
 
         $pdf->SetFont('Arial','',6);
@@ -384,6 +384,7 @@
         $pdf->setX(9); $pdf->Cell(30,2,'FOLIO','',1,'C');
         $pdf->SetFont('Britannic Bold Regular','B',16);
         $pdf->SetTextColor(255, 0, 0);
+        $pdf->setY(255);
         $pdf->setX(9); $pdf->Cell(30,2,$dataCer[0]["FOLIO"],'',1,'C');
 
         $pdf->Image("../../imagenes/empresa/logo2.png",23,228,3);
