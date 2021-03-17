@@ -379,7 +379,7 @@
         $pdf->SetFont('Arial','',7);
         $pdf->setX(9); $pdf->Cell(30,4,'','TLR',1,'C');
         $pdf->setX(9); $pdf->Cell(10,4,'CON NO.','L',0,'L'); $pdf->Cell(20,4, $dataCer[0]["FOLIO"],'RB',1,'C');
-        $pdf->setX(9); $pdf->Cell(18,4,'CON EL LIBRO','L',0,'L'); $pdf->Cell(12,4, $dataCer[0]["LIBRO"],'RB',1,'C');
+        $pdf->setX(9); $pdf->Cell(18,4,'EN EL LIBRO','L',0,'L'); $pdf->Cell(12,4, $dataCer[0]["LIBRO"],'RB',1,'C');
         $pdf->setX(9); $pdf->Cell(10,4,'A FOJAS','L',0,'L'); $pdf->Cell(20,4, $dataCer[0]["FOJA"],'RB',1,'C');
         $pdf->setX(9); $pdf->Cell(10,4,'FECHA','BL',0,'L'); $pdf->Cell(20,4, $fechacer,'RB',1,'C');
 
