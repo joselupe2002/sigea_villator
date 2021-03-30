@@ -28,7 +28,7 @@
        foreach ($res as $lin) {       	  
           $datos[]=$lin;          
        }
-       echo $sql;
+      // echo $sql;
 
        echo json_encode($datos);
 } else {header("Location: index.php");}
