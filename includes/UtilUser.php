@@ -398,7 +398,7 @@ class UtilUser {
 
 	
 	public function  getPie($pdf,$orienta){	
-		$top1=253; $top2=243; $left1=10; $left2=160; $iniciaTexto=50; $anchoTexto=110;
+		$top1=253; $top2=243; $left1=10; $left2=180; $iniciaTexto=50; $anchoTexto=110;
 		if ($orienta=='H') {$top1=192; $top2=188; $left1=20; $left2=215;  $iniciaTexto=80; $anchoTexto=150;}
 		$pre='../../'; if (($orienta=='H2')||($orienta=='V2')) {$pre='../';}
 
@@ -414,19 +414,19 @@ class UtilUser {
 		$pdf->Image($pre.'imagenes/empresa/piepag1.png',$left1,$top1,36);
 		$pdf->SetFont('Montserrat-Medium','',7);
 		$pdf->SetY(-25);
-		$elpie= utf8_decode($direccion)." ".utf8_decode($telefonos)."\n ".utf8_decode($pagina);
+		$elpie= utf8_decode($direccion)." \n".utf8_decode($telefonos)."\n ".utf8_decode($pagina);
 		
 		$pdf->SetX($iniciaTexto);
-		$pdf->MultiCell($anchoTexto,3,$elpie,0,'C',false);
-		$pdf->Image($pre.'imagenes/empresa/piepag2.png',$left2,$top2,46,20);
+		$pdf->MultiCell($anchoTexto,3,$elpie,0,'L',false);
+		$pdf->Image($pre.'imagenes/empresa/piepag2.png',$left2,$top2,20,20);
 	}
 	
 	public function  getEncabezado($pdf,$orienta){
-		$left2=110; $left3=160; $anchoenc=163;
+		$left2=110; $left3=160; $anchoenc=190;
 		if ($orienta=='H') {$left2=210; $left3=260; $anchoenc=213;}
 		$pre='../../'; if (($orienta=='H2')||($orienta=='V2')) {$pre='../';}
 		$pdf->Image($pre.'imagenes/empresa/fondo.png',0,0,187,275);
-		$pdf->Image($pre.'imagenes/empresa/encabezado.png',20,8,$anchoenc);
+		$pdf->Image($pre.'imagenes/empresa/encabezado.png',10,8,$anchoenc,15);
 	
 		$pdf->AddFont('Montserrat-Black','B','Montserrat-Black.php');
 		$pdf->AddFont('Montserrat-Black','','Montserrat-Black.php');

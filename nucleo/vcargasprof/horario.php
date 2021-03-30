@@ -182,11 +182,13 @@
 			
 			function cargaAcademica()
 			{
+
+
 			    $entre=false;
 				$miConex = new Conexion();
 				$resultado=$miConex->getConsulta($_SESSION['bd'],"select a.MATERIAD, a.MATERIA, ".
                                                  "a.SIE AS GRUPO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO, (IFNULL(a.HP,0)+IFNULL(a.HT,0)) as HT".
-						                         " from  vedgrupos a where a.BASE IS NULL and a.CICLO='".$_GET["ciclo"]."' and a.PROFESOR='".$_GET["ID"]."'" );				
+						                         " from  vedgrupos a where IFNULL(a.BASE,'0')='0' and a.CICLO='".$_GET["ciclo"]."' and a.PROFESOR='".$_GET["ID"]."'" );				
 				foreach ($resultado as $row) {
 					$data[] = $row;
 					$entre=true;

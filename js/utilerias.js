@@ -2252,7 +2252,7 @@ function verPlaneacion(materia,materiad, grupo, ciclo, contenedor,esjefe){
 
 function cargarFechas(materia,grupo,ciclo, abierto, esjefe) {
 	cargandoSubtemas=true;
-elsql="SELECT l.UNID_PRED AS TMACVE, "+
+    elsql="SELECT l.UNID_PRED AS TMACVE, "+
 	  "(SELECT UNID_DESCRIP FROM eunidades i WHERE i.UNID_MATERIA=l.UNID_MATERIA and i.UNID_NUMERO=l.UNID_PRED  "+
 	  "		   and i.UNID_PRED='' LIMIT 1) AS TEMA,"+
 	  "UNID_NUMERO AS SMACVE, UNID_DESCRIP AS SUBTEMA, "+
@@ -2262,6 +2262,8 @@ elsql="SELECT l.UNID_PRED AS TMACVE, "+
 	  "        AND j.TMACVE=l.UNID_PRED and j.SMACVE=l.UNID_NUMERO),'') AS FECHAFINPROG "+
       " FROM eunidades l where l.UNID_MATERIA='"+materia+"'  and l.UNID_PRED<>''"+
 	  " order by UNID_PRED,UNID_NUMERO ";
+
+	
 
 
 parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}

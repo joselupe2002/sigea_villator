@@ -6,7 +6,7 @@ include("./includes/UtilUser.php");
 $miConex = new Conexion(); 
 $miUtil = new UtilUser(); 
 
-$resAntes=$miConex->getConsulta("SQLite","SELECT usua_clave FROM CUSUARIOS WHERE USUA_USUARIO='ITSSMO'");
+$resAntes=$miConex->getConsulta("SQLite","SELECT usua_clave FROM CUSUARIOS WHERE USUA_USUARIO='ITSP'");
 
 $res=$miConex->getConsulta("SQLite","SELECT * FROM CUSUARIOS WHERE USUA_USUARIO='".$_POST["login"]."'");
 if (count($res)>0) {
