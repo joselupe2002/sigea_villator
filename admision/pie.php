@@ -28,14 +28,14 @@
 				 </div>
 				 <div class="row"> 
 				    <div class="col-md-12"> 
-						 <a href="<?php echo $facebook?>" target="_blank">
+						 <a href="<?php echo $facebook; ?>" target="_blank">
 						 <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
 						 <span style="color:white; font-weight: bold;"> Facebook</span></a>
                     </div>
 				 </div>
 				 <div class="row"> 
 				    <div class="col-md-12"> 
-						 <a href="<?php echo $twitter?>" target="_blank">
+						 <a href="<?php echo $twitter; ?>" target="_blank">
 						 <i class="ace-icon fa fa-twitter-square text-primary bigger-150"></i>
 						 <span style="color:white; font-weight: bold;"> Twitter</span></a>
                     </div>
@@ -43,7 +43,7 @@
 
 				 <div class="row"> 
 				    <div class="col-md-12"> 
-						 <a href="<?php echo $instagram?>" target="_blank">
+						 <a href="<?php echo $instagram;?>" target="_blank">
 						 <i class="ace-icon fa fa-instagram text-primary bigger-150"></i>
 						 <span style="color:white; font-weight: bold;"> Instagram</span></a>
                     </div>
