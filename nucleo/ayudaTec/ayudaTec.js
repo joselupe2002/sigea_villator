@@ -69,16 +69,18 @@ $("#contenido").append("<div id=\"linea"+cont+"\" class=\"row\"></div>");
 
 jQuery.each(grid_data, function(clave, valor) { 
 
-	img1="<a onclick=\"previewAdjunto('"+valor.DOCGEN_RUTA+"');\"  > <img  id=\"img1\"  src=\"../../imagenes/menu/ayuda1.png\"  style=\"cursor:pointer; width:40px; height:40px;\" /></a>";
+	img1="<a onclick=\"previewAdjunto('"+valor.DOCGEN_RUTA+"');\"  > <img  id=\"img1\"  src=\"../../imagenes/menu/ayuda1.png\"  style=\"cursor:pointer; width:50px; height:50px;\" /></a>";
 	if (valor.DOCGEN_RUTA=="../../imagenes/menu/default.png") {img1="";}
-	img2="<a href=\""+valor.ENLACEEXT+"\" target=\"_blank\" > <img  id=\"img1\" src=\"../../imagenes/menu/ayuda2.png\"  style=\"width:40px; height:40px;\" /></a>";
+	img2="<a href=\""+valor.ENLACEEXT+"\" target=\"_blank\" > <img  id=\"img1\" src=\"../../imagenes/menu/ayuda2.png\"  style=\"width:50px; height:50px;\" /></a>";
 	if ((valor.ENLACEEXT=="") || (valor.ENLACEEXT==null)) {img2="";}
 	if ((valor.DOCGEN_RUTA=="") || (valor.DOCGEN_RUTA==null)) {img1="";}
 
     $("#linea"+cont).append("<div id=\"ventAyuda"+valor.CLAVE+"\" class=\" ayudaPadre fontRoboto col-md-3\">"+
 	"<div class=\"thumbnail search-thumbnail\">"+
-	"	<div style=\"text-align:center;\">"+
-			img1+img2+
+	"	<div class=\"row\" style=\"text-align:center;\">"+
+	"	<div class=\"col-sm-2\"></div>"+
+	"	<div class=\"col-sm-3\">"+img1+"</div>"+
+	"	<div class=\"col-sm-3\">"+img2+"</div>"+
 	"   </div>"+
 	"	<div class=\"caption\">"+
 	"		<span class=\"text-success fontRobotoB layuda\" mipadre=\"ventAyuda"+valor.CLAVE+"\"  >"+valor.URES_DESCRIPLAR+"</span>"+
