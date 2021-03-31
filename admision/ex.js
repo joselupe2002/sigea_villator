@@ -740,7 +740,7 @@ function cargarAdjuntos() {
 					"            <input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
 					"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','docAspira','pdf_"+
 												  valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+
-												  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+usuario+"_"+elciclo+"','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"');\">"+
+												  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"');\">"+
 					"           <input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
 					"        </div>"+
 					"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
