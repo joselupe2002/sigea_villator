@@ -626,7 +626,7 @@ function setInscrito(id,valor, ciclo, lacar){
 						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+elanio,
 						success: function(dataC){
 							micons=dataC;							
-							mimat=elaniomat+pad(lacar,2,'0')+pad(micons,3,'0');	
+							mimat=elaniomat+pad(lacar,2,'0')+pad(micons,4,'0');	
 							elsqlpas="call inscribeAspirante('"+id+"','"+mimat+"');";						
 							if (micons>0) {
 								parametros={

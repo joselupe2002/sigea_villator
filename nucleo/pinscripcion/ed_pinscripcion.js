@@ -10,7 +10,7 @@ function ALUM_MATRICULAclicadd(DATO, usuario, institucion, campus){
 					url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork=MATRICULA"+elanio,
 					success: function(dataC){
                      micons=dataC;			
-                     mimat=elaniomat+"E40"+pad(micons,3,'0');	
+                     mimat=elaniomat+"00"+pad(micons,4,'0');	
                      $("#ALUM_MATRICULA").val(mimat);					
                }
       });
