@@ -41,6 +41,7 @@ var arr_preguntas=[];
 				success: function (dataExa) {
 					
 					elciclo=JSON.parse(dataExa)[0][2];
+					alert (elciclo);
 					enviodocins=JSON.parse(dataExa)[0][1];
 					cargarResultados(JSON.parse(dataExa)[0][0]);
 					
