@@ -321,21 +321,38 @@ class VariableStream
                 $this->SetTextColor(0);
                 $this->SetX(60);
                 $this->Cell(130,5,utf8_decode($dataAlum[0]["NOMBRE"]." ".$dataAlum[0]["APEPAT"]." ".$dataAlum[0]["APEMAT"]),1,0,'C');
-                $this->Ln(5);
-
                 $this->Ln(10);
+                
+
                 $this->SetFont('Montserrat-Black','',10);   
                 $this->SetFillColor(172,31,8);
                 $this->SetTextColor(255);                     
-                $this->Cell(85,5,utf8_decode("1RA OPCIÓN"),1,0,'C',true);
-                $this->Cell(85,5,utf8_decode("2DA OPCIÓN"),1,0,'C',true);
+                $this->Cell(40,5,utf8_decode("MODALIDAD"),1,0,'C',true); 
+                $this->Cell(130,5,utf8_decode("CARRERA"),1,0,'C',true);               
                 $this->Ln(5);
 
-                $this->SetFont('Montserrat-Black','',8);  
+                $this->SetFont('Montserrat-Black','',7);  
                 $this->SetFillColor(172,31,6);
                 $this->SetTextColor(0);
-                $this->Cell(85,5,utf8_decode($dataAlum[0]["CARRERAD"]),1,0,'C');
-                $this->Cell(85,5,utf8_decode($dataAlum[0]["CARRERAD2"]),1,0,'C');
+                $this->Cell(40,5,utf8_decode($dataAlum[0]["MODALIDADD"]),1,0,'C');   
+                $this->Cell(130,5,utf8_decode($dataAlum[0]["CARRERAD"]),1,0,'C');          
+                $this->Ln(5);
+
+                $this->SetFont('Montserrat-Black','',10);   
+                $this->SetFillColor(172,31,8);
+                $this->SetTextColor(255);                               
+                $this->Cell(130,5,utf8_decode("2DA OPCIÓN"),1,0,'C',true);
+                $this->Cell(40,5,utf8_decode("CONTRASEÑA"),1,0,'C',true);
+                $this->Ln(5);
+
+
+                $this->SetFont('Montserrat-Black','',7);  
+                $this->SetFillColor(172,31,6);
+                $this->SetTextColor(0);                
+                $this->Cell(130,5,utf8_decode($dataAlum[0]["CARRERAD2"]),1,0,'C');
+                $this->SetTextColor(16, 119, 233);  
+                $this->Cell(40,5,utf8_decode($dataAlum[0]["CLAVE"]),1,0,'C');
+                
                 $this->Ln(5);
 
 

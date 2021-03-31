@@ -99,9 +99,9 @@
 						<div class="row"> 
 							<div class="col-sm-1"> </div>
 							<!--================ CURP DEL ASPIRANTE ======================-->
-							<div class="col-sm-4"> 
+							<div class="col-sm-2"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-danger">1</span> Clave &Uacute;nica de Registro de Población</strong> 
+									<strong><span class="badge badge-danger">1</span> Clave &Uacute;nica de Reg. de Pob. CURP</strong> 
 								</label>
 								<span class="block input-icon input-icon-right">
 									<input  class="UNO form-control width-100" name="CURP" id="CURP" />
@@ -112,7 +112,14 @@
 						            <i class="ace-icon fa fa-search icon-on-right"></i>
 								</span>
 							</div>
-							<!--================ CARRERA  DEL ASPIRANTE ======================-->
+							<!--================ MODALIDAD Y CARRERA  DEL ASPIRANTE ======================-->
+							<div class="col-sm-2"> 
+								<label class="text-primary">
+									<strong><span class="badge badge-danger">2</span>Modalidad</strong> 
+								</label>								
+							    <Select  class="UNO form-control width-100" name="MODALIDAD" id="MODALIDAD"></SELECT>
+							</div>
+
 							<div class="col-sm-3"> 
 								<label class="text-primary">
 									<strong><span class="badge badge-danger">2</span> Carrera que desea</strong> 
@@ -127,6 +134,8 @@
 							</div>
 							<div class="col-sm-1"> </div>
 						</div>
+
+
 						<div class="row"> 
 							<div class="col-sm-1"> </div>
 							<!--================NOMBRE DEL ASPIRANTE ======================-->

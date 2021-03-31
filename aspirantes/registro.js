@@ -17,6 +17,9 @@ var elciclo="";
 					elciclo=JSON.parse(data)[0]["CICL_CLAVE"];		
 					
 
+						actualizaSelect("MODALIDAD","select MODA_CLAVE, MODA_DESCRIP from modalidad where "+
+											"MODA_ACTIVO='S'","NORMAL","FUERA");
+
 						actualizaSelect("CARRERA","select CARR_CLAVE, CARR_DESCRIP from ccarreras where "+
 											"CARR_OFERTAR='S'","NORMAL","FUERA");
 						actualizaSelect("CARRERA2","select CARR_CLAVE, CARR_DESCRIP from ccarreras where "+
@@ -59,9 +62,16 @@ var elciclo="";
 												//
 											});
 
+						$("#MODALIDAD").change(function(){			
+							actualizaSelect("CARRERA","select CARRERA, CARRERAD from vccarreras_mod where "+
+											"OFERTAR='S' and MODALIDAD='"+$("#MODALIDAD").val()+"' ORDER BY CARRERAD","NORMAL","FUERA"); 
+							actualizaSelect("CARRERA2","select CARRERA, CARRERAD from vccarreras_mod where "+
+											"OFERTAR='S' and MODALIDAD='"+$("#MODALIDAD").val()+"' ORDER BY CARRERAD","NORMAL","FUERA"); 
+						}); 
+
 						$("#CARRERA").change(function(){			
-							actualizaSelect("CARRERA2","select CARR_CLAVE, CARR_DESCRIP from ccarreras where "+
-													"CARR_OFERTAR='S' and CARR_CLAVE<>'"+$("#CARRERA").val()+"' ORDER BY CARR_DESCRIP","NORMAL","FUERA"); 
+							actualizaSelect("CARRERA2","select CARRERA, CARRERAD from vccarreras_mod where "+
+							"OFERTAR='S' and MODALIDAD='"+$("#MODALIDAD").val()+"' and CARRERA<>'"+$("#CARRERA").val()+"' ORDER BY CARRERAD","NORMAL","FUERA"); 
 						}); 
 									
 						$("#NACIONALIDAD").change(function(){
@@ -148,6 +158,7 @@ var elciclo="";
 																$("#NOMBRE").val(valor.NOMBRE);
 																$("#APEPAT").val(valor.APEPAT);
 																$("#APEMAT").val(valor.APEMAT);
+																$("#MODALIDAD").val(valor.MODALIDAD);
 																$("#CARRERA").val(valor.CARRERA);
 																$("#CARRERA2").val(valor.CARRERA2);
 
@@ -245,6 +256,7 @@ var elciclo="";
 									CURP:{ required: true, curpCorrecta:"#CURP"},
 									CARRERA:{min: 1},
 									CARRERA2:{min: 1},
+									MODALIDAD:{min: 1},
 									APEPAT:{ required: true},
 									APEMAT:{ required: true},
 									NOMBRE:{ required: true},
@@ -281,7 +293,8 @@ var elciclo="";
 							messages: {
 									CURP:{required:"Debe colocar su CURP",curpCorrecta:"La CURP no cumple con un formato valido"},
 									CARRERA: "Debe elegir la carrera a la que desea ingresar",
-									CARRERA: "Debe elegir una carrera de segunda opción",
+									CARRERA2: "Debe elegir una carrera de segunda opción",
+									MODALIDAD: "Debe elegir una modalidad de estudio",
 									APEPAT: "Debe colocar su Apellido Paterno",
 									APEMAT: "Debe colocar su Apellido Materno",
 									NOMBRE: "Debe colocar su Nombre Completo",	
@@ -438,6 +451,7 @@ function guardarGen(){
 			APEPAT:$("#APEPAT").val().toUpperCase(),
 			APEMAT:$("#APEMAT").val().toUpperCase(),
 			NOMBRE:$("#NOMBRE").val().toUpperCase(),
+			MODALIDAD:$("#MODALIDAD").val(),
 			CARRERA:$("#CARRERA").val(),
 			CARRERA2:$("#CARRERA2").val(),
 			TIPOCAPT:"WEB",
@@ -468,6 +482,7 @@ function guardarPag1(){
 			APEPAT:$("#APEPAT").val().toUpperCase(),
 			APEMAT:$("#APEMAT").val().toUpperCase(),
 			NOMBRE:$("#NOMBRE").val().toUpperCase(),
+			MODALIDAD:$("#MODALIDAD").val(),
 			CARRERA:$("#CARRERA").val(),
 			CARRERA2:$("#CARRERA2").val(),
 			CICLO:elciclo
