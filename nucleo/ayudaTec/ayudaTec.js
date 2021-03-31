@@ -69,7 +69,7 @@ $("#contenido").append("<div id=\"linea"+cont+"\" class=\"row\"></div>");
 
 jQuery.each(grid_data, function(clave, valor) { 
 
-	img1="<a onclick=\"previewAdjunto('"+valor.DOCGEN_RUTA+"');\"  > <img  id=\"img1\" style=\"cursor:pointer;\" src=\"../../imagenes/menu/ayuda1.png\"  style=\"width:40px; height:40px;\" /></a>";
+	img1="<a onclick=\"previewAdjunto('"+valor.DOCGEN_RUTA+"');\"  > <img  id=\"img1\"  src=\"../../imagenes/menu/ayuda1.png\"  style=\"cursor:pointer; width:40px; height:40px;\" /></a>";
 	if (valor.DOCGEN_RUTA=="../../imagenes/menu/default.png") {img1="";}
 	img2="<a href=\""+valor.ENLACEEXT+"\" target=\"_blank\" > <img  id=\"img1\" src=\"../../imagenes/menu/ayuda2.png\"  style=\"width:40px; height:40px;\" /></a>";
 	if ((valor.ENLACEEXT=="") || (valor.ENLACEEXT==null)) {img2="";}
