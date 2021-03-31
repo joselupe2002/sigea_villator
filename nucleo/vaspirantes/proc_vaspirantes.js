@@ -550,7 +550,7 @@ function insInd(modulo,usuario,essuper){
 			if (table.rows('.selected').data()[0]["ACEPTADO"]=='S') {
 				if (table.rows('.selected').data()[0]["INSCRITO"]=='N') {
 					if (confirm("Desea inscribir al aspirante ID: "+table.rows('.selected').data()[0]["IDASP"])) {
-						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S",table.rows('.selected').data()[0]["CICLO"]);
+						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S",table.rows('.selected').data()[0]["CICLO"],table.rows('.selected').data()[0]["CARRERA"]);
 					}
 				}
 				else {
@@ -599,7 +599,7 @@ function eliminarMatricula(id,lamatricula){
 }
 
 
-function setInscrito(id,valor, ciclo){
+function setInscrito(id,valor, ciclo, lacar){
 	var hoy= new Date();		
 	//var elanio=hoy.getFullYear();
 	//elaniomat=elanio.toString().substring(2,4)
@@ -626,7 +626,7 @@ function setInscrito(id,valor, ciclo){
 						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+elanio,
 						success: function(dataC){
 							micons=dataC;							
-							mimat=elaniomat+"040"+pad(micons,3,'0');	
+							mimat=elaniomat+pad(lacar,2,'0')+pad(micons,3,'0');	
 							elsqlpas="call inscribeAspirante('"+id+"','"+mimat+"');";						
 							if (micons>0) {
 								parametros={
