@@ -351,8 +351,7 @@ class VariableStream
                 $this->SetTextColor(0);                
                 $this->Cell(130,5,utf8_decode($dataAlum[0]["CARRERAD2"]),1,0,'C');
                 $this->SetTextColor(16, 119, 233);  
-                $this->Cell(40,5,utf8_decode($dataAlum[0]["CLAVE"]),1,0,'C');
-                
+                $this->Cell(40,5,utf8_decode($dataAlum[0]["CLAVE"]),1,0,'C');                
                 $this->Ln(5);
 
 
