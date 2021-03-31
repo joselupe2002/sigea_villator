@@ -571,7 +571,7 @@ function guardarHorario(institucion,campus){
 					
 							parametros={tabla:"edescarga",
 								bd:"Mysql",
-								_INSTITUCION:"ITSSMO",
+								_INSTITUCION:"ITSP",
 								_CAMPUS:"0",
 								DESC_ACTIVIDAD:$("#c_"+i+"_1").val(),
 								DESC_PROFESOR: table.rows('.selected').data()[0][0],
@@ -602,7 +602,7 @@ function guardarHorario(institucion,campus){
 								bd:"Mysql",
 								campollave:"DESC_ID",
 								valorllave:$("#c_"+i+"_0").html(),
-								_INSTITUCION:"ITSSMO",
+								_INSTITUCION:"ITSP",
 								_CAMPUS:"0",
 								DESC_ACTIVIDAD:$("#c_"+i+"_1").val(),
 								DESC_PROFESOR: table.rows('.selected').data()[0][0],

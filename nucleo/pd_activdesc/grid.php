@@ -656,7 +656,7 @@ function agregarActividad(id, descrip,modulo,elciclo){
 					fechacap=pad(f.getDate(),2) + "/" + pad((f.getMonth() +1),2) + "/" + f.getFullYear();
 					parametros={tabla:"eplandescarga",
 								bd:"Mysql",
-								_INSTITUCION:"ITSSMO",
+								_INSTITUCION:"ITSP",
 								_CAMPUS:"0",
 								PLAN_IDACT: $("#elid").val(),
 								PLAN_ORDEN:  $("#orden").val(),

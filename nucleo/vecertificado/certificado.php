@@ -222,7 +222,7 @@
         $pdf->SetTextColor(36, 64, 97);
 
         $pdf->Ln(3);
-        $pdf->Cell(0,5,utf8_decode('Instituto Tecnológico Superior de Santa María de El Oro'),0,1,'C');
+        $pdf->Cell(0,5,utf8_decode('Instituto Tecnológico Superior de Perote'),0,1,'C');
         $pdf->SetFont('Arial','',8);
         $pdf->Image("../../imagenes/empresa/logo2.png",12,8,23.2);
 
@@ -338,7 +338,7 @@
         $cadCer="CERTIFICADO COMPLETO"; if ($dataAlum[0]["PLACRED"]>$totcred)  {$cadCer="CERTIFICADO PARCIAL"; }
         $txt=utf8_decode("<p>SE EXPIDE EL PRESENTE <vb>".$cadCer."</vb> QUE AMPARA <vb>".$totcred.
         "</vb> CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE <vb>".
-        $dataAlum[0]["MAPA"]."</vb>, EN <vb>SANTA MARÍA DEL ORO, EL ORO, DGO.</vb> A LOS ".strtoupper($fechadecexp)."</p>");
+        $dataAlum[0]["MAPA"]."</vb>, EN <vb>PEROTE, VER.</vb> A LOS ".strtoupper($fechadecexp)."</p>");
 
 
         $pdf->WriteTag(0,4,$txt,0,"J",0,0);

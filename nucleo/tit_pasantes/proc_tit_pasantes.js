@@ -318,7 +318,7 @@ function constnoincov(modulo,usuario,essuper){
 						     correoalProf(losdatos[0]["PROF"], "<html>Por medio de la presente se le solicitá que asigne en el SIGEA sinodales para: <br> "+
 							 "No. Control: <span style=\"color:green\"><b>"+matricula+"</b></span><br>"+
 							 "Nombre: <span style=\"color:green\"><b>"+nombre+"</b></span>"+
-							 "<br> Sin más por el momento agradecemos su atenci&oacute;n","ITSSMO: SOLICITUD ASIGNACION SINODALES "+matricula+" "+nombre);
+							 "<br> Sin más por el momento agradecemos su atenci&oacute;n","ITSP: SOLICITUD ASIGNACION SINODALES "+matricula+" "+nombre);
 						}
 					});			
 		}
@@ -343,7 +343,7 @@ function constnoincov(modulo,usuario,essuper){
 							 "SECRETARIO: <span style=\"color:blue\"><b>"+$("#selSecretario option:selected").text()+"</b></span><br>"+
 							 "VOCAL: <span style=\"color:blue\"><b>"+$("#selVocal option:selected").text()+"</b></span><br>"+
 							 "SUPLENTE: <span style=\"color:blue\"><b>"+$("#selSuplente option:selected").text()+"</b></span><br>"+							 
-							 "<br> Sin más por el momento agradecemos su atenci&oacute;n","ITSSMO: NOTIFICACION ASIGNACION SINODALES "+matricula+" "+nombre);
+							 "<br> Sin más por el momento agradecemos su atenci&oacute;n","ITSP: NOTIFICACION ASIGNACION SINODALES "+matricula+" "+nombre);
 						}
 					});			
 		}
@@ -374,7 +374,7 @@ function constnoincov(modulo,usuario,essuper){
 							 "<BR>Fecha: <span style=\"color:green\"><b>"+$("#fecha").val()+"</b></span><br>"+
 							 "<BR>Hora: <span style=\"color:green\"><b>"+$("#hora").val()+"</b></span><br>"+
 							 "<BR>Lugar: <span style=\"color:green\"><b>"+$("#sala").val()+"</b></span><br>"+
-							 "<br> Agradeciendo de antemano su puntual asistencia, quedo de usted.","ITSSMO: ASIGNACION COMO "+tipo+" ALUMNO:"+matricula+" "+nombre);
+							 "<br> Agradeciendo de antemano su puntual asistencia, quedo de usted.","ITSP: ASIGNACION COMO "+tipo+" ALUMNO:"+matricula+" "+nombre);
 						}
 					});			
 		}
@@ -401,7 +401,7 @@ function constnoincov(modulo,usuario,essuper){
 							 "<BR>Fecha: <span style=\"color:green\"><b>"+$("#fecha").val()+"</b></span><br>"+
 							 "Hora: <span style=\"color:green\"><b>"+$("#hora").val()+"</b></span><br>"+
 							 "Lugar: <span style=\"color:green\"><b>"+$("#sala").val()+"</b></span><br>"+
-							 "<br> Agradeciendo de antemano su puntual asistencia, quedo de usted.","ITSSMO:FECHA Y HORA TITULACION - "+matricula+" "+nombre);
+							 "<br> Agradeciendo de antemano su puntual asistencia, quedo de usted.","ITSP:FECHA Y HORA TITULACION - "+matricula+" "+nombre);
 						}
 					});			
 		}

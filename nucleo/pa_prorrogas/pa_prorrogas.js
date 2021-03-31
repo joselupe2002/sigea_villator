@@ -180,7 +180,7 @@ function enviarNotiPago(comp){
 					var parametros = {
 						"MENSAJE": mensaje,
 						"ADJSERVER": 'N',
-						"ASUNTO": 'ITSSMO: PAGO DE PRORROGA SUBIDO '+matricula+" "+nombre,
+						"ASUNTO": 'ITSP: PAGO DE PRORROGA SUBIDO '+matricula+" "+nombre,
 						"CORREO" :  elcorreoConta,
 						"NOMBRE" :  nombre,
 						"ADJUNTO":'',

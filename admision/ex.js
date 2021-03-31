@@ -274,7 +274,7 @@ function mandaExamen(idexa, fechaini,horaini,contiempo,minutos,horaInicia,minIni
 				horareal=horaini;
 				parametros={tabla:"lincontestar",
 			                 bd:"Mysql",
-			                 _INSTITUCION:"ITSSMO",
+			                 _INSTITUCION:"ITSP",
 							 _CAMPUS:"0",
 							 IDEXAMEN:idexa,
 							 IDAPLICA:idaplica,

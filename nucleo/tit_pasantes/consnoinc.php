@@ -216,7 +216,7 @@
         $pdf->SetFont('Montserrat-Medium','',10);
         $pdf->Cell(0,5,'DEPENDENCIA: DEPTO. DE SERVICIOS ESCOLARES',0,0,'R');
         $pdf->Ln(3);
-        $pdf->Cell(0,5,"OFICIO NO. ITSSMO-SE-T-".$dataof[0]["CONSECUTIVO"],0,0,'R');
+        $pdf->Cell(0,5,"OFICIO NO. ITSP-SE-T-".$dataof[0]["CONSECUTIVO"],0,0,'R');
 		$pdf->Ln(3);
         $pdf->Cell(0,5,'ASUNTO:'.utf8_decode("CONSTANCIA DE NO INCONVEINCIA"),0,0,'R');
         $pdf->Ln(3);

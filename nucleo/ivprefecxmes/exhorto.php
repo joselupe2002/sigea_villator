@@ -147,7 +147,7 @@
 		$pdf->Ln(10);
 		$pdf->Cell(0,0,utf8_decode($data[0]["PROFESORD"]),0,1,'L');
 		$pdf->Ln(5);
-		$pdf->Cell(0,0,'DOCENTE DEL ITSSMO',0,1,'L');
+		$pdf->Cell(0,0,'DOCENTE DEL ITSP',0,1,'L');
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,'PRESENTE',0,1,'L');
 		$pdf->Ln(5);

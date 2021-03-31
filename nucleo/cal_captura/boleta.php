@@ -377,7 +377,7 @@
 					foreach($dataProfesor as $rowdes)
 					{
 
-						$res=$miutil->enviarCorreo($rowdes['EMPL_CORREOINS'],'SIGEA:ITSSMO Acta de Calificación'.$_GET["materia"]."-".$_GET["materiad"],
+						$res=$miutil->enviarCorreo($rowdes['EMPL_CORREOINS'],'SIGEA:ITSP Acta de Calificación'.$_GET["materia"]."-".$_GET["materiad"],
 						'Materia:  '.$_GET["materia"]."-".$_GET["materiad"].'<br>'.
 						'Grupo:  '.$_GET["grupo"].'<br>'.
 						'Profesor: '.utf8_decode($dataProfesor[0]["NOMBRE"]).'<br>'.

@@ -256,7 +256,7 @@ function ver(){
 	    	      jQuery.each(losdatos, function(clave, valor) { 
 	    	    	   for (x=1; x<=valor.MATUNI; x++) {
 		    	    	     cad="insert into eunidades (unid_materia,unid_pred,unid_numero,unid_descrip, _INSTITUCION,_CAMPUS) values ('"+
-		    	    	     valor.MATCVE+"','','"+pad(x,2)+"','"+valor[10+x].replace(/\n|\r/g, " ").replace(";","")+"','ITSSMO','0');\n";		    	    	     
+		    	    	     valor.MATCVE+"','','"+pad(x,2)+"','"+valor[10+x].replace(/\n|\r/g, " ").replace(";","")+"','ITSP','0');\n";		    	    	     
                              $("#sql").append(cad);
 		    	    	   }
 	    	    	 
@@ -292,7 +292,7 @@ function ver(){
 	    	      jQuery.each(losdatos, function(clave, valor) { 
 	    	    	   for (x=1; x<=valor.MATUNI; x++) {
 		    	    	     cad="insert into eplaneacion (MATERIA,PROFESOR,GRUPO,IDUNIDAD,NUMUNIDAD,FECHA,FECHAR,_INSTITUCION,_CAMPUS) values ('"+
-		    	    	     valor.MATCVE+"','','"+valor.GPOCVE+"','','"+pad(x,2)+"','"+valor[2+x].replace(/\n|\r/g, " ").replace(";","")+"','"+valor[17+x].replace(/\n|\r/g, " ").replace(";","")+"','ITSSMO','0');\n";		    	    	     
+		    	    	     valor.MATCVE+"','','"+valor.GPOCVE+"','','"+pad(x,2)+"','"+valor[2+x].replace(/\n|\r/g, " ").replace(";","")+"','"+valor[17+x].replace(/\n|\r/g, " ").replace(";","")+"','ITSP','0');\n";		    	    	     
                              $("#sql").append(cad);
 		    	    	   }
 	    	    	 
@@ -319,7 +319,7 @@ function ver(){
 	    	      		    	   
 	    	      jQuery.each(losdatos, function(clave, valor) { 
 		    	    	     cad="insert into eunidades (unid_materia,unid_pred,unid_numero,unid_descrip, _INSTITUCION,_CAMPUS) values ('"+
-		    	    	     valor.MATCVE+"','"+valor.TMACVE+"','"+valor.SMACVE+"','"+valor.SMADES.replace(/\n|\r/g, " ").replace(";","")+"','ITSSMO','0');\n";		    	    	     
+		    	    	     valor.MATCVE+"','"+valor.TMACVE+"','"+valor.SMACVE+"','"+valor.SMADES.replace(/\n|\r/g, " ").replace(";","")+"','ITSP','0');\n";		    	    	     
                              $("#sql").append(cad);
 	    	      });		    
 	
