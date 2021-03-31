@@ -229,7 +229,7 @@
                 $this->setY(44);
                 $this->Cell(0,0,utf8_decode("TECOLÓGICO NACIONAL DE MÉXICO"),0,1,'C');                
                 $this->Ln(8);
-                $this->Cell(0,0,utf8_decode("CAMPUS SANTA MARÍA DE EL ORO"),0,1,'C');
+                $this->Cell(0,0,utf8_decode("CAMPUS PEROTE"),0,1,'C');
                
                 $this->SetTextColor(0);
                 $this->setY(74);
@@ -298,7 +298,7 @@
            
                 $this->SetFont('Montserrat-Medium','',12);
                 $this->Ln(10);
-                $this->Cell(0,0,utf8_decode("Santa María del Oro, Dgo., a ".$eldia." de ".$elmes. " de ". $elanio),0,1,'R');
+                $this->Cell(0,0,utf8_decode("Perote, Veracruz, a ".$eldia." de ".$elmes. " de ". $elanio),0,1,'R');
                 
 
             }

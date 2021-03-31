@@ -217,7 +217,7 @@
 		$pdf->Ln(10);
 		$pdf->Cell(134,5,utf8_decode("Instituto Tecnológico Superior"),"",1,'R');	
 		$pdf->Ln(5);
-		$pdf->Cell(134,5,utf8_decode("de Santa María de El Oro"),"",1,'R');	
+		$pdf->Cell(134,5,utf8_decode("de Perote"),"",1,'R');	
 		$pdf->SetTextColor(0);
 
 		$pdf->SetY(60);
@@ -295,7 +295,7 @@
 
 		$pdf->Ln();
 
-		$txt=utf8_decode("<p>Para los usos legales correspondientes se expide la presente en la ciudad de Santa María del Oro, Durango,".
+		$txt=utf8_decode("<p>Para los usos legales correspondientes se expide la presente en la ciudad de Perote,".
 		" a los <vs>".$eldiaA."</vs> días del mes de <vs>".$elmesA."</vs> del año <vs>".$elanioA."</vs>.</p>");
 		$pdf->WriteTag(0,6,$txt,0,"J",0,0);
 
