@@ -550,7 +550,7 @@ function insInd(modulo,usuario,essuper){
 			if (table.rows('.selected').data()[0]["ACEPTADO"]=='S') {
 				if (table.rows('.selected').data()[0]["INSCRITO"]=='N') {
 					if (confirm("Desea inscribir al aspirante ID: "+table.rows('.selected').data()[0]["IDASP"])) {
-						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S",table.rows('.selected').data()[0]["CICLO"],table.rows('.selected').data()[0]["CARRERA"]);
+						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S",table.rows('.selected').data()[0]["CICLO"],table.rows('.selected').data()[0]["CVE_CARRERA1"]);
 					}
 				}
 				else {
