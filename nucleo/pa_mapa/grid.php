@@ -47,7 +47,7 @@
 						</div>			
 						<div class="col-sm-8"  style="text-align:center; vertical-align:center;">
 						    <span class="text-white lead" id="lacarrera">
-								<strong><?php echo $_GET["descrip"];?></strong>
+								<strong><?php  $_GET["descrip"];?></strong>
 						    </span>							    
 						</div>       			 
 						<div class="col-sm-2" ></div>

@@ -72,7 +72,7 @@
 							   <div class="col-xs-12 col-sm-9">
 								    <div class="center">
 								         <span class="btn btn-app btn-sm btn-light no-hover">
-								             <span id="periodos" class="line-height-1 bigger-170 blue">3</span>
+								             <span id="periodos" class="line-height-1 bigger-170 blue"></span>
 								             <br />
 										     <span class="line-height-1 smaller-90"> Periodo </span>
 										 </span>
@@ -330,7 +330,7 @@
 	
 
 		elsql="SELECT alum_matricula, alum_foto,concat(alum_nombre,' ',alum_apepat,' ',alum_apemat) as alum_nombrec,alum_direccion, alum_telefono, alum_correo, "+
-		             " CARR_DESCRIP AS alum_carreraregd, alum_cicloins, getcuatrialum(alum_matricula, getciclo()) AS CUAT,"+
+		             " CARR_DESCRIP AS alum_carreraregd, alum_cicloins, getPeriodos(alum_matricula, getciclo()) AS CUAT,"+
                      " alum_correo AS CORREO,alum_telefono AS TEL, alum_tutor AS TUTOR, ALUM_TRABAJO, ALUM_TELTRABAJO, ALUM_DIRTRABAJO "+
 					 " FROM falumnos, ccarreras  WHERE alum_matricula='<?php echo $_SESSION['usuario'];?>' and ALUM_CARRERAREG=CARR_CLAVE";
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -348,6 +348,9 @@
 
 		    	  	   $('#promedio').html(valor.PROM_SR);
 		    	  	   $('#reprobadas').html(valor.NUMREP);
+
+						$('#periodos').html(valor.CUAT);
+		    	  	  
 		    	  	   
 		    	
 						  

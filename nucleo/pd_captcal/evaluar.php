@@ -51,8 +51,9 @@
 		               <span class="label label-success" >Unidad</span>
 			           <select id="unidades" style="width: 100%;"> </select>
 			           <select style="display:none;" id="base" style="width: 100%;">
-			              <?php for ($x=0;$x<=100;$x++) {?>
-			                  echo  <option value="<?php echo $x;?>"><?php echo $x;?></option>			            
+					   		<option value="0">0</option>	
+			              <?php for ($x=70;$x<=100;$x++) {?>
+			                    <option value="<?php echo $x;?>"><?php echo $x;?></option>			            
 			              <?php } ?>		              
 			           </select>
 		       </div> 	

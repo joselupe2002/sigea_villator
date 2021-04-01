@@ -21,7 +21,7 @@ contMat=1;
 		addSELECT("selCiclos","losciclossel","PROPIO", "SELECT CICL_CLAVE, CICL_DESCRIP FROM ciclosesc order by cicl_clave desc", "","");  			      
 	
 		$("#losalumnos").append("<span class=\"label label-warning\">Alumno</span>");
-		addSELECT("selAlumnos","losalumnos","PROPIO", "SELECT ALUM_MATRICULA, CONCAT(ALUM_MATRICULA,' ',ALUM_NOMBRE,' ',ALUM_APEPAT,' ',ALUM_APEMAT) from falumnos WHERE ALUM_ACTIVO IN (1,2)", "","BUSQUEDA");  			      
+		addSELECT("selAlumnos","losalumnos","PROPIO", "SELECT ALUM_MATRICULA, CONCAT(ALUM_MATRICULA,' ',ALUM_NOMBRE,' ',ALUM_APEPAT,' ',ALUM_APEMAT) from falumnos WHERE ALUM_ACTIVO IN (1)", "","BUSQUEDA");  			      
 
 		$("#lostipos").append("<span class=\"label label-warning\">Tipo Calificación</span>");
 		addSELECT("selTipos","lostipos","PROPIO", "SELECT TCACVE, TCADES FROM dtcali order by TCACVE desc", "","");  			      
