@@ -139,6 +139,11 @@
         $pdf->SetFont('Montserrat-SemiBold','',10);
         
 
+		$nombre=$miutil->getJefe('500');//Nombre de actividades complementaras
+        $pdf->eljefe=$nombre;
+        $pdf->responsable=$data[0]["RESPONSABLED"];
+        $pdf->eljefepsto="RESPONSABLE DE ACTIVIDADES COMPLEMENTARIAS";
+
         
         $pdf->MultiCell(0,8,"El que suscribe : ".utf8_decode($data[0]["RESPONSABLED"]).", por este medio se permite hacer de su conocimiento ".
         		"que el estudiante ". utf8_decode($data[0]["MATRICULAD"]).utf8_decode(" con número de control ").utf8_decode($data[0]["MATRICULA"]).
@@ -151,10 +156,7 @@
         $pdf->MultiCell(0,8,utf8_decode("Se extiende la presente en la ciudad de ".$dataGen[0]["inst_extiende"]." a los ").$eldia.utf8_decode(" días del mes de ").$elmes." de ".$elanio,0,'J', false);
         $pdf->Ln(5);
        
-		$nombre=$miutil->getJefe('500');//Nombre de actividades complementaras
-        $pdf->eljefe=$nombre;
-        $pdf->responsable=$data[0]["RESPONSABLED"];
-        $pdf->eljefepsto="OFICINA DE ACTIVIDADES COMPLEMENTARIAS";
+	
 		
 		/*
 		$pdf->eljefe=$data[0]["COMI_AUTORIZOABREVIA"]." ".$data[0]["COMI_AUTORIZOD"];
