@@ -243,9 +243,7 @@ function guardarCal (matricula,lacal,laletra, alumno){
 								}
 							});
 							}
-						});			
-
-		
+						});					
 		} //del if 		
 }
 
