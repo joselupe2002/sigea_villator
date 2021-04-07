@@ -50,7 +50,7 @@ var elalumno="";
 		$("#informacion").empty();
 		mostrarEspera("esperaInf","grid_pa_mihorario","Cargando Datos...");
 		elsql="SELECT PDOCVE, ID, MATCVE AS MATERIA, MATERIAD,SEMESTRE, CREDITOS, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, "+
-		"SABADO, DOMINGO, CARRERA"+
+		"SABADO, DOMINGO, PROFESORD, CARRERA"+
 		" FROM vhorario_alum a where a.PDOCVE='"+$('#elciclo').html()+"' and a.ALUCTR='"+usuario+"' ORDER BY SEMESTRE, MATERIAD";
 	
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -107,7 +107,7 @@ function generaTablaInformacion(grid_data){
 		 $("#cuerpoInformacion").append("<tr id=\"row"+valor.ID+"\">");   
 		 $("#row"+valor.ID).append("<td>"+valor.PDOCVE+"</td>");   	
 		 $("#row"+valor.ID).append("<td>"+valor.MATERIA+"</td>");    
-		 $("#row"+valor.ID).append("<td>"+valor.MATERIAD+"</td>");         	    
+		 $("#row"+valor.ID).append("<td><span class=\"fontRobotoB text-primary\">"+valor.MATERIAD+"<BR><span class=\"fontRobotoB text-success\">"+valor.PROFESORD+"</span></td>");         	    
 		 $("#row"+valor.ID).append("<td>"+utf8Decode(valor.SEMESTRE)+"</td>");
 		 $("#row"+valor.ID).append("<td>"+valor.CREDITOS+"</td>");
 
