@@ -189,23 +189,23 @@ var miciclo="";
 									success: function(data){ 
 										losdatos=JSON.parse(data); 						
 										if ((porcProyectado>=70) && (losdatos[0][0]<=0)) {
-											$("#servicio").html("<div class=\"alert alert-warning\" style=\"width:100%;\">"+ 									        
+											$("#panIni").html("<div class=\"alert alert-warning\" style=\"width:100%;\">"+ 									        
 															   "  Podrías cursar el Servicio Social, si llegas a cursar todas las asignaturas de el semestre no cerrado"+
 															   "</div>");
 											// OpcionesServicio();			   
 										}
 										if ((porcProyectado<70) && (losdatos[0][0]<=0)) {
-											$("#servicio").html("<div class=\"alert alert-danger\" style=\"width:100%;\">"+ 									        
+											$("#panIni").html("<div class=\"alert alert-danger\" style=\"width:100%;\">"+ 									        
 															   "    Todavía no cumples los créditos necesarios para inscribir el Servicio Social "+
 															   "</div>");
 										}
 										if (losdatos[0][0]>1) {
-											$("#servicio").html("<div class=\"alert alert-success\" style=\"width:100%;\">"+ 									        
+											$("#panIni").html("<div class=\"alert alert-success\" style=\"width:100%;\">"+ 									        
 															   "   Ya cursaste el Servicio Social "+
 															   "</div>");
 										}
 										if ((porcReal>=70) && (losdatos[0][0]<=0)) {
-											$("#servicio").html("<div class=\"alert alert-warning\" style=\"width:100%;\">"+ 									        
+											$("#panIni").html("<div class=\"alert alert-warning\" style=\"width:100%;\">"+ 									        
 															   "    Ya puede cursar el Servicio Social"+
 															   "</div>");
 
@@ -234,10 +234,12 @@ var miciclo="";
   
 
 
+
    function OpcionesServicio(){
 
+
 	var abierto=false;
-	$("#servicio").empty();
+	$("#panIni").empty();
 
 	elsql="select ID, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"'";
 
@@ -247,135 +249,16 @@ var miciclo="";
 		data:parametros,
 		url:  "../base/getdatossqlSeg.php",
 		success: function(data){
-	
-			if (JSON.parse(data)[0]["HAY"]>0) {				
-					elsql="select CLAVE, DOCGEN_RUTA FROM edocgen where CLAVE IN ('SOLSS','CARCOMSS') ORDER BY CLAVE";
-					parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-					$.ajax({
-						type: "POST",
-						data:parametros,
-						url:  "../base/getdatossqlSeg.php",
-						success: function(data){ 
-							losdatos=JSON.parse(data); 
+			if (JSON.parse(data)[0]["HAY"]>0) {
+				cargarPestania("SERVSOC_INI","panIni","servicioSocial","eadjresidencia",usuario,miciclo);
+				cargarPestania("SERVSOC_SEG","panSeg","servicioSocial","eadjresidencia",usuario,miciclo);
+				cargarPestania("SERVSOC_FIN","panFin","servicioSocial","eadjresidencia",usuario,miciclo);
 				
+				
+			}
 
-							$("#servicio").append("<div class=\"row\" style=\"text-align:left;\">"+
-												"    <div class=\"col-sm-12\"> "+
-												"     <div id=\"documentos\" class=\"col-sm-12\" ></div>"+
-												"    </div>"+
-												"</div>");
-
-							$("#documentos").append("<div class=\"row\"><div id=\"cont_sscartapres\" class=\"col-sm-6\"></div>"+
-							"                   						<div id=\"cont_sscartaacep\" class=\"col-sm-6\"></div></div>"+
-													"<div class=\"row\"><div id=\"cont_sssol\" class=\"col-sm-6\"></div>"+
-													"                   <div id=\"cont_sscartacom\" class=\"col-sm-6\"></div></div>"+
-													"<div class=\"row\"><div id=\"cont_ssbim1\" class=\"col-sm-6\"></div>"+
-													"                   <div id=\"cont_ssbim2\" class=\"col-sm-6\"></div></div>"+
-													"<div class=\"row\"><div id=\"cont_ssbim3\" class=\"col-sm-6\"></div>"+
-													"                   <div id=\"cont_ssfinal\" class=\"col-sm-6\"></div>"+
-													"</div>");
-
-
-							elsql="SELECT IFNULL((select concat(VALIDADO,'|',RUTA) from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSSOLSS'),'|') AS RUTA_SSSOLSS, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSCARTAPRES'),'|') AS RUTA_SSCARTAPRES, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSCARTAACEP'),'|') AS RUTA_SSCARTAACEP, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSCARTACOM'),'|') AS RUTA_SSCARTACOM, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM1'),'|') AS RUTA_SSBIM1, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM2'),'|') AS RUTA_SSBIM2, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSBIM3'),'|') AS RUTA_SSBIM3, "+
-							" IFNULL((select concat(VALIDADO,'|',RUTA)  from eadjresidencia where  AUX='"+usuario+"_"+miciclo+"_SSFINAL'),'|') AS RUTA_SSFINAL "+
-							" FROM DUAL"; 
-	
-							parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
-							$.ajax({
-								type: "POST",
-								data:parametros,
-								url:  "../base/getdatossqlSeg.php",
-								success: function(data){
-
-									activaEliminar="";							
-									if ((JSON.parse(data)[0]["RUTA_SSCARTAPRES"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSCARTAPRES"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSCARTAPRES"].split("|")[0]!='S') {
-										dameSubirArchivoLocal("cont_sscartapres","Carta Presentación Sellada","sscartapres",'servicioSocial','pdf',
-										'ID',usuario,'CARTA PRESENTACIÓN SELLADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SSCARTAPRES",JSON.parse(data)[0]["RUTA_SSCARTAPRES"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSCARTAPRES");										
-									} else {
-										agregaPDF("cont_sscartapres","Carta Presentación",JSON.parse(data)[0]["RUTA_SSCARTAPRES"].split("|")[1]);
-									}
-
-									
-									activaEliminar="";							
-									if ((JSON.parse(data)[0]["RUTA_SSCARTAACEP"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSCARTAACEP"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSCARTAACEP"].split("|")[0]!='S') {
-										dameSubirArchivoLocal("cont_sscartaacep","Carta Aceptación Sellada","sscartaacep",'servicioSocial','pdf',
-										'ID',usuario,'CARTA ACEPTACIÓN SELLADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SSCARTAACEP",JSON.parse(data)[0]["RUTA_SSCARTAACEP"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSCARTAACEP");										
-									} else {
-										agregaPDF("cont_sscartaacep","Carta Aceptación",JSON.parse(data)[0]["RUTA_SSCARTAACEP"].split("|")[1]);
-									}
-
-
-					
-									activaEliminar="";							
-									if ((JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[0]!='S') {
-										dameSubirArchivoLocal("cont_sssol","Solicitud Firmada","sssol",'servicioSocial','pdf',
-										'ID',usuario,'SOLICITUD FIRMADA','eadjresidencia','alta',usuario+"_"+miciclo+"_SSSOLSS",JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSSOLSS");										
-									} else {
-										agregaPDF("cont_sssol","Solicitud Firmada",JSON.parse(data)[0]["RUTA_SSSOLSS"].split("|")[1]);
-									}
-
-									activaEliminar="";
-									if ((JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[0]!='S') {				
-										dameSubirArchivoLocal("cont_sscartacom","Carta Compromiso","sscartacom",'servicioSocial','pdf',
-										'ID',usuario,'CARTA COMPROMISO','eadjresidencia','alta',usuario+"_"+miciclo+"_SSCARTACOM",JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSCARTACOM");
-									} else {
-										agregaPDF("cont_sscartacom","Carta Compromiso",JSON.parse(data)[0]["RUTA_SSCARTACOM"].split("|")[1]);
-									}
-
-									activaEliminar="";
-									if ((JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[0]!='S') {				
-										dameSubirArchivoLocal("cont_ssbim1","Reportes Bimestre 1","ssbim1",'servicioSocial','pdf',
-										'ID',usuario,'REPORTES BIMESTRE 1','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM1",JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSBIM1");
-									}else {
-										agregaPDF("cont_ssbim1","Reportes Bimestre 1",JSON.parse(data)[0]["RUTA_SSBIM1"].split("|")[1]);
-									}
-
-									activaEliminar="";
-									if ((JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[0]!='S') {														
-										dameSubirArchivoLocal("cont_ssbim2","Reportes Bimestre 2","ssbim2",'servicioSocial','pdf',
-										'ID',usuario,'REPORTES BIMESTRE 2','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM2",JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSBIM2");
-									}else {
-										agregaPDF("cont_ssbim2","Reportes Bimestre 2",JSON.parse(data)[0]["RUTA_SSBIM2"].split("|")[1]);
-									}
-
-									activaEliminar="";
-									if ((JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[0]!='S') {					
-										dameSubirArchivoLocal("cont_ssbim3","Reportes Bimestre 3","ssbim3",'servicioSocial','pdf',
-										'ID',usuario,'REPORTES BIMESTRE 3','eadjresidencia','alta',usuario+"_"+miciclo+"_SSBIM3",JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSBIM3");
-									}else {
-										agregaPDF("cont_ssbim3","Reportes Bimestre 3",JSON.parse(data)[0]["RUTA_SSBIM3"].split("|")[1]);
-									}
-
-									activaEliminar="";
-									if ((JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[1]!='') && (JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[0]!='S'))  {	activaEliminar='S';}					
-									if (JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[0]!='S') {					
-										dameSubirArchivoLocal("cont_ssfinal","Documentos Finales","ssfinal",'servicioSocial','pdf',
-										'ID',usuario,'DOCUMENTOS FINALES','eadjresidencia','alta',usuario+"_"+miciclo+"_SSFINAL",JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[1],activaEliminar,usuario+"_"+miciclo+"_SSFINAL");
-									}else {
-										agregaPDF("cont_ssfinal","Documentos Finales",JSON.parse(data)[0]["RUTA_SSFINAL"].split("|")[1]);
-									}
-
-								}
-							});
-
-						}
-					});
-				} //DEL SI ESTA ABIERO 
-				else { console.log("No hay proceso abierto");
-						$("#servicio").append("<div class=\"row\">"+
+			else { console.log("No hay proceso abierto");
+						$("#panIni").append("<div class=\"row\">"+
 						"    <div class=\"col-sm-12\"> "+
 						"          <div class=\"alert alert-danger\">No se ha realizado Solicitud de Servicio Social para este Ciclo</div> "+
 						"    </div>");
@@ -383,7 +266,7 @@ var miciclo="";
 			}
 		}); //del ajax de busqueda de corte abierto 
 
-		$("#servicio").append("<div class=\"fontRobotoB\" id=\"pcapt\" style=\"text-align:left;\"></div>");
+		$("#panIni").append("<div class=\"fontRobotoB\" id=\"pcapt\" style=\"text-align:left;\"></div>");
 		abrirCaptura();
 
 	}
@@ -434,8 +317,7 @@ var miciclo="";
 							if (JSON.parse(data)[0]["ENVIADA"]=='S') { bt4=''; bt1="";}	
 
 								//Si esta abierto aparecemos la opción de capturar Proyecto.
-							$("#pcapt").append(bt1+bt2+bt3+bt4+
-							"</div>"+"<hr><div style=\"text-align:center;\">");
+							$("#pcapt").append(bt1+bt2+bt3+bt4);
 
 							
 						}
@@ -444,7 +326,7 @@ var miciclo="";
 
 				}
 				else { console.log("No hay proceso abierto");
-						$("#servicio").append("<div class=\"row\">"+
+						$("#panIni").append("<div class=\"row\">"+
 						"    <div class=\"col-sm-12\"> "+
 						"          <div class=\"alert alert-danger\">No se encuentra abierto el proceso de  Servicio Social para este Ciclo</div> "+
 						"    </div>");
@@ -463,6 +345,8 @@ var miciclo="";
 		"ifnull( REPRESENTANTE,'') AS REPRESENTANTE,ifnull( PUESTO,'') AS PUESTO,ifnull(PROGRAMA,'') AS PROGRAMA,"+
 		"ifnull( RESPONSABLEPROG,'') AS RESPONSABLEPROG,ifnull( MODALIDAD,'') AS MODALIDAD,ifnull( ACTIVIDADES,'') AS ACTIVIDADES,ifnull( DIRECCION,'') AS DIRECCION,"+
 		"ifnull( TIPOPROG,'') AS TIPOPROG,ifnull(ENVIADA,'') AS ENVIADA, ifnull( TIPOPROGADD,'') AS TIPOPROGADD, ifnull( FECHACOM,'') AS FECHACOM, VALIDADO AS VALIDADO,"+
+		"ifnull( ESTADO,'') AS ESTADO,ifnull(MUNICIPIO,'') AS MUNICIPIO, ifnull( SECTOR,'') AS SECTOR, ifnull( TAMANIO,'') AS TAMANIO,"+
+		"ifnull( TELSUPSS,'') AS TELSUPSS,ifnull(TELEMPRESA,'') AS TELEMPRESA, ifnull( CORREOSUPSS,'') AS CORREOSUPSS,"+
 		"count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"'"+
 		" and MATRICULA='"+usuario+"'";
 
@@ -504,9 +388,23 @@ var miciclo="";
 						"</div>"+	
 					"</div>"+
 					"<div class=\"row\">"+
-						"<div class=\"col-sm-12\">"+
+						"<div class=\"col-sm-12\">"+						
 							"<label class=\"fontRobotoB\">Domicilio Empresa: </label><input class=\"form-control captProy\" value=\""+misdatos[0]["DIRECCION"]+"\" id=\"direccion\"></input>"+
 						"</div>"+						
+					"</div>"+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-3\">"+
+						     "<label class=\"fontRobotoB\">Estado</label><select onchange=\"eligeMuni('"+misdatos[0]["MUNICIPIO"]+"');\" class=\"form-control captProy\"  id=\"estado\"></select>"+							
+						"</div>"+	
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Municipio</label><select class=\"form-control captProy\"  id=\"municipio\"></select>"+	
+						"</div>"+	
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Sector</label><select class=\"form-control captProy\"  id=\"sector\"></select>"+	
+						"</div>"+
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Tamaño</label><select class=\"form-control captProy\"  id=\"tamanio\"></select>"+	
+						"</div>"+					
 					"</div>"+
 					"<div class=\"row\">"+
 						"<div class=\"col-sm-5\">"+
@@ -548,6 +446,11 @@ var miciclo="";
 
 				actualizaSelectMarcar("modalidad", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='SSMODALIDAD'", "","",misdatos[0]["MODALIDAD"]); 
 				actualizaSelectMarcar("tipoprog", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='SSTIPOPROG'", "","",misdatos[0]["TIPOPROG"]); 
+				actualizaSelectMarcar("estado", "SELECT ID_ESTADO, ESTADO FROM cat_estado order by ID_ESTADO", "","",misdatos[0]["ESTADO"]); 
+				actualizaSelectMarcar("sector", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='REGIMENEMPRESAS'", "","",misdatos[0]["SECTOR"]); 
+				actualizaSelectMarcar("tamanio", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TAMANIOEMP'", "","",misdatos[0]["TAMANIO"]); 
+
+
 				$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
 				
 			
@@ -560,6 +463,9 @@ var miciclo="";
 	}
 
 
+	function eligeMuni(municipio){
+		actualizaSelectMarcar("municipio", "SELECT ID_MUNICIPIO, MUNICIPIO FROM cat_municipio where ID_ESTADO='"+$("#estado").val()+"' order by MUNICIPIO", "","",municipio);
+	}
 	
 	function grabarDatos(){
 		vacios=false;
@@ -742,7 +648,7 @@ var miciclo="";
 						url:"../base/actualiza.php",
 						data: parametros,
 						success: function(data){ 
-							$("#servicio").html("<div class=\"alert alert-warning\" style=\"width:100%;\">"+ 									        
+							$("#panIni").html("<div class=\"alert alert-warning\" style=\"width:100%;\">"+ 									        
 							"    Tu Solicitud ya fue enviada"+
 							"</div>");	
 							

@@ -291,7 +291,7 @@ class VariableStream
                 $fecha=date("d/m/Y"); 
                 $this->SetFont('Montserrat-SemiBold','B',10);
 
-                $this->Ln(5);
+                $this->Ln();
                 $this->SetFont('Montserrat-Black','',10);   
                 $this->SetFillColor(172,31,8);
                 $this->SetTextColor(255);     
@@ -459,7 +459,7 @@ class VariableStream
                 $this->SetTextColor(255);  
                 $this->Cell(170,5,utf8_decode("OBSERVACIONES"),1,0,'C',true);
                 $this->Ln(5);
-                $this->SetFont('Montserrat-Medium','',8);   
+                $this->SetFont('Montserrat-Medium','',7);   
                
                 $this->SetFillColor(172,31,6);
                 $this->SetTextColor(0);

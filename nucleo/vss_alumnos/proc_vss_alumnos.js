@@ -172,7 +172,13 @@ function veradjss  (modulo,usuario,institucion, campus,essuper){
 
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
-		ss_mostrarAdjuntos(modulo,usuario,institucion, campus,essuper,table.rows('.selected').data()[0]["CICLO"],table.rows('.selected').data()[0]["MATRICULA"]);
+	
+		ss_mostrarAdjuntos(modulo,usuario,institucion, campus,essuper,
+			table.rows('.selected').data()[0]["CICLO"],
+			table.rows('.selected').data()[0]["MATRICULA"],
+			table.rows('.selected').data()[0]["NOMBRE"],
+			table.rows('.selected').data()[0]["ID"],
+			"modAdjuntos","eadjresidencia","servicioSocial","'SERVSOC_INI','SERVSOC_SEG','SERVSOC_FIN'");
 	}
 	else {
 		alert ("Debe seleccionar un Registro");
