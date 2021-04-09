@@ -5,7 +5,7 @@ function verCarta(modulo,usuario,institucion, campus,essuper){
 	 	  
 	if (table.rows('.selected').data().length>0) {
 
-		enlace="nucleo/vrespropuestas/carta.php?id="+table.rows('.selected').data()[0]["ID"];
+		enlace="nucleo/vrespropuestas/carta.php?id="+table.rows('.selected').data()[0]["ID"]+"&tipo=0";
 		abrirPesta(enlace,'Carta Presentación');
 
 
@@ -17,6 +17,24 @@ function verCarta(modulo,usuario,institucion, campus,essuper){
 		}
 
       return false;
+}
+
+
+function verCartaSellada(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+		 
+  if (table.rows('.selected').data().length>0) {
+
+	  enlace="nucleo/vrespropuestas/carta.php?id="+table.rows('.selected').data()[0]["ID"]+"&tipo=1";
+	  abrirPesta(enlace,'Carta Presentación');
+  }
+  else {
+	  alert ("Debe seleccionar un registro");
+	  return 0;
+
+	  }
+
+	return false;
 }
 
 
@@ -71,8 +89,27 @@ function marcarEnviado(modulo,usuario,essuper){
 
 
 
+	function veradjprop  (modulo,usuario,institucion, campus,essuper){
 
+		table = $("#G_"+modulo).DataTable();
+		if (table.rows('.selected').data().length>0) {
+		
+			ss_mostrarAdjuntos(modulo,usuario,institucion, campus,essuper,
+				table.rows('.selected').data()[0]["CICLO"],
+				table.rows('.selected').data()[0]["MATRICULA"],
+				table.rows('.selected').data()[0]["NOMBRE"],
+				table.rows('.selected').data()[0]["ID"],
+				"modAdjuntos","eadjresidencia","residenciasProf","'RESIDEN_REQ','RESIDEN_ANT','RESIDEN_SEG','RESIDEN_FIN'");
+		}
+		else {
+			alert ("Debe seleccionar un Registro");
+			return 0;
 	
+			}
+	
+	}
+
+	/*
 function veradjprop  (modulo,usuario,institucion, campus,essuper){
 
 	table = $("#G_"+modulo).DataTable();
@@ -86,6 +123,7 @@ function veradjprop  (modulo,usuario,institucion, campus,essuper){
 		}
 
 }
+*/
 
 /*============================SUBIR CARTA DE PRESENTACION ]=============================*/
 function subirCarta(modulo,usuario,institucion, campus,essuper){

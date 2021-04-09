@@ -117,7 +117,7 @@ function generaTablaEmpresas(grid_data){
 		//alert ($("#rowM"+contAlum).html()+" "+valor.PROFESOR);   	
 		
 		arrEmpresas[i]=[valor.RFC, valor.EMPRESA,valor.EMPRESA.substring(0,30),valor.GIRO,valor.SECTOR,valor.TITULAR,valor.MISION,
-				 '',valor.DOMICILIO,'','','','',valor.CP,usuario,lafecha,institucion,campus,valor.TELEFONO,'',valor.ID];
+				 '',valor.DOMICILIO,'',valor.ESTADO,valor.MUNICIPIO,'',valor.CP,usuario,lafecha,institucion,campus,valor.TELEFONO,'',valor.ID];
 
 		arrProyectos[i]=[valor.CICLO,valor.ALUM_CARRERAREG,'1',valor.IDEMPRESA,'0',valor.ASESOREX, valor.PSTOASESOREX,'0','','','',
 						 valor.IDASESOR,'','','','','',valor.INICIA,valor.TERMINA,valor.PROYECTO,

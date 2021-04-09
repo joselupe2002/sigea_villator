@@ -30,10 +30,11 @@
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/ui.jqgrid.min.css" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/chosen.min.css" />
         
+        <link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
         </head>
 
 
-<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+<body id="grid_<?php echo $_GET['modulo']; ?>" class="sigeaPrin" style="background-color: white; width:98%;">
     <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>
     
 <div class="row">
@@ -234,53 +235,75 @@
                         }
                     });
 
-                    //Cargamos datos de las carreras aspirantes 
-                         
-                            elsqlSolCar="SELECT a.CARR_DESCRIP AS CARRERA, a.CARR_DESCORTA AS CARRERACOR,"+
-                                       "(SELECT COUNT(*) FROM aspirantes where CICLO='"+elciclo+"'"+
-                                       " and CARRERA=CARR_CLAVE) AS NUM FROM ccarreras a WHERE a.CARR_OFERTAR='S' order by CARR_DESCRIP";                                                       
-                            c=0;
-                            parametros={sql:elsqlSolCar,dato:sessionStorage.co,bd:"Mysql"}
-                            $.ajax({
-                                type: "POST",
-                                data:parametros,
-                                url:  "../base/getdatossqlSeg.php",
-                                success: function(dataCar){   
-                                    jQuery.each(JSON.parse(dataCar), function(clave, valor) {
-                                         $("#lascarreras").append("<span title=\""+valor.CARRERA+"\" class=\"btn btn-app btn-sm "+colorbtn[c]+" no-hover\">"+
-													              "   <span class=\"line-height-1 bigger-170\">"+valor.NUM+"</span>"+
-                                                                  "   <br /> "+
-													              "   <span class=\"line-height-1 smaller-60\"> "+valor.CARRERACOR+" </span>"+
-                                                                  "</span>");
-                                                                  c++;
-                                     });
-                                   
-                                }
-                            });  
-                     //Cargamos datos de las carreras aspirantes finalizadas
-                            colorbtn=["btn-yellow","btn-light","btn-pink","btn-grey","btn-success","btn-info","btn-warning","btn-danger","btn-primary"];                            
-                            elsqlSolCarFin="SELECT a.CARR_DESCRIP AS CARRERA, a.CARR_DESCORTA AS CARRERACOR,"+
-                                       "(SELECT COUNT(*) FROM aspirantes where CICLO='"+elciclo+"' and FINALIZADO='S' "+
-                                       " and CARRERA=CARR_CLAVE) AS NUM FROM ccarreras a WHERE a.CARR_OFERTAR='S' order by CARR_DESCRIP";                                                       
-                            c2=0;
-                            parametros={sql:elsqlSolCarFin,dato:sessionStorage.co,bd:"Mysql"}
-                            $.ajax({
-                                type: "POST",
-                                data:parametros,
-                                url:  "../base/getdatossqlSeg.php",
-                                success: function(dataCarFin){   
-                                    jQuery.each(JSON.parse(dataCarFin), function(clave, valor) {
-                                         $("#lascarrerasFin").append("<span title=\""+valor.CARRERA+"\" class=\"btn btn-app btn-sm "+colorbtn[c2]+" no-hover\">"+
-													              "   <span class=\"line-height-1 bigger-170\">"+valor.NUM+"</span>"+
-                                                                  "   <br /> "+
-													              "   <span class=\"line-height-1 smaller-60\"> "+valor.CARRERACOR+" </span>"+
-                                                                  "</span>");
-                                                                  c2++;
-                                     });
-                                   
-                                }
-                            });
+                    elsqlMod="SELECT distinct(MODALIDAD) AS MODALIDAD,MODALIDADD FROM vaspirantes where CICLO='"+elciclo+"'";                                                       
+                    c=0;
+                    parametrosMod={sql:elsqlMod,dato:sessionStorage.co,bd:"Mysql"}
+                    $.ajax({
+                            type: "POST",
+                            data:parametrosMod,
+                            url:  "../base/getdatossqlSeg.php",
+                            success: function(dataMod){  
+                    
 
+                                    jQuery.each(JSON.parse(dataMod), function(clave, valorMod) {
+                                        	
+                                       
+                                        //Cargamos datos de las carreras aspirantes                          
+                                        elsqlSolCar="SELECT a.CARR_DESCRIP AS CARRERA, a.CARR_DESCORTA AS CARRERACOR,"+
+                                                "(SELECT COUNT(*) FROM aspirantes where CICLO='"+elciclo+"'"+
+                                                " and CARRERA=CARR_CLAVE and MODALIDAD='"+valorMod.MODALIDAD+"') AS NUM FROM ccarreras a WHERE a.CARR_OFERTAR='S' order by CARR_DESCRIP";                                                       
+                                        c=0;
+                                        
+
+                                        parametros={sql:elsqlSolCar,dato:sessionStorage.co,bd:"Mysql"}
+                                        $.ajax({
+                                            type: "POST",
+                                            data:parametros,
+                                            url:  "../base/getdatossqlSeg.php",
+                                            success: function(dataCar){   
+                                                $("#lascarreras").append("<span class=\"label label-warning\">"+valorMod.MODALIDADD+"</span><br>");
+                                                jQuery.each(JSON.parse(dataCar), function(clave, valor) {
+                                                    $("#lascarreras").append("<span title=\""+valor.CARRERA+"\" class=\"btn btn-app btn-sm "+colorbtn[c]+" no-hover\">"+
+                                                                            "   <span class=\"line-height-1 bigger-170\">"+valor.NUM+"</span>"+
+                                                                            "   <br /> "+
+                                                                            "   <span class=\"line-height-1 smaller-60\"> "+valor.CARRERACOR+" </span>"+
+                                                                            "</span>");
+                                                                            c++;
+                                                });
+                                                $("#lascarreras").append("<br>");
+                                            
+                                            }
+                                        });  
+                                        //Cargamos datos de las carreras aspirantes finalizadas
+                                        colorbtn=["btn-yellow","btn-light","btn-pink","btn-grey","btn-success","btn-info","btn-warning","btn-danger","btn-primary"];                            
+                                        elsqlSolCarFin="SELECT a.CARR_DESCRIP AS CARRERA, a.CARR_DESCORTA AS CARRERACOR,"+
+                                                "(SELECT COUNT(*) FROM aspirantes where CICLO='"+elciclo+"' and FINALIZADO='S' "+
+                                                " and CARRERA=CARR_CLAVE and MODALIDAD='"+valorMod.MODALIDAD+"') AS NUM FROM ccarreras a WHERE a.CARR_OFERTAR='S' order by CARR_DESCRIP";                                                       
+                                        c2=0;
+                                        parametros={sql:elsqlSolCarFin,dato:sessionStorage.co,bd:"Mysql"}
+                                        $.ajax({
+                                            type: "POST",
+                                            data:parametros,
+                                            url:  "../base/getdatossqlSeg.php",
+                                            success: function(dataCarFin){   
+                                                $("#lascarrerasFin").append("<span class=\"label label-primary\">"+valorMod.MODALIDADD+"</span><br>");
+                                               
+                                                jQuery.each(JSON.parse(dataCarFin), function(clave, valor) {
+                                                    $("#lascarrerasFin").append("<span title=\""+valor.CARRERA+"\" class=\"btn btn-app btn-sm "+colorbtn[c2]+" no-hover\">"+
+                                                                            "   <span class=\"line-height-1 bigger-170\">"+valor.NUM+"</span>"+
+                                                                            "   <br /> "+
+                                                                            "   <span class=\"line-height-1 smaller-60\"> "+valor.CARRERACOR+" </span>"+
+                                                                            "</span>");
+                                                                            c2++;
+                                                });
+                                                $("#lascarrerasFin").append("<br>");
+                                            
+                                            }
+                                        });
+                                    });
+
+                            }
+                    });
                      
                     
                     
