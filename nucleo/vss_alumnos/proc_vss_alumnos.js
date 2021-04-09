@@ -5,7 +5,7 @@ function impCarta(modulo,usuario,institucion, campus,essuper){
 	 	  
 	if (table.rows('.selected').data().length>0) {
 
-		enlace="nucleo/vss_alumnos/carta.php?id="+table.rows('.selected').data()[0]["ID"];
+		enlace="nucleo/vss_alumnos/carta.php?id="+table.rows('.selected').data()[0]["ID"]+"&tipo=0";
 		abrirPesta(enlace,'Carta Presentación');
 
 
@@ -17,6 +17,20 @@ function impCarta(modulo,usuario,institucion, campus,essuper){
 		}
 
       return false;
+}
+
+function impCartaSellada(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+  if (table.rows('.selected').data().length>0) {
+	  enlace="nucleo/vss_alumnos/carta.php?id="+table.rows('.selected').data()[0]["ID"]+"&tipo=1";
+	  abrirPesta(enlace,'Carta Presentación');
+  }
+  else {
+	  alert ("Debe seleccionar un registro");
+	  return 0;
+	  }
+
+	return false;
 }
 
 
@@ -125,7 +139,7 @@ function impLib(modulo,usuario,institucion, campus,essuper){
 	if (table.rows('.selected').data().length>0) {
 
 		if (table.rows('.selected').data()[0]["FINALIZADO"]=='S') {
-			enlace="nucleo/vss_alumnos/oficioLib.php?id="+table.rows('.selected').data()[0]["ID"];
+			enlace="nucleo/vss_alumnos/oficioLib.php?id="+table.rows('.selected').data()[0]["ID"]+"&tipo=0";
 			abrirPesta(enlace,'Oficio Lib.');}
 		else {
 			alert ("El registro de  "+table.rows('.selected').data()[0]["MATRICULA"]+" "+table.rows('.selected').data()[0]["NOMBRE"]+" No esta  Finalizado");
@@ -141,14 +155,13 @@ function impLib(modulo,usuario,institucion, campus,essuper){
 
 }
 
-
-function cartaFin(modulo,usuario,institucion, campus,essuper){
+function impLibSellado(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data().length>0) {
 
 		if (table.rows('.selected').data()[0]["FINALIZADO"]=='S') {
-			enlace="nucleo/vss_alumnos/cartafin.php?id="+table.rows('.selected').data()[0]["ID"];
-			abrirPesta(enlace,'Carta Fin.');}
+			enlace="nucleo/vss_alumnos/oficioLib.php?id="+table.rows('.selected').data()[0]["ID"]+"&tipo=1";
+			abrirPesta(enlace,'Oficio Lib.');}
 		else {
 			alert ("El registro de  "+table.rows('.selected').data()[0]["MATRICULA"]+" "+table.rows('.selected').data()[0]["NOMBRE"]+" No esta  Finalizado");
 		}
@@ -162,9 +175,6 @@ function cartaFin(modulo,usuario,institucion, campus,essuper){
 		}
 
 }
-
-
-
 
 
 	

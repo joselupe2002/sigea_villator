@@ -34,7 +34,22 @@
 				return $data;
 			}
 			
+
+			function Footer()
+			{	
+                
+                $this->SetFont('Arial','',8);
+				$this->setY(-10);
+				$this->Cell(0,5,utf8_decode("Km. 2.5 Carretera Federal Perote – México; Perote, Ver. C.P. 91270. Teléfonos: 01(282) 8 25 31 50, 8 25 31 51, Fax 8 25 36 68"),0,1,'C');
+
 	
+            
+		
+			}
+
+
+
+			
 		
 
 		}
@@ -60,23 +75,20 @@
 		$pdf->AddFont('Montserrat-ExtraLight','I','Montserrat-ExtraLight.php');
 		$pdf->AddFont('Montserrat-ExtraLight','','Montserrat-ExtraLight.php');
 
-		/*
-		$pdf->SetFont('Montserrat-Black','',9);
-		$pdf->SetY(10);
-		$pdf->Cell(170,5,utf8_decode("TECNOLÓGICO NACIONAL DE MÉXICO"),0,1,'R');
-		$pdf->SetFont('Montserrat-Medium','',9);
-		$pdf->Cell(170,5,utf8_decode($dataGen[0]["inst_razon"]),0,1,'R');
-	
-		$pdf->Image('../../imagenes/empresa/sepescudo.png',20,30,25,25);
-		$pdf->Image('../../imagenes/empresa/logo2.png',166,30,25,25);
+		
+		$pdf->SetFont('Arial','B',16);
+		$pdf->SetY(30);
+		$pdf->Cell(170,5,utf8_decode($dataGen[0]["inst_aux2"]),0,1,'C');
 
-		$pdf->SetY(40);
+		$pdf->Image('../../imagenes/empresa/logo2.png',20,12,25,25);
+
+		$pdf->SetY(50);
 		$pdf->SetFont('Montserrat-Black','',11);
 		$pdf->Cell(174,5,utf8_decode("CONSTANCIA DE TERMINACIÓN DE SERVICIO SOCIAL"),0,1,'C');
-*/
 
 
-		$pdf->SetY(70);
+
+		$pdf->SetY(77);
 		$data = $pdf->LoadData();
 		$miutil = new UtilUser();
 		$fechadec=$miutil->formatFecha($data[0]["INICIO"]);
@@ -84,6 +96,8 @@
 		$fechadec=$miutil->formatFecha($data[0]["TERMINO"]);
 		$fechafin=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
 				
+		$anioTer=date("Y", strtotime($fechadec));
+		$mesTer=date("m", strtotime($fechadec));
 		
 
 		//$dataof=$miutil->verificaOficio("521","COMISION",$_GET["id"]);		
@@ -100,65 +114,87 @@
 		$dir=$miutil->getJefe('101'); //Director General
 		
 		
-		$pdf->SetFont('Arial','',12);
-		$pdf->Cell(0,5,utf8_decode("A QUIEN CORRESPONDA"),0,1,'L');
-		$pdf->Ln(5);
-		$pdf->Cell(0,5,utf8_decode("Por medio de la presente se hace constar que:"),0,1,'L');
-		$pdf->Ln(5);
-
-		$pdf->SetFont('Arial','',12);
 		$elperiodo='del '.$fechaini.' al '.$fechafin;
 
+		$fechadecof=strtotime($miutil->formatFecha($data[0]["FECHAOF"]));
+		$fechaof=$miutil->aletras(date("d",$fechadecof)).utf8_decode(" días del mes  de ").$miutil->getMesLetra(date("m",$fechadecof))." de ". $miutil->aletras(date("Y",$fechadecof));
+        $pdf->Ln(5);
+
+
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(0,5,utf8_decode("A QUIEN CORRESPONDA"),0,1,'L');
+		$pdf->Ln(5);
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->MultiCell(0,5,utf8_decode("El ".$dataGen[0]["inst_aux2"].", hace constar que el (la) C. ".utf8_decode($data[0]["NOMBRE"]).
+	          ", de la carrera de: ".utf8_decode($data[0]["CARRERAD"]).", con número de matrícula: ".
+			  utf8_decode($data[0]["MATRICULA"]).", concluyó satisfactoriamente su Servicio Social conforme a lo dispuesto en el Artículo 45,".
+			  " de la Ley del Ejercicio Profesional para el Estado de Veracruz de Ignacio de la Llave, ".
+			  " cubriendo un total de ".$data[0]["TOTALHORAS"]." hrs. durante el periodo comprendido del ".
+			  $elperiodo),0,'J',false);
+		$pdf->Ln(5);
+
+		$pdf->MultiCell(0,5,utf8_decode("Por lo que se extiende la presente, para los efectos legales que ".
+		"haya lugar, en la Ciudad de  ".$dataGen[0]["inst_extiende"].", a los ").
+		strtolower($fechaof),0,'J',FALSE);
+
+		$pdf->SetFont('Arial','',12);
 		$lasact=preg_replace("[\n|\r|\n\r]", ", ", $data[0]["ACTIVIDADES"]);
 
-		$pdf->MultiCell(0,5,utf8_decode('Según documentos que obran en los archivos de esta Institución, el (la) C. ').utf8_decode($data[0]["NOMBRE"]).
-		' con matricula No. '.utf8_decode($data[0]["MATRICULA"]).utf8_decode(', de la carrera de ').utf8_decode($data[0]["CARRERAD"]).
-		utf8_decode(' realizó su Servicio Social  en la dependencia ').utf8_decode($data[0]["EMPRESA"]).
-		utf8_decode(', desarrollando las siguiente actividades: ').utf8_decode($lasact).
-		utf8_decode(', cubriendo un mínimo total de 500 horas, durante el período comprendido').$elperiodo.
-		utf8_decode(" con un nivel de desempeño ").utf8_decode($data[0]["CALIFICACION2"]." ".$data[0]["CALIFICACIONL"]),0,'J', false);
-		$pdf->Ln(10);
 
-		$pdf->MultiCell(0,5,utf8_decode("Este Servicio Social fue realizado de acuerdo con lo establecido en la Ley Reglamentaria del Artículo 5° Constitucional relativo al ejercicio de las Profesiones y los Reglamentos que rigen la normativa emitida por el Tecnológico Nacional de México."),0,'J', false);
-		$pdf->Ln(10);
-	
+		$dataof=$miutil->getConsecutivoDocumento("LIBERACIONSS",$data[0]["MATRICULA"].$data[0]["FECHAOF"]);
+		$folio=$anioTer."/".$mesTer."/".$data[0]["CARRERA"]."/".str_pad($dataof[0]["CONSECUTIVOSOLO"],3,'0',STR_PAD_LEFT);
+		$pdf->Cell(0,5,$folio,0,1,'L');
 
-		$fechadecof=strtotime($miutil->formatFecha($data[0]["FECHAOF"]));
-		$fechaof=date("d",$fechadecof).utf8_decode(" días del mes  de ").$miutil->getMesLetra(date("m",$fechadecof))." de ". $miutil->aletras(date("Y",$fechadecof));
-        $pdf->Ln(5);
-   
 
-        $pdf->MultiCell(0,5,utf8_decode("Se extiende la presente para los fines legales que al interesado convengan en la ciudad de ".$dataGen[0]["inst_extiende"].", a los ".
-		strtolower($fechaof)).".",0,'J',FALSE);
-		
 
-		$pdf->setY(200);
-		$pdf->Cell(174,3,"ATENTAMENTE",0,0,'C');
+		$firma=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMA");
+		$sello=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_SELLO");
+		if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {			
+			$pdf->Image($sello,160,160,45);
+			$pdf->Image($firma,90,150,40);			
+		}
 
-		$pdf->setY(205);
-		$pdf->Cell(82,3,utf8_decode("COTEJÓ"),0,0,'C');
-		$pdf->Cell(10,3,"",0,0,'C');
-		$pdf->Cell(82,3,"",0,0,'C');
+
+
+		$pdf->setY(160);
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,3,"",0,0,'C');
+		$pdf->Cell(100,3,utf8_decode("A T E N T A M E N T E"),0,0,'C');
+		$pdf->Cell(40,3,"",0,0,'C');
+		$pdf->SetFont('Arial','B',10);
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->setY(180);
+		$pdf->Cell(40,5,"",0,0,'C');
+		$pdf->Cell(100,5,utf8_decode($ss),'T',0,'C');
+		$pdf->Cell(40,5,"",0,0,'C');
 		$pdf->SetFont('Arial','B',10);
 		
-		$pdf->setY(235);		
-		$pdf->Cell(82,3,utf8_decode($ss),0,0,'C');
-		$pdf->Cell(10,3,"",0,0,'C');
-		$pdf->Cell(82,3,utf8_decode($dir),0,0,'C');
 		
-		$pdf->setY(240);		
-		$pdf->Cell(82,3,utf8_decode($elpsto),0,0,'C');
-		$pdf->Cell(10,3,"",0,0,'C');
-		$pdf->Cell(82,3,"DIRECTOR GENERAL",0,0,'C');
-
-		$pdf->SetFont('Arial','',7);
-		$pdf->setY(248);
-		$pdf->Cell(0,5,"C.c.p. Servicios Escolares.- Expediente del alumno",0,1,'L');
-		$pdf->setY(251);
-		$pdf->Cell(0,5,"C.c.p. Expediente del alumnos",0,1,'L');
-		$pdf->setY(254);
-		$pdf->Cell(0,5,"C.c.p. Expediente",0,1,'L');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->setY(185);
+		$pdf->Cell(40,3,"",0,0,'C');
+		$pdf->MultiCell(100,5,utf8_decode($elpsto),0,'C',false);
+		$pdf->Cell(40,3,"",0,0,'C');
+		$pdf->SetFont('Arial','B',10);
 	
+
+		$pdf->SetFont('Arial','',8);
+		$pdf->setY(220);
+		$pdf->Cell(0,5,"C.c.p. Servicios Escolares.-Expediente del alumno",0,1,'L');
+		$pdf->setY(225);
+		$pdf->Cell(0,5,"           Interesado",0,1,'L');
+	
+
+		$pdf->SetFont('Arial','',8);
+		$pdf->setY(240);
+		$pdf->Cell(0,5,"Control de registro: ".$folio,0,1,'C');
+
+
+		
+		
+
 
 		$pdf->Output(); 
 	

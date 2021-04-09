@@ -3592,7 +3592,7 @@ function residencia_mostrarAdjuntos  (modulo,usuario,institucion, campus,essuper
 function cargarPestania(seccion,padre,carpeta, tabla, elusuario, elciclo){
 	var contFila=0;
 	var contDatos=1;
-		elsqlAdj="select IDDOC, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, '"+elciclo+"' "+
+		elsqlAdj="select IDDOC, VALIDADO, IFNULL(OBSVALIDADO,'') AS OBSVALIDADO, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, '"+elciclo+"' "+
 		" AS CICLO from documaspirantes a "+
 		"LEFT OUTER JOIN  "+tabla+" b  on (b.AUX=concat(a.CLAVE,'_','"+elusuario+"_','"+elciclo+"'))"+
 		" WHERE a.ENLINEA='S' and a.MODULO='"+seccion+"' order by TIPOADJ, DOCUMENTO";			
@@ -3605,47 +3605,55 @@ function cargarPestania(seccion,padre,carpeta, tabla, elusuario, elciclo){
 			success: function(dataDoc){  								
 				$("#"+padre).empty();		
 				jQuery.each(JSON.parse(dataDoc), function(clave, valor) { 
-					stElim="display:none; cursor:pointer;";
-					if (valor.RUTA.length>0) { stElim="cursor:pointer; display:block; ";} 
-					
-					cadFile="<div class=\"col-sm-5\">"+											
-					"            <span class=\"text-primary\"><strong>"+utf8Decode(valor.DOCUMENTO)+"</strong></span>"+											
-					"            <input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
-					"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','"+carpeta+"','pdf_"+
-												valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+
-												"',' DOCUMENTO  "+valor.DOCUMENTO+" ','"+tabla+"','alta','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"');\">"+
-					"           <input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
-					"        </div>"+
-					"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
-					"           <a target=\"_blank\" id=\"enlace_RUTA_"+valor.CLAVE+"\" href=\""+valor.RUTA+"\">"+
-					"                 <img class=\"imgadj\" cargado=\"S\" width=\"40px\" height=\"40px\" id=\"pdf_"+valor.CLAVE+"\" name=\"pdf_"+valor.CLAVE+"\" src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
-					"           </a>"+
-					"           <i style=\""+stElim+"\"  id=\"btnEli_RUTA_"+valor.CLAVE+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
-					"            onclick=\"eliminarEnlaceCarpeta('file_"+valor.CLAVE+"','"+carpeta+"',"+
-					"                      'pdf_"+valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
-					"                      '"+tabla+"','alta','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"','PDF');\"></i> "+              				                        
-					"      </div> ";
-
-
-					if ((contDatos % 2)==1) {contFila++; fila="<div class=\"row\" style=\"padding:0px;\" id=\"fila"+padre+contFila+"\"></div>"; }
-					else {fila="";}
-					
-					$("#"+padre).append(fila);
-					$("#fila"+padre+contFila).append(cadFile);
-					
-					contDatos++;	
-						
-					
-				if (valor.RUTA=='') { 
-					$('#enlace_RUTA'+valor.CLAVE).attr('disabled', 'disabled');					  
-					$('#enlace_RUTA'+valor.CLAVE).attr('href', '../../imagenes/menu/pdfno.png');
-					$('#pdf_'+valor.CLAVE).attr('src', "../../imagenes/menu/pdfno.png");
-					$('#pdf_'+valor.CLAVE).attr('cargado', 'N');		                    
-					}
 				
-					if (((valor.TIPOADJ.indexOf("png")>=0) || (valor.TIPOADJ.indexOf("bmp")>=0)) && !(valor.RUTA=='')) {			
-						$('#pdf_'+valor.CLAVE).attr('src', valor.RUTA);	
-					}																
+					if (valor.VALIDADO!='S') {
+							stElim="display:none; cursor:pointer;";
+							if (valor.RUTA.length>0) { stElim="cursor:pointer; display:block; ";} 
+							
+							cadFile="<div title=\""+valor.OBSVALIDADO+"\" class=\"col-sm-5\">"+											
+							"            <span class=\"text-primary\"><strong>"+utf8Decode(valor.DOCUMENTO)+"</strong></span>"+											
+							"            <input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
+							"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','"+carpeta+"','pdf_"+
+														valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+
+														"',' DOCUMENTO  "+valor.DOCUMENTO+" ','"+tabla+"','alta','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"');\">"+
+							"           <input  type=\"hidden\" value=\""+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
+							"        </div>"+
+							"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
+							"           <a target=\"_blank\" id=\"enlace_RUTA_"+valor.CLAVE+"\" href=\""+valor.RUTA+"\">"+
+							"                 <img class=\"imgadj\" cargado=\"S\" width=\"40px\" height=\"40px\" id=\"pdf_"+valor.CLAVE+"\" name=\"pdf_"+valor.CLAVE+"\" src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
+							"           </a>"+
+							"           <i style=\""+stElim+"\"  id=\"btnEli_RUTA_"+valor.CLAVE+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
+							"            onclick=\"eliminarEnlaceCarpeta('file_"+valor.CLAVE+"','"+carpeta+"',"+
+							"                      'pdf_"+valor.CLAVE+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
+							"                      '"+tabla+"','alta','"+valor.CLAVE+"_"+usuario+"_"+elciclo+"','PDF');\"></i> "+              				                        
+							"      </div> ";
+
+
+							if ((contDatos % 2)==1) {contFila++; fila="<div class=\"row\" style=\"padding:0px;\" id=\"fila"+padre+contFila+"\"></div>"; }
+							else {fila="";}
+							
+							$("#"+padre).append(fila);
+							$("#fila"+padre+contFila).append(cadFile);
+							
+							contDatos++;	
+								
+							
+						if (valor.RUTA=='') { 
+							$('#enlace_RUTA'+valor.CLAVE).attr('disabled', 'disabled');					  
+							$('#enlace_RUTA'+valor.CLAVE).attr('href', '../../imagenes/menu/pdfno.png');
+							$('#pdf_'+valor.CLAVE).attr('src', "../../imagenes/menu/pdfno.png");
+							$('#pdf_'+valor.CLAVE).attr('cargado', 'N');		                    
+							}
+						
+							if (((valor.TIPOADJ.indexOf("png")>=0) || (valor.TIPOADJ.indexOf("bmp")>=0)) && !(valor.RUTA=='')) {			
+								$('#pdf_'+valor.CLAVE).attr('src', valor.RUTA);	
+							}
+					}
+					else {
+						$("#"+padre).append("<span class=\" label label-success\"><i class=\"fa fa-check white\"></i>"+valor.DOCUMENTO+"</span> <a title=\"Ver Archivo\" onclick=\"previewAdjunto('"+valor.RUTA+"');\">"+
+						"                  	<img src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
+						"           </a>");
+					} 																
 			});
 
 			$('.fileSigea').ace_file_input({

@@ -2,22 +2,31 @@
 
 function calculaCalif(){
     var prom=60;
-    var cal1=((parseFloat($("#REP1EVAL").val())*0.9)+(parseFloat($("#REP1AUTO").val())*0.1)).toFixed(2);
-    var cal2=((parseFloat($("#REP2EVAL").val())*0.9)+(parseFloat($("#REP2AUTO").val())*0.1)).toFixed(2);
-    var cal3=((parseFloat($("#REP3EVAL").val())*0.9)+(parseFloat($("#REP3AUTO").val())*0.1)).toFixed(2);
-    var cal4=((parseFloat($("#REPFEVAL").val())*0.9)+(parseFloat($("#REPFAUTO").val())*0.1)).toFixed(2);
-    console.log(cal1+"+"+cal2+"+"+cal3+"+"+cal4);
+  
     
-    
-    var eval=((parseFloat($("#REP1EVAL").val()))+(parseFloat($("#REP2EVAL").val()))+(parseFloat($("#REP3EVAL").val()))+(parseFloat($("#REPFEVAL").val())))/4;
-    var auto=((parseFloat($("#REP1AUTO").val()))+(parseFloat($("#REP2AUTO").val()))+(parseFloat($("#REP3AUTO").val()))+(parseFloat($("#REPFAUTO").val())))/4;
+    var alumno=((parseFloat($("#REP1EVAL").val()))+
+              (parseFloat($("#REP2EVAL").val()))+
+              (parseFloat($("#REP3EVAL").val()))+
+              (parseFloat($("#REP1AUTO").val()))+
+              (parseFloat($("#REP2AUTO").val()))+
+              (parseFloat($("#REP3AUTO").val()))
+              )/6;
 
-    console.log("EVAL: "+eval+" AUTO:"+auto);
-   // prom=((cal1+cal2+cal3)/3).toFixed(2);
-   // prom2=((cal1+cal2+cal3)/3).toFixed(0);
+    var empresa=((parseFloat($("#REP1EVALACT").val()))+
+                 (parseFloat($("#REP2EVALACT").val()))+
+                 (parseFloat($("#REP3EVALACT").val()))          
+                )/3;
 
-    prom=((eval*0.9)+(auto*0.10)).toFixed(2);
-    prom2=((eval*0.9)+(auto*0.10)).toFixed(0);
+
+    console.log("EVAL: "+alumno+" AUTO:"+empresa);
+ 
+    p90=(empresa*0.9);
+    p10=(alumno*0.10);
+
+    console.log("p90: "+p90+" p10:"+p10);
+
+    prom=(p90+p10).toFixed(2);
+    prom2=(p90+p10).toFixed(0);
 
 
     if (isNaN(prom)) {prom=0;prom2=0;}
@@ -40,6 +49,32 @@ function calculaCalif(){
 			    }
 	});	      	      			
 }
+
+
+
+function calculaHoras(){
+    var thoras=0;
+    var thoras=(parseFloat($("#HORASBIM1").val()))+
+               (parseFloat($("#HORASBIM2").val()))+
+               (parseFloat($("#HORASBIM3").val()));
+
+    console.log("Horas: "+thoras);
+    if (isNaN(thoras)) {thoras=0;}        
+    $("#TOTALHORAS").val(thoras);
+    	      			
+}
+
+
+function changeHORASBIM1(elemento, usuario, institucion, campus){
+    calculaHoras();
+   }
+   function changeHORASBIM2(elemento, usuario, institucion, campus){
+    calculaHoras();
+   }
+   function changeHORASBIM3(elemento, usuario, institucion, campus){
+    calculaHoras();
+   }
+
 
 function changeREP1EVAL(elemento, usuario, institucion, campus){
     calculaCalif();

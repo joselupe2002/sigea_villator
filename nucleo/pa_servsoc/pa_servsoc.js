@@ -275,6 +275,7 @@ var miciclo="";
 
 	function abrirCaptura(){
 
+		$("#pcapt").empty();
 		var abierto=false;
 		elsql="select count(*) as N from ecortescal where  CICLO='"+miciclo+"'"+
 		" and ABIERTO='S' and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
@@ -347,6 +348,7 @@ var miciclo="";
 		"ifnull( TIPOPROG,'') AS TIPOPROG,ifnull(ENVIADA,'') AS ENVIADA, ifnull( TIPOPROGADD,'') AS TIPOPROGADD, ifnull( FECHACOM,'') AS FECHACOM, VALIDADO AS VALIDADO,"+
 		"ifnull( ESTADO,'') AS ESTADO,ifnull(MUNICIPIO,'') AS MUNICIPIO, ifnull( SECTOR,'') AS SECTOR, ifnull( TAMANIO,'') AS TAMANIO,"+
 		"ifnull( TELSUPSS,'') AS TELSUPSS,ifnull(TELEMPRESA,'') AS TELEMPRESA, ifnull( CORREOSUPSS,'') AS CORREOSUPSS,"+
+		"ifnull( ADICIONAL1,'') AS ADICIONAL1,ifnull(ADICIONAL2,'') AS ADICIONAL2,"+
 		"count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"'"+
 		" and MATRICULA='"+usuario+"'";
 
@@ -361,7 +363,7 @@ var miciclo="";
 
 				if (misdatos[0]["HAY"]>0) {proceso="actualizaDatos("+misdatos[0]["ID"]+");"; } else {proceso="grabarDatos();";}
 				mostrarConfirm2("infoError","grid_pa_servsoc","Captura de Solicitud",
-				"<div class=\"ventanaSC\" style=\"text-align:justify; width:99%; height:250px; overflow-y:auto; overflow-x:hidden;\">"+
+				"<div class=\"ventanaSC sigeaPrin\" style=\"text-align:justify; width:99%; height:250px; overflow-y:auto; overflow-x:hidden;\">"+
 					"<div class=\"row\">"+
 						"<div class=\"col-sm-6\">"+
 							"<label class=\"fontRobotoB\">Dependencia Oficial</label><input class=\"form-control captProy\" id=\"empresa\" value=\""+misdatos[0]["EMPRESA"]+"\"></input>"+
@@ -411,12 +413,25 @@ var miciclo="";
 							"<label class=\"fontRobotoB\">Nombre del Programa </label><input class=\"form-control captProy\" value=\""+misdatos[0]["PROGRAMA"]+"\" id=\"programa\"></input>"+
 						"</div>"+
 						"<div class=\"col-sm-5\">"+
-							"<label class=\"fontRobotoB\">Responsable del Programa </label><input class=\"form-control captProy\" value=\""+misdatos[0]["RESPONSABLEPROG"]+"\" id=\"RESPONSABLEPROG\"></input>"+
+							"<label class=\"fontRobotoB\">Supervisor del SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["RESPONSABLEPROG"]+"\" id=\"RESPONSABLEPROG\"></input>"+
 						"</div>"+
 						"<div class=\"col-sm-2\">"+
 							"<label class=\"fontRobotoB\">Modalidad</label><select class=\"form-control captProy\"  id=\"modalidad\"></select>"+
 						"</div>"+					
 					"</div>"+
+
+					"<div class=\"row\">"+
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Telefono Dependencia </label><input class=\"form-control captProy\" value=\""+misdatos[0]["TELEMPRESA"]+"\" id=\"telempresa\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Teléfono Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["TELSUPSS"]+"\" id=\"telsupss\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-4\">"+
+						"<label class=\"fontRobotoB\">Teléfono Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["CORREOSUPSS"]+"\" id=\"correosupss\"></input>"+
+						"</div>"+					
+					"</div>"+
+
 
 					"<div class=\"row\">"+
 						"<div class=\"col-sm-12\">"+
@@ -434,12 +449,18 @@ var miciclo="";
 					"</div>"+
 
 					"<div class=\"row\">"+
-						"<div class=\"col-sm-3\">"+
+						"<div class=\"col-sm-4\">"+
 							"<label class=\"fontRobotoB\">Fecha Firma de Compromiso</label>"+
 							" <div class=\"input-group\"><input  class=\"form-control captProy date-picker\" value=\""+misdatos[0]["FECHACOM"]+"\" id=\"fechacom\" "+
 							" type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" /> "+
 							" <span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span></div>"+
-						"</div>"+		
+						"</div>"+	
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Adicional 1</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["ADICIONAL1"]+"\" id=\"adicional1\"></input>"+
+						"</div>"+
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Adicional 2</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["ADICIONAL2"]+"\" id=\"adicional2\"></input>"+
+						"</div>"+	
 					"</div>"+					
 				"</div>"
 				,"Grabar Datos",proceso,"modal-lg");
@@ -449,8 +470,8 @@ var miciclo="";
 				actualizaSelectMarcar("estado", "SELECT ID_ESTADO, ESTADO FROM cat_estado order by ID_ESTADO", "","",misdatos[0]["ESTADO"]); 
 				actualizaSelectMarcar("sector", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='REGIMENEMPRESAS'", "","",misdatos[0]["SECTOR"]); 
 				actualizaSelectMarcar("tamanio", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TAMANIOEMP'", "","",misdatos[0]["TAMANIO"]); 
-
-
+				actualizaSelectMarcar("municipio", "SELECT ID_MUNICIPIO, MUNICIPIO FROM cat_municipio where ID_ESTADO='"+misdatos[0]["ESTADO"]+"' order by MUNICIPIO", "","",misdatos[0]["MUNICIPIO"]);
+				
 				$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
 				
 			
@@ -498,6 +519,15 @@ var miciclo="";
 					FECHACOM:$("#fechacom").val(),
 					TIPOPROGADD:$("#tipoprogadd").val().toUpperCase(),
 					ACTIVIDADES:$("#actividades").val().toUpperCase(),
+					ESTADO:$("#estado").val().toUpperCase(),
+					MUNICIPIO:$("#municipio").val().toUpperCase(),
+					SECTOR:$("#sector").val().toUpperCase(),
+					TAMANIO:$("#tamanio").val().toUpperCase(),
+					TELSUPSS:$("#telsupss").val().toUpperCase(),
+					TELEMPRESA:$("#telempresa").val().toUpperCase(),
+					CORREOSUPSS:$("#correosupss").val().toUpperCase(),
+					ADICIONAL1:$("#adicional1").val().toUpperCase(),
+					ADICIONAL2:$("#adicional2").val().toUpperCase(),
 					USUARIO:usuario,
 					FECHAUS:fecha,
 					_INSTITUCION: lainstitucion, 
@@ -553,6 +583,16 @@ var miciclo="";
 					FECHACOM:$("#fechacom").val(),
 					TIPOPROGADD:$("#tipoprogadd").val(),
 					ACTIVIDADES:$("#actividades").val(),
+					ESTADO:$("#estado").val().toUpperCase(),
+					MUNICIPIO:$("#municipio").val().toUpperCase(),
+					SECTOR:$("#sector").val().toUpperCase(),
+					TAMANIO:$("#tamanio").val().toUpperCase(),
+					TELSUPSS:$("#telsupss").val().toUpperCase(),
+					TELEMPRESA:$("#telempresa").val().toUpperCase(),
+					CORREOSUPSS:$("#correosupss").val().toUpperCase(),
+					ADICIONAL1:$("#adicional1").val().toUpperCase(),
+					ADICIONAL2:$("#adicional2").val().toUpperCase(),
+
 					USUARIO:usuario,
 					FECHAUS:fecha,
 					_INSTITUCION: lainstitucion, 

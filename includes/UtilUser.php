@@ -206,13 +206,14 @@ class UtilUser {
 			
 			if (!($numofi=="NO HAY CONSECUTIVO")){				
 
-				$res=$miConex->afectaSQL($_SESSION['bd'],"INSERT INTO econstancias (CONSECUTIVO,MATRICULA,FECHA, ".
+				$res=$miConex->afectaSQL($_SESSION['bd'],"INSERT INTO econstancias (CONSECUTIVO,CONSECUTIVOSOLO,MATRICULA,FECHA, ".
 				        "TIPO,USUARIO,_INSTITUCION,_CAMPUS) VALUES (".
-						"'".$numofi."','".$elidControl."','".$fecha_actual."','".$tipo."',".
+						"'".$numofi."','".$ofisolo."','".$elidControl."','".$fecha_actual."','".$tipo."',".
 						"'".$_SESSION['usuario']."','".$_SESSION['INSTITUCION']."','".$_SESSION['CAMPUS']."');");
 			}
 			$data[0]["FECHA"]=$fecha_actual;
 			$data[0]["CONSECUTIVO"]=$numofi;
+			$data[0]["CONSECUTIVOSOLO"]=$ofisolo;
 		}
 		else {
 			$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT * from econstancias where TIPO='".$tipo."' and MATRICULA='".$elidControl."'");
@@ -222,6 +223,7 @@ class UtilUser {
 	}
 
 
+	
 	
 	function LoadURES($campo,$depto)
 			{				

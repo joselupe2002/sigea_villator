@@ -178,9 +178,7 @@
 		$pdf->SetFont('Montserrat-Medium','B',10);	
 		$pdf->Cell(40,5,utf8_decode("Nombre Completo"),"",0,'L',false);
 		$pdf->Cell(130,5,utf8_decode($data[0]["NOMBRE"]),"B",1,'L',false);
-		$pdf->Ln(5);
-
-	
+		$pdf->Ln(5);	
 	
 		$pdf->Cell(20,5,utf8_decode("Sexo:"),"",0,'L',false);
 		$pdf->Cell(10,5,utf8_decode($data[0]["SEXO"]),"B",0,'L',false);
@@ -192,8 +190,10 @@
 		$pdf->Cell(20,5,utf8_decode("E-mail:"),"",0,'L',false);
 		$pdf->Cell(150,5,utf8_decode($data[0]["CORREO"]),"B",0,'L',false);
 
-		$pdf->Ln(10);
+		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,5,utf8_decode("ESCOLARIDAD"),"",1,'L',false);
+		$pdf->SetFont('Montserrat-Medium','',10);
 
 		$pdf->Cell(30,5,utf8_decode("No. de Control:"),"",0,'L',false);
 		$pdf->Cell(30,5,utf8_decode($data[0]["MATRICULA"]),"B",0,'L',false);
@@ -205,8 +205,10 @@
 		$pdf->Cell(20,5,utf8_decode("Semestre:"),"",0,'L',false);
 		$pdf->Cell(90,5,utf8_decode($data[0]["PERIODOS_INS"]),"B",0,'L',false);
 
-		$pdf->Ln(10);
+		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,5,utf8_decode("DATOS DEL PROGRAMA"),"",1,'L',false);
+		$pdf->SetFont('Montserrat-Medium','',10);
 
 		$pdf->Cell(50,5,utf8_decode("Dependencia Oficial:"),"",0,'L',false);
 		$pdf->Cell(120,5,utf8_decode($data[0]["EMPRESA"]),"B",0,'L',false);
@@ -222,26 +224,49 @@
 		
 		$pdf->Ln(5);
 		$pdf->Cell(20,5,utf8_decode("Modalidad:"),"",0,'L',false);
-		$pdf->Cell(20,5,utf8_decode($data[0]["MODALIDAD"]),"B",0,'L',false);
-		$pdf->Cell(30,5,utf8_decode("Fecha de Inicio:"),"",0,'L',false);
-		$pdf->Cell(30,5,utf8_decode($data[0]["INICIO"]),"B",0,'L',false);
+		$pdf->Cell(80,5,utf8_decode($data[0]["MODALIDADSSD"]),"B",0,'L',false);
+		$pdf->Cell(45,5,utf8_decode("Fecha de Inicio:"),"",0,'L',false);
+		$pdf->Cell(25,5,utf8_decode($data[0]["INICIO"]),"B",0,'L',false);
+
+		$pdf->Ln(5);
+		$pdf->Cell(20,5,utf8_decode("Lugar:"),"",0,'L',false);
+		$pdf->Cell(80,5,utf8_decode($data[0]["MUNICIPIOD"]." ".$data[0]["ESTADOD"]),"B",0,'L',false);
+
 		$pdf->Cell(45,5,utf8_decode("Fecha de Terminación:"),"",0,'L',false);
 		$pdf->Cell(25,5,utf8_decode($data[0]["TERMINO"]),"B",0,'L',false);
 
 
 		$pdf->Ln(10);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);		
 		$pdf->Cell(0,5,utf8_decode("ACTIVIDADES"),"",1,'L',false);
+		$pdf->SetFont('Montserrat-Medium','',10);
+
 		$pdf->MultiCell(170,5,utf8_decode($data[0]["ACTIVIDADES"]),"",'L',false);
 
-		$pdf->Ln(10);
-		$pdf->Cell(0,5,utf8_decode("TIPO DE PROGRAMA"),"",1,'L',false);
+		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
+		$pdf->Cell(0,5,utf8_decode("TIPO DE PROGRAMA O PROYECTO"),"",1,'L',false);
+		$pdf->SetFont('Montserrat-Medium','',10);
 		$pdf->MultiCell(70,5,utf8_decode($data[0]["TIPOPROGD"]),"",'L',false);
 
-		$pdf->Ln(10);
+		
+
+
 		$pdf->Cell(60,5,utf8_decode("En caso de elegir otro, especifique:"),"",1,'L',false);
 		$pdf->MultiCell(110,5,utf8_decode($data[0]["TIPOPROGADD"]),"",'L',false);
 
-		$pdf->Ln(10);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
+		$pdf->Cell(0,5,utf8_decode("FIRMA DE (LA PRESTADOR (S): _____________________________"),"",1,'L',false);
+		$pdf->SetFont('Montserrat-Medium','',7);
+
+		$pdf->MultiCell(170,3,utf8_decode("Plasmo mi firma, con lo que hago constar que conforme a mis intereses personales y de desarrollo profesional, es mi decisión realizar la prestación del servicio en el lugar anteriormente mencionado, bajo mi responsabilidad y estoy consciente de que debo cuidar el protocolo activo de Seguridad Sanitaria (PASSA-IMSS) debido a la Pandemia actual y cuyo cuidado y seguimiento me corresponde a mi como estudiante. "),"",'J',false);
+		
+		
+
+
+		$pdf->Ln(5);
 		$pdf->Cell(60,5,utf8_decode("PARA USO EXCLUSIVO DE LA OFICINA DE SERVICIO SOCIAL"),"",1,'L',false);
 		$pdf->Cell(60,5,utf8_decode("ACEPTADO:    SI (  )   NO ( )  MOTIVO:  "),"",1,'L',false);
 		$pdf->Cell(60,5,utf8_decode("OBSERVACIONES"),"",1,'L',false);

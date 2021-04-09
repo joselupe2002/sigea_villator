@@ -13,6 +13,8 @@
 	class PDF extends FPDF {
    	        var $eljefe="";
    	        var $eljefepsto="";
+			var $ini="";
+			var $fin="";
  
 			function LoadData()
 			{				
@@ -47,29 +49,26 @@
 				$miutil = new UtilUser();
 				$miutil->getPie($this,'V');
 				
-				$this->SetX(10);$this->SetY(-70);
+				$this->SetX(10);$this->SetY(-80);
 				$this->SetFont('Montserrat-ExtraBold','B',10);
 				$this->Cell(0,0,'A T E N T A M E N T E',0,1,'L');
 				
-				$this->SetX(10);$this->SetY(-65);
+				$this->SetX(10);$this->SetY(-75);
 				$this->SetFont('Montserrat-ExtraLight','I',8);
 				$this->Cell(0,0,utf8_decode('Excelencia en Educación Tecnológica'),0,1,'L');
 
-				$this->SetX(10);$this->SetY(-52);
-				$this->SetFont('Montserrat-ExtraLight','I',8);
-
 				
-				$this->SetX(10);$this->SetY(-45);
+				$this->SetX(10);$this->SetY(-65);
 				$this->SetFont('Montserrat-ExtraBold','B',10);
 				$this->Cell(0,0,utf8_decode($this->eljefe),0,1,'L');
 				
+				$this->SetX(10);$this->SetY(-60);
+				$this->MultiCell(150,5,utf8_decode($this->eljefepsto),0,'L');
+				
+				
 				$this->SetX(10);$this->SetY(-40);
-				$this->Cell(0,0,utf8_decode($this->eljefepsto),0,1,'L');
-				
-				
-				$this->SetX(10);$this->SetY(-30);
 				$this->SetFont('Montserrat-Medium','',8);
-				$this->Cell(0,0,"c.c.p. Archivo.",0,1,'L');
+				$this->Cell(0,0,utf8_decode("** El Servicio Social se valida en la Dependencia e inicia a partir del ".$this->ini."  al ".$this->fin."** "),0,1,'C');
 				
 			}
 		
@@ -90,15 +89,16 @@
 		$miutil = new UtilUser();
 		$fechadec=$miutil->formatFecha($data[0]["INICIO"]);
 		$fechaini=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
-		
+		$pdf->ini=$fechaini;
+
 		$fechadec=$miutil->formatFecha($data[0]["TERMINO"]);
 		$fechafin=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
-		
+		$pdf->fin=$fechafin;
 		
 		$dataGen = $pdf->LoadDatosGen();
 	
 	
-		$dataof=$miutil->verificaOficio("521","COMISION",$_GET["id"]);
+		$dataof=$miutil->verificaOficio("521","CARTAPRES",$_GET["id"]);
 		
 		$fechadecof=$miutil->formatFecha($dataof[0]["CONT_FECHA"]);
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
@@ -111,33 +111,48 @@
 		
 		
 		$pdf->SetFont('Montserrat-Medium','',9);
-		$pdf->Ln(10);
-		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"]." ".$fechaof,0,1,'R');	
-		$pdf->Ln(5);
+		$pdf->Ln(10);		
 		$pdf->Cell(0,0,'OFICIO No. '.utf8_decode($dataof[0]["CONT_NUMOFI"]),0,1,'R');
 		$pdf->Ln(5);
-		$pdf->Cell(0,0,'ASUNTO: '.utf8_decode("Carta de Presentación"),0,1,'R');
+		$pdf->Cell(0,0,'ASUNTO: '.utf8_decode("Oficio de Presentación Servicio Social"),0,1,'R');
+		$pdf->Ln(5);
+		$pdf->Cell(0,0,utf8_decode("Anexo XXI del SGI"),0,1,'R');
+		$pdf->Ln(5);
+		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"]." ".$fechaof,0,1,'R');	
+		
+		
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Ln(10);
 
 		$pdf->Cell(0,4,utf8_decode(strtoupper ($data[0]["REPRESENTANTE"])),0,1,'L');
 		$pdf->Cell(0,4,utf8_decode(strtoupper ($data[0]["PUESTO"])),0,1,'L');
-		$pdf->MultiCell(100,5,utf8_decode(strtoupper ($data[0]["EMPRESA"])),0,'L',false);
+		$pdf->MultiCell(150,5,utf8_decode(strtoupper ($data[0]["EMPRESA"])),0,'L',false);
+		$pdf->MultiCell(150,5,utf8_decode(strtoupper ($data[0]["MUNICIPIOD"]).", ".strtoupper ($data[0]["ESTADOD"])),0,'L',false);
 
 		$pdf->Ln(10);
 
 		$pdf->SetFont('Montserrat-Medium','',10);
 		$elperiodo='del '.$fechaini.' al '.$fechafin;
-		$pdf->MultiCell(0,8,utf8_decode('Por este conducto, presentamos a sus finas atenciones al C. ').utf8_decode($data[0]["NOMBRE"]).
-		utf8_decode(" con número de control escolar ").utf8_decode($data[0]["MATRICULA"]).utf8_decode(",  alumno(a) de la carrera de: ").utf8_decode($data[0]["CARRERAD"]).
-		utf8_decode(", quien desea realizar su Servicio Social en esa Dependencia, cubriendo un total de 480 horas y máximo 500 en el programa ").
+		$pdf->MultiCell(0,8,utf8_decode('Por este conducto, presentamos a sus finas atenciones al (la): C. ').utf8_decode($data[0]["NOMBRE"]).
+		utf8_decode(", con número de control escolar: ").utf8_decode($data[0]["MATRICULA"]).utf8_decode(",  ESTUDIANTE de la carrera de: ").utf8_decode($data[0]["CARRERAD"]).
+		utf8_decode(", sistema: ".utf8_decode($data[0]["MODALIDADD"])." con  No. de seguridad social IMSS: ".utf8_decode($data[0]["SEGURO1"]).
+		", quien desea realizar su Servicio Social en esa Dependencia, cubriendo un total de 480 horas y máximo 500 en el programa. ").
 		utf8_decode($data[0]["PROGRAMA"]). utf8_decode(" en un periodo mínimo de seis meses y no mayor de dos años."),0,'J', false);
 		$pdf->Ln(5);
 
-	
-		$pdf->MultiCell(0,8,utf8_decode('Agradezco las atenciones que se sirva brindar al portador de la presente.'),0,'J', false);
 
+
+		$pdf->MultiCell(0,8,utf8_decode('Agradezco las atenciones que se sirva brindar al (la) portador (a) de la presente. '),0,'J', false);
+
+		$firma=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMA");
+		$sello=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_SELLO");
+		if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {			
+			$pdf->Image($sello,150,170,45);
+			$pdf->Image($firma,50,190,40);			
+		}
+		
+	
 		$pdf->Ln(5);
 		
 		$pdf->Output(); 

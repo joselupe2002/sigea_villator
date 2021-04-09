@@ -185,8 +185,9 @@
 		$data = $pdf->LoadData();
 		$dataGen=$pdf->LoadDatosGen();
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
-		$pdf->Cell(0,3,utf8_decode("CARTA COMPROMISO DE SERVICIO SOCIAL"),"",1,'C',false);
-		$pdf->Cell(0,5,utf8_decode("DEPARTAMENTO DE VINCULACIÓN"),"",1,'C',false);
+		$pdf->Cell(0,3,utf8_decode("DEPARTAMENTO DE SERVICIO SOCIAL Y RESIDENCIAS PROFESIONALES"),"",1,'C',false);
+		$pdf->Cell(0,5,utf8_decode("CARTA COMPROMISO DE SERVICIO SOCIAL"),"",1,'C',false);
+		$pdf->Cell(0,5,utf8_decode("Anexo XX"),"",1,'C',false);
 	
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-Medium','B',10);
@@ -228,7 +229,7 @@
 
 		$pdf->Ln(10);
 		$pdf->SetFont('Montserrat-Medium','B',10);
-		$pdf->MultiCell(170,5,utf8_decode("Me comprometo a realizar el Servicio Social acatando el reglamento emitido por el Tecnológico Nacional de México y llevarlo a cabo en el lugar y periodos manifestados, así como, a participar con mis conocimientos e iniciativa en las actividades que desempeñe, procurando dar una imagen positiva del Instituto en el Organismo o Dependencia oficial, de no hacerlo así, quedo enterado(a) de la cancelación respectiva, la cual procederá automáticamente. "),"",'J',false);
+		$pdf->MultiCell(170,5,utf8_decode("Me comprometo a realizar el Servicio Social acatando el reglamento emitido por el Tecnológico Nacional de México y llevarlo a cabo en el lugar y periodos manifestados, así como, a participar con mis conocimientos e iniciativa en las actividades que desempeñe, procurando dar una imagen positiva del Instituto en el Organismo o Dependencia oficial, de no hacerlo así, quedo enterado(a) de la cancelación respectiva, la cual procederá automáticamente. Asimismo, por este medio, autorizo la utilización del whats app y la plataforma de Classroom, como medios de apoyo, para recibir y entregar documentos, avisos o información sobre el proceso de SS y me comprometo a hacer uso debido de lo que se publique de uso compartido, información con terceros o información personal. Si no lo acato así, acepto la sanción administrativa o legal correspondiente."),"",'J',false);
 		
 		$miutil = new UtilUser();
 		$fechadecof=$miutil->formatFecha($data[0]["FECHACOM"]);
