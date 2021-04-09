@@ -392,6 +392,11 @@ class UtilUser {
 			return($meses[$num-1]);		    
 	}
 
+	public function getMesCorto($num) {
+		$meses=["Ene","Feb", "Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];		
+			return($meses[$num-1]);		    
+	}
+
 
 	public function getMesRomano($num) {
 		$meses=["I","II", "III","IV","V","VI","VII","VIII","IX","X","XI","XII"];		

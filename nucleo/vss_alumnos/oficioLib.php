@@ -96,8 +96,11 @@
 		$fechadec=$miutil->formatFecha($data[0]["TERMINO"]);
 		$fechafin=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
 				
+		
+		
+		$fechadec=$miutil->formatFecha($data[0]["FECHAOF"]);
 		$anioTer=date("Y", strtotime($fechadec));
-		$mesTer=date("m", strtotime($fechadec));
+		$mesTer=$miutil->getMesCorto(date("m",strtotime($fechadec)));
 		
 
 		//$dataof=$miutil->verificaOficio("521","COMISION",$_GET["id"]);		
@@ -143,7 +146,7 @@
 
 
 		$dataof=$miutil->getConsecutivoDocumento("LIBERACIONSS",$data[0]["MATRICULA"].$data[0]["FECHAOF"]);
-		$folio=$anioTer."/".$mesTer."/".$data[0]["CARRERA"]."/".str_pad($dataof[0]["CONSECUTIVOSOLO"],3,'0',STR_PAD_LEFT);
+		$folio=strtoupper($mesTer)."/".$anioTer."/".$data[0]["CARRERACD"]."/".str_pad($dataof[0]["CONSECUTIVOSOLO"],3,'0',STR_PAD_LEFT);
 		$pdf->Cell(0,5,$folio,0,1,'L');
 
 
