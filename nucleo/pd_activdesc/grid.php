@@ -607,16 +607,16 @@ function agregarActividad(id, descrip,modulo,elciclo){
 							"         class=\"ace-icon fa red fa-trash-o bigger-120\"></i>";   	  
 
 				
-		   	 $("#cuerpoActividad").append("<tr id=\"row"+c+"\">");
-		   	 $("#row"+c).append(boton);
-		   	 $("#row"+c).append("<td>"+botonPDF+"</td>");
-		   	 $("#row"+c).append("<td>"+c+"</td>");
-			 $("#row"+c).append("<td>"+valor.PLAN_ID+"</td>");	
+		   	 $("#cuerpoActividad").append("<tr id=\"rowA"+c+"\">");
+		   	 $("#rowA"+c).append(boton);
+		   	 $("#rowA"+c).append("<td>"+botonPDF+"</td>");
+		   	 $("#rowA"+c).append("<td>"+c+"</td>");
+			 $("#rowA"+c).append("<td>"+valor.PLAN_ID+"</td>");	
 			 
-		     $("#row"+c).append("<td id=\"a_"+c+"_1\" "+cad1+" >"+valor.PLAN_ORDEN+"</td>");		
-		   	 $("#row"+c).append("<td id=\"a_"+c+"_2\" "+cad2+" >"+valor.PLAN_ACTIVIDAD+"</td>");	
-		   	 $("#row"+c).append("<td id=\"a_"+c+"_3\" "+cad3+" >"+valor.PLAN_ENTREGABLE+"</td>");	
-		     $("#row"+c).append("<td id=\"a_"+c+"_4\" "+cad4+" >"+valor.PLAN_FECHAENTREGA+"</td>");	
+		     $("#rowA"+c).append("<td id=\"a_"+c+"_1\" "+cad1+" >"+valor.PLAN_ORDEN+"</td>");		
+		   	 $("#rowA"+c).append("<td id=\"a_"+c+"_2\" "+cad2+" >"+valor.PLAN_ACTIVIDAD+"</td>");	
+		   	 $("#rowA"+c).append("<td id=\"a_"+c+"_3\" "+cad3+" >"+valor.PLAN_ENTREGABLE+"</td>");	
+		     $("#rowA"+c).append("<td id=\"a_"+c+"_4\" "+cad4+" >"+valor.PLAN_FECHAENTREGA+"</td>");	
 
 		     if (valor.RUTA=='') { 
 	                $('#enlace_'+valor.PLAN_ID).attr('disabled', 'disabled');
@@ -647,9 +647,6 @@ function agregarActividad(id, descrip,modulo,elciclo){
 
 	    
       function insertaActividad(id,descrip,modulo,elciclo){	
-
-	
-
 	    if (($("#orden").val().length>0) && ($("#actividad").val().length>0) && ($("#entregable").val().length>0) && ($("#fecha").val().length>0) ) {
 					
 					var f = new Date();

@@ -346,7 +346,7 @@ var miciclo="";
 		"ifnull( REPRESENTANTE,'') AS REPRESENTANTE,ifnull( PUESTO,'') AS PUESTO,ifnull(PROGRAMA,'') AS PROGRAMA,"+
 		"ifnull( RESPONSABLEPROG,'') AS RESPONSABLEPROG,ifnull( MODALIDAD,'') AS MODALIDAD,ifnull( ACTIVIDADES,'') AS ACTIVIDADES,ifnull( DIRECCION,'') AS DIRECCION,"+
 		"ifnull( TIPOPROG,'') AS TIPOPROG,ifnull(ENVIADA,'') AS ENVIADA, ifnull( TIPOPROGADD,'') AS TIPOPROGADD, ifnull( FECHACOM,'') AS FECHACOM, VALIDADO AS VALIDADO,"+
-		"ifnull( ESTADO,'') AS ESTADO,ifnull(MUNICIPIO,'') AS MUNICIPIO, ifnull( SECTOR,'') AS SECTOR, ifnull( TAMANIO,'') AS TAMANIO,"+
+		"ifnull( CARGORESPPROG,'') AS CARGORESPPROG,ifnull( ESTADO,'') AS ESTADO,ifnull(MUNICIPIO,'') AS MUNICIPIO, ifnull( SECTOR,'') AS SECTOR, ifnull( TAMANIO,'') AS TAMANIO,"+
 		"ifnull( TELSUPSS,'') AS TELSUPSS,ifnull(TELEMPRESA,'') AS TELEMPRESA, ifnull( CORREOSUPSS,'') AS CORREOSUPSS,"+
 		"ifnull( ADICIONAL1,'') AS ADICIONAL1,ifnull(ADICIONAL2,'') AS ADICIONAL2,"+
 		"count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"'"+
@@ -409,25 +409,31 @@ var miciclo="";
 						"</div>"+					
 					"</div>"+
 					"<div class=\"row\">"+
-						"<div class=\"col-sm-5\">"+
+						"<div class=\"col-sm-4\">"+
 							"<label class=\"fontRobotoB\">Nombre del Programa </label><input class=\"form-control captProy\" value=\""+misdatos[0]["PROGRAMA"]+"\" id=\"programa\"></input>"+
 						"</div>"+
-						"<div class=\"col-sm-5\">"+
-							"<label class=\"fontRobotoB\">Supervisor del SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["RESPONSABLEPROG"]+"\" id=\"RESPONSABLEPROG\"></input>"+
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Supervisor del SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["RESPONSABLEPROG"]+"\" id=\"responsableprog\"></input>"+
 						"</div>"+
-						"<div class=\"col-sm-2\">"+
-							"<label class=\"fontRobotoB\">Modalidad</label><select class=\"form-control captProy\"  id=\"modalidad\"></select>"+
-						"</div>"+					
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Cargo del Supervisor del SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["CARGORESPPROG"]+"\" id=\"cargorespprog\"></input>"+
+						"</div>"+
+										
 					"</div>"+
 
 					"<div class=\"row\">"+
-						"<div class=\"col-sm-4\">"+
+
+						"<div class=\"col-sm-3\">"+
+							"<label class=\"fontRobotoB\">Modalidad</label><select class=\"form-control captProy\"  id=\"modalidad\"></select>"+
+						"</div>"+	
+
+						"<div class=\"col-sm-3\">"+
 							"<label class=\"fontRobotoB\">Telefono Dependencia </label><input class=\"form-control captProy\" value=\""+misdatos[0]["TELEMPRESA"]+"\" id=\"telempresa\"></input>"+
 						"</div>"+
-						"<div class=\"col-sm-4\">"+
+						"<div class=\"col-sm-3\">"+
 							"<label class=\"fontRobotoB\">Teléfono Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["TELSUPSS"]+"\" id=\"telsupss\"></input>"+
 						"</div>"+
-						"<div class=\"col-sm-4\">"+
+						"<div class=\"col-sm-3\">"+
 						"<label class=\"fontRobotoB\">Teléfono Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["CORREOSUPSS"]+"\" id=\"correosupss\"></input>"+
 						"</div>"+					
 					"</div>"+
@@ -511,7 +517,8 @@ var miciclo="";
 					EMPRESA:$("#empresa").val().toUpperCase(),
 					MODALIDAD:$("#modalidad").val(),
 					PUESTO:$("#puesto").val().toUpperCase(),
-					RESPONSABLEPROG:$("#RESPONSABLEPROG").val().toUpperCase(),
+					RESPONSABLEPROG:$("#responsableprog").val().toUpperCase(),
+					CARGORESPPROG:$("#cargorespprog").val().toUpperCase(),
 					REPRESENTANTE:$("#representante").val().toUpperCase(),
 					PROGRAMA:$("#programa").val(),
 					TIPOPROG:$("#tipoprog").val(),
@@ -572,7 +579,8 @@ var miciclo="";
 					TERMINO:$("#termino").val(),
 					EMPRESA:$("#empresa").val(),
 					PUESTO:$("#puesto").val(),
-					RESPONSABLEPROG:$("#RESPONSABLEPROG").val().toUpperCase(),
+					RESPONSABLEPROG:$("#responsableprog").val().toUpperCase(),
+					CARGORESPPROG:$("#cargorespprog").val().toUpperCase(),
 					HORARIO:"LUNES A VIERNES 08:00 - 16:00",
 					HORAS:"500",
 					REPRESENTANTE:$("#representante").val(),

@@ -60,10 +60,10 @@
 				
 				$this->SetX(10);$this->SetY(-65);
 				$this->SetFont('Montserrat-ExtraBold','B',10);
-				$this->Cell(0,0,utf8_decode($this->eljefe),0,1,'L');
+				$this->Cell(0,5,utf8_decode($this->eljefe),0,1,'L');
 				
 				$this->SetX(10);$this->SetY(-60);
-				$this->MultiCell(150,5,utf8_decode($this->eljefepsto),0,'L');
+				$this->MultiCell(150,3,utf8_decode($this->eljefepsto),0,'L');
 				
 				
 				$this->SetX(10);$this->SetY(-40);
@@ -132,11 +132,12 @@
 
 		$pdf->Ln(10);
 
+		if ($data[0]["SEGURO1"]=='') {$elseguro="EN TRÁMITE";} else {$elseguro=$data[0]["SEGURO1"];}
 		$pdf->SetFont('Montserrat-Medium','',10);
 		$elperiodo='del '.$fechaini.' al '.$fechafin;
 		$pdf->MultiCell(0,8,utf8_decode('Por este conducto, presentamos a sus finas atenciones al (la): C. ').utf8_decode($data[0]["NOMBRE"]).
 		utf8_decode(", con número de control escolar: ").utf8_decode($data[0]["MATRICULA"]).utf8_decode(",  ESTUDIANTE de la carrera de: ").utf8_decode($data[0]["CARRERAD"]).
-		utf8_decode(", sistema: ".utf8_decode($data[0]["MODALIDADD"])." con  No. de seguridad social IMSS: ".utf8_decode($data[0]["SEGURO1"]).
+		utf8_decode(", sistema: ".utf8_decode($data[0]["MODALIDADD"])." con  No. de seguridad social IMSS: ".$elseguro.
 		", quien desea realizar su Servicio Social en esa Dependencia, cubriendo un total de 480 horas y máximo 500 en el programa. ").
 		utf8_decode($data[0]["PROGRAMA"]). utf8_decode(" en un periodo mínimo de seis meses y no mayor de dos años."),0,'J', false);
 		$pdf->Ln(5);

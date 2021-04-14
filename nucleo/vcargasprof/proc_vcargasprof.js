@@ -50,7 +50,7 @@ function addDescarga(modulo,usuario,institucion, campus,essuper){
 		   "                                 </div>"+		   
 		   "                           </div>"+  //div del row
 		   "                           <div class=\"space-10\"></div>"+
-		   "                           <div class=\"row\" style=\"overflow-x: auto; overflow-y: auto; height:100%;\">" +
+		   "                           <div class=\"row\" class=\"sigeaPrin\" style=\"overflow-x: auto; overflow-y: auto; height:100%;\">" +
 		   "                                <div class=\"col-sm-8\"> "+
 	       "                                    <table id=\"tabHorarios\" class= \"table table-condensed table-bordered table-hover\">"+
 	   	   "                                        <thead>  "+
@@ -76,9 +76,9 @@ function addDescarga(modulo,usuario,institucion, campus,essuper){
 		   "                       </div> "+ //div contenedor de la tabla y combo
 		   "                   </div> "+ //div del tab de descarga academica
 		   "                   <div id=\"tabCla\" class=\"tab-pane fade\">"+
-		   "                           <div class=\"row\" style=\"overflow-x: auto; overflow-y: auto; height:100%;\">" +
+		   "                           <div class=\"row\" class=\"sigeaPrin\" style=\"overflow-x: auto; overflow-y: auto; height:100%;\">" +
 		   "                                <div class=\"col-sm-8\" style=\"padding:0px; margin-left:20px;\"> "+	       
-		   "                                   <table id=\"tabHorariosB\" class= \"table table-condensed table-bordered table-hover\">"+
+		   "                                   <table id=\"tabHorariosB\" class= \" table table-condensed table-bordered table-hover\">"+
 	   	   "                                     <thead>  "+
 		   "                                        <tr>"+
 		   "                             	           <th>R</th> "+ //Sirve para le lectura del renglon al momento de validar cruce
@@ -153,8 +153,10 @@ function addDescarga(modulo,usuario,institucion, campus,essuper){
 											   " JUEVES as jueves, VIERNES as viernes, SABADO as sabado, DOMINGO as domingo,   "+
 											   " A_LUNES AS a_lunes, A_MARTES AS a_martes, A_MIERCOLES AS a_miercoles, A_JUEVES AS a_jueves, "+
 											   " A_VIERNES AS a_viernes, A_SABADO AS a_sabado, A_DOMINGO AS a_domingo, CUPO as cupo"+
-											   " FROM edgrupos, cmaterias WHERE DGRU_BASE IS NULL AND DGRU_MATERIA=MATE_CLAVE AND DGRU_PROFESOR='"+table.rows('.selected').data()[0][0]+"'"+
+											   " FROM edgrupos, cmaterias WHERE  ifnull(DGRU_BASE,'0')='0' AND DGRU_MATERIA=MATE_CLAVE AND DGRU_PROFESOR='"+table.rows('.selected').data()[0][0]+"'"+
 											   " and DGRU_CICLO='"+table.rows('.selected').data()[0]["CICLO"]+"'";
+
+											 
 										
 											parametros={sql:elsql2,dato:sessionStorage.co,bd:"Mysql"}
 

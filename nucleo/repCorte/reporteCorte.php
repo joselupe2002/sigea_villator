@@ -232,14 +232,14 @@
 
 				
 				
-				$this->SetX(10);$this->SetY(-60);
+				$this->SetX(10);$this->SetY(-38);
 				$this->SetFont('Montserrat-ExtraBold','B',10);
 				$this->Cell(75,0,utf8_decode('DOCENTE'),0,0,'C');
 				$this->Cell(20,0,'',0,0,'L');
 				$this->Cell(75,0,utf8_decode($this->eljefepsto),0,0,'C');
 
 
-				$this->SetX(10);$this->SetY(-45);
+				$this->SetX(10);$this->SetY(-33);
 				$this->Cell(75,0,utf8_decode($this->eldocente),0,0,'C');
 				$this->Cell(20,0,'',0,0,'L');
 				$this->Cell(75,0,utf8_decode($this->eljefe),0,0,'C');
@@ -265,7 +265,7 @@
 		
 		$pdf->SetFont('Arial','',10);
 		$pdf->SetMargins(25, 25 , 25);
-		$pdf->SetAutoPageBreak(true,30); 
+		$pdf->SetAutoPageBreak(true,40); 
 		$pdf->AddPage();
 		
 	
@@ -400,25 +400,25 @@
 		$pdf->SetFont('Montserrat-Medium','',9);	
 		$pdf->Cell(5,0,utf8_decode("TOTAL DE ALUMNOS POR MATERIA"),0,0,'J');
 
-		$pdf->Ln(5);
+		$pdf->Ln(3);
 		$pdf->SetFont('Montserrat-ExtraBold','',9);
 		$pdf->Cell(5,0,utf8_decode("B"),0,0,'J');
 		$pdf->SetFont('Montserrat-Medium','',9);	
 		$pdf->Cell(5,0,utf8_decode("NÚMERO DE ALUMNOS QUE ALCANZARON LA COMPETENCIA"),0,0,'J');
 	
-		$pdf->Ln(5);
+		$pdf->Ln(3);
 		$pdf->SetFont('Montserrat-ExtraBold','',9);
 		$pdf->Cell(5,0,utf8_decode("C"),0,0,'J');
 		$pdf->SetFont('Montserrat-Medium','',9);	
 		$pdf->Cell(5,0,utf8_decode("PORCENTAJE DE ALUMNOS QUE ALCANZARON LA COMPETENCIA"),0,0,'J');
 
-		$pdf->Ln(5);
+		$pdf->Ln(3);
 		$pdf->SetFont('Montserrat-ExtraBold','',9);
 		$pdf->Cell(5,0,utf8_decode("D"),0,0,'J');
 		$pdf->SetFont('Montserrat-Medium','',9);	
 		$pdf->Cell(5,0,utf8_decode("NÚMERO DE ALUMNOS QUE NO ALCANZARON LA COMPETENCIA"),0,0,'J');
 
-		$pdf->Ln(5);
+		$pdf->Ln(3);
 		$pdf->SetFont('Montserrat-ExtraBold','',9);
 		$pdf->Cell(5,0,utf8_decode("E"),0,0,'J');
 		$pdf->SetFont('Montserrat-Medium','',9);	

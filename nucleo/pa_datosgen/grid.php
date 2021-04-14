@@ -152,6 +152,13 @@
 																	<input class="form-control" name="correo" id="correo" type="text" />
 															</div>
 														</div>
+
+														<div class="profile-info-row"><div class="profile-info-name">Seguro IMSS</div>
+															<div class="input-group">
+																	<span class="input-group-addon"><i class="ace-icon fa fa-ambulance blue"></i></span>
+																	<input class="form-control" name="seguro" id="seguro" type="text" />
+															</div>
+														</div>
 																										
 													
 														
@@ -286,6 +293,7 @@
 	if (campo=='ALUM_CORREO') {parametros={ALUM_CORREO:$("#correo").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
 	if (campo=='ALUM_TELEFONO') {parametros={ALUM_TELEFONO:$("#telefono").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
 	if (campo=='ALUM_DIRECCION') {parametros={ALUM_DIRECCION:$("#direccion").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
+	if (campo=='ALUM_NOSEGURO') {parametros={ALUM_NOSEGURO:$("#seguro").val(),ALUM_SEGUROORD:$("#seguro").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
 	
 
 	$('#dlgproceso').modal({backdrop: 'static', keyboard: false});	         
@@ -331,7 +339,7 @@
 
 		elsql="SELECT alum_matricula, alum_foto,concat(alum_nombre,' ',alum_apepat,' ',alum_apemat) as alum_nombrec,alum_direccion, alum_telefono, alum_correo, "+
 		             " CARR_DESCRIP AS alum_carreraregd, alum_cicloins, getPeriodos(alum_matricula, getciclo()) AS CUAT,"+
-                     " alum_correo AS CORREO,alum_telefono AS TEL, alum_tutor AS TUTOR, ALUM_TRABAJO, ALUM_TELTRABAJO, ALUM_DIRTRABAJO "+
+                     " alum_correo AS CORREO, ALUM_NOSEGURO AS ALUM_NOSEGURO, alum_telefono AS TEL, alum_tutor AS TUTOR, ALUM_TRABAJO, ALUM_TELTRABAJO, ALUM_DIRTRABAJO "+
 					 " FROM falumnos, ccarreras  WHERE alum_matricula='<?php echo $_SESSION['usuario'];?>' and ALUM_CARRERAREG=CARR_CLAVE";
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 		   $.ajax({
@@ -357,6 +365,8 @@
 						$('#direccion').val(valor.alum_direccion);
 		    	  	    $('#telefono').val(valor.alum_telefono);
 						$('#correo').val(valor.alum_correo);
+
+						$('#seguro').val(valor.ALUM_NOSEGURO);
 						  
 					
 						$('#trabajo').val(valor.ALUM_TRABAJO);	
@@ -421,6 +431,8 @@ function guardar(){
 				ALUM_TRABAJO:$("#trabajo").val(),
 				ALUM_TELTRABAJO:$("#teltrabajo").val(),
 				ALUM_DIRTRABAJO:$("#dirtrabajo").val(),
+				ALUM_NOSEGURO:$("#seguro").val(),
+				ALUM_SEGUROORD:$("#seguro").val()
 				
 		    	//ALUM_TUTOR:$("#ALUM_TUTOR").val(),
 		    	//ALUM_TELTUTOR:$("#ALUM_TELTUTOR").val(),
