@@ -149,7 +149,7 @@
 		$firma=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMA");
 		$sello=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_SELLO");
 		if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {			
-			$pdf->Image($sello,150,170,45);
+			$pdf->Image($sello,150,194,45);
 			$pdf->Image($firma,50,190,40);			
 		}
 		
