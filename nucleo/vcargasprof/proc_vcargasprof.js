@@ -154,7 +154,7 @@ function addDescarga(modulo,usuario,institucion, campus,essuper){
 											   " A_LUNES AS a_lunes, A_MARTES AS a_martes, A_MIERCOLES AS a_miercoles, A_JUEVES AS a_jueves, "+
 											   " A_VIERNES AS a_viernes, A_SABADO AS a_sabado, A_DOMINGO AS a_domingo, CUPO as cupo"+
 											   " FROM edgrupos, cmaterias WHERE  ifnull(DGRU_BASE,'0')='0' AND DGRU_MATERIA=MATE_CLAVE AND DGRU_PROFESOR='"+table.rows('.selected').data()[0][0]+"'"+
-											   " and DGRU_CICLO='"+table.rows('.selected').data()[0]["CICLO"]+"'";
+											   " and DGRU_CICLO='"+table.rows('.selected').data()[0]["CICLO"]+"' and DGRU_BASE=0";
 
 											 
 										
