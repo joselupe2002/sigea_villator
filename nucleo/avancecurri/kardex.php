@@ -408,8 +408,7 @@
         $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(70); $pdf->Cell(0,0,'MAT. CUR: ',0,1,'L');
         $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(90);$pdf->Cell(0,0,"{matcursadas}",0,1,'L');
 
-        $elstdesc=$pdf->LoadDatosStatus()[0]["CATA_DESCRIP"];
-
+        $elstdesc=$pdf->LoadDatosStatus($dataAlum[0]["SITUACION"])[0]["CATA_DESCRIP"];
 
         $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(115); $pdf->Cell(0,0,'SIT: ',0,1,'L');
         $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(135);$pdf->Cell(0,0,utf8_decode($dataAlum[0]["SITUACION"]."-".$elstdesc),0,1,'L');
