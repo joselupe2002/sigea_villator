@@ -150,6 +150,19 @@
 				}
 				return $data;
             }
+
+
+            function LoadDatosStatus($elst)
+			{				
+                $miConex = new Conexion();
+                $sql="SELECT CATA_DESCRIP FROM scatalogos where CATA_TIPO='STALUM' AND CATA_CLAVE='".$elst."' ";
+                
+				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+            }
             
 
             function LoadDatosCursando($ciclo)
@@ -395,8 +408,11 @@
         $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(70); $pdf->Cell(0,0,'MAT. CUR: ',0,1,'L');
         $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(90);$pdf->Cell(0,0,"{matcursadas}",0,1,'L');
 
+        $elstdesc=$pdf->LoadDatosStatus()[0]["CATA_DESCRIP"];
+
+
         $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(115); $pdf->Cell(0,0,'SIT: ',0,1,'L');
-        $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(135);$pdf->Cell(0,0,utf8_decode($dataAlum[0]["SITUACION"]),0,1,'L');
+        $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(135);$pdf->Cell(0,0,utf8_decode($dataAlum[0]["SITUACION"]."-".$elstdesc),0,1,'L');
 
         $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(160); $pdf->Cell(0,0,'SIN REPROB: ',0,1,'L');
         $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(185);$pdf->Cell(0,0,round($dataAlum[0]["PROMEDIO_SR"],0),0,1,'L');
