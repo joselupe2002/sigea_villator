@@ -139,7 +139,7 @@
 			{
 				$miConex = new Conexion();
 				$resultado=$miConex->getConsulta("Mysql","SELECT URES_URES, EMPL_NUMERO, concat(EMPL_NOMBRE, ' ',EMPL_APEPAT, ' ', EMPL_APEMAT) AS NOMBRE, EMPL_ABREVIA, EMPL_FIRMAOF
-			                                              FROM fures a, pempleados b  where a.`CARRERA`=".$carrera." and a.`URES_JEFE`=b.`EMPL_NUMERO`");
+			                                              FROM fures a, pempleados b  where a.`URES_URES`=".$carrera." and a.`URES_JEFE`=b.`EMPL_NUMERO`");
 				
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -235,7 +235,7 @@
 		
 		
 		//Extraemos el Departamento de acuerdo a la carrera 
-		$dataDepto = $pdf->LoadDatosDepto('303');
+		$dataDepto = $pdf->LoadDatosDepto('500');
 		
 	
 		//Para el numero de oficio 
