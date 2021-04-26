@@ -43,8 +43,7 @@ contMat=1;
 	}
 
 	function cargaMateriaCom (){
-		elsql="select VMAT_MATERIA,VMAT_MATERIAD from vmatciclo a  where a.VMAT_TIPOMAT IN('AC') and a.CARRERA "+
-			  " and a.CARRERA IN (SELECT CARRERA from fures WHERE URES_URES="+$("#selOficios option:selected").text().split("|")[1]+") ";
+		elsql="select VMAT_MATERIA,VMAT_MATERIAD from vmatciclo a  where a.VMAT_TIPOMAT IN('AC')";
 	    parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 	    mostrarEspera("esperahor","grid_ecomplcal","Cargando Datos...");
 	    $.ajax({
