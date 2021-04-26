@@ -235,7 +235,7 @@
 		
 		
 		//Extraemos el Departamento de acuerdo a la carrera 
-		$dataDepto = $pdf->LoadDatosDepto('500');
+		$dataDepto = $pdf->LoadDatosDepto('303');
 		
 	
 		//Para el numero de oficio 
