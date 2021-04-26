@@ -230,8 +230,8 @@
 		
 
 		$dataGen = $pdf->LoadDatosGen();
-		$nombre=$miutil->getJefe('500');
-		$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('500'),"EMPL_FIRMAOF");
+		$nombre=$miutil->getJefe('303');
+		$elpsto=$miUtil->getDatoEmpl($miutil->getJefeNum('303'),"EMPL_FIRMAOF");
 		
 		
 		//Extraemos el Departamento de acuerdo a la carrera 
