@@ -239,7 +239,7 @@
 		
 	
 		//Para el numero de oficio 
-		$depto=$dataDepto[0]["URES_URES"];
+		$depto="500";
 		$dataof=$miutil->verificaOficio($depto,"COMPLEMENTARIAS",$depto."-".date("dmY"));
 		
 		$fechadecof=$miutil->formatFecha($dataof[0]["CONT_FECHA"]);
