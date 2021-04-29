@@ -136,9 +136,9 @@ function adjPDF(modulo,usuario,institucion, campus,essuper){
 		stElim="display:none; cursor:pointer;";
     	if (table.rows('.selected').data()[0]["COMP_LIBERACION"].length>0) {stElim="cursor:pointer; display:block; ";}
     	btnEliminar="<i style=\""+stElim+"\"  id=\"btnEli_COMP_LIBERACION\"  title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+        	                            
-        "onclick=\"eliminarEnlaceDrive('file_COMP_LIBERACION','COMP_LIBERACION','pdf_COMP_LIBERACION','COMP_LIBERACION','pdf','S','ID','"+
+        "onclick=\"eliminarEnlaceCarpeta('file_COMP_LIBERACION','liberaCompl','pdf_COMP_LIBERACION','COMP_LIBERACION','pdf','N','ID','"+
                                         table.rows('.selected').data()[0]["IDCAL"]+"','"+table.rows('.selected').data()[0]["ACTIVIDADD"]+
-                                        "','ecalificagen','edita','');\"></i> "; 
+                                        "','ecalificagen','edita','','PDF');\"></i> "; 
     	
     	 
 		script="<div class=\"modal fade\" id=\"modalDocument\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
@@ -176,7 +176,7 @@ function adjPDF(modulo,usuario,institucion, campus,essuper){
 		   "                  <div class=\"row\"> "+
 		   "                    <div class=\"col-sm-12\">"+
 		   "                      <input type=\"file\" id=\"file_COMP_LIBERACION\" name=\"file_COMP_LIBERACION\""+
-	       "                          onchange=\"subirPDFDriveSave('file_COMP_LIBERACION','COMP_LIBERACION','pdf_COMP_LIBERACION','COMP_LIBERACION','pdf','S','ID','"+table.rows('.selected').data()[0]["IDCAL"]+"','"+table.rows('.selected').data()[0]["ACTIVIDADD"]+"','ecalificagen','edita','');\"/>"+
+	       "                          onchange=\"subirPDFDriveSaveAsp_local('file_COMP_LIBERACION','liberaCompl','pdf_COMP_LIBERACION','COMP_LIBERACION','pdf','N','ID','"+table.rows('.selected').data()[0]["IDCAL"]+"','"+table.rows('.selected').data()[0]["ACTIVIDADD"]+"-"+table.rows('.selected').data()[0]["MATRICULAD"]+"','ecalificagen','edita','','"+table.rows('.selected').data()[0]["IDCAL"]+"');\"/>"+
 	       "                      <input  type=\"hidden\" value=\""+table.rows('.selected').data()[0]["COMP_LIBERACION"]+"\"  name=\"COMP_LIBERACION\" id=\"COMP_LIBERACION\"  placeholder=\"\" />\n"+
            "                  </div> "+
 	       "                 </div>"+		  

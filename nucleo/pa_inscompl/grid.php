@@ -245,6 +245,8 @@
 	                 "</tr>"+
                  "</tbody></div></div>";
             
+				 cadCal="text-danger";
+				 if (valor.PROM>0){ cadCal="text-success";}
 
     	 $("#fichas").append("<div class=\"col-md-6\">"+
 		                         "<div class=\"thumbnail search-thumbnail\">"+
@@ -253,9 +255,10 @@
 			   							"<div class=\"space-12\"></div>"+
 			  							"<h5 class=\"text-primary\" style=\"text-align: center\"><strong>"+valor.NOMBREACT+"</strong></h5>"+
 			  							"<div class=\"row\">"+
-			  					             "<div class=\"col-sm-5\"><span class=\"label label-success label-white middle\">INICIA: "+valor.INICIA+"</span></div>"+
-											   "<div class=\"col-sm-5\" style=\"text-align:right\"><span class=\"label label-danger label-white middle\">TERMINA: "+valor.TERMINA+"</span></div>"+		  						        
-											   "<div class=\"col-sm-2\">"+
+										  	   "<div class=\"col-sm-3\"><span class=\"badge badge-danger\">"+valor.ID+"</span></div>"+											   
+			  					               "<div class=\"col-sm-3\"><span class=\"label label-success label-white middle\">INICIA: "+valor.INICIA+"</span></div>"+
+											   "<div class=\"col-sm-3\" style=\"text-align:right\"><span class=\"label label-danger label-white middle\">TERMINA: "+valor.TERMINA+"</span></div>"+		  						        
+											   "<div class=\"col-sm-3\">"+
 											          "<a target=\"_blank\" id=\"enlace_"+valor.ACTIVIDAD+"\" href=\""+valor.RUTA+"\">"+
                                                       "     <img width=\"40px\" height=\"40px\" id=\"pdf_"+valor.ACTIVIDAD+"\" name=\"pdf_\" src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
                                                       "</a>"+
@@ -266,7 +269,7 @@
               							"<div class=\"space-6\"></div>"+          
               							"<div class=\"row\">"+
                     						"<div class=\"col-sm-12\" style=\"text-align: right;\"> "+
-                          							"<span  title=\"N&uacute;mero de cr&eacute;ditos\" class=\"pull-left badge badge-success\">"+valor.CREDITOS+"</span>"+
+                          							"<span  title=\"N&uacute;mero de cr&eacute;ditos\" class=\"pull-left badge badge-success\">"+valor.CREDITOS+" Crédito</span>"+
                           							"<i class=\"ace-icon blue fa fa-user bigger-80\" style=\"cursor: pointer;\"></i>"+
                           							"<small class=\"text-warning\" title=\"Responsable de la Actividad\"><strong>"+valor.RESPONSABLED+"</strong></small>"+
                     						"</div>"+
@@ -274,7 +277,7 @@
               							"<div class=\"space-6\"></div>"+  
               							"<div class=\"clearfix\">"+
 										    "<span class=\"pull-left\">Calificaci&oacute;n</span>"+
-										    "<span class=\"pull-right\">"+valor.PROM+"</span>"+
+										    "<span class=\"fontRobotoB "+cadCal+" bigger-200 pull-right\">"+valor.PROM+"</span>"+
 									        "</div>"+
 
 									        "<div class=\"progress progress-mini\">"+
@@ -344,7 +347,7 @@ if (confirm("Seguro que desea Inscribirse a la Actividad: "+laactividad)) {
 
 function cargarActIns() {
 	elsql="SELECT a.ACTIVIDAD, b.ACTIVIDADD AS TIPO, b.ACTIVIDAD as NOMBREACT,b.INICIA, b.TERMINA, b.RESPONSABLED, b.CREDITOS,"+ 
-        		 "c.PROM, b.LUNES, b.MARTES,b.MIERCOLES,b.JUEVES,b.VIERNES,b.SABADO,b.DOMINGO, c.COMP_LIBERACION as RUTA  FROM einscompl a "+
+        		 "ifnull(c.PROM,'0') as PROM, b.LUNES, b.MARTES,b.MIERCOLES,b.JUEVES,b.VIERNES,b.SABADO,b.DOMINGO,c.ID AS ID, c.RUTA as RUTA  FROM einscompl a "+
         		 "left outer join ecalificagen c on (a.ACTIVIDAD=c.ACTIVIDAD and a.MATRICULA=c.MATRICULA)"+
         		 ", vecomplementaria b "+
 				 "WHERE a.ACTIVIDAD=b.ID and a.MATRICULA='"+lamat+"';"				 
