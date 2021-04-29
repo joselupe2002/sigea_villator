@@ -102,7 +102,8 @@ contMat=1;
 		"LISPA7, LISPA8, LISPA9,LISPA10 from (((((dlista join falumnos) join ccarreras) "+
 		" left join cmaterias on (dlista.MATCVE = cmaterias.MATE_CLAVE) ) "+
 		" left join pempleados on (dlista.LISTC15 = pempleados.EMPL_NUMERO))"+
-		"  left join eciclmate on (dlista.MATCVE = eciclmate.CICL_MATERIA and eciclmate.CICL_MAPA=falumnos.ALUM_MAPA))"+
+		"  left join eciclmate on ((dlista.MATCVE = eciclmate.CICL_MATERIA and eciclmate.CICL_MAPA=falumnos.ALUM_MAPA) "+
+		"                       or (dlista.MATCVE = eciclmate.CICL_MATERIA and LISTC13=10)))"+
 	   " where falumnos.ALUM_MATRICULA = dlista.ALUCTR and falumnos.ALUM_CARRERAREG = ccarreras.CARR_CLAVE"+
 	     tagCiclo+tagMatricula+tagProfesor+tagMateria+
 		" ORDER BY PDOCVE, ALUCTR";
