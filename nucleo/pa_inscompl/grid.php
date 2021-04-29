@@ -347,7 +347,7 @@ if (confirm("Seguro que desea Inscribirse a la Actividad: "+laactividad)) {
 
 function cargarActIns() {
 	elsql="SELECT a.ACTIVIDAD, b.ACTIVIDADD AS TIPO, b.ACTIVIDAD as NOMBREACT,b.INICIA, b.TERMINA, b.RESPONSABLED, b.CREDITOS,"+ 
-        		 "ifnull(c.PROM,'0') as PROM, b.LUNES, b.MARTES,b.MIERCOLES,b.JUEVES,b.VIERNES,b.SABADO,b.DOMINGO,c.ID AS ID, c.RUTA as RUTA  FROM einscompl a "+
+        		 "ifnull(c.PROM,'0') as PROM, b.LUNES, b.MARTES,b.MIERCOLES,b.JUEVES,b.VIERNES,b.SABADO,b.DOMINGO,ifnull(c.ID,'SC') AS ID, c.RUTA as RUTA  FROM einscompl a "+
         		 "left outer join ecalificagen c on (a.ACTIVIDAD=c.ACTIVIDAD and a.MATRICULA=c.MATRICULA)"+
         		 ", vecomplementaria b "+
 				 "WHERE a.ACTIVIDAD=b.ID and a.MATRICULA='"+lamat+"';"				 
