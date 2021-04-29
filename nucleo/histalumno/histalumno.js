@@ -98,8 +98,15 @@ contMat=1;
 
 		elsql=" select  ID, ALUCTR, PDOCVE,ALUM_NOMBRE, CICL_CREDITO, ALUM_APEPAT,ALUM_APEMAT,CICL_CUATRIMESTRE, "+
 		"GPOCVE, TCACVE, MATCVE, MATE_DESCRIP, LISTC15, EMPL_NOMBRE, EMPL_APEPAT, EMPL_APEMAT, "+
-		"CARR_CLAVE, CARR_DESCRIP,LISCAL, LISPA1, LISPA2, LISPA3, LISPA4, LISPA5, LISPA6,"+
-		"LISPA7, LISPA8, LISPA9,LISPA10 from (((((dlista join falumnos) join ccarreras) "+
+		"CARR_CLAVE, CARR_DESCRIP,LISCAL, ifnull(LISPA1,'') as LISPA1, ifnull(LISPA2,'') as LISPA2, "+
+		"ifnull(LISPA3,'') as LISPA3,"+
+		"ifnull(LISPA4,'') as LISPA4,"+
+		"ifnull(LISPA5,'') as LISPA5,"+
+		"ifnull(LISPA6,'') as LISPA6,"+
+		"ifnull(LISPA7,'') as LISPA7,"+
+		"ifnull(LISPA8,'') as LISPA8,"+
+		"ifnull(LISPA9,'') as LISPA9,"+
+		"ifnull(LISPA10,'') as LISPA10 from (((((dlista join falumnos) join ccarreras) "+
 		" left join cmaterias on (dlista.MATCVE = cmaterias.MATE_CLAVE) ) "+
 		" left join pempleados on (dlista.LISTC15 = pempleados.EMPL_NUMERO))"+
 		"  left join eciclmate on ((dlista.MATCVE = eciclmate.CICL_MATERIA and eciclmate.CICL_MAPA=falumnos.ALUM_MAPA) "+
