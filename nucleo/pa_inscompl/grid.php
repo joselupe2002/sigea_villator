@@ -156,6 +156,8 @@
 <script type="text/javascript" src="<?php echo $nivel; ?>assets/js/jquery.validate.min.js"></script>
 <script src="<?php echo $nivel; ?>js/sha/sha512.js"></script>
 
+<script src="<?php echo $nivel; ?>js/utilerias.js"></script>
+
 
 
 
@@ -220,6 +222,7 @@
  function generaTablaIns(grid_data){
        c=0;
        $("#fichas").empty();
+	   var totCred=0;
      jQuery.each(grid_data, function(clave, valor) { 	
          cadDias="";
          cadDias="<div class=\"row\"><div class=\"col-sm-12\">"+             
@@ -245,8 +248,9 @@
 	                 "</tr>"+
                  "</tbody></div></div>";
             
-				 cadCal="text-danger";
-				 if (valor.PROM>0){ cadCal="text-success";}
+
+				 cadCal="#600514;";
+				 if (valor.PROM>0){ cadCal="#017561;"; totCred+=parseInt(valor.CREDITOS);}
 
     	 $("#fichas").append("<div class=\"col-md-6\">"+
 		                         "<div class=\"thumbnail search-thumbnail\">"+
@@ -255,11 +259,11 @@
 			   							"<div class=\"space-12\"></div>"+
 			  							"<h5 class=\"text-primary\" style=\"text-align: center\"><strong>"+valor.NOMBREACT+"</strong></h5>"+
 			  							"<div class=\"row\">"+
-										  	   "<div class=\"col-sm-3\"><span class=\"badge badge-danger\">"+valor.ID+"</span></div>"+											   
+										  	   "<div class=\"col-sm-3\"><span class=\"badge badge-danger\">id="+valor.ID+"</span></div>"+											   
 			  					               "<div class=\"col-sm-3\"><span class=\"label label-success label-white middle\">INICIA: "+valor.INICIA+"</span></div>"+
 											   "<div class=\"col-sm-3\" style=\"text-align:right\"><span class=\"label label-danger label-white middle\">TERMINA: "+valor.TERMINA+"</span></div>"+		  						        
 											   "<div class=\"col-sm-3\">"+
-											          "<a target=\"_blank\" id=\"enlace_"+valor.ACTIVIDAD+"\" href=\""+valor.RUTA+"\">"+
+											          "<a target=\"_blank\" id=\"enlace_"+valor.ACTIVIDAD+"\" onclick=\"previewAdjunto('"+valor.RUTA+"');\">"+
                                                       "     <img width=\"40px\" height=\"40px\" id=\"pdf_"+valor.ACTIVIDAD+"\" name=\"pdf_\" src=\"..\\..\\imagenes\\menu\\pdf.png\" width=\"50px\" height=\"50px\">"+
                                                       "</a>"+
 											   "</div>"+		  						        
@@ -275,9 +279,9 @@
                     						"</div>"+
               							"</div> "+ 
               							"<div class=\"space-6\"></div>"+  
-              							"<div class=\"clearfix\">"+
-										    "<span class=\"pull-left\">Calificaci&oacute;n</span>"+
-										    "<span class=\"fontRobotoB "+cadCal+" bigger-200 pull-right\">"+valor.PROM+"</span>"+
+              							"<div class=\"clearfix\">"+	
+										    "<span class=\"fontRobotoB bigger-160 pull-right\"  style=\"margin:0px;  background-color:#150175; color:white;\">&nbsp"+valor.PROM+"&nbsp</span>"+									    
+										    "<span class=\"fontRobotoB bigger-160 pull-right\"  style=\"margin:0px;  background-color:"+cadCal+" color:white\">&nbspCAL&nbsp</span>"+											
 									        "</div>"+
 
 									        "<div class=\"progress progress-mini\">"+
@@ -295,6 +299,11 @@
 	    	
       });
 
+	  $("#fichas").append("<br>"+	                      								    
+						  "<span class=\"fontRobotoB bigger-160 pull-left\"  style=\"margin-left:10px;  background-color:"+cadCal+" color:white\">&nbspTOTAL CRÉDITOS APROBADOS&nbsp</span>"+
+						  "<span class=\"fontRobotoB bigger-160 pull-left\"  style=\"margin:0px;  background-color:#150175; color:white;\">&nbsp"+totCred+"&nbsp</span><br>"
+						
+						);
      
 }		
 
