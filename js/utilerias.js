@@ -3765,9 +3765,9 @@ function ss_mostrarAdjuntos(modulo,elusuario,institucion, campus,essuper,elciclo
 										
 									$("#rowAsp"+padre+c).append("<td style=\"text-align: center; vertical-align: middle;\">"+cadEnc+"</td>");					
 										
-									if (valor.VALIDADO=='S') {cadValor='N'; mensajebtn="No Validar"; } else {cadValor='S'; mensajebtn="Validar";}									
+									if (valor.VALIDADO=='S') {cadValor='N'; mensajebtn="Validado"; laclase="btn-danger"; } else {cadValor='S'; mensajebtn="Validar"; laclase="btn-primary";}									
 									evento="ss_validaradj('"+valor.CLAVE+"','"+elciclo+"','"+elusuario+"','"+valor.OBSVALIDADO+"','"+valor.DOCUMENTO+"','"+padre+"');";
-									$("#rowAsp"+padre+c).append( "<td><button type=\"button\" class=\"btn btn-white  btn-primary btn-round\" "+
+									$("#rowAsp"+padre+c).append( "<td><button id=\"btnVal"+valor.CLAVE+"\" type=\"button\" class=\"btn btn-white  "+laclase+" btn-round\" "+
 																"onclick=\""+evento+"\"><strong>"+mensajebtn+"</strong></button></td>");	
 
 									$("#rowAsp"+padre+c).append("<td>"+cadFile+"</td>");	
@@ -3846,14 +3846,16 @@ function ss_btnValidarAdj(ciclo,matricula,tipo, reporte,padre){
 		   cadObs="<b>Favor de Revisar la siguiente Observación:<b><br>"+$("#ss_obsValidado").val();
 		   if ($("#ss_validado").val()=='S') {status="<span style=\"color:green\"><b> VALIDADO</b></span>"; cadObs="";}
 
-		   correoalAlum(matricula, "<html>Servicio Social: "+reporte+" "+status+
+		   correoalAlum(matricula, "<html>"+reporte+" "+status+
 								"</b></span>."+cadObs
-								,"STATUS DE SOLICITUD SERVICIO SOCIAL "+matricula);
-			$("#"+padre).modal("hide");
+								,"STATUS DE DOCUMENTOS "+matricula);
+			
 			$("#confVal").modal("hide");
-			
-			
-			//ss_mostrarAdjuntos("vss_alumnos","","","","",ciclo,matricula);
+			laclase="btn-danger"; msjBtn="No Validar"; if ($("#ss_validado").val()=='N') {msjBtn="Validar"; laclase="btn-primary";}
+			$("#btnVal"+tipo).html("<strong>"+msjBtn+"</strong>");
+			$("#btnVal"+tipo).removeClass("btn-primary");
+			$("#btnVal"+tipo).removeClass("btn-danger");
+			$("#btnVal"+tipo).addClass(laclase);
 
 	   		}					     
 	   });    	
