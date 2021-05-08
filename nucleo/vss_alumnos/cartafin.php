@@ -127,7 +127,7 @@
 
 		$lasact=preg_replace("[\n|\r|\n\r]", ", ", $data[0]["ACTIVIDADES"]);
 
-		$pdf->MultiCell(0,5,utf8_decode('Según documentos que obran en los archivos de esta Institución, el (la) C. ').utf8_decode($data[0]["NOMBRE"]).
+		$pdf->MultiCell(0,5,utf8_decode('Según documentos que obran en los archivos de esta Institución, el (la) C. ').$data[0]["NOMBRE"].
 		' con matricula No. '.utf8_decode($data[0]["MATRICULA"]).utf8_decode(', de la carrera de ').utf8_decode($data[0]["CARRERAD"]).
 		utf8_decode(' realizó su Servicio Social  en la dependencia ').utf8_decode($data[0]["EMPRESA"]).
 		utf8_decode(', desarrollando las siguiente actividades: ').utf8_decode($lasact).

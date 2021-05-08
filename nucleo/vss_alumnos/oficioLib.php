@@ -129,7 +129,7 @@
 		$pdf->Ln(5);
 
 		$pdf->SetFont('Arial','',12);
-		$pdf->MultiCell(0,5,utf8_decode("El ".$dataGen[0]["inst_aux2"].", hace constar que el (la) C. ".utf8_decode($data[0]["NOMBRE"]).
+		$pdf->MultiCell(0,5,utf8_decode("El ".$dataGen[0]["inst_aux2"].", hace constar que el (la) C. ".$data[0]["NOMBRE"].
 	          ", de la carrera de: ".utf8_decode($data[0]["CARRERAD"]).", con número de matrícula: ".
 			  utf8_decode($data[0]["MATRICULA"]).", concluyó satisfactoriamente su Servicio Social conforme a lo dispuesto en el Artículo 45,".
 			  " de la Ley del Ejercicio Profesional para el Estado de Veracruz de Ignacio de la Llave, ".
