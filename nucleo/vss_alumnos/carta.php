@@ -129,6 +129,7 @@
 		$pdf->Cell(0,4,utf8_decode(strtoupper ($data[0]["PUESTO"])),0,1,'L');
 		$pdf->MultiCell(150,5,utf8_decode(strtoupper ($data[0]["EMPRESA"])),0,'L',false);
 		$pdf->MultiCell(150,5,utf8_decode(strtoupper ($data[0]["MUNICIPIOD"]).", ".strtoupper ($data[0]["ESTADOD"])),0,'L',false);
+		$pdf->MultiCell(150,5,utf8_decode("PRESENTE"),0,'L',false);
 
 		$pdf->Ln(10);
 
