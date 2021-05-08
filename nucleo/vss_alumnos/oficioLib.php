@@ -139,7 +139,7 @@
 
 		$pdf->MultiCell(0,5,utf8_decode("Por lo que se extiende la presente, para los efectos legales que ".
 		"haya lugar, en la Ciudad de  ".$dataGen[0]["inst_extiende"].", a los ").
-		strtolower($fechaof),0,'J',FALSE);
+		strtolower($fechaof),0,'J',FALSE).".";
 
 		$pdf->SetFont('Arial','',12);
 		$lasact=preg_replace("[\n|\r|\n\r]", ", ", $data[0]["ACTIVIDADES"]);
@@ -147,7 +147,8 @@
 
 		$dataof=$miutil->getConsecutivoDocumento("LIBERACIONSS",$data[0]["MATRICULA"].$data[0]["FECHAOF"]);
 		$folio=strtoupper($mesTer)."/".$anioTer."/".$data[0]["CARRERACD"]."/".str_pad($dataof[0]["CONSECUTIVOSOLO"],3,'0',STR_PAD_LEFT);
-		$pdf->Cell(0,5,$folio,0,1,'L');
+		
+		//$pdf->Cell(0,5,$folio,0,1,'L');
 
 
 
