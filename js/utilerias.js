@@ -3744,14 +3744,14 @@ function ss_mostrarAdjuntos(modulo,elusuario,institucion, campus,essuper,elciclo
 								
 										cadFile="<input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
 											"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','"+carpeta+"','pdf"+
-																		c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+
+																		c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+
 																		"',' DOCUMENTO  "+valor.DOCUMENTO+" ','"+tabla+"','alta','"+valor.CLAVE+"_"+elusuario+"_"+elciclo+"','S');\">"+
 											"           <input  type=\"hidden\" value=\"../"+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
 											"        </div>"+
 											"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
 											"           <i style=\""+stElim+"\"  id=\"btnEli_RUTA_"+valor.CLAVE+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
 											"            onclick=\"eliminarEnlaceCarpeta('file_"+valor.CLAVE+"','"+carpeta+"',"+
-											"                      'pdf"+c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','S','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
+											"                      'pdf"+c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
 											"                      '"+tabla+"','alta','"+valor.CLAVE+"_"+elusuario+"_"+elciclo+"','PDF');\"></i> ";
 
 									
@@ -3759,7 +3759,7 @@ function ss_mostrarAdjuntos(modulo,elusuario,institucion, campus,essuper,elciclo
 									$("#rowAsp"+padre+c).append("<td>"+valor.IDDOC+"</td>");
 									$("#rowAsp"+padre+c).append("<td>"+valor.DOCUMENTO+"</td>");				
 									
-									cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_RUTA_"+valor.CLAVE+"\" href=\"../"+valor.RUTA+"\">"+
+									cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_RUTA_"+valor.CLAVE+"\" href=\""+valor.RUTA+"\">"+
 														" <img width=\"40px\" height=\"40px\" id=\"pdf"+c+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 														" </a>";		
 										
