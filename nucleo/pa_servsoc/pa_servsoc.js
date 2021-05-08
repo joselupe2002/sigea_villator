@@ -347,7 +347,7 @@ var miciclo="";
 		"ifnull( RESPONSABLEPROG,'') AS RESPONSABLEPROG,ifnull( MODALIDAD,'') AS MODALIDAD,ifnull( ACTIVIDADES,'') AS ACTIVIDADES,ifnull( DIRECCION,'') AS DIRECCION,"+
 		"ifnull( TIPOPROG,'') AS TIPOPROG,ifnull(ENVIADA,'') AS ENVIADA, ifnull( TIPOPROGADD,'') AS TIPOPROGADD, ifnull( FECHACOM,'') AS FECHACOM, VALIDADO AS VALIDADO,"+
 		"ifnull( CARGORESPPROG,'') AS CARGORESPPROG,ifnull( ESTADO,'') AS ESTADO,ifnull(MUNICIPIO,'') AS MUNICIPIO, ifnull( SECTOR,'') AS SECTOR, ifnull( TAMANIO,'') AS TAMANIO,"+
-		"ifnull( TELSUPSS,'') AS TELSUPSS,ifnull(TELEMPRESA,'') AS TELEMPRESA, ifnull( CORREOSUPSS,'') AS CORREOSUPSS,"+
+		"ifnull( TELSUPSS,'') AS TELSUPSS,ifnull(TELEMPRESA,'') AS TELEMPRESA, ifnull( CORREOSUPSS,'') AS CORREOSUPSS,ifnull( HORARIO,'') AS HORARIO,"+
 		"ifnull( ADICIONAL1,'') AS ADICIONAL1,ifnull(ADICIONAL2,'') AS ADICIONAL2,"+
 		"count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"'"+
 		" and MATRICULA='"+usuario+"'";
@@ -446,12 +446,16 @@ var miciclo="";
 					"</div>"+
 
 					"<div class=\"row\">"+
-						"<div class=\"col-sm-6\">"+
+						"<div class=\"col-sm-4\">"+
 							"<label class=\"fontRobotoB\">Tipo de Programa</label><select class=\"form-control captProy\"  id=\"tipoprog\"></select>"+
 						"</div>"+	
-						"<div class=\"col-sm-6\">"+
+						"<div class=\"col-sm-4\">"+
 							"<label class=\"fontRobotoB\">Otro, especifique</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["TIPOPROGADD"]+"\" id=\"tipoprogadd\"></input>"+
-						"</div>"+			
+						"</div>"+	
+						"<div class=\"col-sm-4\">"+
+							"<label class=\"fontRobotoB\">Tipo Asistencia</label><select class=\"form-control captProy\"  id=\"horario\"></select>"+
+						"</div>"+
+								
 					"</div>"+
 
 					"<div class=\"row\">"+
@@ -477,6 +481,8 @@ var miciclo="";
 				actualizaSelectMarcar("sector", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='REGIMENEMPRESAS'", "","",misdatos[0]["SECTOR"]); 
 				actualizaSelectMarcar("tamanio", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TAMANIOEMP'", "","",misdatos[0]["TAMANIO"]); 
 				actualizaSelectMarcar("municipio", "SELECT ID_MUNICIPIO, MUNICIPIO FROM cat_municipio where ID_ESTADO='"+misdatos[0]["ESTADO"]+"' order by MUNICIPIO", "","",misdatos[0]["MUNICIPIO"]);
+				actualizaSelectMarcar("horario", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TIPASISSS'", "","",misdatos[0]["HORARIO"]); 
+				
 				
 				$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
 				
@@ -511,7 +517,7 @@ var miciclo="";
 					MATRICULA:usuario,
 					CICLO:miciclo,
 					INICIO:$("#inicio").val(),
-					HORARIO:"LUNES A VIERNES 08:00 - 16:00",
+					HORARIO:$("#horario").val(),
 					HORAS:"500",
 					TERMINO:$("#termino").val(),
 					EMPRESA:$("#empresa").val().toUpperCase(),
@@ -581,7 +587,7 @@ var miciclo="";
 					PUESTO:$("#puesto").val(),
 					RESPONSABLEPROG:$("#responsableprog").val().toUpperCase(),
 					CARGORESPPROG:$("#cargorespprog").val().toUpperCase(),
-					HORARIO:"LUNES A VIERNES 08:00 - 16:00",
+					HORARIO:$("#horario").val(),
 					HORAS:"500",
 					REPRESENTANTE:$("#representante").val(),
 					PROGRAMA:$("#programa").val(),
