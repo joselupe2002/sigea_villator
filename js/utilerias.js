@@ -3766,7 +3766,7 @@ function ss_mostrarAdjuntos(modulo,elusuario,institucion, campus,essuper,elciclo
 									$("#rowAsp"+padre+c).append("<td style=\"text-align: center; vertical-align: middle;\">"+cadEnc+"</td>");					
 										
 									if (valor.VALIDADO=='S') {cadValor='N'; mensajebtn="Validado"; laclase="btn-danger"; } else {cadValor='S'; mensajebtn="Validar"; laclase="btn-primary";}									
-									evento="ss_validaradj('"+valor.CLAVE+"','"+elciclo+"','"+elusuario+"','"+valor.OBSVALIDADO+"','"+valor.DOCUMENTO+"','"+padre+"','"+tabla+');";
+									evento="ss_validaradj('"+valor.CLAVE+"','"+elciclo+"','"+elusuario+"','"+valor.OBSVALIDADO+"','"+valor.DOCUMENTO+"','"+padre+"','"+tabla+"');";
 									$("#rowAsp"+padre+c).append( "<td><button id=\"btnVal"+valor.CLAVE+"\" type=\"button\" class=\"btn btn-white  "+laclase+" btn-round\" "+
 																"onclick=\""+evento+"\"><strong>"+mensajebtn+"</strong></button></td>");	
 
