@@ -84,7 +84,7 @@
 
 		$pdf->SetY(50);
 		$pdf->SetFont('Montserrat-Black','',11);
-		$pdf->Cell(174,5,utf8_decode("CONSTANCIA DE TERMINACIÓN DE SERVICIO SOCIAL"),0,1,'C');
+		$pdf->Cell(174,5,utf8_decode("CONSTANCIA DE LIBERACIÓN DE SERVICIO SOCIAL"),0,1,'C');
 
 
 
