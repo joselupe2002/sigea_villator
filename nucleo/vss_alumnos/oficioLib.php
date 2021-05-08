@@ -134,12 +134,12 @@
 			  utf8_decode($data[0]["MATRICULA"]).", concluyó satisfactoriamente su Servicio Social conforme a lo dispuesto en el Artículo 45,".
 			  " de la Ley del Ejercicio Profesional para el Estado de Veracruz de Ignacio de la Llave, ".
 			  " cubriendo un total de ".$data[0]["TOTALHORAS"]." hrs. durante el periodo comprendido del ".
-			  $elperiodo),0,'J',false);
+			  $elperiodo."."),0,'J',false);
 		$pdf->Ln(5);
 
 		$pdf->MultiCell(0,5,utf8_decode("Por lo que se extiende la presente, para los efectos legales que ".
 		"haya lugar, en la Ciudad de  ".$dataGen[0]["inst_extiende"].", a los ").
-		strtolower($fechaof),0,'J',FALSE).".";
+		strtolower($fechaof).".",0,'J',FALSE);
 
 		$pdf->SetFont('Arial','',12);
 		$lasact=preg_replace("[\n|\r|\n\r]", ", ", $data[0]["ACTIVIDADES"]);
