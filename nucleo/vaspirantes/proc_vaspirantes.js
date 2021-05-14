@@ -70,7 +70,6 @@ function verDocumentos(modulo,usuario,essuper){
 			   "                                   <th>ID</th> "+
 			   "                                   <th>Documento</th> "+
 			   "                             	   <th>PDF</th> "+ 
-			   "                             	   <th>SUBIR PDF</th> "+ 
 			   "                               </tr> "+
 			   "                         </thead>" +
 			   "                   </table>"+	
@@ -95,10 +94,9 @@ function verDocumentos(modulo,usuario,essuper){
 		    $('#modalDocumentAsp').modal({show:true, backdrop: 'static'});
 
 		    
-	        sqlAsp="select a.IDDOC, a.CLAVE, a.DOCUMENTO, TIPOADJ,"+
-				   "(SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where "+
-				   " b.AUX=CONCAT(a.CLAVE,'_','"+table.rows('.selected').data()[0]["CURP"]+"','_','"+table.rows('.selected').data()[0]["CICLO"]+"')) AS RUTA "+
-		           " from documaspirantes a Where ENLINEA='S' and MODULO IN ('REGISTRO','INSCRIPCION') order by IDDOC";
+	        sqlAsp="select a.IDDOC, a.CLAVE, a.DOCUMENTO,"+
+			       "(SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where b.AUX=CONCAT('"+table.rows('.selected').data()[0]["CICLO"]+"',a.CLAVE,'"+table.rows('.selected').data()[0]["CURP"]+"')) AS RUTA "+
+		           " from documaspirantes a Where ENLINEA='S' order by IDDOC";
 
 			parametros={sql:sqlAsp,dato:sessionStorage.co,bd:"Mysql"}
 		    $.ajax({
@@ -132,43 +130,26 @@ function generaTablaSubirAsp(grid_data, op){
 	   $("#tabAsp").append("<tbody id=\"cuerpoAsp\">");
        c=0;	
 	   globalUni=1; 
-	   table = $("#G_vaspirantes").DataTable();
+
 	   
        jQuery.each(grid_data, function(clave, valor) { 	
-				stElim="display:none; cursor:pointer;";
-				if ((valor.RUTA!='')&&(valor.RUTA!=null)) { stElim="cursor:pointer; display:block; ";}
-		
-				cadFile="<input class=\"fileSigea\" type=\"file\" id=\"ASPfile_"+valor.CLAVE+"\""+
-				"                   onchange=\"subirPDFDriveSaveAsp_local('ASPfile_"+valor.CLAVE+"','docAspira','pdf"+
-											  c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+
-											  "',' DOCUMENTO  "+valor.DOCUMENTO+" ','adjaspirantes','alta','"+valor.CLAVE+"_"+table.rows('.selected').data()[0]["CURP"]+"_"+table.rows('.selected').data()[0]["CICLO"]+"',"+
-											  "'"+valor.CLAVE+"_"+table.rows('.selected').data()[0]["CURP"]+"_"+table.rows('.selected').data()[0]["CICLO"]+"');\">"+
-					"           <input  type=\"hidden\" value=\"../"+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
-					"        </div>"+
-					"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+
-					"           <i style=\""+stElim+"\"  id=\"btnEli_RUTA_"+valor.CLAVE+"\" title=\"Eliminar el PDF que se ha subido anteriormente\" class=\"ace-icon glyphicon red glyphicon-trash \" "+
-					"            onclick=\"eliminarEnlaceCarpeta('ASPfile_"+valor.CLAVE+"','docAspira',"+
-					"                      'pdf"+c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+"','"+valor.DOCUMENTO+"-DOCUMENTO',"+
-					"                      'adjaspirantes','alta','"+valor.CLAVE+"_"+table.rows('.selected').data()[0]["CURP"]+"_"+table.rows('.selected').data()[0]["CICLO"]+"','PDF');\"></i> ";
-
-
+          
 			 $("#cuerpoAsp").append("<tr id=\"rowAsp"+c+"\"></tr>");
 			 $("#rowAsp"+c).append("<td>"+valor.IDDOC+"</td>");
-			 $("#rowAsp"+c).append("<td>"+valor.DOCUMENTO+"</td>");				
+			 $("#rowAsp"+c).append("<td>"+valor.DOCUMENTO+"</td>");	
 			
-		     cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_RUTA_"+valor.CLAVE+"\" href=\"../"+valor.RUTA+"\">"+
+		     cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_"+c+"\" href=\""+valor.RUTA+"\">"+
 				                " <img width=\"40px\" height=\"40px\" id=\"pdf"+c+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 								" </a>";		
 				 
 			$("#rowAsp"+c).append("<td style=\"text-align: center; vertical-align: middle;\">"+cadEnc+"</td>");					
 				 
-			$("#rowAsp"+c).append("<td>"+cadFile+"</td>");	
 			
 		     if ((valor.RUTA=='')||(valor.RUTA==null)) { 				    
-			        $('#enlace_RUTA_'+valor.CLAVE).attr('disabled', 'disabled');
-	                $('#enlace_RUTA_'+valor.CLAVE).attr('href', '..\\..\\imagenes\\menu\\pdfno.png');
-					$('#pdf'+c).attr('src', "..\\..\\imagenes\\menu\\pdfno.png");   
-				}
+			        $('#enlace_'+c).attr('disabled', 'disabled');
+	                $('#enlace_'+c).attr('href', '..\\..\\imagenes\\menu\\pdfno.png');
+	                $('#pdf'+c).attr('src', "..\\..\\imagenes\\menu\\pdfno.png");
+			      }
 
 			    c++;
 		   		globalUni=c;
@@ -198,7 +179,7 @@ function verPago(modulo,usuario,essuper){
 
 		    
 			sqlAsp="SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where "+
-				   " b.AUX=CONCAT('PAGO_','"+table.rows('.selected').data()[0]["CURP"]+"_','"+table.rows('.selected').data()[0]["CICLO"]+"')";		          
+				   " b.AUX=CONCAT('"+table.rows('.selected').data()[0]["CICLO"]+"','PAGO','"+table.rows('.selected').data()[0]["CURP"]+"')";		          
 			parametros={sql:sqlAsp,dato:sessionStorage.co,bd:"Mysql"}
 		    $.ajax({
 				   type: "POST",
@@ -213,7 +194,7 @@ function verPago(modulo,usuario,essuper){
 						   });			
 						   
 						   if (entre) {
-							previewAdjunto(ruta);							   
+							   window.open(ruta, '_blank'); 
 						   }
 						   else {alert ("No se adjunto documento de pago");}
 		        	        		        	    
@@ -267,7 +248,7 @@ function VerPagoIns(modulo,usuario,essuper){
 
 		    // SE DEBE AGREGAR EL CICLO ESCOLAR MAS ADELANTE PROCESO 2021
 			sqlAsp="SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where "+
-				   " b.AUX=CONCAT('PAIN_','"+table.rows('.selected').data()[0]["CURP"]+"_','"+table.rows('.selected').data()[0]["CICLO"]+"')";		          
+				   " b.AUX=CONCAT('"+table.rows('.selected').data()[0]["CICLO"]+"','PAIN','"+table.rows('.selected').data()[0]["CURP"]+"')";		          
 			parametros={sql:sqlAsp,dato:sessionStorage.co,bd:"Mysql"}
 		    $.ajax({
 				   type: "POST",
@@ -282,7 +263,7 @@ function VerPagoIns(modulo,usuario,essuper){
 						   });			
 						   
 						   if (entre) {
-							previewAdjunto(ruta);				
+							   window.open(ruta, '_blank'); 
 						   }
 						   else {alert ("No se adjunto documento de pago");}
 		        	        		        	    
@@ -343,6 +324,7 @@ function marcarPagadoIns(modulo,usuario,essuper){
 }
 
 function btnMarcarPagadoIns(id){
+	enviarCorreoAsp('vaspirantes',$("#pagado").val(),$("#obsPagado").val(),"PAGO DE INSCRIPCIÓN");
 	setPagadoIns(id,$("#pagado").val(),$("#obsPagado").val());
 }
 
@@ -373,6 +355,47 @@ function setCotejado(id,valor,obs){
 
 
 
+function enviarCorreoAsp(modulo,cotejado, obs, tipo){
+
+	table = $("#G_"+modulo).DataTable();
+	elcorreo=table.rows('.selected').data()[0]["CORREO"];
+	eltipo=tipo;
+
+	mensaje="<html>Tu pago "+tipo+" ha sido <span style=\"color:blue\"><b> VALIDADO </b></span> por el &aacute;rea de Contabilidad, "+
+	" se continuará con el tramite correspondiente. <html>";
+	if (cotejado=='N') {mensaje="<html> Tu pago <span style=\"color:red\"> <b> NO SE HA VALIDADO </b></span> por el &aacute;rea de Contabilidad, "+
+	                      "presenta las siguientes observaciones: <br/><html>"+obs;}
+
+	//=================para las pruebas ==================
+	//elcorreo='mecatronica@macuspana.tecnm.mx';
+   //========================================================
+    var parametros = {
+		"MENSAJE": mensaje,
+		"ADJSERVER": 'N',
+		"ASUNTO": 'ITSM: STATUS DE PAGO DE '+eltipo,
+		"CORREO" :  elcorreo,
+		"NOMBRE" :  table.rows('.selected').data()[0]["NOMBRE"],
+		"ADJUNTO":''
+    };
+
+    $.ajax({
+        data:  parametros,
+        type: "POST",
+        url: "../base/enviaCorreo.php",
+        success: function(response)
+        {
+           console.log("ALUMNO: "+response);
+        },
+        error : function(error) {
+            console.log(error);
+            alert ("Error en ajax "+error.toString()+"\n");
+        }
+	});
+
+}
+
+
+
 function marcarPagado(modulo,usuario,essuper){
 	table = $("#G_"+modulo).DataTable();
 	if (table.rows('.selected').data()[0]["FINALIZADO"]=='S') {
@@ -388,8 +411,9 @@ function marcarPagado(modulo,usuario,essuper){
 }
 
 function btnMarcarPagado(id){
-	
-	setPagado(id,$("#pagado").val(),$("#obsPagado").val());
+	enviarCorreoAsp('vaspirantes',$("#pagado").val(),$("#obsPagado").val(),"PAGO DE FICHA DE EXAMEN");
+	if ($("#pagado").val()=='N') {setFinalizado(id,"N");}
+	setPagado(id,$("#pagado").val(),$("#obsPagado").val());	
 }
 
 
@@ -408,6 +432,8 @@ function marcarCotejado(modulo,usuario,essuper){
 }
 
 function btnMarcarCotejado(id){
+	enviarCorreoAsp('vaspirantes',$("#cotejado").val(),$("#obsCotejado").val(),"DOCUMENTOS DE PRE-INSCRIPCIÓN");
+	if ($("#cotejado").val()=='N') {setFinalizado(id,"N");}
 	setCotejado(id,$("#cotejado").val(),$("#obsCotejado").val());
 }
 
@@ -490,8 +516,6 @@ function agregarDialog(modulo){
 
 
 
-
-
 function aceptarAspirante(lafila,modulo,institucion, campus) {
 	res="";
 	var table = $("#G_"+modulo).DataTable();	
@@ -542,7 +566,7 @@ function insTodos(modulo,usuario,institucion, campus,essuper){
 	table.rows().iterator('row', function(context, index){
 		 nreg++;		    
 	});
-	inscribirAspirante(table.rows(elReg).data(), modulo,institucion,campus, );
+	inscribirAspirante(table.rows(elReg).data(), modulo,institucion,campus);
 }
 
 function insInd(modulo,usuario,essuper){
@@ -551,7 +575,7 @@ function insInd(modulo,usuario,essuper){
 			if (table.rows('.selected').data()[0]["ACEPTADO"]=='S') {
 				if (table.rows('.selected').data()[0]["INSCRITO"]=='N') {
 					if (confirm("Desea inscribir al aspirante ID: "+table.rows('.selected').data()[0]["IDASP"])) {
-						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S",table.rows('.selected').data()[0]["CICLO"],table.rows('.selected').data()[0]["CVE_CARRERA1"]);
+						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S");
 					}
 				}
 				else {
@@ -600,15 +624,10 @@ function eliminarMatricula(id,lamatricula){
 }
 
 
-function setInscrito(id,valor, ciclo, lacar){
+function setInscrito(id,valor){
 	var hoy= new Date();		
-	//var elanio=hoy.getFullYear();
-	//elaniomat=elanio.toString().substring(2,4)
-
-	elanio="20"+ciclo.substring(1,3);
-	elaniomat=elanio.toString().substring(2,4);
-
-
+	var elanio=hoy.getFullYear();
+	elaniomat=elanio.toString().substring(2,4)
 	$('#modalDocument').modal({show:true, backdrop: 'static'});	 
 	   parametros={
 		   tabla:"aspirantes",
@@ -627,7 +646,7 @@ function setInscrito(id,valor, ciclo, lacar){
 						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+elanio,
 						success: function(dataC){
 							micons=dataC;							
-							mimat=elaniomat+pad(lacar,2,'0')+pad(micons,4,'0');	
+							mimat=elaniomat+"E40"+pad(micons,3,'0');	
 							elsqlpas="call inscribeAspirante('"+id+"','"+mimat+"');";						
 							if (micons>0) {
 								parametros={
@@ -660,11 +679,9 @@ function setInscrito(id,valor, ciclo, lacar){
 function inscribirAspirante(lafila,modulo,institucion, campus) {
 	res="";
 	var table = $("#G_"+modulo).DataTable();	
-	var hoy= new Date();	
-	alert (lafila[0]["CICLO"]);	
-	
-	elanio="20"+lafila[0]["CICLO"].substring(1,3);
-	elaniomat=elanio.toString().substring(2,4);
+	var hoy= new Date();		
+	var elanio=hoy.getFullYear();
+	elaniomat=elanio.toString().substring(2,4)
 
 	if ((lafila[0]["INSCRITO"]=='N') && (lafila[0]["ACEPTADO"]=='S')) {
 		parametros={tabla:"aspirantes",campollave:"IDASP",bd:"Mysql",valorllave:lafila[0][0],INSCRITO: "S"};
@@ -678,7 +695,7 @@ function inscribirAspirante(lafila,modulo,institucion, campus) {
 						success: function(dataC){
 							console.log(dataC);
 							micons=dataC;				
-							mimat=elaniomat+"040"+pad(micons,3,'0');						
+							mimat=elaniomat+"E40"+pad(micons,3,'0');						
 							if (micons>0) {
 								parametros={
 									bd:"mysql",
