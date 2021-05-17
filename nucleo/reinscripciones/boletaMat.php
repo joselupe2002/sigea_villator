@@ -368,8 +368,18 @@
                 
                 $this->setX(10);$this->setY(($linea+122));     
                 
-                $nombre= $dataJefe[0]["NOMBRE"];
-                $psto= $dataJefe[0]["PUESTO"];
+
+                if (($_GET["carrera"]=="10")) {
+                    $nombre= $nombre=$miutil->getJefe('412');
+                    $psto= "COORDINADOR(A) DE INGLÉS";
+                }
+                else {
+                    $nombre= $dataJefe[0]["NOMBRE"];
+                    $psto= $dataJefe[0]["PUESTO"];
+                }
+
+
+                
                 $this->Cell(80,5,utf8_decode($nombre),'T',0,'L');
                 $this->setX(10);$this->setY(($linea+125));
                 $this->SetFont('Montserrat-SemiBold','',8);                
