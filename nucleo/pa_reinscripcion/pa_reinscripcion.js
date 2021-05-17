@@ -60,7 +60,7 @@ var credM1=0;
 							"<select onchange=\"elegirTipoOperacion();\" id=\"tipoOperacion\">"+
 							"	<option value=\"0\">Elija una opción</option>"+
 							"	<option value=\"N\">Carrera</option>"+
-						//	"	<option value=\"I\">Inglés</option>"+
+							"	<option value=\"I\">Inglés</option>"+
 						//	"	<option value=\"OC\">ExtraEscolares</option>"+
 							"</select>");
 						    
