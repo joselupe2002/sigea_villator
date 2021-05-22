@@ -302,8 +302,11 @@
 			if (eltidepocorte=='CCO1'){tipocal="1";}
 			if (eltidepocorte=='CCO2'){tipocal="1";}
 			if (eltidepocorte=='CCO3'){tipocal="1";}
+			if (eltidepocorte=='CCO4'){tipocal="1";}
+			if (eltidepocorte=='CCO5'){tipocal="1";}
 			if (eltidepocorte=='CCC1'){tipocal="2";}
 			if (eltidepocorte=='CCC2'){tipocal="3";}
+	
 
 			$("#SELIMG_"+id).attr("src","..\\..\\imagenes\\menu\\esperar.gif");
 		    	    $.ajax({
