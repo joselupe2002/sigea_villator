@@ -388,11 +388,11 @@
 
 
         $pdf->SetFont('Humanst521 BT','',6);
-        $pdf->Line(26, 153, 26, 127);
-        $pdf->TextWithRotation(30,150,'FIRMA DEL ALUMNO',90,0);
+        $pdf->Line(26, 166, 26, 144);
+        $pdf->TextWithRotation(30,165,'FIRMA DEL ALUMNO',90,0);
         $pdf->SetFont('Humanst521 BT','',5);
 
-        $pdf->TextWithRotation(47,174,utf8_decode('ESTE DOCUMENTO NO ES VÁLIDO SI LLEVA ENMENDADURAS O RASPADURAS'),90,0);
+        $pdf->TextWithRotation(42,174,utf8_decode('ESTE DOCUMENTO NO ES VÁLIDO SI LLEVA ENMENDADURAS O RASPADURAS'),90,0);
        
 
         
@@ -402,32 +402,32 @@
       
         $fechacer=$dataCer[0]["FECHAEXP"];
 
-        $pdf->setY(171);
-        $pdf->setX(9); $pdf->Cell(35,2,'','TLR',1,'C');
+        $pdf->setY(186);
+        $pdf->setX(4); $pdf->Cell(35,2,'','TLR',1,'C');
         $pdf->SetFont('Humanst521 BT','B',6);
-        $pdf->setX(9); $pdf->Cell(35,2,'REGISTRADO EN EL','LR',1,'C');
-        $pdf->setX(9); $pdf->Cell(35,2,'DEPARTAMENTO DE CONTROL','LR',1,'C');
-        $pdf->setX(9); $pdf->Cell(35,2,'ESCOLAR','LR',1,'C');        
-        $pdf->setX(9); $pdf->Cell(35,2,'','BLR',1,'C');
+        $pdf->setX(4); $pdf->Cell(35,2,'REGISTRADO EN EL','LR',1,'C');
+        $pdf->setX(4); $pdf->Cell(35,2,'DEPARTAMENTO DE CONTROL','LR',1,'C');
+        $pdf->setX(4); $pdf->Cell(35,2,'ESCOLAR','LR',1,'C');        
+        $pdf->setX(4); $pdf->Cell(35,2,'','BLR',1,'C');
 
         $pdf->SetFont('Humanst521 BT','',7);
-        $pdf->setX(9); $pdf->Cell(35,4,'','LR',1,'C');
-        $pdf->setX(9); $pdf->Cell(18,4,'CON NO.','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["FOLIO"],'R',1,'C');
-        $pdf->setX(9); $pdf->Cell(18,4,'EN EL LIBRO','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["LIBRO"],'R',1,'C');
-        $pdf->setX(9); $pdf->Cell(18,4,'A FOJAS','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["FOJA"],'R',1,'C');
-        $pdf->setX(9); $pdf->Cell(5,4,'','L',0,'L'); $pdf->Cell(25,4, $fechacer,'',0,'C');$pdf->Cell(5,4,'','R',1,'L');
-        $pdf->setX(9); $pdf->Cell(5,4,'','LB',0,'L'); $pdf->Cell(25,4,"FECHA",'TB',0,'C');$pdf->Cell(5,4,'','RB',1,'L');
+        $pdf->setX(4); $pdf->Cell(35,4,'','LR',1,'C');
+        $pdf->setX(4); $pdf->Cell(18,4,'CON NO.','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["FOLIO"],'R',1,'C');
+        $pdf->setX(4); $pdf->Cell(18,4,'EN EL LIBRO','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["LIBRO"],'R',1,'C');
+        $pdf->setX(4); $pdf->Cell(18,4,'A FOJAS','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["FOJA"],'R',1,'C');
+        $pdf->setX(4); $pdf->Cell(5,4,'','L',0,'L'); $pdf->Cell(25,4, $fechacer,'',0,'C');$pdf->Cell(5,4,'','R',1,'L');
+        $pdf->setX(4); $pdf->Cell(5,4,'','LB',0,'L'); $pdf->Cell(25,4,"FECHA",'TB',0,'C');$pdf->Cell(5,4,'','RB',1,'L');
 
-        $pdf->setY(210);
+        $pdf->setY(225);
         $pdf->SetFont('Arial','B',6);
-        $pdf->setX(9); $pdf->Cell(35,5,utf8_decode('COTEJO'),'',1,'C');
-        $pdf->setY(221);
-        $pdf->Line(12, 221, 40, 221);
-        $pdf->setX(9); $pdf->MultiCell(35,3,$nombreEsc,0,'C',false);
+        $pdf->setX(4); $pdf->Cell(35,5,utf8_decode('COTEJO'),'',1,'C');
+        $pdf->setY(236);
+        $pdf->Line(7, 235, 35, 235);
+        $pdf->setX(4); $pdf->MultiCell(35,3,$nombreEsc,0,'C',false);
 
         $pdf->SetFont('Arial','',6);
-        $pdf->setX(9); $pdf->Cell(35,2,'JEFA DEL DEPARTAMENTO','',1,'C');
-        $pdf->setX(9); $pdf->Cell(35,2,'DE CONTROL ESCOLAR','',1,'C');
+        $pdf->setX(4); $pdf->Cell(35,2,'JEFA DEL DEPARTAMENTO','',1,'C');
+        $pdf->setX(4); $pdf->Cell(35,2,'DE CONTROL ESCOLAR','',1,'C');
         
        
 
