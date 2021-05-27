@@ -339,12 +339,13 @@
         /*=======================colacamos el promedio ==========================*/
         $pdf->setX($mgTabla); 
         
+        $pdf->SetFont('Humanst521 BT Bold','B',11);
         $promedio=round($sumacal/($n),2);
         $promedio=number_format($promedio, 2, '.', ',');
         $pdf->SetWidths(array(85, 21,32,13));
         $pdf->SetFillColor(223, 223, 223);
         $pdf->SetBorder(array('1', '1','1','1'));
-        $pdf->SetAligns(array('R', 'R','J','C'));
+        $pdf->SetAligns(array('R', 'C','J','C'));
         $pdf->SetFont('Humanst521 BT','B',8);
         $pdf->SetFondo(array(true,true, true,true,true));
         $pdf->Row(array( "PROMEDIO",$promedio,"",""));
