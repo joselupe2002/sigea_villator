@@ -414,7 +414,7 @@
         $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(135);$pdf->Cell(0,0,utf8_decode($dataAlum[0]["SITUACION"]."-".$elstdesc),0,1,'L');
 
         $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(160); $pdf->Cell(0,0,'SIN REPROB: ',0,1,'L');
-        $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(185);$pdf->Cell(0,0,round($dataAlum[0]["PROMEDIO_SR"],0),0,1,'L');
+        $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(185);$pdf->Cell(0,0,round($dataAlum[0]["PROMEDIO_SR"],2),0,1,'L');
         
         $pdf->Ln(5);
         $pdf->setX(30);
@@ -468,7 +468,7 @@
         }
 
         $pdf->parseVar('{matapr}',$materiasaprobadas); // convertimos la variable.
-        $pdf->parseVar('{promreprobadas}',round($sumacursadas/($cursadas),0)); // Sacamos el promedio con materias reprobadas
+        $pdf->parseVar('{promreprobadas}',round($sumacursadas/($cursadas),2)); // Sacamos el promedio con materias reprobadas
        // $pdf->parseVar('{matcursadas}',$cursadas); // convertimos la variable de materias cursadas
        $pdf->parseVar('{matcursadas}',$materiasaprobadas); // convertimos la variable de materias cursadas
  
