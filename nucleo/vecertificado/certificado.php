@@ -378,8 +378,8 @@
         $pdf->Cell(0,0,"DIRECTOR",0,1,'C');
 
         $pdf->Ln(5);
-        $pdf->Line(90, 268, 155, 268);
-        $pdf->setY(270);
+        $pdf->Line(90, 278, 155, 278);
+        $pdf->setY(280);
         $pdf->SetFont('Humanst521 BT','B',8);         
         $pdf->WriteTag(0,0,"<vb>".utf8_decode($nombre)."</vb>",'0',"C",0,0);
 
