@@ -284,9 +284,9 @@
         $pdf->SetTextColor(0);
         $pdf->SetFont('Humanst521 BT','',8);
 
-        $pdf->setY(54);$pdf->setX(9);
+        $pdf->setY(54);$pdf->setX(4);
         $pdf->Cell(32,5,'MATRICULA',"LRT",1,'C');
-        $pdf->setX(9);
+        $pdf->setX(4);
         $pdf->SetFont('Humanst521 BT','B',8);
         //$pdf->Cell(32,5,$dataCer[0]["MATRICULA"],"LTRB",0,'C');
         $pdf->WriteTag(32,5,"<vb>".$dataCer[0]["MATRICULA"]."</vb>",1,"C",0,0);
