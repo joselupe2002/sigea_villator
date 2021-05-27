@@ -299,6 +299,7 @@
         $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
         $pdf->Cell(13,5,utf8_decode('CR'),1,0,'C');
 
+        
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
         $pdf->SetFont('Humanst521 BT','',7);
@@ -328,6 +329,13 @@
         }
 
         //echo $pdf->getY();
+
+        $matFin; $cadCer="CERTIFICADO"; if ($dataAlum[0]["PLACRED"]>$totcred)  {$cadCer="CERTIFICADO"; $matFin="***** I N C O M P L E T O *****"; }
+
+        $pdf->SetBorder(array('L','L','LR','R'));
+        $pdf->SetFondo(array(false,false,false,false));
+        $pdf->Row(array($matFin,"","",""));
+
         
         while ($pdf->getY()<=229) {
             $pdf->setX($mgTabla); 
@@ -355,8 +363,7 @@
         $fechaexp=$miutil->formatFecha($dataCer[0]["FECHAEXP"]);
         $fechadecexp=$miutil->aletras(date("d", strtotime($fechaexp)))." DÍAS DEL MES DE ".
                      $miutil->getMesLetra(date("m", strtotime($fechaexp)))." DEL AÑO ". $miutil->aletras(date("Y", strtotime($fechaexp)));
-        $pdf->SetFont('Humanst521 BT','',8);    
-        $cadCer="CERTIFICADO"; if ($dataAlum[0]["PLACRED"]>$totcred)  {$cadCer="CERTIFICADO"; }
+        $pdf->SetFont('Humanst521 BT','',8);            
         $txt=utf8_decode("<p>SE EXTIENDE EL PRESENTE ".$cadCer." QUE AMPARA <vb>".$totcred."</vb> ".
         " CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE ".
         $dataAlum[0]["MAPA"].", EN LA CIUDAD DE PEROTE, VERACRUZ, A LOS ".strtoupper($fechadecexp).".</p>");
@@ -399,8 +406,8 @@
         $pdf->SetFont('Humanst521 BT','B',6);
         $pdf->setX(9); $pdf->Cell(35,2,'REGISTRADO EN EL','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(35,2,'DEPARTAMENTO DE CONTROL','LR',1,'C');
-        $pdf->setX(9); $pdf->Cell(35,2,'ESCOLAR','bLR',1,'C');        
-        $pdf->setX(9); $pdf->Cell(35,2,'','LR',1,'C');
+        $pdf->setX(9); $pdf->Cell(35,2,'ESCOLAR','LR',1,'C');        
+        $pdf->setX(9); $pdf->Cell(35,2,'','BLR',1,'C');
 
         $pdf->SetFont('Humanst521 BT','',7);
         $pdf->setX(9); $pdf->Cell(35,4,'','LR',1,'C');
