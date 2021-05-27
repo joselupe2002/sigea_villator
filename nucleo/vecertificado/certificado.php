@@ -218,8 +218,8 @@
         $pdf->AddFont('Britannic Bold Regular','B','Britannic Bold Regular.php');
         
 	
-		$pdf->SetMargins(48, 13, 12);
-        $margeniz=45;
+		$pdf->SetMargins(43, 13, 12);
+        $margeniz=40;
 		$pdf->SetAutoPageBreak(true,10); 
         $pdf->AddPage();
        
@@ -265,7 +265,7 @@
         $pdf->SetStyle("VB","arial","B",8,"0,0,0");
         $pdf->WriteTag(0,3,$txt,0,"R",0,0);
 
-        $mgTabla=48;
+        $mgTabla=43;
         $pdf->setY(35);
         $pdf->SetFont('Humanst521 BT','B',10);
         $ella='EL'; if ($dataAlum[0]["SEXO"]==2) {$ella='LA';}
@@ -291,19 +291,20 @@
         //$pdf->Cell(32,5,$dataCer[0]["MATRICULA"],"LTRB",0,'C');
         $pdf->WriteTag(32,5,"<vb>".$dataCer[0]["MATRICULA"]."</vb>",1,"C",0,0);
 
+        $colMat=90; $colCal=21; $colObs=32; $colCre=13; 
         
         $pdf->setY(54);  $pdf->setX($mgTabla);    
         $pdf->SetFont('Humanst521 BT','B',8);
-        $pdf->Cell(85,5,'MATERIA','TBL',0,'L');
-        $pdf->Cell(21,5,'CALIF.','TLBR',0,'C');
-        $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
-        $pdf->Cell(13,5,utf8_decode('CR'),1,0,'C');
+        $pdf->Cell($colMat,5,'MATERIA','TBL',0,'L');
+        $pdf->Cell($colCal,5,'CALIF.','TLBR',0,'C');
+        $pdf->Cell($colObs,5,'OBSERVACIONES',1,0,'C');
+        $pdf->Cell($colCre,5,utf8_decode('CR'),1,0,'C');
 
         
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
         $pdf->SetFont('Humanst521 BT','',7);
-        $pdf->SetWidths(array(85, 21,32,13));
+        $pdf->SetWidths(array($colMat,$colCal ,$colObs,$colCre));
         $pdf->SetAligns(array('L', 'C','J','C'));
         $pdf->SetBorder(array('L', 'L','LR','R'));
         
@@ -350,7 +351,7 @@
         $pdf->SetFont('Humanst521 BT Bold','B',11);
         $promedio=round($sumacal/($n),2);
         $promedio=number_format($promedio, 2, '.', ',');
-        $pdf->SetWidths(array(85, 21,32,13));
+        $pdf->SetWidths(array($colMat,$colCal ,$colObs,$colCre));
         $pdf->SetFillColor(223, 223, 223);
         $pdf->SetBorder(array('1', '1','1','1'));
         $pdf->SetAligns(array('R', 'C','J','C'));
@@ -369,7 +370,7 @@
         $dataAlum[0]["MAPA"].", EN LA CIUDAD DE PEROTE, VERACRUZ, A LOS ".strtoupper($fechadecexp).".</p>");
 
 
-        $pdf->WriteTag(151,4,$txt,1,"J",0,0);
+        $pdf->WriteTag(156,4,$txt,1,"J",0,0);
 
 
 
