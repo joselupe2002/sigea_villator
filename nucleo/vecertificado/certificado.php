@@ -211,6 +211,8 @@
         
         $pdf->AddFont('Humanst521 BT','B','Humanst521 BT.php');
         $pdf->AddFont('Humanst521 BT','','Humanst521 BT.php');
+        $pdf->AddFont('Humanst521 BT Bold','B','Humanst521 BT Bold.php');
+        $pdf->AddFont('Humanst521 BT Bold','','Humanst521 BT Bold.php');
         $pdf->AddFont('lucida-sans-unicode_[allfont.es]','B','lucida-sans-unicode_[allfont.es].php');
         $pdf->AddFont('BRITANIC','B','BRITANIC.php');
         $pdf->AddFont('Britannic Bold Regular','B','Britannic Bold Regular.php');
@@ -220,10 +222,16 @@
         $margeniz=45;
 		$pdf->SetAutoPageBreak(true,10); 
         $pdf->AddPage();
-        $pdf->SetFont('Humanst521 BT','B',10);
+       
         $pdf->Ln(3);
+        $pdf->SetStyle("p","arial","",8,"0,0,0");
+        $pdf->SetStyle("vb","arial","B",8,"0,0,0");
+        $pdf->SetStyle("VB","arial","B",8,"0,0,0");
+
+        $pdf->SetFont('Humanst521 BT Bold','B',12);
         $pdf->Cell(0,5,utf8_decode('GOBIERNO DEL ESTADO DE VERACRUZ DE IGNACIO DE LA LLAVE'),0,1,'C');
-        $pdf->Cell(0,5,utf8_decode('INSTITUTO TECNOLOGICO SUPERIOR DE PEROTE'),0,1,'C');
+        $pdf->Cell(0,5,utf8_decode('INSTITUTO TECNOLÓGICO SUPERIOR DE PEROTE'),0,1,'C');
+
         $pdf->SetFont('Arial','',8);
        // $pdf->Image("../../imagenes/empresa/logo2.png",12,8,23.2);
 
@@ -261,11 +269,11 @@
         $pdf->setY(35);
         $pdf->SetFont('Humanst521 BT','B',10);
         $ella='EL'; if ($dataAlum[0]["SEXO"]==2) {$ella='LA';}
-        $txt=utf8_decode("<p>EL C. <vb>".$nombre."</vb> DIRECTOR GENERAL DEL ". $data2[0]["inst_razon"].
-        " CLAVE <vb>". $data2[0]["inst_claveof"]."</vb>, CERTIFICA, QUE SEGÚN CONSTANCIAS QUE EXISTEN EN EL ARCHIVO ESCOLAR DE ESTE INSTITUTO, ".$ella." C. <vb>".
-        $dataAlum[0]["NOMBRE"]."</vb> CURSO LAS ASIGNATURAS QUE INTEGRAN EL PLAN DE ESTUDIOS DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>".
-        "(PLAN - CRÉDITOS) <vb>". $cadInicio."</vb> A <vb>".$cadfin."</vb>".
-        ", CON LOS RESULTADOS QUE A CONTINUACIÓN SE ANOTAN</p>");
+        $txt=utf8_decode("<p>EL C. <vb>".$nombre."</vb> DIRECTOR GENERAL DEL <vb>". $data2[0]["inst_razon"].
+        "</vb> CLAVE <vb>". $data2[0]["inst_claveof"]."</vb>, CERTIFICA, QUE SEGÚN CONSTANCIAS QUE EXISTEN EN EL ARCHIVO ESCOLAR DE ESTE INSTITUTO, ".$ella." C. <vb>".
+        $dataAlum[0]["NOMBRE"]."</vb> CURSÓ LAS ASIGNATURAS QUE INTEGRAN EL PLAN DE ESTUDIOS DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>".
+        " (PLAN - CRÉDITOS) <vb>". $cadInicio."</vb> A <vb>".$cadfin."</vb>".
+        ", CON LOS RESULTADOS QUE A CONTINUACIÓN SE ANOTAN:</p>");
 
         $pdf->Ln();
         $pdf->SetStyle("p","arial","",8,"0,0,0");
@@ -277,9 +285,11 @@
         $pdf->SetFont('Humanst521 BT','',8);
 
         $pdf->setY(54);$pdf->setX(9);
-        $pdf->Cell(32,5,'NO. DE CONTROL',"LRT",1,'C');
+        $pdf->Cell(32,5,'MATRICULA',"LRT",1,'C');
         $pdf->setX(9);
-        $pdf->Cell(32,5,$dataCer[0]["MATRICULA"],"LTRB",0,'C');
+        $pdf->SetFont('Humanst521 BT','B',8);
+        //$pdf->Cell(32,5,$dataCer[0]["MATRICULA"],"LTRB",0,'C');
+        $pdf->WriteTag(32,5,"<vb>".$dataCer[0]["MATRICULA"]."</vb>",1,"C",0,0);
 
         
         $pdf->setY(54);  $pdf->setX($mgTabla);    
@@ -303,7 +313,7 @@
         foreach($data as $row) {   
             $pdf->setX($mgTabla); 
             $cadRev='';
-            if (($row["GPOCVE"]=='REV') && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS'))) {$cadRev='*';}
+            if (($row["TCAL"]=='93') && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS'))) {$cadRev='*';}
             $pdf->Row(array( utf8_decode($row["MATERIAD"]." ".$cadRev),
                              utf8_decode($row["CAL"]),
                              "",
@@ -328,7 +338,9 @@
     
         /*=======================colacamos el promedio ==========================*/
         $pdf->setX($mgTabla); 
-        $promedio=round($sumacal/($n));
+        
+        $promedio=round($sumacal/($n),2);
+        $promedio=number_format($promedio, 2, '.', ',');
         $pdf->SetWidths(array(85, 13,32,21));
         $pdf->SetFillColor(223, 223, 223);
         $pdf->SetBorder(array('1', '1','1','1'));
@@ -340,13 +352,13 @@
 
 
         $fechaexp=$miutil->formatFecha($dataCer[0]["FECHAEXP"]);
-        $fechadecexp="<vb>".$miutil->aletras(date("d", strtotime($fechaexp)))."</vb> DÍAS DEL MES DE ".
-                     "<vb>".$miutil->getMesLetra(date("m", strtotime($fechaexp)))."</vb> DEL AÑO <vb>". $miutil->aletras(date("Y", strtotime($fechaexp)))."</vb>";
+        $fechadecexp=$miutil->aletras(date("d", strtotime($fechaexp)))." DÍAS DEL MES DE ".
+                     $miutil->getMesLetra(date("m", strtotime($fechaexp)))." DEL AÑO ". $miutil->aletras(date("Y", strtotime($fechaexp)));
         $pdf->SetFont('Humanst521 BT','',8);    
-        $cadCer="CERTIFICADO COMPLETO"; if ($dataAlum[0]["PLACRED"]>$totcred)  {$cadCer="CERTIFICADO PARCIAL"; }
-        $txt=utf8_decode("<p>SE EXPIDE EL PRESENTE <vb>".$cadCer."</vb> QUE AMPARA <vb>".$totcred.
-        "</vb> CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE <vb>".
-        $dataAlum[0]["MAPA"]."</vb>, EN LA CIUDAD DE PEROTE, VERACRUZ A LOS ".strtoupper($fechadecexp).".</p>");
+        $cadCer="CERTIFICADO"; if ($dataAlum[0]["PLACRED"]>$totcred)  {$cadCer="CERTIFICADO"; }
+        $txt=utf8_decode("<p>SE EXTIENDE EL PRESENTE ".$cadCer." QUE AMPARA <vb>".$totcred."</vb> ".
+        " CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE ".
+        $dataAlum[0]["MAPA"].", EN LA CIUDAD DE PEROTE, VERACRUZ, A LOS ".strtoupper($fechadecexp).".</p>");
 
 
         $pdf->WriteTag(151,4,$txt,1,"J",0,0);
@@ -358,15 +370,16 @@
         $pdf->Cell(0,0,"DIRECTOR",0,1,'C');
 
         $pdf->Ln(5);
-        $pdf->Line(90, 258, 155, 258);
-        $pdf->setY(260);
-        $pdf->SetFont('Humanst521 BT','B',8);   
-        $pdf->Cell(0,0,utf8_decode($nombre),"",1,'C');
+        $pdf->Line(90, 268, 155, 268);
+        $pdf->setY(270);
+        $pdf->SetFont('Humanst521 BT','B',8);         
+        $pdf->WriteTag(0,0,"<vb>".utf8_decode($nombre)."</vb>",'0',"C",0,0);
 
        
 
 
-        $pdf->Line(26, 153, 26, 120);
+        $pdf->SetFont('Humanst521 BT','',6);
+        $pdf->Line(26, 153, 26, 127);
         $pdf->TextWithRotation(30,150,'FIRMA DEL ALUMNO',90,0);
         $pdf->SetFont('Humanst521 BT','',5);
 
@@ -383,22 +396,22 @@
         $pdf->setY(171);
         $pdf->setX(9); $pdf->Cell(35,2,'','TLR',1,'C');
         $pdf->SetFont('Humanst521 BT','B',6);
-        $pdf->setX(9); $pdf->Cell(35,2,'REGISTRADO EN EL','LR',1,'C');
+        $pdf->setX(9); $pdf->Cell(35,2,'REGISTRADO EN EL','BLR',1,'C');
         $pdf->setX(9); $pdf->Cell(35,2,'DEPARTAMENTO DE CONTROL','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(35,2,'ESCOLAR','LR',1,'C');        
         $pdf->setX(9); $pdf->Cell(35,2,'','LR',1,'C');
 
         $pdf->SetFont('Humanst521 BT','',7);
         $pdf->setX(9); $pdf->Cell(35,4,'','LR',1,'C');
-        $pdf->setX(9); $pdf->Cell(10,4,'CON NO.','L',0,'L'); $pdf->Cell(25,4, $dataCer[0]["FOLIO"],'R',1,'R');
-        $pdf->setX(9); $pdf->Cell(18,4,'EN EL LIBRO','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["LIBRO"],'R',1,'R');
-        $pdf->setX(9); $pdf->Cell(10,4,'A FOJAS','L',0,'L'); $pdf->Cell(25,4, $dataCer[0]["FOJA"],'R',1,'R');
+        $pdf->setX(9); $pdf->Cell(18,4,'CON NO.','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["FOLIO"],'R',1,'C');
+        $pdf->setX(9); $pdf->Cell(18,4,'EN EL LIBRO','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["LIBRO"],'R',1,'C');
+        $pdf->setX(9); $pdf->Cell(18,4,'A FOJAS','L',0,'L'); $pdf->Cell(17,4, $dataCer[0]["FOJA"],'R',1,'C');
         $pdf->setX(9); $pdf->Cell(5,4,'','L',0,'L'); $pdf->Cell(25,4, $fechacer,'',0,'C');$pdf->Cell(5,4,'','R',1,'L');
         $pdf->setX(9); $pdf->Cell(5,4,'','LB',0,'L'); $pdf->Cell(25,4,"FECHA",'TB',0,'C');$pdf->Cell(5,4,'','RB',1,'L');
 
         $pdf->setY(210);
         $pdf->SetFont('Arial','B',6);
-        $pdf->setX(9); $pdf->Cell(35,5,utf8_decode('COTEJÓ'),'',1,'C');
+        $pdf->setX(9); $pdf->Cell(35,5,utf8_decode('COTEJO'),'',1,'C');
         $pdf->setY(221);
         $pdf->Line(12, 221, 40, 221);
         $pdf->setX(9); $pdf->MultiCell(35,3,$nombreEsc,0,'C',false);
