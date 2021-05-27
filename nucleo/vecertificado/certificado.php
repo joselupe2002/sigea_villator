@@ -134,8 +134,8 @@
 			{				
                 $miConex = new Conexion();
                 $sql="SELECT MATRICULA, NOMBRE,MATERIA, MATERIAD, SEMESTRE, GPOCVE,". 
-                "(CASE WHEN TIPOMAT='AC' THEN (select SUBSTRING(CALLET,1,3) from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1)".
-                "      WHEN TIPOMAT='SS' THEN (select SUBSTRING(CALLET,1,3) from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1) ".
+                "(CASE WHEN TIPOMAT='AC' THEN (select CALLET from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1)".
+                "      WHEN TIPOMAT='SS' THEN (select CALLET from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1) ".
                 " ELSE CAL END) AS CAL,".
                 "TCAL,CICLO,CREDITO,TIPOMAT, VECES, PRIMERA, SEGUNDA, TERCERA FROM kardexcursadas a ".
                 " where MATRICULA='".$_GET["matricula"]."' AND CAL>=70 AND CERRADO='S' AND CERRADO='S' ORDER BY SEMESTRE, MATERIAD";
@@ -396,9 +396,9 @@
         $pdf->setY(171);
         $pdf->setX(9); $pdf->Cell(35,2,'','TLR',1,'C');
         $pdf->SetFont('Humanst521 BT','B',6);
-        $pdf->setX(9); $pdf->Cell(35,2,'REGISTRADO EN EL','BLR',1,'C');
+        $pdf->setX(9); $pdf->Cell(35,2,'REGISTRADO EN EL','LR',1,'C');
         $pdf->setX(9); $pdf->Cell(35,2,'DEPARTAMENTO DE CONTROL','LR',1,'C');
-        $pdf->setX(9); $pdf->Cell(35,2,'ESCOLAR','LR',1,'C');        
+        $pdf->setX(9); $pdf->Cell(35,2,'ESCOLAR','bLR',1,'C');        
         $pdf->setX(9); $pdf->Cell(35,2,'','LR',1,'C');
 
         $pdf->SetFont('Humanst521 BT','',7);
