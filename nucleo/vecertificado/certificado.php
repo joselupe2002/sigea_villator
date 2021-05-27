@@ -295,14 +295,14 @@
         $pdf->setY(54);  $pdf->setX($mgTabla);    
         $pdf->SetFont('Humanst521 BT','B',8);
         $pdf->Cell(85,5,'MATERIA','TBL',0,'L');
-        $pdf->Cell(13,5,'CALIF.','TLBR',0,'C');
+        $pdf->Cell(21,5,'CALIF.','TLBR',0,'C');
         $pdf->Cell(32,5,'OBSERVACIONES',1,0,'C');
-        $pdf->Cell(21,5,utf8_decode('CR'),1,0,'C');
+        $pdf->Cell(13,5,utf8_decode('CR'),1,0,'C');
 
         /*=======================colacamos las calificaciones ==========================*/
         $pdf->Ln();
         $pdf->SetFont('Humanst521 BT','',7);
-        $pdf->SetWidths(array(85, 13,32,21));
+        $pdf->SetWidths(array(85, 21,32,13));
         $pdf->SetAligns(array('L', 'C','J','C'));
         $pdf->SetBorder(array('L', 'L','LR','R'));
         
@@ -341,7 +341,7 @@
         
         $promedio=round($sumacal/($n),2);
         $promedio=number_format($promedio, 2, '.', ',');
-        $pdf->SetWidths(array(85, 13,32,21));
+        $pdf->SetWidths(array(85, 21,32,13));
         $pdf->SetFillColor(223, 223, 223);
         $pdf->SetBorder(array('1', '1','1','1'));
         $pdf->SetAligns(array('R', 'R','J','C'));
@@ -433,7 +433,7 @@
         $pdf->SetFont('Humanst521 BT','',8);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->setY(60); 
-        $pdf->Cell(100,0,"",0,0,'C');
+        $pdf->Cell(110,0,"",0,0,'C');
         $pdf->MultiCell(25,3,$dataCer[0]["OBS"],0,'J',false);
      
       
