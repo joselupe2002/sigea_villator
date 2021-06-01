@@ -49,6 +49,7 @@ contMat=1;
 	   	   "        <thead >  "+
 		   "             <tr id=\"headMaterias\">"+
 		   "                <th>No.</th> "+
+		   "                <th>OP</th> "+
 		   "                <th>Id</th> "+
 		   "                <th>CICLO</th> "+
 		   "                <th>MATRICULA</th> "+	
@@ -149,6 +150,8 @@ function generaTablaInformacion(grid_data){
 	
 		$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\">");
 		$("#rowM"+contR).append("<td>"+contR+"</td>");
+		$("#rowM"+contR).append("<td><button onclick=\"eliminar('"+valor.ID+"')\" class=\"btn btn-white btn-info btn-bold\">"+
+		                            "<i class=\"ace-icon fa fa-trash bigger-120 red\"></i></button></td>");
 		$("#rowM"+contR).append("<td>"+valor.ID+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.PDOCVE+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.ALUCTR+"</td>");
@@ -182,3 +185,26 @@ function generaTablaInformacion(grid_data){
 } 
 
 
+function eliminar(elid) {
+	if(confirm("Seguro que desea eliminar el registro: "+elid) ){
+		    		
+			
+	  var parametros = {
+				"tabla" :"dlista",
+				"campollave" : "ID",
+				"bd":"Mysql",
+				"valorllave" : elid
+		};
+		
+	  $.ajax({
+			  data:  parametros,
+			  url:   '../base/eliminar.php',
+			  type:  'post',          
+			  success:  function (response) {
+				  console.log(response);
+				  cargarInformacion();
+				  
+			}		
+		 }); 
+  }    
+}
