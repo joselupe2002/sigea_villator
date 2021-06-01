@@ -49,7 +49,7 @@ contMat=1;
 	   	   "        <thead >  "+
 		   "             <tr id=\"headMaterias\">"+
 		   "                <th>No.</th> "+
-		   "                <th>OP</th> "+
+		   "                <th>Eli</th> "+
 		   "                <th>Id</th> "+
 		   "                <th>CICLO</th> "+
 		   "                <th>MATRICULA</th> "+	
