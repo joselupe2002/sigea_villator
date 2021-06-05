@@ -6,6 +6,7 @@ var arr_nombresec=[];
 var arr_instsec=[];
 var arr_instpreg=[];
 var arr_respuestas=[];
+var arr_preguntas=[];
 
 
     $(document).ready(function($) { var Body = $('container'); Body.addClass('preloader-site');});
@@ -19,8 +20,20 @@ var arr_respuestas=[];
 	    window.location.hash="Red" //chrome
 		window.onhashchange=function(){window.location.hash="red";}
 		cargandoExamen();
+
+		
+
 		}); 
 
+		function onKeyDownHandler() {
+			
+			if (event.keyCode==49) { $("#opcion_"+pregactiva+"_5").attr('checked', true); cambioRespuesta(arr_preguntas[pregactiva-1],pregactiva,'5','1','1');}			
+			if (event.keyCode==50) { $("#opcion_"+pregactiva+"_4").attr('checked', true); cambioRespuesta(arr_preguntas[pregactiva-1],pregactiva,'4','1','1');}			
+			if (event.keyCode==51) { $("#opcion_"+pregactiva+"_3").attr('checked', true); cambioRespuesta(arr_preguntas[pregactiva-1],pregactiva,'3','1','1');}
+			if (event.keyCode==52) { $("#opcion_"+pregactiva+"_2").attr('checked', true); cambioRespuesta(arr_preguntas[pregactiva-1],pregactiva,'2','1','1');}
+			if (event.keyCode==53) { $("#opcion_"+pregactiva+"_1").attr('checked', true); cambioRespuesta(arr_preguntas[pregactiva-1],pregactiva,'1','1','1');}
+	    }
+		
 
 function cierraExamen(){
 	
@@ -120,6 +133,7 @@ function cargandoExamen(){
 		    jQuery.each(JSON.parse(dataPre), function(clave, valorPre) { 
 				arr_nombresec[clave]=valorPre.SECCION;
 				arr_respuestas[clave]='0';
+				arr_preguntas[clave]=valorPre.IDP;
 		
 			    hide="hide"; color="badge badge-gray";
 				if (contPreg==1){ hide=""; pregactiva=1; color="badge badge-yellow";}

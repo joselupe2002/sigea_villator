@@ -35,7 +35,7 @@
 	</head>
 
 
-	<body id="grid_registro" style="background-color: white;">
+	<body id="grid_registro" style="background-color: white;" onkeydown="onKeyDownHandler();">
        
     <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>	      
 
