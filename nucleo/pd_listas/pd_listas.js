@@ -125,10 +125,10 @@ function generaTablaInformacion(grid_data){
 									"<option value=\"J\">J</option>"+
 									"<option value=\"R\">R</option>"+
 									"<SELECT></th>"+
-	"<th style=\"text-align: center;\">CARRERA</th>"+
-	"<th style=\"text-align: center;\">CORREO INSTITUCIONAL</th>"+
-	"<th style=\"text-align: center;\">CORREO PERSONAL</th>"+
-	"<th style=\"text-align: center;\">TELEFONO</th>"
+	"<th style=\"text-align: center;\">CARRERA</th>"
+	//"<th style=\"text-align: center;\">CORREO INSTITUCIONAL</th>"+
+	//"<th style=\"text-align: center;\">CORREO PERSONAL</th>"+
+	//"<th style=\"text-align: center;\">TELEFONO</th>"
 	); 
 
 	 $("#tabInformacion").append("<tbody id=\"cuerpoInformacion\">");
@@ -149,9 +149,9 @@ function generaTablaInformacion(grid_data){
 									"<option value=\"R\">R</option>"+
 									"<SELECT></td>");      	    
 		 $("#row"+valor.ID).append("<td>"+utf8Decode(valor.CARRERAD)+"</td>");
-		 $("#row"+valor.ID).append("<td>"+valor.ALUM_CORREOINS+"</td>");      
-		 $("#row"+valor.ID).append("<td>"+valor.ALUM_CORREO+"</td>");      
-		 $("#row"+valor.ID).append("<td>"+valor.ALUM_TELEFONO+"</td>");     
+		// $("#row"+valor.ID).append("<td>"+valor.ALUM_CORREOINS+"</td>");      
+		// $("#row"+valor.ID).append("<td>"+valor.ALUM_CORREO+"</td>");      
+		// $("#row"+valor.ID).append("<td>"+valor.ALUM_TELEFONO+"</td>");     
 		 $("#selValor"+valor.MATRICULA).val(valor.VALOR);
 		$("#row"+valor.ID).append("</tr>");
 		c++;
