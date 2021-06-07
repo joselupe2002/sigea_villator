@@ -200,16 +200,16 @@
 			function Header()
 			{
 				$miutil = new UtilUser();
-                //$miutil->getEncabezado($this,'V');			
+                $miutil->getEncabezado($this,'V');			
                 //Para que cuando se cambie a la otra pagina empiece a la derecha y la stablas no se descuadren
 
                 $datagen=$this->LoadDatosGen();
 
-                $this->Image('../../imagenes/empresa/seplogo.png',20,8,60);
+               // $this->Image('../../imagenes/empresa/seplogo.png',20,8,60);
                 $this->SetY(20);
                 $this->SetFont('Arial','',12);
                 $this->SetX(100);
-                $this->MultiCell(100,5,utf8_decode($datagen[0]["inst_razon"]),0,'R');              
+               // $this->MultiCell(100,5,utf8_decode($datagen[0]["inst_razon"]),0,'R');              
                 $this->Ln(5);	
 
                 $this->SetX(10);
@@ -237,7 +237,7 @@
 			function Footer()
 			{	                
                 $miutil = new UtilUser();             
-                //$miutil->getPie($this,'V');
+                $miutil->getPie($this,'V');
 		
 			}
 
@@ -247,7 +247,7 @@
 		header("Content-Type: text/html; charset=UTF-8");
 		
 		$pdf->SetFont('Arial','',10);
-		$pdf->SetMargins(25, 15 , 15);
+		$pdf->SetMargins(25, 20 , 15);
 		$pdf->SetAutoPageBreak(true,30); 
         $pdf->AddPage();
 
