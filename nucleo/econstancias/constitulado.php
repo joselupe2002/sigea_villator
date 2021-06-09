@@ -256,7 +256,7 @@
         $pdf->Ln(5);
         $pdf->SetX(120);
         $pdf->Cell(35,5,'ASUNTO:',0,0,'L');
-        $pdf->Cell(35,5,"CONSTANCIA DE EGRESO",0,0,'L');
+        $pdf->Cell(35,5,"CONSTANCIA DE TITULADO",0,0,'L');
         $pdf->Ln(10);
         $pdf->Cell(0,5,"A QUIEN CORRESPONDA:",0,0,'L');
         $pdf->Ln(5);
