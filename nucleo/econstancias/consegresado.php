@@ -1,7 +1,7 @@
 
 <?php session_start(); if (($_SESSION['inicio']==1)) {
 	header('Content-Type: text/html; charset='.$_SESSION['encode']);
-	require('../../fpdf/fpdf.php');
+	require('../../fpdf/PDF_WriteTag.php');
 	include("../.././includes/Conexion.php");
 	include("../.././includes/UtilUser.php");
 	$miConex = new Conexion();
@@ -12,7 +12,7 @@
 
 	
 	
-	class PDF extends FPDF {
+	class PDF extends PDF_WriteTag {
        
         
         function parseVar($key='',$value='') {
@@ -263,41 +263,36 @@
         $fin=$miutil->formatFecha($dataAlum[0]["FIN"]);
 		$ffin=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
         
+        $pdf->SetStyle("p","Montserrat-Medium","",10,"0,0,0");
+        $pdf->SetStyle("vs","Montserrat-Medium","U",10,"0,0,0");
+		$pdf->SetStyle("vsb","Montserrat-Medium","UB",10,"0,0,0");
+        $pdf->SetStyle("vb","Montserrat-ExtraBold","B",10,"0,0,0");
 
-        $pdf->MultiCell(0,5,utf8_decode("LA (EL) QUE SUSCRIBE, JEFE(A) DEL DEPARTAMENTO DE SERVICIOS ESCOLARES, HACE CONSTAR QUE EL (LA) C.".
-        $dataAlum[0]["NOMBRE"]." ES EGRESADO DE LA CARRERA DE ".$dataAlum[0]["CARRERAD"].", CON PLAN DE ESTUDIOS ".
-        $dataAlum[0]["MAPA"]." Y LA ESPECIALIDAD DE ".$dataAlum[0]["ESPECIALIDADD"]." CON NÚMERO DE CONTROL ".
-        $dataAlum[0]["ALUM_MATRICULA"].", QUIEN HA CUMPLIDO AL ".$dataAlum[0]["AVANCE"]."% CON LOS ".
-        $dataAlum[0]["PLACRED"]." CREDITOS QUE CORRESPONDEN A LAS MATERIAS DE SU CURRICULA ADEMÁS DE HABER ".
+
+
+        $pdf->WriteTag(0,5,utf8_decode("<p>LA (EL) QUE SUSCRIBE, JEFE(A) DEL DEPARTAMENTO DE SERVICIOS ESCOLARES, HACE CONSTAR QUE EL (LA) <vb>C.".
+        $dataAlum[0]["NOMBRE"]."</vb> ES <vb>EGRESADO</vb> DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>, CON PLAN DE ESTUDIOS <vb>".
+        $dataAlum[0]["MAPA"]."</vb> Y LA ESPECIALIDAD DE <vb>".$dataAlum[0]["ESPECIALIDADD"]."</vb> CON NÚMERO DE CONTROL <vb>".
+        $dataAlum[0]["ALUM_MATRICULA"]."</vb>, QUIEN HA CUMPLIDO AL <vb>".$dataAlum[0]["AVANCE"]."%</vb> CON LOS <vb>".
+        $dataAlum[0]["PLACRED"]."</vb> CREDITOS QUE CORRESPONDEN A LAS MATERIAS DE SU CURRICULA ADEMÁS DE HABER ".
         "CUBIERTO CON LOS CREDITOS DE SU SERVICIO SOCIAL , CREDITOS DE RESIDENCIA PROFESIONAL Y CREDITOS ". 
         "DE LAS ACTIVIDADES COMPLEMENTARIAS, QUIEN ADEMÁS YA HA REALIZADO EL TRAMITE DE CERTIFICADO PROFESIONAL ".
         "ESTE ÚLTIMO SE ENCUENTRA EN REVISION POR LA DIRECCIÓN DE EDUCACIÓN TECNOLÓGICA, Y POSTERIORMENTE SERÁ ".
         "LEGALIZADO POR LA SECRETARÍA DE GOBERNACION DEL ESTADO DE VERACRUZ, TENIENDO UN PLAZO DE CINCO MESES ".
-        "PARA RECIBIRLO "),0,'J',FALSE);
+        "PARA RECIBIRLO </p>"),0,'J',FALSE);
 
         $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode("HACIENDO CONSTAR ADEMÁS QUE LLEVÓ A CABO SUS ESTUDIOS EN EL PERIODO DEL ".
-        $finicio." AL ".$ffin." AL OBSERVANDO EN SU ESTANCIA BUENA CONDUCTA. SE ESPECIFÍCA QUE LA CURP QUE EL JOVEN TIENE ES: ".
-        "QUIEN CUBRIÓ UN TOTAL DE 260 CRÉDITOS DE LOS QUE CONSTA LA CARRERA, ADEMÁS DE CONTAR CON UN PROMEDIO FINAL DE:87.88"),0,'J',FALSE);
-
-
+        $pdf->WriteTag(0,5,utf8_decode("<p>HACIENDO CONSTAR ADEMÁS QUE LLEVÓ A CABO SUS ESTUDIOS EN EL PERIODO DEL <vb>".
+        $finicio."</vb> AL <vb>".$ffin."</vb> AL OBSERVANDO EN SU ESTANCIA BUENA CONDUCTA. SE ESPECIFÍCA QUE LA CURP QUE EL JOVEN TIENE ES: ".
+        "QUIEN CUBRIÓ UN TOTAL DE 260 CRÉDITOS DE LOS QUE CONSTA LA CARRERA, ADEMÁS DE CONTAR CON UN ". 
+        "PROMEDIO FINAL DE: <vb>".$dataAlum[0]["PROMEDIO_SR"]."</vb>.</p>"),0,'J',FALSE);
         
-
-        /*
-        $dataAlum[0]["STATUS"]." EN EL ".$elsem." SEMESTRE ".
-        "DE ".$dataAlum[0]["CARRERAD"].", EN EL PERIODO COMPRENDIDO DE ".
-        $dataCiclo[0]["CICL_INICIOR"]." AL ". $dataCiclo[0]["CICL_FINR"]." CON UN PERÍODO VACACIONAL DE ".
-        $dataCiclo[0]["CICL_VACINI"]." AL ". $dataCiclo[0]["CICL_VACFIN"].", CUBRIENDO ".$loscre." DE UN TOTAL DE ".$dataAlum[0]["PLACRED"].
-        " CRÉDITOS DEL PLAN DE ESTUDIOS, UN PROMEDIO DE ".
-        $dataAlum[0]["PROMEDIO_SR"]. " CON UN AVANCE DEL ".$dataAlum[0]["AVANCE"]."%."),0,'J',FALSE);
-        */
-
 		$fechaof=$miutil->aletras(date("d"))." DÍAS DEL MES DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". $miutil->aletras(date("Y"));
         $pdf->Ln(5);
    
 
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
-        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
+        $pdf->WriteTag(0,5,utf8_decode("<p>SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
+        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</p>"),0,'J',FALSE);
         
         $pdf->Ln(25);
 

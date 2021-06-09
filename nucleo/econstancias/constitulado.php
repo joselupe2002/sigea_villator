@@ -1,7 +1,7 @@
 
 <?php session_start(); if (($_SESSION['inicio']==1)) {
 	header('Content-Type: text/html; charset='.$_SESSION['encode']);
-	require('../../fpdf/fpdf.php');
+    require('../../fpdf/PDF_WriteTag.php');
 	include("../.././includes/Conexion.php");
 	include("../.././includes/UtilUser.php");
 	$miConex = new Conexion();
@@ -12,7 +12,7 @@
 
 	
 	
-	class PDF extends FPDF {
+	class PDF extends PDF_WriteTag {
        
         
         function parseVar($key='',$value='') {
@@ -148,9 +148,9 @@
                 $data=[];	
                 $miConex = new Conexion();
                 $sql="select ALUM_MATRICULA, CONCAT(ALUM_NOMBRE, ' ',ALUM_APEPAT, ' ',ALUM_APEMAT) AS NOMBRE, ".
-                " ALUM_CARRERAREG AS CARRERA, ALUM_ACTIVO AS SITUACION, ALUM_CICLOTER AS CICLOTER, ".
+                " ALUM_CARRERAREG AS CARRERA, ALUM_CURP, ALUM_CICLOINS, x.CICL_INICIO AS INICIO, y.CICL_FIN AS FIN, ALUM_CICLOTER, ALUM_ACTIVO AS SITUACION, ALUM_CICLOTER AS CICLOTER, ".
                 " ALUM_CICLOINS AS CICLOINS, CARR_DESCRIP AS CARRERAD, ".
-                " PLACRED, PLAMAT,  c.CLAVEOF AS ESPECIALIDAD, ALUM_MAPA AS MAPA,".
+                " PLACRED, PLAMAT,  c.CLAVEOF AS ESPECIALIDAD, c.DESCRIP AS ESPECIALIDADD, ALUM_MAPA AS MAPA,".
                 " round(getavanceCred('".$_GET["matricula"]."'),0) as AVANCE, ".
                 " getPromedio('".$_GET["matricula"]."','N') as PROMEDIO_SR,".
                 " getPeriodos('".$_GET["matricula"]."',(select MAX(ifnull(PDOCVE,0)) from dlista where ALUCTR='".$_GET["matricula"]."')) AS PERIODOS,".
@@ -158,10 +158,25 @@
                 " getcuatrialum('".$_GET["matricula"]."',getciclo()) as SEMESTRE,".
                 " (select SUM(a.CREDITO) from kardexcursadas a where CERRADO='S'  and a.MATRICULA='".$_GET["matricula"]."' AND CAL>=70) AS CRETOT, ".
                 " (select SUM(a.CREDITO) from kardexcursadas a where a.CICLO=getciclo() AND CERRADO='N'  and a.MATRICULA='".$_GET["matricula"]."') AS CRECUR ".
-                " from falumnos a LEFT outer JOIN especialidad c on (a.ALUM_ESPECIALIDAD=c.ID), ccarreras b, mapas d where ".
+                " from falumnos a LEFT outer JOIN especialidad c on (a.ALUM_ESPECIALIDAD=c.ID)".
+                " LEFT outer JOIN ciclosesc x on (a.ALUM_CICLOINS=x.CICL_CLAVE)".
+                " LEFT outer JOIN ciclosesc y on (a.ALUM_CICLOTER=y.CICL_CLAVE), ccarreras b, mapas d where ".
                 " CARR_CLAVE=ALUM_CARRERAREG".
                 " and ALUM_MAPA=d.MAPA_CLAVE and a.ALUM_MATRICULA='".$_GET["matricula"]."'";
                //echo $sql;
+				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				return $data;
+            }
+
+
+            function LoadDatosTitulo()
+			{				
+                $data=[];	
+                $miConex = new Conexion();
+                $sql="select * from vtit_pasantes where MATRICULA='".$_GET["matricula"]."'";
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -200,20 +215,13 @@
                 $nombre=$miutil->getJefe('303');//Nombre del puesto de Recursos Humanos
                 $miutil->getPie($this,'V');
                 $this->SetFont('Montserrat-ExtraBold','B',10);
-                $this->setY(-80);
-                $this->Cell(0,5,"ATENTAMENTE",0,1,'C');
                 $this->setY(-60);
+                $this->Cell(0,5,"ATENTAMENTE",0,1,'C');
+                $this->setY(-50);
                 $this->Cell(0,5,utf8_decode($nombre),0,1,'C');
-                $this->setY(-55);
+                $this->setY(-45);
                 $this->Cell(0,5,"JEFE DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",0,1,'C');
 		
-                 //CODIGO QR
-                 $dataAlum = $this->LoadDatosAlumnos();
-                $cadena= "OF:".$_GET["consec"]."-".$_GET["anio"]."|".$dataAlum[0]["ALUM_MATRICULA"]."|".str_replace(" ","|",$dataAlum[0]["NOMBRE"]).
-                str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$dataAlum[0]["CRETOT"]."|AVANCE:".$dataAlum[0]["AVANCE"];     
-                $this->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,205,28,28);     
-
-
 			}
 
 		}
@@ -230,52 +238,87 @@
          
         $dataGen = $pdf->LoadDatosGen();
         $dataAlum = $pdf->LoadDatosAlumnos();
+        $dataTit = $pdf->LoadDatosTitulo();
         $miutil = new UtilUser();
-
-        $pdf->Ln(3);
+        $pdf->SetY(35);
         $pdf->SetFont('Montserrat-ExtraBold','B',11);
         $pdf->SetX(120);
-        $pdf->Cell(35,5,'DEPENDENCIA:',0,0,'L');
-        $pdf->Cell(35,5,'DPTO DE SERV.ESCS',0,0,'L');
+        $pdf->Cell(35,5,utf8_decode('ÁREA:'),0,0,'L');
+        $pdf->Cell(35,5,'SERVICIOS ESCOLARES',0,0,'L');
         $pdf->Ln(5);
         $pdf->SetX(120);
-        $pdf->Cell(35,5,'OFICIO NO.: :',0,0,'L');
+        $pdf->Cell(35,5,'OFICIO NO.:',0,0,'L');
         $pdf->Cell(35,5,$_GET["consec"]."/".$_GET["anio"],0,0,'L');
         $pdf->Ln(5);
         $pdf->SetX(120);
-        $pdf->Cell(35,5,'CLAVE: :',0,0,'L');
+        $pdf->Cell(35,5,'CLAVE:',0,0,'L');
         $pdf->Cell(35,5,$dataGen[0]["inst_claveof"],0,0,'L');
         $pdf->Ln(5);
         $pdf->SetX(120);
-        $pdf->Cell(35,5,'ASUNTO: :',0,0,'L');
-        $pdf->Cell(35,5,"CONSTANCIA",0,0,'L');
-        $pdf->Ln(15);
-        $pdf->Cell(0,5,"A QUIEN CORRESPONDA:",0,0,'L');
+        $pdf->Cell(35,5,'ASUNTO:',0,0,'L');
+        $pdf->Cell(35,5,"CONSTANCIA DE EGRESO",0,0,'L');
         $pdf->Ln(10);
-        $pdf->SetFont('Montserrat-Medium','',11);
+        $pdf->Cell(0,5,"A QUIEN CORRESPONDA:",0,0,'L');
+        $pdf->Ln(5);
+        $pdf->SetFont('Montserrat-Medium','',10);
         
         $loscre=$dataAlum[0]["CRETOT"];
         if ($dataAlum[0]["CRETOT"]>$dataAlum[0]["PLACRED"]) { $loscre=$dataAlum[0]["PLACRED"];}
-       
+     
 
         $miutil = new UtilUser();
         $elsem=$miutil->dameCardinal($dataAlum[0]["PERIODOS"]);
-        $pdf->MultiCell(0,5,utf8_decode("LA (EL) QUE SUSCRIBE, HACE CONSTAR, QUE SEGÚN EL ARCHIVO ESCOLAR, LA (EL) ".
-        $dataAlum[0]["NOMBRE"]." CON  MATRICULA ". $dataAlum[0]["ALUM_MATRICULA"].", ES ".$dataAlum[0]["STATUS"]." EN EL ".$elsem." SEMESTRE ".
-        "DE ".$dataAlum[0]["CARRERAD"].", EN EL PERIODO COMPRENDIDO DE ".
-        $dataCiclo[0]["CICL_INICIOR"]." AL ". $dataCiclo[0]["CICL_FINR"]." CON UN PERÍODO VACACIONAL DE ".
-        $dataCiclo[0]["CICL_VACINI"]." AL ". $dataCiclo[0]["CICL_VACFIN"].", CUBRIENDO ".$loscre." DE UN TOTAL DE ".$dataAlum[0]["PLACRED"].
-        " CRÉDITOS DEL PLAN DE ESTUDIOS, UN PROMEDIO DE ".
-        $dataAlum[0]["PROMEDIO_SR"]. " CON UN AVANCE DEL ".$dataAlum[0]["AVANCE"]."%."),0,'J',FALSE);
+
+   
+        $inicio=$miutil->formatFecha($dataAlum[0]["INICIO"]);
+		$finicio=date("d", strtotime($inicio))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($inicio))))." DE ".date("Y", strtotime($inicio));
         
+        $fin=$miutil->formatFecha($dataAlum[0]["FIN"]);
+		$ffin=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
+        
+        $exa=$miutil->formatFecha($dataTit[0]["FECHA_TIT"]);
+		$fexa=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
+        
+
+        $pdf->SetStyle("p","Montserrat-Medium","",10,"0,0,0");
+        $pdf->SetStyle("vs","Montserrat-Medium","U",10,"0,0,0");
+		$pdf->SetStyle("vsb","Montserrat-Medium","UB",10,"0,0,0");
+        $pdf->SetStyle("vb","Montserrat-ExtraBold","B",10,"0,0,0");
+
+        $pdf->WriteTag(0,4,utf8_decode("<p>LA (EL) QUE SUSCRIBE, JEFE(A) DEL DEPARTAMENTO DE SERVICIOS ESCOLARES, HACE CONSTAR QUE EL (LA) <vb>C. ".
+        $dataAlum[0]["NOMBRE"]."</vb> ES EGRESADO DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>, CON PLAN DE ESTUDIOS <vb>".
+        $dataAlum[0]["MAPA"]."</vb> Y LA ESPECIALIDAD DE <vb>".$dataAlum[0]["ESPECIALIDADD"]."</vb> CON NÚMERO DE CONTROL <vb>".
+        $dataAlum[0]["ALUM_MATRICULA"]."</vb>, Y SE ENCUENTRA COMO <vb>TITULADO(A)</vb>, QUIEN PRESENTO SU EXAMEN PROFESIONAL EL DIA <vb>".
+        $fexa."</vb> POR LA OPCION <vb>".$dataTit[0]["OPCIOND"]."</vb> CON EL TEMA: <vb>".$dataTit[0]["TEMA"]."</vb>.</p>"),0,'J',FALSE);
+
+        $pdf->Ln(3);
+        $pdf->WriteTag(0,4,utf8_decode("<p>EL TITULO Y CÉDULA PROFESIONAL SE ENCUENTRAN EN PROCESO DE REGISTRO EN LA SECRETARÍA DE EDUCACIÓN DE VERACRUZ ".
+        "Y LA DIRECCIÓN GENERAL DE PROFESIONES. HACIENDO CONSTAR ADEMÁS, QUE REALIZÓ SUS ESTUDIOS EN EL PERIODO DEL <vb>".
+        $finicio."</vb> AL <vb>".$ffin."</vb> OBSERVANDO EN SU ESTANCIA BUENA CONDUCTA. SE INFORMA ADEMÁS QUE YA NO SE ENCUENTRA COMO ALUMN(O)A ACTIV(O)A ".
+        "DENTRO DEL INSTITUTO Y QUE SE HAN INICIADO LOS TRÁMITES PARA DARLE DE BAJA EL SEGURO SOCIAL QUE COMO ".
+        "ALUMN(O)A TENÍA SUS DOCUMENTOS ORIGINALES QUE ENTRARON PARA SU TRÁMITE DE TITULACIÓN SERÁN UTILIZADOS ". 
+        "HASTA QUE SE LE ENTREGUE SU TÍTULO Y CEDULA PROFESIONAL Y QUE RECIBIRÁ SU TÍTULO Y CÉDULA PROFESIONAL ". 
+        "APROXIMADAMENTE ENTRE CUATRO A SEIS MESES DESPUÉS DE LA FECHA DE TITULACIÓN, DE ACUERDO A COMO LAS ". 
+        "DEPENDENCIAS TANTO ESTATALES COMO FEDERALES LE DEN AGILIDAD AL PROCESO.</p>"),0,'J',FALSE);
+        $pdf->Ln(3);
+        $pdf->WriteTag(0,4,utf8_decode("<p>LOS DOCUMENTOS ORIGINALES QUE SE ". 
+        "RETIENEN POR PROCESO DE TITULACIÓN, SON LOS SIGUIENTES: <vb>ACTA DE NACIMIENTO, CERTIFICADO DE BACHILLERATO, ". 
+        "CERTIFICADO PROFESIONAL. </vb>"),0,'J',FALSE);
+
 		$fechaof=$miutil->aletras(date("d"))." DÍAS DEL MES DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". $miutil->aletras(date("Y"));
         $pdf->Ln(5);
-   
 
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".$dataGen[0]["inst_extiende"]." A LOS ".
-        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
+        $pdf->WriteTag(0,5,utf8_decode("<p>SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
+        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</p>"),0,'J',FALSE);
         
-        $pdf->Ln(15);
+        $pdf->Ln(25);
+
+        
+        //CODIGO QR
+        $cadena= "OF:".$_GET["consec"]."-".$_GET["anio"]."|".$dataAlum[0]["ALUM_MATRICULA"]."|".str_replace(" ","|",$dataAlum[0]["NOMBRE"]).
+        str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$loscre."|AVANCE:".$dataAlum[0]["AVANCE"];     
+        $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,210,28,28);     
+
 
     
             

@@ -213,6 +213,13 @@
                 $this->setY(-35);
                 $this->Cell(0,5,"JEFE DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",0,1,'C');
         
+                 //CODIGO QR
+                $dataAlum = $this->LoadDatosAlumnos();
+                $cadena= "OF:".$_GET["consec"]."-".$_GET["anio"]."|".$dataAlum[0]["ALUM_MATRICULA"]."|".str_replace(" ","|",$dataAlum[0]["NOMBRE"]).
+                str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$dataAlum[0]["CRETOT"]."|AVANCE:".$dataAlum[0]["AVANCE"];     
+                $this->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,227,28,28); 
+
+
                 
 			}
 
@@ -258,11 +265,7 @@
 
         $loscre=$dataAlum[0]["CRETOT"];
         if ($dataAlum[0]["CRETOT"]>$dataAlum[0]["PLACRED"]) { $loscre=$dataAlum[0]["PLACRED"];}
-        //CODIGO QR
-        $cadena= "OF:".$_GET["consec"]."-".$_GET["anio"]."|".$dataAlum[0]["ALUM_MATRICULA"]."|".str_replace(" ","|",$dataAlum[0]["NOMBRE"]).
-        str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$loscre."|AVANCE:".$dataAlum[0]["AVANCE"];     
-        $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,40,28,28); 
-
+       
         
         $miutil = new UtilUser();
         $elsem=$miutil->dameCardinal($dataAlum[0]["PERIODOS"]);

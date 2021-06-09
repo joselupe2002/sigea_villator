@@ -222,7 +222,7 @@
                 
                 $miutil = new UtilUser();
                 $nombre=$miutil->getJefe('303');//Nombre del puesto de Recursos Humanos
-                $miutil->getPie($this,'V');
+               
                 $this->SetFont('Montserrat-ExtraBold','B',10);
                 $this->setY(-50);
                 $this->Cell(0,5,"ATENTAMENTE",0,1,'C');
@@ -230,6 +230,14 @@
                 $this->Cell(0,5,utf8_decode($nombre),0,1,'C');
                 $this->setY(-35);
                 $this->Cell(0,5,"JEFE DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",0,1,'C');
+
+                 //CODIGO QR
+                 $dataAlum = $this->LoadDatosAlumnos();
+                $cadena= "OF:".$_GET["consec"]."-".$_GET["anio"]."|".$dataAlum[0]["ALUM_MATRICULA"]."|".str_replace(" ","|",$dataAlum[0]["NOMBRE"]).
+                str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$dataAlum[0]["CRETOT"]."|AVANCE:".$dataAlum[0]["AVANCE"];     
+                $this->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,220,28,28);     
+
+                $miutil->getPie($this,'V');
 		
 			}
 
@@ -240,7 +248,7 @@
 		
 		$pdf->SetFont('Arial','',10);
 		$pdf->SetMargins(25, 25 , 25);
-		$pdf->SetAutoPageBreak(true,50); 
+		$pdf->SetAutoPageBreak(true,60); 
         $pdf->AddPage();
         $dataCiclo=$pdf->LoadDatosCiclo();
         $elciclo=$dataCiclo[0]["CICL_CLAVE"];
@@ -271,15 +279,11 @@
         $pdf->Ln(15);
         $pdf->Cell(0,5,"A QUIEN CORRESPONDA:",0,0,'L');
         $pdf->Ln(10);
-        $pdf->SetFont('Montserrat-Medium','',11);
+        $pdf->SetFont('Montserrat-Medium','',10);
        
         $loscre=$dataAlum[0]["CRETOT"];
         if ($dataAlum[0]["CRETOT"]>$dataAlum[0]["PLACRED"]) { $loscre=$dataAlum[0]["PLACRED"];}
-        //CODIGO QR
-        $cadena= "OF:".$_GET["consec"]."-".$_GET["anio"]."|".$dataAlum[0]["ALUM_MATRICULA"]."|".str_replace(" ","|",$dataAlum[0]["NOMBRE"]).
-        str_replace(" ","|",$dataAlum[0]["CARRERAD"])."|CREDAVANCE:".$loscre."|AVANCE:".$dataAlum[0]["AVANCE"];     
-        $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',20,40,28,28);     
-
+       
 
         $miutil = new UtilUser();
         $elsem=$miutil->dameCardinal($dataAlum[0]["PERIODOS"]);
@@ -292,9 +296,7 @@
         $dataAlum[0]["PROMEDIO_SR"]. " CON UN AVANCE DEL ".$dataAlum[0]["AVANCE"]."%. CON LAS CALIFICACIONES QUE ".
         " A CONTINUACION SE ENLISTAN: "),0,'J',FALSE);
 
-        $pdf->Ln(5);
-        $pdf->MultiCell(0,5,utf8_decode("CON LAS CALIFICACIONES QUE A CONTINUACION SE ENLISTAN:"),0,'J',FALSE);
-        $pdf->Ln();
+        $pdf->Ln(3);
         $pdf->SetFont('Montserrat-Medium','',8);
         $pdf->SetFillColor(172,31,6);
         $pdf->SetTextColor(0);
@@ -360,14 +362,14 @@
         $pdf->MultiCell(0,3,utf8_decode("OPC: OR Ordinario, RE Regularización, EX Extraordinario, O2 Ordinario de ".
         "repetición de curso, R2 Regularización de repetición de curso, EE Examen Especial, EQ Equivalencia de ".
         " Estudios, CO Convalidación, RE Revalidación"),0,'J',FALSE);
-        $pdf->Ln(5);
+        $pdf->Ln(3);
 
         $pdf->SetFont('Montserrat-Medium','',11);
         $pdf->MultiCell(0,5,utf8_decode("PROMEDIO DE LOS PERIODOS LISTADOS ".round(($totalcal/$totalmat),2)),0,'J',FALSE);
-        $pdf->Ln(5);
+        $pdf->Ln(3);
 
 		$fechaof=$miutil->aletras(date("d"))." DÍAS DEL MES DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". $miutil->aletras(date("Y"));
-        $pdf->Ln(5);
+        $pdf->Ln(3);
    
 
         $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
