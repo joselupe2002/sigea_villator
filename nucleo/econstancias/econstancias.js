@@ -100,6 +100,7 @@ function imprimeReporte(tipocons,consecutivo) {
 		if (tipocons=="5") {enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val(); abrirPesta(enlace,"Kardex"); }
 		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=0"; abrirPesta(enlace,"Boleta"); }
 		if (tipocons=="7") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=1"; abrirPesta(enlace,"Boleta"); }
+		if (tipocons=="8") {enlace="nucleo/econstancias/consegresado.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio;  abrirPesta(enlace,"Egresado"); }
 	}
 	if ($("#selTipoExp").val()==2) {
 		if (tipocons=="1") {enlace="nucleo/econstancias/conscal.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio; abrirPesta(enlace,"Calif"); }
@@ -109,6 +110,7 @@ function imprimeReporte(tipocons,consecutivo) {
 		if (tipocons=="5") {enlace="nucleo/avancecurri/kardex.php?matricula="+$("#selAlumnos").val(); abrirPesta(enlace,"Kardex"); }
 		if (tipocons=="6") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=0"; abrirPesta(enlace,"Boleta"); }
 		if (tipocons=="7") {enlace="nucleo/econstancias/boleta.php?matricula="+$("#selAlumnos").val()+"&ciclo="+$("#selciclo").val()+"&tipo=1"; abrirPesta(enlace,"Boleta"); }
+		if (tipocons=="8") {enlace="nucleo/econstancias/consegresado.php?elciclo="+$("#selciclo").val()+"&matricula="+$("#selAlumnos").val()+"&consec="+consecutivo+"&anio="+elanio;  abrirPesta(enlace,"Egresado"); }
 	}
 }
 
