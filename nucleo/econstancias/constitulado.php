@@ -276,9 +276,10 @@
         $fin=$miutil->formatFecha($dataAlum[0]["FIN"]);
 		$ffin=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
         
-        $exa=$miutil->formatFecha($dataTit[0]["FECHA_TIT"]);
-		$fexa=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
-        
+        $exa=$miutil->formatFecha($dataTit[0]["FECHA_ACTA"]);
+       
+		$fexa=date("d", strtotime($exa))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($exa))))." DE ".date("Y", strtotime($exa));
+       // echo $dataTit[0]["FECHA_ACTA"]." ".$exa." ".$fexa;
 
         $pdf->SetStyle("p","Montserrat-Medium","",10,"0,0,0");
         $pdf->SetStyle("vs","Montserrat-Medium","U",10,"0,0,0");
@@ -296,14 +297,14 @@
         "Y LA DIRECCIÓN GENERAL DE PROFESIONES. HACIENDO CONSTAR ADEMÁS, QUE REALIZÓ SUS ESTUDIOS EN EL PERIODO DEL <vb>".
         $finicio."</vb> AL <vb>".$ffin."</vb> OBSERVANDO EN SU ESTANCIA BUENA CONDUCTA. SE INFORMA ADEMÁS QUE YA NO SE ENCUENTRA COMO ALUMN(O)A ACTIV(O)A ".
         "DENTRO DEL INSTITUTO Y QUE SE HAN INICIADO LOS TRÁMITES PARA DARLE DE BAJA EL SEGURO SOCIAL QUE COMO ".
-        "ALUMN(O)A TENÍA SUS DOCUMENTOS ORIGINALES QUE ENTRARON PARA SU TRÁMITE DE TITULACIÓN SERÁN UTILIZADOS ". 
+        "ALUMN(O)A TENÍA. SUS DOCUMENTOS ORIGINALES QUE ENTRARON PARA SU TRÁMITE DE TITULACIÓN SERÁN UTILIZADOS ". 
         "HASTA QUE SE LE ENTREGUE SU TÍTULO Y CEDULA PROFESIONAL Y QUE RECIBIRÁ SU TÍTULO Y CÉDULA PROFESIONAL ". 
-        "APROXIMADAMENTE ENTRE CUATRO A SEIS MESES DESPUÉS DE LA FECHA DE TITULACIÓN, DE ACUERDO A COMO LAS ". 
+        "ENTRE CUATRO A SEIS MESES DESPUÉS DE LA FECHA DE TITULACIÓN, DE ACUERDO A COMO LAS ". 
         "DEPENDENCIAS TANTO ESTATALES COMO FEDERALES LE DEN AGILIDAD AL PROCESO.</p>"),0,'J',FALSE);
         $pdf->Ln(3);
         $pdf->WriteTag(0,4,utf8_decode("<p>LOS DOCUMENTOS ORIGINALES QUE SE ". 
         "RETIENEN POR PROCESO DE TITULACIÓN, SON LOS SIGUIENTES: <vb>ACTA DE NACIMIENTO, CERTIFICADO DE BACHILLERATO, ". 
-        "CERTIFICADO PROFESIONAL. </vb>"),0,'J',FALSE);
+        "CERTIFICADO PROFESIONAL, ACTA DE EXAMEN PROFESIONAL. </vb>"),0,'J',FALSE);
 
 		$fechaof=$miutil->aletras(date("d"))." DÍAS DEL MES DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". $miutil->aletras(date("Y"));
         $pdf->Ln(5);
