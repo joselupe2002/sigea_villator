@@ -304,7 +304,7 @@
         $pdf->Ln(3);
         $pdf->WriteTag(0,4,utf8_decode("<p>LOS DOCUMENTOS ORIGINALES QUE SE ". 
         "RETIENEN POR PROCESO DE TITULACIÓN, SON LOS SIGUIENTES: <vb>ACTA DE NACIMIENTO, CERTIFICADO DE BACHILLERATO, ". 
-        "CERTIFICADO PROFESIONAL, ACTA DE EXAMEN PROFESIONAL. </vb>"),0,'J',FALSE);
+        "CERTIFICADO PROFESIONAL Y ACTA DE EXAMEN PROFESIONAL. </vb>"),0,'J',FALSE);
 
 		$fechaof=$miutil->aletras(date("d"))." DÍAS DEL MES DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". $miutil->aletras(date("Y"));
         $pdf->Ln(5);
