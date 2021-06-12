@@ -290,7 +290,7 @@
         $dataAlum[0]["NOMBRE"]."</vb> ES EGRESADO DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>, CON PLAN DE ESTUDIOS <vb>".
         $dataAlum[0]["MAPA"]."</vb> Y LA ESPECIALIDAD DE <vb>".$dataAlum[0]["ESPECIALIDADD"]."</vb> CON NÚMERO DE CONTROL <vb>".
         $dataAlum[0]["ALUM_MATRICULA"]."</vb>, Y SE ENCUENTRA COMO <vb>TITULADO(A)</vb>, QUIEN PRESENTO SU EXAMEN PROFESIONAL EL DIA <vb>".
-        $fexa."</vb> POR LA OPCION <vb>".$dataTit[0]["OPCIOND"]."</vb> CON EL TEMA: <vb>".$dataTit[0]["TEMA"]."</vb>.</p>"),0,'J',FALSE);
+        $fexa."</vb> POR LA OPCION <vb>".$dataTit[0]["OPCIOND"]."</vb> CON EL TEMA: <vb>".strtoupper($dataTit[0]["TEMA"])."</vb>.</p>"),0,'J',FALSE);
 
         $pdf->Ln(3);
         $pdf->WriteTag(0,4,utf8_decode("<p>EL TITULO Y CÉDULA PROFESIONAL SE ENCUENTRAN EN PROCESO DE REGISTRO EN LA SECRETARÍA DE EDUCACIÓN DE VERACRUZ ".
