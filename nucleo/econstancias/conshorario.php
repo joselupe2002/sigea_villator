@@ -1,7 +1,7 @@
 
 <?php session_start(); if (($_SESSION['inicio']==1)) {
 	header('Content-Type: text/html; charset='.$_SESSION['encode']);
-	require('../../fpdf/fpdf.php');
+	require('../../fpdf/PDF_WriteTag.php');
 	include("../.././includes/Conexion.php");
 	include("../.././includes/UtilUser.php");
 	$miConex = new Conexion();
@@ -12,7 +12,7 @@
 
 	
 	
-	class PDF extends FPDF {
+	class PDF extends PDF_WriteTag {
        
         
         function parseVar($key='',$value='') {
@@ -140,7 +140,7 @@
 			{		
                 $data=[];			
                 $miConex = new Conexion();
-                $sql="SELECT * FROM ciclosesc where CICL_CLAVE=(select MAX(ifnull(PDOCVE,0)) from dlista where ALUCTR='".$_GET["matricula"]."');";
+                $sql="SELECT * FROM ciclosesc where CICL_CLAVE='".$_GET["elciclo"]."';";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
@@ -267,16 +267,21 @@
         if ($dataAlum[0]["CRETOT"]>$dataAlum[0]["PLACRED"]) { $loscre=$dataAlum[0]["PLACRED"];}
        
         
+        $pdf->SetStyle("p","Montserrat-Medium","",11,"0,0,0");
+        $pdf->SetStyle("vs","Montserrat-Medium","U",11,"0,0,0");
+		$pdf->SetStyle("vsb","Montserrat-Medium","UB",11,"0,0,0");
+        $pdf->SetStyle("vb","Montserrat-ExtraBold","B",11,"0,0,0");
+
         $miutil = new UtilUser();
         $elsem=$miutil->dameCardinal($dataAlum[0]["PERIODOS"]);
-        $pdf->MultiCell(0,5,utf8_decode("LA (EL) QUE SUSCRIBE, HACE CONSTAR, QUE SEGÚN EL ARCHIVO ESCOLAR, LA (EL) ".
-        $dataAlum[0]["NOMBRE"]." CON  MATRICULA ". $dataAlum[0]["ALUM_MATRICULA"].", ES ".$dataAlum[0]["STATUS"]." EN EL ".$elsem." SEMESTRE ".
-        "DE ".$dataAlum[0]["CARRERAD"].", EN EL PERIODO COMPRENDIDO DE ".
-        $dataCiclo[0]["CICL_INICIOR"]." AL ". $dataCiclo[0]["CICL_FINR"]." CON UN PERÍODO VACACIONAL DE ".
-        $dataCiclo[0]["CICL_VACINI"]." AL ". $dataCiclo[0]["CICL_VACFIN"].", CUBRIENDO ".$loscre." DE UN TOTAL DE ".$dataAlum[0]["PLACRED"].
-        " CRÉDITOS DEL PLAN DE ESTUDIOS, UN PROMEDIO DE ".
-        $dataAlum[0]["PROMEDIO_SR"]. " CON UN AVANCE DEL ".$dataAlum[0]["AVANCE"]."%. CON LAS CALIFICACIONES QUE ".
-        " A CONTINUACION SE ENLISTAN: "),0,'J',FALSE);
+        $pdf->WriteTag(0,5,utf8_decode("<p> LA (EL) QUE SUSCRIBE, HACE CONSTAR, QUE SEGÚN EL ARCHIVO ESCOLAR, LA (EL) <vb>C. ".
+        $dataAlum[0]["NOMBRE"]."</vb> CON  MATRICULA <vb>". $dataAlum[0]["ALUM_MATRICULA"]."</vb>, ES <vb>".$dataAlum[0]["STATUS"]."</vb> EN EL <vb>".$elsem."</vb> SEMESTRE ".
+        "DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>, EN EL PERIODO COMPRENDIDO DE <vb>".
+        $dataCiclo[0]["CICL_INICIO"]."</vb> AL <vb>". $dataCiclo[0]["CICL_FIN"]."</vb> CON UN PERÍODO VACACIONAL DE <vb>".
+        $dataCiclo[0]["CICL_VACINI"]."</vb> AL <vb>". $dataCiclo[0]["CICL_VACFIN"]."</vb>, CUBRIENDO <vb>".$loscre."</vb> DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"].
+        "</vb> CRÉDITOS DEL PLAN DE ESTUDIOS, UN PROMEDIO DE <vb>".
+        $dataAlum[0]["PROMEDIO_SR"]. "</vb> CON UN AVANCE DEL <vb>".$dataAlum[0]["AVANCE"]."%</vb>. CON EL HORARIO QUE ".
+        " A CONTINUACION SE ENLISTA: </p>"),0,'J',FALSE);
 
         $pdf->Ln(3);
         $pdf->SetFillColor(172,31,6);

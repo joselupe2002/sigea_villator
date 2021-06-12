@@ -142,7 +142,7 @@
 			{		
                 $data=[];			
                 $miConex = new Conexion();
-                $sql="SELECT * FROM ciclosesc where CICL_CLAVE=(select MAX(ifnull(PDOCVE,0)) from dlista where ALUCTR='".$_GET["matricula"]."');";
+                $sql="SELECT * FROM ciclosesc where CICL_CLAVE='".$_GET["elciclo"]."';";
                 
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
