@@ -59,7 +59,12 @@
 			        </thead> 
 			  </table>	
 		</div>
+		<button class="btn btn-white btn-info btn-bold" onclick="imprimirAcuse();">
+				<i class="ace-icon fa fa-floppy-o bigger-180 blue"></i>
+						<span class="fontRobotoB bigger-180">Imprimir Acuse de Encuesta</span>
+		</button>
 
+ 
 
  
 <!-- DIALOGO DE ESPERA -->     

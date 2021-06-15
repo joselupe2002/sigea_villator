@@ -119,3 +119,36 @@ function evaluar(id,profesor,materia,materiad,grupo,ciclo,profesord,idgrupo){
 }
 
 
+
+
+
+function imprimirAcuse() {
+    
+
+    elsql="SELECT COUNT(*) as HAY FROM ( "+
+        "select (select count(*) from ed_respuestasv2 h where h.`MATRICULA`=e.ALUCTR"+
+        " AND h.CICLO=PDOCVE AND h.MATERIA=MATCVE AND TERMINADA='S') AS ESTA"+
+        " from dlista e"+
+        " where e.ALUCTR='"+elusuario+"' and e.PDOCVE='"+ $("#elciclo").html()+"' and e.BAJA='N' and LISTC15<>9999) u"+
+        " WHERE ESTA=0";
+    
+    parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+    
+    $.ajax({
+        type: "POST",
+        data:parametros,
+        url:  "../base/getdatossqlSeg.php",
+        success: function(data){
+            losdatos=JSON.parse(data);
+            if (losdatos[0]["HAY"]==0) {
+                enlace="nucleo/pa_evaldocv2/acuse.php?mat="+elusuario+"&ciclo="+ $("#elciclo").html();
+                abrirPesta(enlace,"Acuse");
+            }
+            else {
+                alert ("Para poder imprimir su ACUSE debe evaluar todas sus asignaturas")
+            }
+        }
+    });
+
+    
+}
