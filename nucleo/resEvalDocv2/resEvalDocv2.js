@@ -273,7 +273,7 @@ function cargarInformacionA(){
 	" (SELECT COUNT(DISTINCT(l.IDGRUPO)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.CICLO='"+$("#selCiclos").val()+"' and l.MATRICULA=b.ALUM_MATRICULA) AS RES"+
 	" from dlista a, falumnos b, cmaterias c  where PDOCVE='"+$("#selCiclos").val()+"'"+
 	" and a.ALUCTR=b.ALUM_MATRICULA"+
-	" and a.MATCVE=c.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') "+
+	" and a.MATCVE=c.MATE_CLAVE "+   //AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') "+
 	" and b.ALUM_CARRERAREG='"+$("#selCarreras").val()+"'"+
 	" group by PDOCVE,ALUCTR";
 
@@ -327,7 +327,7 @@ jQuery.each(grid_data, function(clave, valor) {
 
 function verMateriasA(ciclo,alumno){
 	elsqlMa=elsql="select MATCVE AS MATERIA, MATE_DESCRIP AS MATERIAD, getcuatrimatxalum(MATCVE,ALUCTR) AS SEM "+
-	" from dlista a, cmaterias c  where  PDOCVE='"+ciclo+"'  and  a.MATCVE=c.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') AND ALUCTR='"+alumno+"'  ORDER BY 3,1";
+	" from dlista a, cmaterias c  where  PDOCVE='"+ciclo+"'  and  a.MATCVE=c.MATE_CLAVE AND ALUCTR='"+alumno+"'  ORDER BY 3,1";
 
 	parametros={sql:elsqlMa,dato:sessionStorage.co,bd:"Mysql"}
 
