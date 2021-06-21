@@ -72,7 +72,7 @@ contMat=1;
 		elsql="select a.IDDETALLE, PROFESOR, PROFESORD, MATERIA, MATERIAD, SEMESTRE, SIE AS GRUPO, "+
 			  "(SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE) AS RES, "+
 			  "(select count(*) from dlista where IDGRUPO=a.IDDETALLE AND BAJA='N') AS ALUM "+
-		      " from vedgrupos a, cmaterias b where a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') and a.CICLO='"+$("#selCiclos").val()+"'"+ 
+		      " from vedgrupos a, cmaterias b where a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I') and a.CICLO='"+$("#selCiclos").val()+"'"+ 
 			  " and a.CARRERA="+$("#selCarreras").val()+"  ORDER BY SEMESTRE,MATERIAD";
 	  
 		mostrarEspera("esperahor","grid_resEvalDocv2","Cargando Datos...");
@@ -153,7 +153,7 @@ function cargarInformacionP(){
 		  "SUM((SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE)) AS RES, "+
 		  "SUM((select count(*) from dlista where IDGRUPO=a.IDDETALLE AND BAJA='N')) AS ALUM "+
 		  " from vedgrupos a, cmaterias b, pempleados z LEFT OUTER JOIN  fures y ON (z.EMPL_DEPTO=y.URES_URES)  where a.CICLO='"+$("#selCiclos").val()+"'"+ 
-		  " and a.PROFESOR=z.EMPL_NUMERO and a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP')"+
+		  " and a.PROFESOR=z.EMPL_NUMERO and a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I')"+
 		  " GROUP BY   CICLO, PROFESOR, PROFESORD, z.EMPL_DEPTO" +
 		  "  ORDER BY  CICLO, z.EMPL_DEPTO, PROFESORD";
 
@@ -218,7 +218,7 @@ function verMaterias(ciclo,profesor){
 	elsqlMa=elsql="select a.IDDETALLE, PROFESOR, PROFESORD, MATERIA, MATERIAD, SEMESTRE, SIE AS GRUPO, "+
 	"(SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE) AS RES, "+
 	"(select count(*) from dlista where IDGRUPO=a.IDDETALLE AND BAJA='N') AS ALUM "+
-	" from vedgrupos a, cmaterias b where a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') "+
+	" from vedgrupos a, cmaterias b where a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I') "+
 	"and a.CICLO='"+ciclo+"' and PROFESOR='"+profesor+"'"+ " ORDER BY SEMESTRE,MATERIAD";
 
 	parametros={sql:elsqlMa,dato:sessionStorage.co,bd:"Mysql"}
@@ -273,7 +273,7 @@ function cargarInformacionA(){
 	" (SELECT COUNT(DISTINCT(l.IDGRUPO)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.CICLO='"+$("#selCiclos").val()+"' and l.MATRICULA=b.ALUM_MATRICULA) AS RES"+
 	" from dlista a, falumnos b, cmaterias c  where PDOCVE='"+$("#selCiclos").val()+"'"+
 	" and a.ALUCTR=b.ALUM_MATRICULA"+
-	" and a.MATCVE=c.MATE_CLAVE "+   //AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') "+
+	" and a.MATCVE=c.MATE_CLAVE "+   //AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I') "+
 	" and b.ALUM_CARRERAREG='"+$("#selCarreras").val()+"'"+
 	" group by PDOCVE,ALUCTR";
 
@@ -383,7 +383,7 @@ function cargarFaltantes(){
 	"ALUM_CORREO AS CORREO, ALUM_CORREOINS AS CORREOINS, ALUM_TELEFONO AS TELEFONO"+
 	" from dlista a, falumnos b, ccarreras, cmaterias where a.PDOCVE="+$("#selCiclos").val()+" and "+
 	"ALUCTR=ALUM_MATRICULA and CARR_CLAVE=ALUM_CARRERAREG AND "+
-	"MATCVE=MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') AND "+
+	"MATCVE=MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I') AND "+
 	" a.ID NOT in (select IFNULL(h.IDDETALLE,0) from ed_respuestasv2 h) order by ALUM_APEPAT, ALUM_APEMAT,ALUM_NOMBRE";
 
 	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}

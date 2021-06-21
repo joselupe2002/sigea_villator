@@ -233,7 +233,7 @@
                 $car=" and ALUM_CARRERAREG='".$_GET["depto"]."'"; if ($_GET["depto"]=="0") {$car="";}
 
                 $sql=" select * from ed_respuestasv2 b, cmaterias, falumnos  where MATERIA=MATE_CLAVE ".
-                " and ifnull(MATE_TIPO,'') NOT IN ('T')  AND MATRICULA=ALUM_MATRICULA AND b.CICLO='".$_GET["ciclo"]."'".$car;
+                " and ifnull(MATE_TIPO,'') NOT IN ('T','RP','I')  AND MATRICULA=ALUM_MATRICULA AND b.CICLO='".$_GET["ciclo"]."'".$car;
 
                 //echo $sql;
 
