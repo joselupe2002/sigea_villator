@@ -191,11 +191,32 @@
 
                 $datagen=$this->LoadDatosGen();
 
-                $this->Image('../../imagenes/empresa/seplogo.png',20,8,60);
-                $this->SetY(20);
+                $this->AddFont('Montserrat-Black','B','Montserrat-Black.php');
+                $this->AddFont('Montserrat-Black','','Montserrat-Black.php');
+                $this->AddFont('Montserrat-Medium','B','Montserrat-Medium.php');
+                $this->AddFont('Montserrat-Medium','','Montserrat-Medium.php');
+                $this->AddFont('Montserrat-SemiBold','','Montserrat-SemiBold.php');
+                $this->AddFont('Montserrat-SemiBold','B','Montserrat-SemiBold.php');
+                $this->AddFont('Montserrat-ExtraBold','B','Montserrat-ExtraBold.php');
+                $this->AddFont('Montserrat-ExtraBold','','Montserrat-ExtraBold.php');
+                $this->AddFont('Montserrat-ExtraBold','I','Montserrat-ExtraBold.php');
+                $this->AddFont('Montserrat-ExtraLight','I','Montserrat-ExtraLight.php');
+                $this->AddFont('Montserrat-ExtraLight','','Montserrat-ExtraLight.php');
+
+                $this->Image('../../imagenes/empresa/fondo.png',0,0,187,275);
+                $this->Image('../../imagenes/empresa/tit_sep.png',20,8,60);
+                $this->Image('../../imagenes/empresa/tit_tecnm.png',85,8,28);
+                $this->Image('../../imagenes/empresa/pie1.png',115,8,13);
+                $this->SetY(8);
                 $this->SetFont('Arial','',12);
                 $this->SetX(100);
-                $this->MultiCell(100,5,utf8_decode($datagen[0]["inst_razon"]),0,'R');
+                $this->SetFont('Montserrat-Medium','B',7);
+                $this->Cell(0,3,utf8_decode("Secretaria de Educacion Pública"),0,1,'R');    
+                $this->Cell(0,3,utf8_decode("Tecnológico Nacional de México"),0,1,'R');    
+                $this->Cell(0,3,utf8_decode("Secretaria Académica, de Investigación e Innovación"),0,1,'R'); 
+                $this->Cell(0,3,utf8_decode("Dirección de Docencia e Innovación Educativa"),0,1,'R'); 
+                $this->Cell(0,3,utf8_decode("Campus Perote"),0,1,'R');   
+                $this->Cell(0,3,utf8_decode("Departamento de Desarrollo Académico"),0,1,'R');            
                 $this->Ln(5);	
 
                 $this->SetX(10);
@@ -227,8 +248,30 @@
 
 			function Footer()
 			{	                
-                $miutil = new UtilUser();             
-                //$miutil->getPie($this,'V');
+                $miutil = new UtilUser(); 
+                $datagen=$this->LoadDatosGen();           
+               // $miutil->getPie($this,'V');
+
+                $direccion=$datagen[0]["inst_direccion"];
+			    $telefonos=$datagen[0]["inst_telefono"];
+			    $pagina=$datagen[0]["inst_pagina"];
+
+                
+                $this->SetX(20);
+                $this->SetY(-20);
+                $this->SetFont('Montserrat-Medium','B',7);
+                $this->Cell(90,3,utf8_decode("Km. 2.5 Carretera Perote-México 91270 Perote, Ver."),0,1,'C');  
+                $this->Cell(90,3,utf8_decode("Tel(s). 2282 825 3150 y 51 2281 825 36 63 Fax. 22 81 26 21 27 Cel. Fax (922) 22 243 36"),0,1,'C');  
+                $this->Cell(90,3,utf8_decode("Correos: dda_dperote@tecnm.mx, dir_perote@tecnm.mx"),0,1,'C');  
+
+               $this->Image('../../imagenes/empresa/ed_pie1.png',120,250,18);
+               $this->Image('../../imagenes/empresa/ed_pie2.png',140,250,18);
+               $this->Image('../../imagenes/empresa/ed_pie3.png',160,250,19);
+               $this->Image('../../imagenes/empresa/ed_pie4.png',180,250,21);
+
+               $this->SetDrawColor(243, 240, 229);
+               $this->SetLineWidth(0.7);
+               $this->Line(20,247,200,247);
 		
 			}
 
