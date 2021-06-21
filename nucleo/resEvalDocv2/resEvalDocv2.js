@@ -72,7 +72,7 @@ contMat=1;
 		elsql="select a.IDDETALLE, PROFESOR, PROFESORD, MATERIA, MATERIAD, SEMESTRE, SIE AS GRUPO, "+
 			  "(SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE) AS RES, "+
 			  "(select count(*) from dlista where IDGRUPO=a.IDDETALLE AND BAJA='N') AS ALUM "+
-		      " from vedgrupos a where a.CICLO='"+$("#selCiclos").val()+"'"+ 
+		      " from vedgrupos a, camterias b where a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP') and a.CICLO='"+$("#selCiclos").val()+"'"+ 
 			  " and a.CARRERA="+$("#selCarreras").val()+"  ORDER BY SEMESTRE,MATERIAD";
 	  
 		mostrarEspera("esperahor","grid_resEvalDocv2","Cargando Datos...");
