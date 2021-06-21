@@ -152,7 +152,7 @@ function cargarInformacionP(){
 	elsql="select CICLO,PROFESOR, PROFESORD, z.EMPL_DEPTO as DEPTO, ifnull(URES_DESCRIP,'') AS DEPTOD,"+
 		  "SUM((SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestasv2 l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE)) AS RES, "+
 		  "SUM((select count(*) from dlista where IDGRUPO=a.IDDETALLE AND BAJA='N')) AS ALUM "+
-		  " from vedgrupos a, pempleados z, cmaterias b LEFT OUTER JOIN  fures y ON (z.EMPL_DEPTO=y.URES_URES)  where a.CICLO='"+$("#selCiclos").val()+"'"+ 
+		  " from vedgrupos a, cmaterias b, pempleados z LEFT OUTER JOIN  fures y ON (z.EMPL_DEPTO=y.URES_URES)  where a.CICLO='"+$("#selCiclos").val()+"'"+ 
 		  " and a.PROFESOR=z.EMPL_NUMERO and a.MATERIA=b.MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP')"+
 		  " GROUP BY   CICLO, PROFESOR, PROFESORD, z.EMPL_DEPTO" +
 		  "  ORDER BY  CICLO, z.EMPL_DEPTO, PROFESORD";
