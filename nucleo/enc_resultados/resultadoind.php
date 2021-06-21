@@ -127,7 +127,7 @@
                 $sql="select a.IDDETALLE, PROFESOR, PROFESORD, MATERIA, MATERIAD, SEMESTRE, SIE AS GRUPO, ".
                 "(SELECT COUNT(DISTINCT(l.MATRICULA)) FROM ed_respuestas l where l.TERMINADA='S' and l.IDGRUPO=a.IDDETALLE) AS RES, ".
                 "(select count(*) from dlista where IDGRUPO=a.IDDETALLE AND BAJA='N') AS ALUM ".
-                " from vedgrupos a, cmaterias b where MATERIA=MATE_CLAVE AND ifnull(MATE_TIPOMAT,'0') NOT IN ('RP','AC') ".
+                " from vedgrupos a, cmaterias b where MATERIA=MATE_CLAVE AND ifnull(MATE_TIPO,'0') NOT IN ('RP','AC') ".
                 " AND  a.CICLO='".$_GET["ciclo"]."' and PROFESOR='".$_GET["profesor"]."'". " ORDER BY SEMESTRE,MATERIAD";
 
                 //echo $sql;
@@ -157,7 +157,7 @@
                 $data=[];	
                 $miConex = new Conexion();
                 $sql="select b.CICLO, b.PROFESOR, o.SECCION, o.LETRASECCION, count(*) AS NUM, sum(RESPUESTA) AS TOTAL ".
-                " from ed_preguntas o, ed_respuestas b, cmaterias c  where b.MATERIA=MATE_CLAVE AND ifnull(MATE_TIPOMAT,'0') NOT IN ('RP','AC') ".
+                " from ed_preguntas o, ed_respuestas b, cmaterias c  where b.MATERIA=MATE_CLAVE AND ifnull(MATE_TIPO,'0') NOT IN ('RP','AC') ".
                 " and o.IDP=b.IDPREGUNTA and b.CICLO='".$_GET["ciclo"]."' ".
                 " and b.PROFESOR='".$_GET["profesor"]."'".
                 " group by b.CICLO, b.PROFESOR, o.SECCION,LETRASECCION ORDER BY LETRASECCION";
@@ -175,7 +175,7 @@
                 $data=[];	
                 $miConex = new Conexion();
                 $sql="select DESCRIP AS OBS from ed_observa u, edgrupos v, cmaterias z where ".
-                " DGRU_MATERIA=MATE_CLAVE AND ifnull(MATE_TIPOMAT,'0') NOT IN ('RP','AC')".
+                " DGRU_MATERIA=MATE_CLAVE AND ifnull(MATE_TIPO,'0') NOT IN ('RP','AC')".
                 " and  u.IDGRUPO=v.DGRU_ID and ".
                 "v.DGRU_PROFESOR='".$_GET["profesor"]."' and v.DGRU_CICLO='".$_GET["ciclo"]."' and DESCRIP<>''";
 
