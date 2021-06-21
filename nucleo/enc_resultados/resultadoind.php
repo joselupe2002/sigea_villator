@@ -175,7 +175,7 @@
                 $data=[];	
                 $miConex = new Conexion();
                 $sql="select DESCRIP AS OBS from ed_observa u, edgrupos v, cmaterias z where ".
-                " DGRU_MATERIA=MATE_CLAVE AND ifnull(MATE_TIPOMAT,'0') NOT IN ('RP','AC')"
+                " DGRU_MATERIA=MATE_CLAVE AND ifnull(MATE_TIPOMAT,'0') NOT IN ('RP','AC')".
                 " and  u.IDGRUPO=v.DGRU_ID and ".
                 "v.DGRU_PROFESOR='".$_GET["profesor"]."' and v.DGRU_CICLO='".$_GET["ciclo"]."' and DESCRIP<>''";
 
