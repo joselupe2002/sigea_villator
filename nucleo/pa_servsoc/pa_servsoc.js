@@ -283,6 +283,7 @@ var miciclo="";
 		" AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='SOLSERSOC' "+
 		" order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
 
+		console.log("Abrir Captura");
 
 		parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 		$.ajax({
@@ -340,6 +341,8 @@ var miciclo="";
 
 	
 	function capturaProyecto(){
+
+		console.log("Captura de Datos Pres");
 
 		elsql="select ifnull(ID,'0') as ID,ifnull( MATRICULA,'') AS MATRICULA,ifnull( CICLO,'') AS CICLO,ifnull( INICIO,'') AS INICIO,"+
 		"ifnull( PROGRAMA,'') AS PROYECTO,ifnull( TERMINO,'') AS TERMINO,ifnull( EMPRESA,'') AS EMPRESA,"+
