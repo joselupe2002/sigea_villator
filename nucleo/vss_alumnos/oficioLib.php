@@ -92,9 +92,9 @@
 		$data = $pdf->LoadData();
 		$miutil = new UtilUser();
 		$fechadec=$miutil->formatFecha($data[0]["INICIO"]);
-		$fechaini=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
+		$fechaini=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del año ".date("Y", strtotime($fechadec));
 		$fechadec=$miutil->formatFecha($data[0]["TERMINO"]);
-		$fechafin=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
+		$fechafin=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del año ".date("Y", strtotime($fechadec));
 				
 		
 		
@@ -120,7 +120,7 @@
 		$elperiodo='del '.$fechaini.' al '.$fechafin;
 
 		$fechadecof=strtotime($miutil->formatFecha($data[0]["FECHAOF"]));
-		$fechaof=$miutil->aletras(date("d",$fechadecof)).utf8_decode(" días del mes  de ").$miutil->getMesLetra(date("m",$fechadecof))." de ". $miutil->aletras(date("Y",$fechadecof));
+		$fechaof=$miutil->aletras(date("d",$fechadecof)).utf8_decode(" días del mes de ").$miutil->getMesLetra(date("m",$fechadecof))." del año ". $miutil->aletras(date("Y",$fechadecof));
         $pdf->Ln(5);
 
 
@@ -133,7 +133,7 @@
 	          ", de la carrera de: ".utf8_decode($data[0]["CARRERAD"]).", con número de matrícula: ".
 			  utf8_decode($data[0]["MATRICULA"]).", concluyó satisfactoriamente su Servicio Social conforme a lo dispuesto en el Artículo 45,".
 			  " de la Ley del Ejercicio Profesional para el Estado de Veracruz de Ignacio de la Llave, ".
-			  " cubriendo un total de ".$data[0]["TOTALHORAS"]." hrs. durante el periodo comprendido del ".
+			  " cubriendo un total de ".$data[0]["TOTALHORAS"]." hrs. durante el periodo comprendido ".
 			  $elperiodo."."),0,'J',false);
 		$pdf->Ln(5);
 
