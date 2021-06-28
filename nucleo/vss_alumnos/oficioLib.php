@@ -120,7 +120,7 @@
 		$elperiodo='del '.$fechaini.' al '.$fechafin;
 
 		$fechadecof=strtotime($miutil->formatFecha($data[0]["FECHAOF"]));
-		$fechaof=$miutil->aletras(date("d",$fechadecof)).utf8_decode(" días del mes de ").$miutil->getMesLetra(date("m",$fechadecof))." del año ". $miutil->aletras(date("Y",$fechadecof));
+		$fechaof=$miutil->aletras(date("d",$fechadecof)).utf8_decode(" días del mes de ").$miutil->getMesLetra(date("m",$fechadecof)).utf8_decode(" del año "). $miutil->aletras(date("Y",$fechadecof));
         $pdf->Ln(5);
 
 
