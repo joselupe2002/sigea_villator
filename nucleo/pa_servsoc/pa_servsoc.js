@@ -209,6 +209,7 @@ var miciclo="";
 															   "    Ya puede cursar el Servicio Social"+
 															   "</div>");
 
+										console.log("Abrir Opciones de Servicio");
 													
 											OpcionesServicio();
 										}
@@ -236,7 +237,7 @@ var miciclo="";
 
 
    function OpcionesServicio(){
-
+	console.log("Opciones de Servicio");
 
 	var abierto=false;
 	$("#panIni").empty();
