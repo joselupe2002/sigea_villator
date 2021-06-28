@@ -75,7 +75,7 @@
 			</div>
 			<div class="col-sm-6" style="text-align:center;">
 				<span id="nombre" class="fontRobotoB bigger-200">ESTUDIO SOCIO-ECONÓMICO</span>  <br> 
-				<span id="carrera" class="text-danger fontRobotoB bigger-200">ITSM</span> <br> 				
+				<span id="carrera" class="text-danger fontRobotoB bigger-200"></span> <br> 				
 			</div>
 			<div class="col-sm-2" style="text-align:center;">
 			    <div style="padding-top:20px;">
