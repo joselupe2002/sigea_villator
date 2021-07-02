@@ -95,13 +95,15 @@
 		
 		$miutil = new UtilUser();
 		
-		
+	
 		$jefediv=$miUtil->getDatoGen("fures","CONCAT(URES_JEFE,'|',URES_URES)","CARRERA",$data[0]["CARRERA_ALUM"]);
 		$datosJefe=explode("|", $jefediv);
+	
 		$jefediv=$miUtil->getDatoEmpl($datosJefe[0],"CONCAT(EMPL_ABREVIA,' ',EMPL_NOMBRE,' ',' ',EMPL_APEPAT,' ',EMPL_APEMAT)") ;
 
 		$depto=$datosJefe[1];
 		
+	
 		
 		$elpsto=$miUtil->getDatoEmpl($datosJefe[0],"EMPL_FIRMAOF");
 		
@@ -139,7 +141,7 @@
         $pdf->SetFont('Montserrat-SemiBold','',10);
         
 
-		if ($data[0]["TIPOCVE"]==19) {
+		if ($data[0]["ID_TIPO"]==19) {
 				$nombre=$miutil->getJefe('500');//Nombre de actividades complementaras
 				$pdf->eljefe=$nombre;
 				$pdf->responsable=$data[0]["RESPONSABLED"];
@@ -149,6 +151,7 @@
 			$pdf->eljefe=$jefediv;
         	$pdf->responsable=$data[0]["RESPONSABLED"];
 			$pdf->eljefepsto=$elpsto;
+		
 		}
 
         
