@@ -139,10 +139,17 @@
         $pdf->SetFont('Montserrat-SemiBold','',10);
         
 
-		$nombre=$miutil->getJefe('500');//Nombre de actividades complementaras
-        $pdf->eljefe=$nombre;
-        $pdf->responsable=$data[0]["RESPONSABLED"];
-        $pdf->eljefepsto="RESPONSABLE DE ACTIVIDADES COMPLEMENTARIAS";
+		if ($data[0]["TIPOCVE"]==19) {
+				$nombre=$miutil->getJefe('500');//Nombre de actividades complementaras
+				$pdf->eljefe=$nombre;
+				$pdf->responsable=$data[0]["RESPONSABLED"];
+				$pdf->eljefepsto="RESPONSABLE DE ACTIVIDADES COMPLEMENTARIAS";
+		}
+		else {
+			$pdf->eljefe=$jefediv;
+        	$pdf->responsable=$data[0]["RESPONSABLED"];
+			$pdf->eljefepsto=$elpsto;
+		}
 
         
         $pdf->MultiCell(0,8,"El que suscribe : ".utf8_decode($data[0]["RESPONSABLED"]).", por este medio se permite hacer de su conocimiento ".
