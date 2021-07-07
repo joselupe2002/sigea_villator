@@ -325,7 +325,7 @@
 		" and CONT_SOLO='".$dataof[0]["CONT_SOLO"]."'";
 
 
-		echo $elsql;
+		//echo $elsql;
 		$res=$miConex->afectaSQL($_SESSION['bd'],$elsql);	    
 		
 
