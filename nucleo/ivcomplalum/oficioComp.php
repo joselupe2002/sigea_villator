@@ -324,7 +324,8 @@
 		"CONT_INFO='".substr($lasmatricula,0,strlen($lasmatricula)-1)."' WHERE CONT_CONTROL='".$depto."-".date("dmY")."-".$_GET["carrera"]."'".
 		" and CONT_SOLO='".$dataof[0]["CONT_SOLO"]."'";
 
-		//echo $elsql;
+
+		echo $elsql;
 		$res=$miConex->afectaSQL($_SESSION['bd'],$elsql);	    
 		
 
