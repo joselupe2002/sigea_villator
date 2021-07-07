@@ -206,7 +206,7 @@
 			function lasComplementarias($id)
 			{
 				$miConex = new Conexion();
-				$sql="SELECT ACTIVIDADD,RESPONSABLED,CREDITOS, PROM, PROML FROM vecompl_cal where MATRICULA='".$id."'";
+				$sql="SELECT ACTIVIDADD,RESPONSABLED,CREDITOS, PROM, PROML, CARRERA_ALUM FROM vecompl_cal where MATRICULA='".$id."'";
 				
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);
 				foreach ($resultado as $row) {
@@ -237,9 +237,10 @@
 		//Extraemos el Departamento de acuerdo a la carrera 
 		$dataDepto = $pdf->LoadDatosDepto('500');
 		
+		
 	
 		//Para el numero de oficio 
-		$depto="500";
+		$depto="500".$_GET["carrera"];
 		$dataof=$miutil->verificaOficio($depto,"COMPLEMENTARIAS",$depto."-".date("dmY"));
 		
 		$fechadecof=$miutil->formatFecha($dataof[0]["CONT_FECHA"]);
