@@ -321,7 +321,7 @@
 		
 		
 		$elsql="UPDATE contoficios set ".
-		"CONT_INFO='".substr($lasmatricula,0,strlen($lasmatricula)-1)."' WHERE CONT_CONTROL='".$depto."-".date("dmY")."'".
+		"CONT_INFO='".substr($lasmatricula,0,strlen($lasmatricula)-1)."' WHERE CONT_CONTROL='".$depto."-".date("dmY")."-".$_GET["carrera"]."'".
 		" and CONT_SOLO='".$dataof[0]["CONT_SOLO"]."'";
 
 		//echo $elsql;
