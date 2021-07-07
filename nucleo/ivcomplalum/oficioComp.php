@@ -240,8 +240,8 @@
 		
 	
 		//Para el numero de oficio 
-		$depto="500".$_GET["carrera"];
-		$dataof=$miutil->verificaOficio($depto,"COMPLEMENTARIAS",$depto."-".date("dmY"));
+		$depto="500";
+		$dataof=$miutil->verificaOficio($depto,"COMPLEMENTARIAS",$depto."-".date("dmY")."-".$_GET["carrera"]);
 		
 		$fechadecof=$miutil->formatFecha($dataof[0]["CONT_FECHA"]);
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
