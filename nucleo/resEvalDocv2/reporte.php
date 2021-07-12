@@ -131,7 +131,7 @@
                 " (select count(*) from dlista where (IDGRUPO=a.IDDETALLE)  ".
                 " or (IDGRUPO IN (SELECT g.DGRU_ID FROM edgrupos g where IFNULL(g.DGRU_BASE,0)=a.IDDETALLE)) AND BAJA='N') AS ALUM ".
                 " from vedgrupos a, cmaterias b  ".
-                " where MATERIA=MATE_CLAVE  and ifnull(MATE_TIPO,'') NOT IN ('T','RP','I')  AND IFNULL(a.BASE,'0')='0' and a.CICLO='".$_GET["ciclo"]."'  and PROFESOR='".$_GET["profesor"]."'". " ORDER BY SEMESTRE,MATERIAD";
+                " where MATERIA=MATE_CLAVE  and ifnull(MATE_TIPO,'') AND EVALDOC='S' NOT IN ('T','RP','I')  AND IFNULL(a.BASE,'0')='0' and a.CICLO='".$_GET["ciclo"]."'  and PROFESOR='".$_GET["profesor"]."'". " ORDER BY SEMESTRE,MATERIAD";
 
                 //echo $sql;
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
