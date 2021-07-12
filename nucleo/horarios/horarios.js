@@ -93,7 +93,7 @@ var matser="";
 		   "                <th style=\"text-align:center\">Viernes</th> "+
 		   "                <th style=\"text-align:center\">Sabado</th> "+
 		   "                <th style=\"text-align:center\">Domingo</th> "+	  
-		   
+		   "                <th style=\"text-align:center\">Eval.Doc</th> "+	  
 		   "             </tr> "+
 		   "            </thead>" +
 		   "         </table>";
@@ -104,7 +104,7 @@ var matser="";
 		       "CICL_HT AS ht, CICL_HP as hp, LUNES AS lunes, MARTES AS martes, MIERCOLES as miercoles,"+
 		       " JUEVES as jueves, VIERNES as viernes, SABADO as sabado, DOMINGO as domingo,   "+
 		       " A_LUNES AS a_lunes, A_MARTES AS a_martes, A_MIERCOLES AS a_miercoles, A_JUEVES AS a_jueves, "+
-		       " A_VIERNES AS a_viernes, A_SABADO AS a_sabado, A_DOMINGO AS a_domingo, CUPO as cupo,SIE,CICL_CUATRIMESTRE AS SEM"+
+		       " EVALDOC,A_VIERNES AS a_viernes, A_SABADO AS a_sabado, A_DOMINGO AS a_domingo, CUPO as cupo,SIE,CICL_CUATRIMESTRE AS SEM"+
 			   " FROM edgrupos, cmaterias, eciclmate WHERE DGRU_CARRERA='"+$("#selCarreras").val()+"'"+
 			   " AND DGRU_CICLO='"+$("#selCiclos").val()+"' and MATE_CLAVE=DGRU_MATERIA and MATE_CLAVE=CICL_MATERIA "+
 			   " AND CICL_MAPA=DGRU_MAPA AND DGRU_MAPA='"+$("#selPlanes").val()+"' order by CICL_CUATRIMESTRE, MATE_DESCRIP";
@@ -283,6 +283,19 @@ function generaTablaHorarios(grid_data){
 	    $("#row"+c).append("<td>"+parte0+" id=\"c_"+c+"_8B\" ondblclick=\"horarioAulas('"+c+"','8B','SABADO','AULA');\"></select>"+parte1+" id=\"c_"+c+"_8\" value=\""+valor.sabado+"\" ondblclick=\"horarioAulas('"+c+"','8B','SABADO','PROFESOR');\">"+parte2);
 	    $("#row"+c).append("<td>"+parte0+" id=\"c_"+c+"_9B\" ondblclick=\"horarioAulas('"+c+"','9B','DOMINGO','AULA');\"></select>"+parte1+" id=\"c_"+c+"_9\" value=\""+valor.domingo+"\" ondblclick=\"horarioAulas('"+c+"','9B','DOMINGO','PROFESOR');\">"+parte2);
 		
+		//==================CHECK PARA EVALUACIÓN DOCENTE ======================
+		valorcheck=""; if (valor.EVALDOC=="S") {valorcheck="checked =\"true\"";}
+		$("#row"+c).append("<td>"+
+								"<div class=\"checkbox\" style=\"padding:0px; margin: 0px;\">"+
+								"<label> "+
+								"<input id=\"c_"+c+"_EVALDOC\" type=\"checkbox\" "+
+								"class=\"selMateria ace ace-switch ace-switch-6\""+valorcheck+" />"+
+								"<span class=\"lbl\"></span>"+
+								"</label> "+
+								"</div> "+
+							"</td>");
+		
+		
 		//AGREGAMOS LA CLASE EDIT A TODOS LOS ELEMENTOS 
 		$("#c_"+c+"_2").addClass("edit");
 		$("#c_"+c+"_2SIE").addClass("edit");
@@ -311,6 +324,9 @@ function generaTablaHorarios(grid_data){
 	    $("#c_"+c+"_8B").val(valor.a_sabado); 
 	    $("#c_"+c+"_9B").html($("#aulas").html()); 
 	    $("#c_"+c+"_9B").val(valor.a_domingo); 
+	    
+
+
 	    c++;
 	    global=c;        			
 	});	
@@ -566,6 +582,8 @@ function validarDatos(fila,id){
 function guardarFila(nombre,id,fila){
 
      if (validarDatos(fila,id)) {
+
+		    valevaldoc='N'; if ($("#c_"+fila+"_EVALDOC").prop("checked")) {valevaldoc='S';}
 			parametros={
 					tabla:"edgrupos",
 					campollave:"DGRU_ID",
@@ -588,7 +606,8 @@ function guardarFila(nombre,id,fila){
 					A_SABADO:$("#c_"+fila+"_8B").val(),
 					A_DOMINGO:$("#c_"+fila+"_9B").val(),
 					CUPO:$("#c_"+fila+"_10").val(),
-					SIE:$("#c_"+fila+"_2SIE").val()
+					SIE:$("#c_"+fila+"_2SIE").val(),
+					EVALDOC:valevaldoc
 					};
 
 			$.ajax({
