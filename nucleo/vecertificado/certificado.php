@@ -150,7 +150,7 @@
             function LoadDatosCertificado()
 			{				
                 $miConex = new Conexion();
-                $sql="SELECT * FROM vecertificado where FOLIO=".$_GET["folio"];                
+                $sql="SELECT * FROM vecertificado where FOLIO='".$_GET["folio"]."'";                
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
 					$data[] = $row;
