@@ -268,8 +268,8 @@
 
 		$pdf->Ln(5);
 		$pdf->Cell(60,5,utf8_decode("PARA USO EXCLUSIVO DE LA OFICINA DE SERVICIO SOCIAL"),"",1,'L',false);
-		$pdf->Cell(60,5,utf8_decode("ACEPTADO:    SI (  )   NO ( )  MOTIVO:  "),"",1,'L',false);
-		$pdf->Cell(60,5,utf8_decode("OBSERVACIONES"),"",1,'L',false);
+		$pdf->Cell(60,5,utf8_decode("ACEPTADO:    SI ( X )   NO ( )  MOTIVO:  "),"",1,'L',false);
+		$pdf->Cell(60,5,utf8_decode("OBSERVACIONES: NINGUNA"),"",1,'L',false);
 
 		$pdf->Output();
 
