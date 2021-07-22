@@ -140,7 +140,7 @@
 		utf8_decode(", con número de control escolar: ").utf8_decode($data[0]["MATRICULA"]).utf8_decode(",  ESTUDIANTE de la carrera de: ").utf8_decode($data[0]["CARRERAD"]).
 		utf8_decode(", sistema: ".utf8_decode($data[0]["MODALIDADD"])." con  No. de seguridad social IMSS: ".$elseguro.
 		", quien desea realizar su Servicio Social en esa Dependencia, cubriendo un total de 480 horas y máximo 500 en el programa: ").
-		utf8_decode($data[0]["PROGRAMA"]). utf8_decode(" en un periodo mínimo de seis meses y no mayor de dos años."),0,'J', false);
+		utf8_decode($data[0]["PROGRAMA"]). utf8_decode(", en un periodo mínimo de seis meses y no mayor de dos años."),0,'J', false);
 		$pdf->Ln(5);
 
 
