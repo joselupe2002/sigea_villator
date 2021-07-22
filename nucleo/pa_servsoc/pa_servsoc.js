@@ -64,7 +64,8 @@ var miciclo="";
 			success: function(dataCic2){ 
 				losdatosCic=JSON.parse( dataCic2); 
 				elciclo=losdatosCic[0][0];
-				elsql="select ifnull(RUTA,'') as RUTA, ifnull(RUTALIB,'') as RUTALIB, count(*) as HAY FROM ss_alumnos a where MATRICULA='"+usuario+"' and CICLO='"+elciclo+"'";
+				//elsql="select ifnull(RUTA,'') as RUTA, ifnull(RUTALIB,'') as RUTALIB, count(*) as HAY FROM ss_alumnos a where MATRICULA='"+usuario+"' and CICLO='"+elciclo+"'"; --Botón para cuando la carta se sube al sistema 
+				elsql="select ID, FINALIZADO, VALIDADO, count(*) as HAY FROM ss_alumnos a where MATRICULA='"+usuario+"' and CICLO='"+elciclo+"'";
 				parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 		
 				$.ajax({
@@ -74,18 +75,33 @@ var miciclo="";
 							success: function(data){	
 								losdatos=JSON.parse(data); 						
 								btn1="";btn2="";		
-								if ((losdatos[0]["HAY"]>0) && (losdatos[0]["RUTA"]!="")) {							
+								if ((losdatos[0]["HAY"]>0) && (losdatos[0]["VALIDADO"]=="S")) {							
+									/*
 									btn1="<a  href=\""+losdatos[0]["RUTA"]+"\" class=\"btn  btn-bold btn-danger\">"+
 										 "     <i class=\"ace-icon white fa fa-file-text bigger-200\"></i><span class=\"fontRobotoB text-white\">Ver Carta Presentación</span>"+
-										 "</a>";							
+										 "</a>";*/
+									enlace="nucleo/vss_alumnos/carta.php?id="+losdatos[0]["ID"]+"&tipo=1";
+									btn1="<a  onclick=\"abrirPesta('"+enlace+"','Carta Presentación')\" class=\"btn  btn-bold btn-danger\">"+
+										 "     <i class=\"ace-icon white fa fa-eye bigger-200\"></i><span class=\"fontRobotoB text-white\">Ver Carta Presentación</span>"+
+										 "</a>";	 
+									
 									}	
-									if ((losdatos[0]["HAY"]>0) && (losdatos[0]["RUTALIB"]!="")) {							
-										btn2="<a  href=\""+losdatos[0]["RUTALIB"]+"\"  class=\"btn  btn-bold btn-success\" >"+
+									if ((losdatos[0]["HAY"]>0) && (losdatos[0]["FINALIZADO"]=="S")) {	
+										enlace="nucleo/vss_alumnos/oficioLib.php?id="+losdatos[0]["ID"]+"&tipo=1";
+										btn2="<a  onclick=\"abrirPesta('"+enlace+"','Carta Lib.')\" class=\"btn  btn-bold btn-success\">"+
+											"     <i class=\"ace-icon white fa fa-file-text bigger-200\"></i><span class=\"fontRobotoB text-white\">Ver Oficio Liberación</span>"+
+											"</a>";
+
+										/*btn2="<a  href=\""+losdatos[0]["RUTALIB"]+"\"  class=\"btn  btn-bold btn-success\" >"+
 										 "     <i class=\"ace-icon white fa fa-file-text bigger-200\"></i><span class=\"fontRobotoB text-white\">Ver Liberación</span>"+
-										 "</a>";							
+										 "</a>";*/
+
 										}	
-								$("#lacarta").append("<div class=\"row\">"+"<div class=\"col-sm-6\">"+btn2+	
-																			"<div class=\"col-sm-6\">"+btn1+"</div></div>");						 
+								$("#lacarta").append("<div class=\"row\" style=\"text-align:center;\">"+
+								                    "      <div class=\"col-sm-6\" style=\"text-align:center;\">"+btn2+"</div>"+	
+													"      <div class=\"col-sm-6\" style=\"text-align:center;\">"+btn1+"</div>"+
+													"</div>"+
+													"<div class=\"row\"><br></div></div>");						 
 							}
 					});
 			}
