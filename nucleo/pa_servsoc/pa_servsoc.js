@@ -438,7 +438,7 @@ var miciclo="";
 							"<label class=\"fontRobotoB\">Teléfono Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["TELSUPSS"]+"\" id=\"telsupss\"></input>"+
 						"</div>"+
 						"<div class=\"col-sm-3\">"+
-						"<label class=\"fontRobotoB\">Teléfono Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["CORREOSUPSS"]+"\" id=\"correosupss\"></input>"+
+						"<label class=\"fontRobotoB\">e-mail Supervisor SS. </label><input class=\"form-control captProy\" value=\""+misdatos[0]["CORREOSUPSS"]+"\" id=\"correosupss\"></input>"+
 						"</div>"+					
 					"</div>"+
 
