@@ -211,7 +211,7 @@
 		$pdf->SetFont('Montserrat-Medium','',10);
 
 		$pdf->Cell(50,5,utf8_decode("Dependencia Oficial:"),"",0,'L',false);
-		$pdf->Cell(120,5,utf8_decode($data[0]["EMPRESA"]),"B",0,'L',false);
+		$pdf->MultiCell(120,3,utf8_decode($data[0]["EMPRESA"]),"B",'L',false);
 		$pdf->Ln(5);
 		$pdf->Cell(50,5,utf8_decode("Titular de la Dependencia:"),"",0,'L',false);
 		$pdf->SetFont('Montserrat-Medium','B',8);
