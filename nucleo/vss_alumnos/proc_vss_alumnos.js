@@ -176,6 +176,44 @@ function impLibSellado(modulo,usuario,institucion, campus,essuper){
 
 }
 
+function impSolSS(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+	if (table.rows('.selected').data().length>0) {
+
+		enlace="nucleo/pa_servsoc/solicitud.php?id="+table.rows('.selected').data()[0]["ID"];
+		abrirPesta(enlace, "Solic.");
+
+	}
+	else {
+		alert ("Debe seleccionar un registro");
+		return 0;
+
+		}
+
+}
+
+
+function impCartaSS(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+	if (table.rows('.selected').data().length>0) {
+
+		enlace="nucleo/pa_servsoc/cartaCom.php?id="+table.rows('.selected').data()[0]["ID"];
+		abrirPesta(enlace, "Solic.");
+
+	}
+	else {
+		alert ("Debe seleccionar un registro");
+		return 0;
+
+		}
+
+}
+
+
+
+
+
+
 
 	
 function veradjss  (modulo,usuario,institucion, campus,essuper){
