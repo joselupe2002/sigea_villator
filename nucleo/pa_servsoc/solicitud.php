@@ -178,19 +178,19 @@
 		$pdf->SetFont('Montserrat-Medium','B',10);	
 		$pdf->Cell(40,5,utf8_decode("Nombre Completo"),"",0,'L',false);
 		$pdf->Cell(130,5,utf8_decode($data[0]["NOMBRE"]),"B",1,'L',false);
-		$pdf->Ln(5);	
+		$pdf->Ln(3);	
 	
-		$pdf->Cell(20,5,utf8_decode("Sexo:"),"",0,'L',false);
-		$pdf->Cell(10,5,utf8_decode($data[0]["SEXO"]),"B",0,'L',false);
-		$pdf->Cell(20,5,utf8_decode("Teléfono:"),"",0,'L',false);
-		$pdf->Cell(30,5,utf8_decode($data[0]["TELEFONO"]),"B",0,'L',false);
-		$pdf->Cell(20,5,utf8_decode("Domicilio:"),"",0,'L',false);
-		$pdf->MultiCell(70,5,utf8_decode($data[0]["DIRECCION"]),"B",'L',false);
-		$pdf->Ln(5);
-		$pdf->Cell(20,5,utf8_decode("E-mail:"),"",0,'L',false);
-		$pdf->Cell(150,5,utf8_decode($data[0]["CORREO"]),"B",0,'L',false);
+		$pdf->Cell(20,3,utf8_decode("Sexo:"),"",0,'L',false);
+		$pdf->Cell(10,3,utf8_decode($data[0]["SEXO"]),"B",0,'L',false);
+		$pdf->Cell(20,3,utf8_decode("Teléfono:"),"",0,'L',false);
+		$pdf->Cell(30,3,utf8_decode($data[0]["TELEFONO"]),"B",0,'L',false);
+		$pdf->Cell(20,3,utf8_decode("Domicilio:"),"",0,'L',false);
+		$pdf->MultiCell(70,3,utf8_decode($data[0]["DIRECCION"]),"B",'L',false);
+		$pdf->Ln(3);
+		$pdf->Cell(20,3,utf8_decode("E-mail:"),"",0,'L',false);
+		$pdf->Cell(150,3,utf8_decode($data[0]["CORREO"]),"B",0,'L',false);
 
-		$pdf->Ln(5);
+		$pdf->Ln(3);
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,5,utf8_decode("ESCOLARIDAD"),"",1,'L',false);
 		$pdf->SetFont('Montserrat-Medium','',10);
@@ -214,25 +214,38 @@
 		$pdf->Cell(120,5,utf8_decode($data[0]["EMPRESA"]),"B",0,'L',false);
 		$pdf->Ln(5);
 		$pdf->Cell(50,5,utf8_decode("Titular de la Dependencia:"),"",0,'L',false);
+		$pdf->SetFont('Montserrat-Medium','B',8);
 		$pdf->Cell(120,5,utf8_decode($data[0]["REPRESENTANTE"]),"B",0,'L',false);
 		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(50,5,utf8_decode("Cargo del Titular:"),"",0,'L',false);
-		$pdf->Cell(120,5,utf8_decode($data[0]["PUESTO"]),"B",0,'L',false);
+		$pdf->SetFont('Montserrat-Medium','B',8);
+		$pdf->MultiCell(120,3,utf8_decode($data[0]["PUESTO"]),"B",'L',false);
 		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(50,5,utf8_decode("Nombre del Programa:"),"",0,'L',false);
-		$pdf->Cell(120,5,utf8_decode($data[0]["PROGRAMA"]),"B",0,'L',false);
-		
+		$pdf->SetFont('Montserrat-Medium','B',8);
+		$pdf->MultiCell(120,3,utf8_decode($data[0]["PROGRAMA"]),"B",'L',false);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Ln(5);
 		$pdf->Cell(20,5,utf8_decode("Modalidad:"),"",0,'L',false);
+		$pdf->SetFont('Montserrat-Medium','B',8);
 		$pdf->Cell(80,5,utf8_decode($data[0]["MODALIDADSSD"]),"B",0,'L',false);
+
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(45,5,utf8_decode("Fecha de Inicio:"),"",0,'L',false);
+		$pdf->SetFont('Montserrat-Medium','B',10);
 		$pdf->Cell(25,5,utf8_decode($data[0]["INICIO"]),"B",0,'L',false);
 
 		$pdf->Ln(5);
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(20,5,utf8_decode("Lugar:"),"",0,'L',false);
+		$pdf->SetFont('Montserrat-Medium','B',8);
 		$pdf->Cell(80,5,utf8_decode($data[0]["MUNICIPIOD"]." ".$data[0]["ESTADOD"]),"B",0,'L',false);
 
+		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(45,5,utf8_decode("Fecha de Terminación:"),"",0,'L',false);
+		$pdf->SetFont('Montserrat-Medium','B',10);
 		$pdf->Cell(25,5,utf8_decode($data[0]["TERMINO"]),"B",0,'L',false);
 
 
@@ -241,7 +254,7 @@
 		$pdf->Cell(0,5,utf8_decode("ACTIVIDADES"),"",1,'L',false);
 		$pdf->SetFont('Montserrat-Medium','',10);
 
-		$pdf->MultiCell(170,5,utf8_decode($data[0]["ACTIVIDADES"]),"",'L',false);
+		$pdf->MultiCell(170,3,utf8_decode($data[0]["ACTIVIDADES"]),"",'L',false);
 
 		$pdf->Ln(5);
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);

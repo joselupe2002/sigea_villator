@@ -309,7 +309,13 @@ var miciclo="";
 			url:  "../base/getdatossqlSeg.php",
 			success: function(data){
 
-				
+				bt2="<button  onclick=\"verProyecto();\" class=\"btn btn-white btn-success btn-bold\">"+
+							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>2. Imprimir Solicitud"+
+							"</button>  &nbsp;  &nbsp; ";
+				bt3="<button  onclick=\"verCartaCom();\" class=\"btn btn-white btn-warning btn-bold\">"+
+							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>3. Carta Compromiso"+
+							"</button>  &nbsp;  &nbsp; ";
+
 				if (JSON.parse(data)[0]["N"]>0) {	
 					
 					elsql="select  ifnull(ENVIADA,'N') AS ENVIADA, count(*) as HAY from ss_alumnos a where  CICLO='"+miciclo+"' and MATRICULA='"+usuario+"'";			
@@ -323,12 +329,7 @@ var miciclo="";
 							bt1="<button  onclick=\"capturaProyecto();\" class=\"btn btn-white btn-info btn-bold\">"+
 							"     <i class=\"ace-icon green glyphicon glyphicon-book\"></i>1. Capturar Solicitud"+
 							"</button> &nbsp;  &nbsp; ";
-							bt2="<button  onclick=\"verProyecto();\" class=\"btn btn-white btn-success btn-bold\">"+
-							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>2. Imprimir Solicitud"+
-							"</button>  &nbsp;  &nbsp; ";
-							bt3="<button  onclick=\"verCartaCom();\" class=\"btn btn-white btn-warning btn-bold\">"+
-							"     <i class=\"ace-icon pink glyphicon glyphicon-print\"></i>3. Carta Compromiso"+
-							"</button>  &nbsp;  &nbsp; ";
+							
 							bt4="<button  onclick=\"enviarSol();\" class=\"btn btn-white btn-danger btn-bold\">"+
 							"     <i class=\"ace-icon blue  fa  fa-share-square-o\"></i>4. Enviar"+
 							"</button>";
@@ -344,12 +345,16 @@ var miciclo="";
 				
 
 				}
-				else { console.log("No hay proceso abierto");
+				else { 
+						$("#pcapt").append(bt2+bt3);
+						console.log("No hay proceso abierto");
 						$("#panIni").append("<div class=\"row\">"+
 						"    <div class=\"col-sm-12\"> "+
 						"          <div class=\"alert alert-danger\">No se encuentra abierto el proceso de  Servicio Social para este Ciclo</div> "+
 						"    </div>");
 				}
+
+				
 				
 			}
 		});
