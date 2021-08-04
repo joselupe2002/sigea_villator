@@ -233,10 +233,10 @@ function cargarFoto(){
 								  "                   atiendas las siguientes instrucciones "+
 								  "             </span><br> <br>"+
 								  "             <span class=\"fontAmaranthB text-light bigger-140\">"+
-								  "                   A. Debe contestar las evaluaciones en este orden 1. EXAMEN DE ADMISIÓN 2. EXAMEN PSICOMÉTRICO Y 3. EXAMEN DE CARRERA."+								  								  
+								  "                   A. Debes de leer y resolver tu Evaluación Diagnostica TecNM en el tiempo establecido."+								  								  
 								  "             </span>  <br>"+
 								  "             <span class=\"fontAmaranthB text-light bigger-140\">"+
-								  "                   B. Tome en cuenta la hora de inicio de cada examen y el tiempo que tiene para contestar."+								  								  
+								  "                   B.  Toma en cuenta la hora de inicio de la Evaluación Diagnostica TecNM."+								  								  
 								  "             </span> <br> "+
 								  "             <span class=\"fontAmaranthB text-light bigger-140\">"+
 								  "                   C. En caso de que tenga problemas de conexión a internet las respuestas quedán grabadas y continuará donde se quedó."+								  								  
