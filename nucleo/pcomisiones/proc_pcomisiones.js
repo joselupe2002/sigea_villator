@@ -63,6 +63,7 @@ function reporteComision(elid,tipo){
 function reporteComRH(elid, tipo){
 	tit='OficioRH';
 	abrirPesta("nucleo/pcomisiones/oficiocomRH.php?tipo="+tipo+"&ID="+elid,tit);
+	//window.open("../pcomisiones/oficiocomRH.php?tipo=0&ID="+elid, '_blank');
     return false;
 }
 
@@ -73,7 +74,8 @@ function oficioCumplida(modulo,tipo){
 	if (table.rows('.selected').data()[0]["CUMPLIDA"]=='S') {
 				tit='OficioSI';
 		        if (tipo==2) {tit='Enviando..';}
-				abrirPesta("nucleo/pcomisiones/oficiocumple.php?tipo="+tipo+"&ID="+elid,tit);				
+				abrirPesta("nucleo/pcomisiones/oficiocumple.php?tipo="+tipo+"&ID="+elid,tit);
+				//window.open("../pcomisiones/oficiocumple.php?tipo="+tipo+"&ID="+elid, '_blank');
 	}
 	else {alert ("La actividad no esta marcada como cumplida")}
     return false;
@@ -86,7 +88,8 @@ function oficioNoCumplida(modulo,tipo){
 	if (table.rows('.selected').data()[0]["CUMPLIDA"]=='N') {
 				tit='OficioNO';
 		        if (tipo==2) {tit='Enviando..';}
-		        abrirPesta("nucleo/pcomisiones/oficionocumple.php?tipo="+tipo+"&ID="+elid, tit)				
+		        abrirPesta("nucleo/pcomisiones/oficionocumple.php?tipo="+tipo+"&ID="+elid, tit)
+				//window.open("../pcomisiones/oficionocumple.php?tipo="+tipo+"&ID="+elid, '_blank');
 	}
 	else {alert ("La actividad no esta marcada como NO cumplida")}
     return false;
@@ -195,7 +198,7 @@ function crearCopias(id,modulo){
         		original=JSON.parse(data);
         		 var loscampos = ["COMI_PROFESOR","COMI_FECHAINI","COMI_FECHAFIN","COMI_HORAINI","COMI_HORAFIN",
         		                  "COMI_LUGAR","COMI_RESPONSABLE","COMI_ACTIVIDAD","COMI_FECHAUS","COMI_USUARIO",
-        		                  "COMI_AUTORIZO","_INSTITUCION","_CAMPUS","COMI_GRUPO"];
+        		                  "COMI_AUTORIZO","_INSTITUCION","_CAMPUS","LEYENDA1","LEYENDA2","COMI_GRUPO"];
         		 
         		c=0;
         		cad="";
@@ -214,6 +217,8 @@ function crearCopias(id,modulo){
      		         original[0]["COMI_AUTORIZO"]+"|"+
      		         original[0]["_INSTITUCION"]+"|"+
      		         original[0]["_CAMPUS"]+"|"+
+					 original[0]["LEYENDA1"]+"|"+
+					 original[0]["LEYENDA2"]+"|"+
      		         original[0]["COMI_GRUPO"];
         			 losdatos[c]=cad;
         			 cad="";

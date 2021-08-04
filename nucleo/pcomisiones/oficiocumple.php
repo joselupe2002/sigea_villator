@@ -78,7 +78,7 @@
 			{
 				$miConex = new Conexion();
 				$resultado=$miConex->getConsulta($_SESSION['bd'],
-						"select  EMPL_NUMERO, CONCAT(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) as NOMBRE, EMPL_CORREOINS ".
+						"select  EMPL_NUMERO, CONCAT(EMPL_ABREVIA,' ',EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) as NOMBRE, EMPL_CORREOINS ".
 						"from pempleados where EMPL_NUMERO='".$matricula."'");
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -114,11 +114,6 @@
 		$depto=$miUtil->getDatoEmpl($data[0]["COMI_AUTORIZO"],"EMPL_DEPTO");
 		$elpsto=$miUtil->getDatoEmpl($data[0]["COMI_PROFESOR"],"EMPL_FIRMAOF");
 		
-			//LEYENDA DE ENCABEZADO
-			$pdf->SetFont('Montserrat-SemiBold','',10);
-			$deptod=$miUtil->LoadURES("URES_DESCRIP",$depto)[0]["URES_DESCRIP"];
-			$pdf->setY(37);
-			$pdf->Cell(0,0,utf8_decode($deptod),0,1,'R');
 		
 		
 		
@@ -141,7 +136,7 @@
 		
 		$pdf->SetFont('Montserrat-Medium','',9);
 		$pdf->Ln(10);
-		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"].$fechaof,0,1,'R');	
+		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"]." ".$fechaof,0,1,'R');	
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,'OFICIO No. '.utf8_decode($dataof[0]["CONT_NUMOFI"]),0,1,'R');
 		$pdf->SetFont('Montserrat-ExtraBold','B',9);
@@ -156,13 +151,20 @@
 		
 		$pdf->SetFont('Montserrat-SemiBold','',10);
 		
-		$laetfecha ='del '.$fechaini.' al '.$fechafin; $etfin=utf8_decode(" en fechas y horas señaladas.");
-		if ($fechaini==$fechafin) {$laetfecha="el ".$fechaini; $etfin=utf8_decode(" en fecha y hora señalada.");}
-		
-		$pdf->MultiCell(0,8,utf8_decode('Por medio de la presente, se hace constar que usted CUMPLIO satisfactoriamente con la actividad "').utf8_decode($data[0]["COMI_ACTIVIDAD"]).
-		utf8_decode('", la cual se llevó a cabo ').$laetfecha.', en horario de '.utf8_decode($data[0]["COMI_HORAINI"]).
-				' a '.$data[0]["COMI_HORAFIN"].utf8_decode(', agradecemos el interés empeñado en esta actividad y lo invitamos a '.
-				' continuar trabajando de la misma manera que lo ha demostrado en esta encomienda. '),0,'J', false);
+		$laetfecha ='del '.$fechaini.' al '.$fechafin; 
+		if ($fechaini==$fechafin) {$laetfecha="el ".$fechaini;}
+
+		if ($data[0]["COMI_LUGAR"]!='NA') {$ellugar=', favor de presentarse en '.utf8_decode($data[0]["COMI_LUGAR"]); } 
+		else {$ellugar='';}
+
+		if ($data[0]["COMI_HORAINI"]!='') {$lahora=', en horario de '.utf8_decode($data[0]["COMI_HORAINI"]).' a '.$data[0]["COMI_HORAFIN"]; } 
+		else {$lahora='';}
+
+
+		$pdf->MultiCell(0,8,utf8_decode('Por medio de la presente, se hace constar que usted CUMPLIO satisfactoriamente con la actividad: "').utf8_decode($data[0]["COMI_ACTIVIDAD"]).
+		utf8_decode('", la cual se llevó a cabo ').$laetfecha.$ellugar.$lahora.", ".utf8_decode(' agradecemos el interés empeñado en esta actividad y lo invitamos a '.
+		' continuar trabajando de la misma manera que lo ha demostrado en esta encomienda. '),0,'J', false);
+
 		$pdf->Ln(5);
 		$pdf->Ln(5);
 		$pdf->MultiCell(0,8,utf8_decode('Sin más por el momento aprovecho para enviarle un cordial saludo.'),0,'J', false);
@@ -172,6 +174,14 @@
 	
 		$dataProf = $pdf->LoadProf($data[0]["COMI_PROFESOR"]);
 			
+		$cadena= "CUMPLIMIENTO|OF:".str_replace("/","|",$dataof[0]["CONT_NUMOFI"]) ."|FECHA:".str_replace("/","",$data[0]["COMI_FECHAINI"])."-".str_replace("/","",$data[0]["COMI_FECHAFIN"]).
+		"|".str_replace(" ","|",$data[0]["COMI_PROFESOR"])."|".
+		str_replace(" ","|",$data[0]["COMI_PROFESORD"]);
+		
+		$pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',30,30,35,35);     
+
+
+
 		if ($_GET["tipo"]=='0') { $pdf->Output(); }
 		
 		if ($_GET["tipo"]=='2') {
@@ -197,7 +207,7 @@
 	      <?php 
 					foreach($dataProf as $rowdes)
 					{
-						$res=$miutil->enviarCorreo($rowdes[2],'SIGEA:ITSP Liberación de Comisión '.$data[0]["COMI_ID"].$data[0]["COMI_ACTIVIDAD"],
+						$res=$miutil->enviarCorreo($rowdes[2],'SIGEA:ITSM Liberación de Comisión '.$data[0]["COMI_ID"].$data[0]["COMI_ACTIVIDAD"],
 						'Liberación de Comisión:  '.$data[0]["COMI_ACTIVIDAD"].'<br>'.
 						'Fechas:  '.$data[0]["COMI_FECHAINI"].' al:  '.utf8_decode($data[0]["COMI_FECHAFIN"]).'<br>'.
 						'Lugar: '.$data[0]["COMI_LUGAR"].'<br>'.

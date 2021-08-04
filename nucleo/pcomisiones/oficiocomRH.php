@@ -77,7 +77,7 @@
 			{
 				$miConex = new Conexion();
 				$resultado=$miConex->getConsulta($_SESSION['bd'],
-						"select  EMPL_NUMERO, CONCAT(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) as NOMBRE, EMPL_CORREOINS ".
+						"select  EMPL_NUMERO, CONCAT(EMPL_ABREVIA,' ',EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) as NOMBRE, EMPL_CORREOINS ".
 						"from pempleados where EMPL_NUMERO='".$matricula."'");
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -110,7 +110,6 @@
 		$pdf->AddPage();
 		
 	
-
 		 
 		$data = $pdf->LoadData();
 		$miutil = new UtilUser();
@@ -121,7 +120,7 @@
 		$fechafin=date("d", strtotime($fechadec))." de ".$miutil->getFecha($fechadec,'MES'). " del ".date("Y", strtotime($fechadec));
 		
 		
-	
+		
 		
 		$dataGen = $pdf->LoadDatosGen();
 		$nombre=$miutil->getJefe('302');//Nombre del puesto de Recursos Humanos
@@ -130,14 +129,6 @@
 		//Para el numero de oficio 
 		$depto=$miUtil->getDatoEmpl($data[0]["COMI_AUTORIZO"],"EMPL_DEPTO");
 		$dataof=$miutil->verificaOficio($depto,"COMISIONRH",$_GET["ID"]);
-
-		//LEYENDA DE ENCABEZADO
-		$pdf->SetFont('Montserrat-SemiBold','',10);
-		$deptod=$miUtil->LoadURES("URES_DESCRIP",$depto)[0]["URES_DESCRIP"];
-		$pdf->setY(37);
-		$pdf->Cell(0,0,utf8_decode($deptod),0,1,'R');
-		
-
 		
 		$fechadecof=$miutil->formatFecha($dataof[0]["CONT_FECHA"]);
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
@@ -154,7 +145,7 @@
 		
 		$pdf->SetFont('Montserrat-Medium','',9);
 		$pdf->Ln(10);
-		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"]." ".$fechaof,0,1,'R');	
+		$pdf->Cell(0,0,$dataGen[0]["inst_fechaof"].$fechaof,0,1,'R');	
 		$pdf->Ln(5);
 		$pdf->Cell(0,0,'OFICIO No. '.utf8_decode($dataof[0]["CONT_NUMOFI"]),0,1,'R');
 		$pdf->SetFont('Montserrat-ExtraBold','B',9);
@@ -178,7 +169,7 @@
 		$losProfes=$pdf->losComisionados($data[0]["COMI_ID"],$data[0]["COMI_GRUPO"]);
 		foreach($losProfes as $rowdes)
 		{
-			$pdf->MultiCell(0,5,utf8_decode($rowdes[0]),0,'J', false);
+			$pdf->MultiCell(0,5,$rowdes[0],0,'J', false);
 		}
 		$pdf->ln();
 		
