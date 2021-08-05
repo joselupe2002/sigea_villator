@@ -179,7 +179,7 @@ function generaTablaMaterias(grid_data,campos){
 
 /*==================ELIMINAR REGISTROS =================================*/
 function eliminarPresenta(curp,idexam,idaplica){
-	alert (curp+" "+idexam+" "+idaplica);
+
 
 	parametros={
 		tabla:"linrespuestas",
