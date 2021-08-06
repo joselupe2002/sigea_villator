@@ -131,7 +131,7 @@
                    " PROFESOR AS PROFESOR, concat(EMPL_NOMBRE,' ',EMPL_APEPAT,' ',EMPL_APEMAT) AS PROFESORD".
                    " from vboleta a, falumnos b, veciclmate c, pempleados d where  MATRICULA=ALUM_MATRICULA AND  CICLO='".$_GET["ciclo"]."'".
                    " AND MATRICULA='".$_GET["matricula"]."'  and ALUM_MAPA=c.CICL_MAPA and MATERIA=c.CICL_MATERIA".
-                   " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T') and BAJA='N' and CERRADO='S' ";
+                   " and PROFESOR=d.EMPL_NUMERO  and IFNULL(CICL_TIPOMAT,'0') NOT IN ('I','OC','T','AC') and BAJA='N' and CERRADO='S' ";
                    
                    $resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
                    foreach ($resultado as $row) {
