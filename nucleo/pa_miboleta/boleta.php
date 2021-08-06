@@ -320,7 +320,7 @@
                         $this->Ln();
                         $this->setX(120);
                         $this->Cell(25,5,"PROMEDIO:",1,0,'R');
-                        $this->Cell(10,5,round(($sumaapr/$nmat),0),1,1,'R');
+                        $this->Cell(10,5,round(($sumaapr/$nmat),1),1,1,'R');
                         $this->setX(120);
                         $this->Cell(25,5,"MAT. REPR:",1,0,'R');
                         $this->Cell(10,5,$nrep,1,1,'R');
