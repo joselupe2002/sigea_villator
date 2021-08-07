@@ -4,7 +4,7 @@
    -->
 
 
-<?php session_start(); if (($_SESSION['inicio']==1)  && (strpos($_SESSION['permisos'],$_GET["modulo"])) ){ 
+   <?php session_start(); if (($_SESSION['inicio']==1)  && (strpos($_SESSION['permisos'],$_GET["modulo"])) ){ 
 	header('Content-Type: text/html; charset='.$_SESSION['encode']);
 	include("../.././includes/Conexion.php");
 	include("../.././includes/UtilUser.php");
@@ -29,7 +29,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>estilos/preloader.css" type="text/css" media="screen">         
         <link href="imagenes/login/sigea.png" rel="image_src" />
-		<link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/ui.jqgrid.min.css" />
 
         <style type="text/css">table.dataTable tbody tr.selected {color: blue; font-weight:bold; }</style>
@@ -176,7 +175,7 @@
 
 
 <?php if ($tieneProc=='S') {?>
-    <script src="<?php echo $nivel; ?>nucleo/<?php echo $_GET["modulo"];?>/proc_<?php echo $_GET["modulo"];?>.js"></script>
+    <script src="<?php echo $nivel; ?>nucleo/<?php echo $_GET["modulo"];?>/proc_<?php echo $_GET["modulo"];?>.js?v=<?php echo date('YmdHis'); ?>"></script>
 <?php }?>
 
 <script type="text/javascript">
@@ -440,10 +439,10 @@
 		function modificar(){
 			
 
-			ruta="../base/editaReg.php?restr=&modulo=<?php echo $_GET["modulo"]?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo "N";?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&campollave=<?php echo $campoLlave; ?>&gridpropio=S&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&valorllave=";//El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
+			ruta="../base/editaReg.php?modulo=<?php echo $_GET["modulo"]?>&restr=<?php echo $_GET['restr']?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo "N";?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&campollave=<?php echo $campoLlave; ?>&gridpropio=S&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&valorllave=";//El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
 		   <?php                  
 	             if (file_exists("../".$_GET["modulo"]."/editaReg.php")) {?>
-	                 ruta="<?php echo "../".$_GET["modulo"]."/editaReg.php"?>?modulo=<?php echo $_GET["modulo"]?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo "N";?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&campollave=<?php echo $campoLlave; ?>&gridpropio=S&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&valorllave=";  //El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
+	                 ruta="<?php echo "../".$_GET["modulo"]."/editaReg.php"?>?modulo=<?php echo $_GET["modulo"]?>&restr=<?php echo $_GET['restr']?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo "N";?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&campollave=<?php echo $campoLlave; ?>&gridpropio=S&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&valorllave=";  //El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
 	       <?php }?>
 	              
 			
@@ -494,8 +493,8 @@
 		function insertar() {
 			  $('#dlgproceso').modal({backdrop: 'static', keyboard: false});	
                <?php                  
-               $url="../base/nuevoReg.php?restr=&modulo=".$_GET["modulo"]."&bd=".$_GET["bd"]."&limitar=N"."&automatico=".$_GET["automatico"]."&nombre=".$_GET["nombre"]."&tablagraba=".$laTablaGraba."&tabla=".$laTabla."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."&gridpropio=S";
-               if (file_exists("../".$_GET["modulo"]."/nuevoReg.php")) {$url="../".$_GET["modulo"]."/nuevoReg.php?modulo=".$_GET["modulo"]."&bd=".$_GET["bd"]."&limitar=N"."&automatico=".$_GET["automatico"]."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."gridpropio=S";}?>
+               $url="../base/nuevoReg.php?modulo=".$_GET["modulo"]."&restr=".$_GET['restr']."&bd=".$_GET["bd"]."&limitar=N"."&automatico=".$_GET["automatico"]."&nombre=".$_GET["nombre"]."&tablagraba=".$laTablaGraba."&tabla=".$laTabla."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."&gridpropio=S";
+               if (file_exists("../".$_GET["modulo"]."/nuevoReg.php")) {$url="../".$_GET["modulo"]."/nuevoReg.php?modulo=".$_GET["modulo"]."&restr=".$_GET['restr']."&bd=".$_GET["bd"]."&limitar=N"."&automatico=".$_GET["automatico"]."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."gridpropio=S";}?>
                  location.href="<?php echo $url;?>";       
                        
 			}
