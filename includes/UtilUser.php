@@ -15,8 +15,8 @@ class UtilUser {
 
 	public function enviarCorreo($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
-		$emisor="sigea@smariaoro.tecnm.mx";
-		$clave="Lox40224";
+		$emisor="sigea@itsmacuspana.edu.mx";
+		$clave="Emanuel2010";
 		
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -30,9 +30,10 @@ class UtilUser {
 						'allow_self_signed' => true
 				)
 		);
-		$mail->Host = "smtp.office365.com";	
+		$mail->Host = "smtp.gmail.com";	
+		//$mail->Host = "smtp.office365.com";	
 		$mail->Port = 587; // or 587
-		$mail->SMTPSecure = "tls";
+		//$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
 		$mail->Username = $emisor;
 		$mail->Password = $clave;
@@ -60,8 +61,8 @@ class UtilUser {
 
 	public function enviarCorreoCopia($receptor,$asunto,$cuerpo,$adj1,$ccopia) {
 		$res="";
-		$emisor="sigea@smariaoro.tecnm.mx";
-		$clave="Lox40224";
+		$emisor="sigea@itsmacuspana.edu.mx";
+		$clave="Emanuel2010";
 		
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -75,7 +76,8 @@ class UtilUser {
 						'allow_self_signed' => true
 				)
 		);
-		$mail->Host = "smtp.office365.com";	
+		//$mail->Host = "smtp.office365.com";	
+		$mail->Host = "smtp.gmail.com";	
 		$mail->Port = 587; // or 587
 		$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
@@ -104,8 +106,8 @@ class UtilUser {
 	public function enviarCorreoAdj($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
 	
-		$emisor="sigea@smariaoro.tecnm.mx";
-		$clave="Lox40224";
+		$emisor="sigea@itsmacuspana.edu.mx";
+		$clave="Emanuel2010";
 
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -119,7 +121,8 @@ class UtilUser {
 						'allow_self_signed' => true
 				)
 		);
-		$mail->Host = "smtp.office365.com";	
+		$mail->Host = "smtp.gmail.com";	
+		//$mail->Host = "smtp.office365.com";	
 		$mail->Port = 587; // or 587
 		$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
