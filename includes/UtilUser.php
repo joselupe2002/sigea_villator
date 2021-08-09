@@ -106,8 +106,8 @@ class UtilUser {
 	public function enviarCorreoAdj($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
 	
-		$emisor="sigea@itsmacuspana.edu.mx";
-		$clave="Emanuel2010";
+		$emisor="sigea@itsperote.edu.mx";
+		$clave="castilloMtz05*";
 
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
