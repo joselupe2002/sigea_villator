@@ -33,7 +33,7 @@ class UtilUser {
 		$mail->Host = "smtp.gmail.com";	
 		//$mail->Host = "smtp.office365.com";	
 		$mail->Port = 587; // or 587
-		//$mail->SMTPSecure = "tls";
+		$mail->SMTPSecure = "tls";
 		$mail->IsHTML(true);
 		$mail->Username = $emisor;
 		$mail->Password = $clave;
