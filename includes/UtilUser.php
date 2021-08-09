@@ -113,7 +113,7 @@ class UtilUser {
 		$mail->IsSMTP(); // enable SMTP
 		$mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
 		$mail->SMTPAuth = true; // authentication enabled
-		//$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+		$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
 		$mail->SMTPOptions = array(
 				'ssl' => array(
 						'verify_peer' => false,
