@@ -15,8 +15,8 @@ class UtilUser {
 
 	public function enviarCorreo($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
-		$emisor="sigea@itsperote.edu.mx";
-		$clave="castilloMtz05*";
+		$emisor="sigea@itsmacuspana.edu.mx";
+		$clave="Emanuel2010";
 		
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
@@ -106,14 +106,17 @@ class UtilUser {
 	public function enviarCorreoAdj($receptor,$asunto,$cuerpo,$adj1) {
 		$res="";
 	
-		$emisor="sigea@itsperote.edu.mx";
-		$clave="castilloMtz05*";
+		//$emisor="sigea@itsperote.edu.mx";
+		//$clave="castilloMtz05*";
+
+		$emisor="sigea@itsmacuspana.edu.mx";
+		$clave="Emanuel2010";
 
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
-		$mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+		$mail->SMTPDebug =0; // debugging: 1 = errors and messages, 2 = messages only
 		$mail->SMTPAuth = true; // authentication enabled
-		$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+		//$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
 		$mail->SMTPOptions = array(
 				'ssl' => array(
 						'verify_peer' => false,
