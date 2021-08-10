@@ -575,7 +575,7 @@ function insInd(modulo,usuario,essuper){
 			if (table.rows('.selected').data()[0]["ACEPTADO"]=='S') {
 				if (table.rows('.selected').data()[0]["INSCRITO"]=='N') {
 					if (confirm("Desea inscribir al aspirante ID: "+table.rows('.selected').data()[0]["IDASP"])) {
-						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S");
+						setInscrito(table.rows('.selected').data()[0]["IDASP"],"S",table.rows('.selected').data()[0]["CVE_CARRERA1"]);
 					}
 				}
 				else {
@@ -624,7 +624,7 @@ function eliminarMatricula(id,lamatricula){
 }
 
 
-function setInscrito(id,valor){
+function setInscrito(id,valor, carrera){
 	var hoy= new Date();		
 	var elanio=hoy.getFullYear();
 	elaniomat=elanio.toString().substring(2,4)
@@ -645,8 +645,9 @@ function setInscrito(id,valor){
 						type: "POST",
 						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+elanio,
 						success: function(dataC){
-							micons=dataC;							
-							mimat=elaniomat+"E40"+pad(micons,3,'0');	
+							micons=dataC;	
+							cvecar=pad(carrera,2,"0");
+							mimat=elaniomat+cvecar+pad(micons,4,'0');													
 							elsqlpas="call inscribeAspirante('"+id+"','"+mimat+"');";						
 							if (micons>0) {
 								parametros={
@@ -683,6 +684,8 @@ function inscribirAspirante(lafila,modulo,institucion, campus) {
 	var elanio=hoy.getFullYear();
 	elaniomat=elanio.toString().substring(2,4)
 
+	cvecar=pad(lafila[0]["CVE_CARRERA1"],2,"0");
+
 	if ((lafila[0]["INSCRITO"]=='N') && (lafila[0]["ACEPTADO"]=='S')) {
 		parametros={tabla:"aspirantes",campollave:"IDASP",bd:"Mysql",valorllave:lafila[0][0],INSCRITO: "S"};
 		$.ajax({type: "POST",
@@ -695,7 +698,7 @@ function inscribirAspirante(lafila,modulo,institucion, campus) {
 						success: function(dataC){
 							console.log(dataC);
 							micons=dataC;				
-							mimat=elaniomat+"E40"+pad(micons,3,'0');						
+							mimat=elaniomat+cvecar+pad(micons,4,'0');						
 							if (micons>0) {
 								parametros={
 									bd:"mysql",
