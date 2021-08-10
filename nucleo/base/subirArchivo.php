@@ -3,7 +3,7 @@ session_start();
 if ($_SESSION['inicio']==1) {   
 	if ($_FILES[$_GET['inputFile']]["error"] > 0)
 			{
-				echo "0|Ocurrio un error al subir el archivo (Extensiones png, bmp, jpg, pdf menos de 1 MB)";
+				echo "0|Ocurrio un error al subir el archivo: ".$_FILES['file']['error'];
 		}
 		else
 		{       /*$niv="";
