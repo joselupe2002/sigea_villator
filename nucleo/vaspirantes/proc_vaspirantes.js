@@ -643,8 +643,9 @@ function setInscrito(id,valor, carrera){
 			success: function(data){
 					$.ajax({
 						type: "POST",
-						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+elanio,
+						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+carrera+elanio,
 						success: function(dataC){
+							console.log(dataC);
 							micons=dataC;	
 							cvecar=pad(carrera,2,"0");
 							mimat=elaniomat+cvecar+pad(micons,4,'0');													
@@ -694,7 +695,7 @@ function inscribirAspirante(lafila,modulo,institucion, campus) {
 				success: function(data){    
 					$.ajax({
 						type: "POST",
-						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+elanio,
+						url:"../base/getConsecutivo.php?tabla=econsoficial&campok=concat(TIPO,ANIO)&campocons=CONSECUTIVO&valork="+"MATRICULA"+lafila[0]["CVE_CARRERA1"]+elanio,
 						success: function(dataC){
 							console.log(dataC);
 							micons=dataC;				
