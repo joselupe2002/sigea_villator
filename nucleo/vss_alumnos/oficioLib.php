@@ -154,10 +154,13 @@
 
 		$firma=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_FIRMA");
 		$sello=$miUtil->getDatoEmpl($miutil->getJefeNum('521'),"EMPL_SELLO");
-		if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')) {			
+		if (($_GET["tipo"]=='1') ||($_GET["tipo"]=='2')||($_GET["tipo"]=='3')) {			
 			$pdf->Image($sello,160,160,45);
 			$pdf->Image($firma,90,150,40);			
 		}
+
+
+		
 
 
 
@@ -196,6 +199,10 @@
 		$pdf->Cell(0,5,"Control de registro: ".$folio,0,1,'C');
 
 
+		if ($_GET["tipo"]=='3') {			
+			$pdf->setY(250);
+			$pdf->Cell(0,5,"Documento sin validez Oficial solo para consulta. El original se encuentra en el expediente de Control Escolar",0,1,'C');
+		}
 		
 		
 

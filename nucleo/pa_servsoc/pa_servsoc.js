@@ -87,7 +87,7 @@ var miciclo="";
 									
 									}	
 									if ((losdatos[0]["HAY"]>0) && (losdatos[0]["FINALIZADO"]=="S")) {	
-										enlace="nucleo/vss_alumnos/oficioLib.php?id="+losdatos[0]["ID"]+"&tipo=1";
+										enlace="nucleo/vss_alumnos/oficioLib.php?id="+losdatos[0]["ID"]+"&tipo=3";
 										btn2="<a  onclick=\"abrirPesta('"+enlace+"','Carta Lib.')\" class=\"btn  btn-bold btn-success\">"+
 											"     <i class=\"ace-icon white fa fa-file-text bigger-200\"></i><span class=\"fontRobotoB text-white\">Ver Oficio Liberación</span>"+
 											"</a>";
