@@ -95,7 +95,7 @@ function verDocumentos(modulo,usuario,essuper){
 
 		    
 	        sqlAsp="select a.IDDOC, a.CLAVE, a.DOCUMENTO,"+
-			       "(SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where b.AUX=CONCAT(a.CLAVE,'"+table.rows('.selected').data()[0]["CURP"]+"','"+table.rows('.selected').data()[0]["CICLO"]+"')) AS RUTA "+
+			       "(SELECT ifnull(RUTA,'') AS RUTA FROM adjaspirantes b where b.AUX=CONCAT(a.CLAVE,'_"+table.rows('.selected').data()[0]["CURP"]+"_','"+table.rows('.selected').data()[0]["CICLO"]+"')) AS RUTA "+
 		           " from documaspirantes a Where ENLINEA='S' and MODULO IN ('INSCRIPCION','REGISTRO') order by IDDOC";
 
 			parametros={sql:sqlAsp,dato:sessionStorage.co,bd:"Mysql"}
