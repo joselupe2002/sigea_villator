@@ -666,7 +666,7 @@ function cargarAdjuntos() {
 	elsqlAdj="select IDDOC, DOCUMENTO, ifnull(b.RUTA,'') as RUTA, CLAVE, TIPOADJ, "+
 			 " (SELECT CICL_CLAVE FROM ciclosesc where CICL_ADMISION='S' ORDER BY CICL_ORDEN DESC LIMIT 1) AS CICLO "+
 	         " from documaspirantes a "+
-	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat(a.CLAVE,'_','"+usuario+"','_','"+elciclo+"'))"+
+	         "LEFT OUTER JOIN  adjaspirantes b  on (b.AUX=concat((SELECT CICL_CLAVE FROM ciclosesc where CICL_ADMISION='S' ORDER BY CICL_ORDEN DESC LIMIT 1),a.CLAVE,'_','"+usuario+"','_','"+elciclo+"'))"+
 			 " WHERE a.ENLINEA='S' and a.MODULO='INSCRIPCION' order by TIPOADJ, DOCUMENTO";
 			 parametros={sql:elsqlAdj,dato:sessionStorage.co,bd:"Mysql"}
 	$.ajax({
