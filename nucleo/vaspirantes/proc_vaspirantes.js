@@ -138,7 +138,7 @@ function generaTablaSubirAsp(grid_data, op){
 			 $("#rowAsp"+c).append("<td>"+valor.IDDOC+"</td>");
 			 $("#rowAsp"+c).append("<td>"+valor.DOCUMENTO+"</td>");	
 			
-		     cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_"+c+"\" href=\""+valor.RUTA+"\">"+
+		     cadEnc="<a title=\"Ver Archivo Adjunto\" target=\"_blank\" id=\"enlace_"+c+"\" href=\"..\\"+valor.RUTA+"\">"+
 				                " <img width=\"40px\" height=\"40px\" id=\"pdf"+c+"\" src=\""+ladefault+"\" width=\"50px\" height=\"50px\">"+
 								" </a>";		
 				 
