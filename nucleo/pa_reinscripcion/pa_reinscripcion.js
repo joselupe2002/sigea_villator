@@ -145,7 +145,7 @@ var credM1=0;
 				idop=$("#tipoOperacion").val();
 				$("#elrecibo").empty();
 				
-				elsql="SELECT RUTA,COTEJADO,count(*) FROM eadjreins where AUX='"+usuario+"_"+miciclo+"_"+idop+"'";			
+				elsql="SELECT RUTA,COTEJADO,ifnull(OBSCOTEJO,''),count(*) FROM eadjreins where AUX='"+usuario+"_"+miciclo+"_"+idop+"'";			
 			  	parametros2={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 				$.ajax({
 					type: "POST",
@@ -154,7 +154,7 @@ var credM1=0;
 					success: function(data2){  	
 						laruta='';
 						activaEliminar='S';
-						if (JSON.parse(data2)[0][2]>0) {laruta=JSON.parse(data2)[0][0]; 
+						if (JSON.parse(data2)[0][3]>0) {laruta=JSON.parse(data2)[0][0]; 
 														activaEliminar=JSON.parse(data2)[0][1]=='N'?'S':'N'; }
 						dameSubirArchivoLocal("elrecibo","Recibo de Pago de "+txtop,"reciboreins",'recibosReins','pdf',
 								'ID',usuario,'RECIBO DE PAGO '+txtop,'eadjreins','alta',usuario+"_"+miciclo+"_"+idop,laruta,activaEliminar,usuario+"_"+miciclo+"_"+idop);						
@@ -163,6 +163,13 @@ var credM1=0;
 						if (JSON.parse(data2)[0][1]=='S') {
 							$("#inputFileRow").html("<span class=\"badge badge-success bigger-120\"><i class=\"fa fa-check bigger-200\"></i>"+
 													"Tu pago ha sido validado Correctamente</span>");										
+						}	
+
+						//en caso de que el pago NO haya sido validado Y TENGA OBSERVACIONES
+						if ((JSON.parse(data2)[0][2]!='') && (JSON.parse(data2)[0][1]!='S')) {
+							dameVentana("errorpago","grid_pa_reinscripcion","ERROR EN PAGO","sm","red","fa fa-times","300");
+							$("#body_errorpago").html("<div class=\"alert alert-danger bigger-120\">"+
+							JSON.parse(data2)[0][2]+"</div>");										
 						}	
 					
 						//agregamos el boton de subir horarios
