@@ -159,7 +159,7 @@ var credM1=0;
 						dameSubirArchivoLocal("elrecibo","Recibo de Pago de "+txtop,"reciboreins",'recibosReins','pdf',
 								'ID',usuario,'RECIBO DE PAGO '+txtop,'eadjreins','alta',usuario+"_"+miciclo+"_"+idop,laruta,activaEliminar,usuario+"_"+miciclo+"_"+idop);						
 					
-						//en caso de que el pago ya haya sido validado
+						//====en caso de que el pago ya haya sido validado
 						if (JSON.parse(data2)[0][1]=='S') {
 							$("#inputFileRow").html("<span class=\"badge badge-success bigger-120\"><i class=\"fa fa-check bigger-200\"></i>"+
 													"Tu pago ha sido validado Correctamente</span>");										
