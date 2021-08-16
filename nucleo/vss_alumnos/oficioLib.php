@@ -196,7 +196,7 @@
 
 		$pdf->SetFont('Arial','',8);
 		$pdf->setY(240);
-		$pdf->Cell(0,5,"Control de registro: ".$folio,0,1,'C');
+		//$pdf->Cell(0,5,"Control de registro: ".$folio,0,1,'C');
 
 
 		if ($_GET["tipo"]=='3') {			
