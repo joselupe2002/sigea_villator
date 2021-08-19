@@ -380,7 +380,10 @@
 
 
                 
-                $this->Cell(80,5,utf8_decode($nombre),'T',0,'L');
+                $this->Cell(80,5,utf8_decode($nombre),'T',0,'L');  
+                $this->Cell(5,5,"",0,0,'L');     
+                $this->Cell(40,5,utf8_decode("Firma Alumno"),'T',0,'C'); 
+
                 $this->setX(10);$this->setY(($linea+125));
                 $this->SetFont('Montserrat-SemiBold','',8);                
                 $this->Cell(0,5,utf8_decode($psto),'',0,'L');

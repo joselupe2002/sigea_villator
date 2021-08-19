@@ -349,3 +349,22 @@ function promediarAlumno(lafila,modulo,institucion, campus) {
 	});	      	      			
      
 }
+
+
+/*===========================================*/
+function impBoletass(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+	if (table.rows('.selected').data().length>0) {
+
+		enlace="nucleo/vss_alumnos/boletass.php?carrera="+table.rows('.selected').data()[0]["CARRERA"]+
+		"&ciclo="+table.rows('.selected').data()[0]["CICLO"];
+		abrirPesta(enlace, "Boleta");
+
+	}
+	else {
+		alert ("Debe seleccionar un registro");
+		return 0;
+
+		}
+
+}
