@@ -226,8 +226,8 @@
         $pdf->Ln(5);
         $pdf->SetFont('Montserrat-ExtraBold','B',9);$pdf->Cell(0,0,'MATERIA: ',0,1,'L');
         $pdf->SetFont('Montserrat-Medium','',9);$pdf->setX(50);$pdf->Cell(0,0,utf8_decode("SERVICIO SOCIAL"),0,1,'L');
-        $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(145);$pdf->Cell(0,0,"FOLIO:",0,1,'L');
-        $pdf->SetFont('Montserrat-Medium','',9); $pdf->setX(195); $pdf->Cell(0,0,$elfolio,0,1,'R');
+        $pdf->SetFont('Montserrat-ExtraBold','B',9); $pdf->setX(110);$pdf->Cell(0,0,"FOLIO:".$elfolio,0,1,'L');
+        
         $pdf->Ln(3);
 
         $dataCiclo = $pdf->LoadDatosCiclo();
