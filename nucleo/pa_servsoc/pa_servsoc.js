@@ -491,7 +491,7 @@ var miciclo="";
 							" <span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span></div>"+
 						"</div>"+	
 						"<div class=\"col-sm-4\">"+
-							"<label class=\"fontRobotoB\">Adicional 1</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["ADICIONAL1"]+"\" id=\"adicional1\"></input>"+
+							"<label class=\"fontRobotoB\">Lugar de Residencia (Alumno)</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["ADICIONAL1"]+"\" id=\"adicional1\"></input>"+
 						"</div>"+
 						"<div class=\"col-sm-4\">"+
 							"<label class=\"fontRobotoB\">Adicional 2</label><input class=\"form-control captProyOP\" value=\""+misdatos[0]["ADICIONAL2"]+"\" id=\"adicional2\"></input>"+
