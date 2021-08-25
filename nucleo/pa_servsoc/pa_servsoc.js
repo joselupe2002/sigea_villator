@@ -408,7 +408,7 @@ var miciclo="";
 					"</div>"+
 					"<div class=\"row\">"+
 						"<div class=\"col-sm-6\">"+
-							"<label class=\"fontRobotoB\">Titular de la Dependencia: </label><input class=\"form-control captProy\" value=\""+misdatos[0]["REPRESENTANTE"]+"\" id=\"representante\"></input>"+
+							"<label class=\"fontRobotoB\">Nombre a quien se dirige Oficio de Presentación </label><input class=\"form-control captProy\" value=\""+misdatos[0]["REPRESENTANTE"]+"\" id=\"representante\"></input>"+
 						"</div>"+
 						"<div class=\"col-sm-6\">"+
 							"<label class=\"fontRobotoB\">Cargo del Titular:</label><input class=\"form-control captProy\" value=\""+misdatos[0]["PUESTO"]+"\" id=\"puesto\"></input>"+
