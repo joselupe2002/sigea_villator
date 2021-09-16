@@ -49,13 +49,10 @@ contMat=1;
 		
 		$("#losciclossel").empty();
 		$("#losciclossel").append("<span class=\"label label-primary\">Ciclo Escolar</span>");
-		addSELECT("selCiclos","losciclossel","PROPIO", "SELECT CICL_CLAVE, CONCAT(CICL_CLAVE,' ',CICL_DESCRIP) FROM ciclosesc UNION SELECT '%','TODOS LOS CICLO' FROM DUAL order by 1 DESC", "","");  			      
-
+		addSELECT("selCiclos","losciclossel","PROPIO", "SELECT CICL_CLAVE, CICL_DESCRIP FROM ciclosesc WHERE CICL_CLAVE=9999", "","");  			      
+		actualizaSelect("selCiclos", "SELECT CICL_CLAVE, CONCAT(CICL_CLAVE,' ',CICL_DESCRIP) FROM ciclosesc UNION SELECT '%','TODOS LOS CICLO' FROM DUAL order by 1 DESC", "",""); 
 		
-		$("#lasmodalidades").empty();
-		$("#lasmodalidades").append("<span class=\"label label-warning\">Modalidad</span>");
-		addSELECT("selModalidades","lasmodalidades","PROPIO", "SELECT MODA_CLAVE, MODA_DESCRIP FROM modalidad WHERE MODA_ACTIVO='S' UNION SELECT '%','TODAS LAS MODALIDAD' FROM DUAL order by 1 DESC ", "","");  			      
-	
+		
 
 		$("#losreportes").empty();
 		$("#losreportes").append("<span class=\"label label-danger\">Reporte</span>");
@@ -145,8 +142,6 @@ contMat=1;
 		if ($("#selCarreras").val()=='%') {tagCarreras=" IN ("+miscarreras+")";}
 		tagCiclos="="+$("#selCiclos").val();
 		if ($("#selCiclos").val()=='%') {tagCiclos="LIKE '%'";}
-		tagModalidad="="+$("#selModalidades").val();
-		if ($("#selModalidades").val()=='%') {tagModalidad="LIKE '%'";}
 		
 
 
@@ -160,8 +155,6 @@ contMat=1;
 					elsqlCon=JSON.parse(data)[0]["ELSQL"];
 					elsqlCon=elsqlCon.replace(/IN {CARRERA}/gi,tagCarreras);
 					elsqlCon=elsqlCon.replace(/IN {CICLO}/gi,tagCiclos);
-					elsqlCon=elsqlCon.replace(/IN {MODALIDAD}/gi,tagModalidad);
-
 					miscampos=JSON.parse(data)[0]["CAMPOS"].split("|");
 					misclases=JSON.parse(data)[0]["CLASES"].split("|");
 					miseventos=JSON.parse(data)[0]["EVENTOS"].split("|");
@@ -359,3 +352,7 @@ function filtrarMenu() {
 }
 
 /*=====================================================================*/
+function abrirNuevaVentana() {
+	abrirPesta("nucleo/vstGenerales/grid.php?modulo=vstGenerales","Indicadores");
+	
+}
