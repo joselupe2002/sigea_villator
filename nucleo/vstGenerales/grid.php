@@ -53,10 +53,12 @@
 								<input id="filtrar"  onkeyup="filtrarMenu();" type="text" id="form-field-icon-1" />
 								<i class="ace-icon fa fa-search blue"></i>
 							</span>
+
 							<button title="Buscar Registros" onclick="abrirNuevaVentana();" 
 							    class="btn btn-white btn-success btn-round"> 
 								<i class="ace-icon blue fa fa-tasks bigger-140"></i><span class="btn-small">Nueva Ventana</span>            
 							</button>	
+							
 						</div>   
 		            </div> 
 		      </div>
@@ -78,9 +80,8 @@
 							    class="btn btn-white btn-success btn-round"> 
 								<i class="ace-icon pink fa fa-mail-reply" style="padding-top:0px; margin:0px;" ></i>           
 							</button>
-
 						</div> 	
-						<div id="losreportes" class="col-sm-4" >
+						<div id="losreportes" class="col-sm-3" >
 							<button style="width:25px; height:25px; margin:0px;" title="Ayuda sobre el reporte" onclick="getInfoInd();" 
 							    class="btn btn-white btn-success btn-round"> 
 								<i class="ace-icon pink fa fa-info" style="padding-top:0px; margin:0px;" ></i>           
@@ -88,9 +89,12 @@
 						</div>   
 						<div id="losciclossel" class="col-sm-2" >
 						</div>                    				
-						<div id="lascarreras" class="col-sm-3">
+						<div id="lascarreras" class="col-sm-2">
 						</div>       			 
 					
+						<div id="lasmodalidades" class="col-sm-2">
+						</div> 
+
 						<div class="col-sm-2" style="padding-top:14px;">
 						    <button title="Buscar Registros" onclick="cargarInformacion();" class="btn btn-white btn-info btn-round" value="Agregar"> 
 								<i class="ace-icon green fa fa-search bigger-140"></i><span class="btn-small"></span>            
@@ -98,8 +102,7 @@
 							<button title="Exportar Registros " onclick="convertirDataTable('tabInformacion');" 
 							    class="btn btn-white btn-success btn-round" value="Agregar"> 
 								<i class="ace-icon blue fa fa-wrench bigger-140"></i><span class="btn-small"></span>            
-							</button>		
-																												 									
+							</button>																													 									
 						</div>
 		            </div> 
 		      </div>
@@ -191,5 +194,4 @@
 </body>
 <?php } else {header("Location: index.php");}?>
 </html>
-
 
