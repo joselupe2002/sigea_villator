@@ -35,7 +35,7 @@
 	</head>
 
 
-	<body id="evaluar" style="background-color: white;">
+	<body id="evaluar" style="background-color: white; width:98%;">
 	    
 	    
 	    
