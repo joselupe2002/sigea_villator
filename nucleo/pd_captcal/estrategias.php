@@ -312,8 +312,8 @@ function cargaTablaEstra(id){
 					cadRuta=valor.RUTA;		
 					if(typeof cadRuta === 'undefined'){ cadRuta="";}
 					activaEliminar="S";
-					dameSubirArchivoDrive("file"+valor.ID,"","ADJ_"+valor.ID,'estrategiasRepro','pdf',
-					'ID',valor.ID,'EVIDENCIA DE ESTRATEGIA '+valor.ID,'eadjgenerales','alta',"ESTREP_"+valor.ID+"_"+valor.IDCORTE+"_"+valor.IDDETALLE,cadRuta,activaEliminar);	
+					dameSubirArchivoLocal("file"+valor.ID,"","ADJ_"+valor.ID,'estrategiasRepro','pdf',
+					'ID',valor.ID,'EVIDENCIA DE ESTRATEGIA '+valor.ID,'eadjgenerales','alta',"ESTREP_"+valor.ID+"_"+valor.IDCORTE+"_"+valor.IDDETALLE,cadRuta,activaEliminar,"EST_"+id+"_"+valor.ID);	
 
 
 					c++;
