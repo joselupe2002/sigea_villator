@@ -35,7 +35,7 @@
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" class="sigeaPrin" style="background-color: white;">
 	    
 	    
 	    

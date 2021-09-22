@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="<?php echo $nivel; ?>estilos/preloader.css" type="text/css" media="screen">         
         <link href="imagenes/login/sigea.png" rel="image_src" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/ui.jqgrid.min.css" />
+		<link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
 
         <style type="text/css">table.dataTable tbody tr.selected {color: blue; font-weight:bold; }
                th, td {  word-wrap: break-word;        
@@ -65,7 +66,7 @@
     
     
 		      
-	<div  class="table-responsive" style="overflow-y: auto; height: 300px;" >
+	<div  class="sigeaPrin table-responsive" style="overflow-y: auto; height: 300px;" >
 		  <table id="latabla" class= "display table-condensed table-striped table-sm table-bordered table-hover nowrap" ></table>
 	</div>
 	
