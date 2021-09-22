@@ -51,8 +51,9 @@
 		               <span class="label label-success" >Unidad</span>
 			           <select id="unidades" style="width: 100%;"> </select>
 			           <select style="display:none;" id="base" style="width: 100%;">
-			              <?php for ($x=0;$x<=100;$x++) {?>
-			                  echo  <option value="<?php echo $x;?>"><?php echo $x;?></option>			            
+					   		<option value="0">0</option>	
+			              <?php for ($x=70;$x<=100;$x++) {?>
+			                    <option value="<?php echo $x;?>"><?php echo $x;?></option>			            
 			              <?php } ?>		              
 			           </select>
 		       </div> 	
@@ -157,7 +158,7 @@
 			 
 			 //Buscamos los cortes que esta abierto para la asignatura de acuerdo al ciclo 
 			 sqlCor="select * from ecortescal where  CICLO='<?php echo $_GET["ciclo"]?>'"+
-		            " and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
+		            " and ABIERTO='S' and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
 					" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
 		            " AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='CALIFICACION' "+
 		            " order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
@@ -301,8 +302,11 @@
 			if (eltidepocorte=='CCO1'){tipocal="1";}
 			if (eltidepocorte=='CCO2'){tipocal="1";}
 			if (eltidepocorte=='CCO3'){tipocal="1";}
+			if (eltidepocorte=='CCO4'){tipocal="1";}
+			if (eltidepocorte=='CCO5'){tipocal="1";}
 			if (eltidepocorte=='CCC1'){tipocal="2";}
 			if (eltidepocorte=='CCC2'){tipocal="3";}
+	
 
 			$("#SELIMG_"+id).attr("src","..\\..\\imagenes\\menu\\esperar.gif");
 		    	    $.ajax({
