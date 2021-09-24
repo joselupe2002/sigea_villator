@@ -43,14 +43,15 @@
 					        <img id="img_ALUM_FOTO"  style="width: 150px; height: 170px;" class="editable img-responsive" src=""/>
 					   </span>
     				   <div class="space-4"></div>
-                      
- 	    		       <input class="fileSigea" type="file" id="file_ALUM_FOTO" name="file_ALUM_FOTO" 
- 	    		             onchange="subirArchivoDriveName('file_ALUM_FOTO','ALUM_FOTO','img_ALUM_FOTO','ALUM_FOTO','jpeg|png|JPG|jpg','S','<?php echo $_SESSION["usuario"];?>')">
- 	    		       
-                        <input type="hidden" value=""  name="ALUM_FOTO" id="ALUM_FOTO" placeholder="" />   	
-						<button  onclick="guardarCampo('ALUM_FOTO',true,'La Foto fue asignada correctamente');" class="btn btn-white btn-info btn-bold">
-				                 <i class="ace-icon green fa fa-camera bigger-160"></i><span class=" fontRobot bigger-100">Asignar Foto</span>            
-				        </button>
+                      	<div id="cont_ALUM_FOTO">
+							<input class="fileSigea" type="file" id="file_ALUM_FOTO" name="file_ALUM_FOTO" 
+								onchange="subirArchivoDriveName('file_ALUM_FOTO','ALUM_FOTO','img_ALUM_FOTO','ALUM_FOTO','jpeg|png|JPG|jpg','S','<?php echo $_SESSION["usuario"];?>')">
+						
+							<input type="hidden" value=""  name="ALUM_FOTO" id="ALUM_FOTO" placeholder="" />   	
+							<button  onclick="guardarCampo('ALUM_FOTO',true,'La Foto fue asignada correctamente');" class="btn btn-white btn-info btn-bold">
+									<i class="ace-icon green fa fa-camera bigger-160"></i><span class=" fontRobot bigger-100">Asignar Foto</span>            
+							</button>
+						</div>
 
 					</div>
 
@@ -482,7 +483,8 @@
 
 
    function guardarCampo(campo,conmsj,mensaje) {
-	if (campo=='ALUM_FOTO') {parametros={ALUM_FOTO:$("#ALUM_FOTO").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
+	var recargar=false;
+	if (campo=='ALUM_FOTO') {recargar=true; parametros={ALUM_VALIDAFOTO:"S",ALUM_FOTO:$("#ALUM_FOTO").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
 	if (campo=='ALUM_CORREO') {parametros={ALUM_CORREO:$("#correo").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
 	if (campo=='ALUM_TELEFONO') {parametros={ALUM_TELEFONO:$("#telefono").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
 	if (campo=='ALUM_DIRECCION') {parametros={ALUM_DIRECCION:$("#direccion").val(),tabla:"falumnos",campollave:"ALUM_MATRICULA",valorllave:"<?php echo $_SESSION['usuario'];?>",bd:"Mysql"};}
@@ -496,7 +498,8 @@
 		    	success: function(data){		    				
 		    		$('#dlgproceso').modal("hide");  			                                	                      
 		    		if (!(data.substring(0,1)=="0")){ if (conmsj){alert (mensaje);}}	
-		    		else {alert ("OCURRIO EL SIGUIENTE ERROR: "+data);}          					           
+		    		else {alert ("OCURRIO EL SIGUIENTE ERROR: "+data);}    
+					if (recargar) { window.parent.document.getElementById('FRpa_datosgen').contentWindow.location.reload();}      					           
 		           }					     
 		      });          
 }
@@ -529,7 +532,7 @@
 	
 	
 
-		elsql="SELECT alum_matricula, getPeriodos(ALUM_MATRICULA,getciclo()) as PERIODOS, alum_foto,concat(alum_nombre,' ',alum_apepat,' ',alum_apemat) as alum_nombrec,alum_direccion, alum_telefono, alum_correo, "+
+		elsql="SELECT alum_matricula, ALUM_VALIDAFOTO, getPeriodos(ALUM_MATRICULA,getciclo()) as PERIODOS, alum_foto,concat(alum_nombre,' ',alum_apepat,' ',alum_apemat) as alum_nombrec,alum_direccion, alum_telefono, alum_correo, "+
 		             " ALUM_EDONAC, ALUM_ESTADO, ALUM_MUNINAC, ALUM_MUNICIPIO, ALUM_LOCALIDAD, ALUM_PADRE, ALUM_MADRE, ALUM_PADREVIVE, ALUM_MADREVIVE,"+
 					 "ALUM_TUTOR, ALUM_TUTORESTADO, ALUM_TUTORMUNICIPIO, ALUM_TUTORDIR, ALUM_TUTORLOC, ALUM_TUTORCP, ALUM_TUTORCOL, ALUM_TUTORDIR, ALUM_TUTORTRABAJO, ALUM_TUTORTEL, ALUM_TUTORCORREO,"+
 					 " ALUM_COLONIA, ALUM_NOSEGURO, LENIND, GPOIND, CARR_DESCRIP AS alum_carreraregd, alum_cicloins, getcuatrialum(alum_matricula, getciclo()) AS CUAT,"+
@@ -543,6 +546,9 @@
 		       success: function(data){  
 		    	      losdatos=JSON.parse(data);		    	      		    	    		    	        
 		    	      jQuery.each(losdatos, function(clave, valor) { 
+
+						
+						if (valor.ALUM_VALIDAFOTO=='S') {$("#cont_ALUM_FOTO").addClass("hide");}
 		    	    	
 		    	    	//text editable		    	  	   
 		    	  	    $('#nombreal').html(valor.alum_nombrec);		    	  	  
