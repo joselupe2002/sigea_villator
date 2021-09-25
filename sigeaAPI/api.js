@@ -41,8 +41,13 @@ var elciclo="";
 											"    <div class=\"col-sm-8\"  style=\"border-top:1px solid white; background-color:#064E4D; color:white\">"+cont[0]["PERIODO"]+"</div>"+								
 						                    "</div>");
 						
-						var re = /\.\.\//gi;					
-						lafoto=cont[0]["ALUM_FOTO"].replace(re, "");
+						if (cont[0]["ALUM_FOTO"].indexOf('../')<0) {
+							lafoto=cont[0]["ALUM_FOTO"];
+						}
+						else {
+							var re = /\.\.\//gi;					
+							lafoto=cont[0]["ALUM_FOTO"].replace(re, "");
+						}
 						$("#add").html("<img style=\"width:130px; height:160px; border: 1px solid #E1E7E7; border-radius:50%;\" src=\"../"+lafoto+"\">");
 					}
 					else {

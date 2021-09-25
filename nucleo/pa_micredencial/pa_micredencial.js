@@ -102,7 +102,7 @@ var miciclo="";
 
 			new QRious({
 						element: document.querySelector("#codigoQR"),
-						value: host+"/sigeaAPI/api.php?t="+btoa("C1")+"&i="+btoa(usuario), // La URL o el texto
+						value: host+"/sigea/sigeaAPI/api.php?t="+btoa("C1")+"&i="+btoa(usuario), // La URL o el texto
 						size: 200,
 						backgroundAlpha: 0, // 0 para fondo transparente
 						foreground: "#8bc34a", // Color del QR
