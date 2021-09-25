@@ -243,6 +243,32 @@ function actualizaCarrera(modulo,usuario,institucion, campus,essuper){
 }
 
 
+function actualizaTCAL(modulo,usuario,institucion, campus,essuper){
+
+	table = $("#G_"+modulo).DataTable();
+	if (table.rows('.selected').data().length>0) {
+			elsql="update dlista a set a.TCACVE=(SELECT TCACVE FROM  dkarde b WHERE  b.KARTAS1=a.ID and b.ALUCTR='"+table.rows('.selected').data()[0]["MATRICULA"]+"')"+
+	       " WHERE a.ALUCTR='"+table.rows('.selected').data()[0]["MATRICULA"]+"' and TCACVE=0";					
+				parametros={bd:"mysql",sql:elsql,dato:sessionStorage.co};
+				$.ajax({
+						type: "POST",
+						url:"../base/ejecutasql.php",
+						data:parametros,
+						success: function(dataC){	
+							console.log(dataC);	
+							alert ("Registro Actualizado");									
+						}					     
+				});   //ajax del procedimiento de insercion en falumnos  	
+			}
+		else {
+				alert ("Debe seleccionar un registro");
+				return 0;
+		
+				}
+	
+}
+
+
 
 function documentos(modulo,usuario,institucion, campus,essuper){
 	table = $("#G_"+modulo).DataTable();
