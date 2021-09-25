@@ -46,10 +46,10 @@ var elciclo="";
 						}
 						else {
 							var re = /\.\.\//gi;					
-							lafoto=cont[0]["ALUM_FOTO"].replace(re, "");
+							lafoto="../"+cont[0]["ALUM_FOTO"].replace(re, "");
 						}
 						console.log(lafoto);
-						$("#add").html("<img style=\"width:130px; height:160px; border: 1px solid #E1E7E7; border-radius:50%;\" src=\"../"+lafoto+"\">");
+						$("#add").html("<img style=\"width:130px; height:160px; border: 1px solid #E1E7E7; border-radius:50%;\" src=\""+lafoto+"\">");
 					}
 					else {
 						$("#container").html("<div class=\"alert alert-danger\">LA CREDENCIAL SE ENCUENTRA VENCIDA</div>");
