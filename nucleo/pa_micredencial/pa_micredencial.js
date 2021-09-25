@@ -95,10 +95,14 @@ var miciclo="";
 									"      top:440px; left:0px; width:150px; height:5px;\">SEMESTRE: "+alum[0]["PERIODO"]+
 								   "   </div>"
 								 						
-									 );		
+									 );	
+			var protocol = location.protocol;
+			var slashes = protocol.concat("//");
+			var host = slashes.concat(window.location.hostname);
+
 			new QRious({
 						element: document.querySelector("#codigoQR"),
-						value: "https://parzibyte.me/blog", // La URL o el texto
+						value: host+"/sigeaAPI/api.php?t="+btoa("C1")+"&i="+btoa(usuario), // La URL o el texto
 						size: 200,
 						backgroundAlpha: 0, // 0 para fondo transparente
 						foreground: "#8bc34a", // Color del QR
