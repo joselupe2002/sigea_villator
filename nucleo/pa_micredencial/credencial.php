@@ -330,79 +330,80 @@ function TextWithRotation($x, $y, $txt, $txt_angle, $font_angle=0)
 		
 		$data = $pdf->LoadData();
         $dataCic = $pdf->LoadDatosCiclo();
-        $pdf->Image("../../imagenes/empresa/fondoCredF.png",10,10,100,140);
-        $pdf->Image("../../imagenes/empresa/fondoCredA.png",110,10,100,140);
+        $pdf->Image("../../imagenes/empresa/fondoCredF.png",10,10,60,90);
+        $pdf->Image("../../imagenes/empresa/fondoCredA.png",70,10,60,90);
 
         $pdf->SetDrawColor(225, 231, 231 );
         $pdf->SetLineWidth(1);
-        $pdf->ClippingCircle(60,50,15,true);
-        $pdf->Image($data[0]["ALUM_FOTO"],43,35,35,35);
+        $pdf->ClippingCircle(40,35,8,true);
+        $pdf->Image($data[0]["ALUM_FOTO"],31,27,20,20);
         $pdf->UnsetClipping();
 		
-        $pdf->SetFont('Humanst521 BT','B',14);
-		$pdf->SetY(70);$pdf->SetX(15);
-		$pdf->MultiCell(90,5,utf8_decode($data[0]["ALUM_NOMBRE"]." ".$data[0]["ALUM_APEPAT"]." ".$data[0]["ALUM_APEMAT"]),0,'C',false);
+        $pdf->SetFont('Humanst521 BT','B',10);
+		$pdf->SetY(45);$pdf->SetX(12);
+		$pdf->MultiCell(55,5,utf8_decode($data[0]["ALUM_NOMBRE"]." ".$data[0]["ALUM_APEPAT"]." ".$data[0]["ALUM_APEMAT"]),0,'C',false);
+		
+
+        $pdf->SetFont('Humanst521 BT','B',10);
+		$pdf->SetY(60);$pdf->SetX(12);
+		$pdf->MultiCell(55,5,utf8_decode($data[0]["CARR_DESCRIP"]),0,'C',false);
 		
 
         $pdf->SetFont('Humanst521 BT','B',14);
-		$pdf->SetY(85);$pdf->SetX(15);
-		$pdf->MultiCell(90,5,utf8_decode($data[0]["CARR_DESCRIP"]),0,'C',false);
-		
-
-        $pdf->SetFont('Humanst521 BT','B',14);
-		$pdf->SetY(95);$pdf->SetX(10);
+		$pdf->SetY(70);$pdf->SetX(10);
         $pdf->SetFillColor(13, 27, 91);
         $pdf->SetTextColor(255);
-		$pdf->Cell(100,7,utf8_decode("MATRÍCULA: ".$data[0]["ALUM_MATRICULA"]),0,0,'C',true);
+		$pdf->Cell(60,7,utf8_decode("MATRÍCULA: ".$data[0]["ALUM_MATRICULA"]),0,0,'C',true);
 
 
         $cadena= $_GET["liga"]."?t=".base64_encode("C1")."&i=".base64_encode($_GET["mat"]);
-        $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',45,105,30,30);     
+        //echo $cadena;
+        $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',35,78,18,18);     
       
 
         $pdf->SetFillColor(255);
         $pdf->SetTextColor(0);
-        $pdf->SetY(120);$pdf->SetX(15);
+        $pdf->SetY(85);$pdf->SetX(15);
         $pdf->SetFont('Humanst521 BT','B',40);
 		$pdf->Cell(20,5,utf8_decode($data[0]["PERIODO"]),0,0,'C',true);
         $pdf->SetFont('Humanst521 BT','B',10);
         $pdf->SetTextColor(0);
-        $pdf->TextWithDirection(33,130,'SEMESTRE','U');
+        $pdf->TextWithDirection(20,95,'SEMESTRE','U');
         $pdf->SetTextColor(13, 27, 91 );
         
 
         /*==============================atras ======================*/
-        $pdf->SetY(70);$pdf->SetX(115);
-        $pdf->SetFont('Humanst521 BT','B',14);
+        $pdf->SetY(45);$pdf->SetX(75);
+        $pdf->SetFont('Humanst521 BT','B',12);
         $pdf->SetTextColor(0);
-		$pdf->Cell(90,5,utf8_decode("FIRMA DEL ALUMNO"),0,0,'C',true);
+		$pdf->Cell(50,5,utf8_decode("FIRMA DEL ALUMNO"),0,0,'C',true);
 
-		$pdf->Line(120,68,200,68);
+		$pdf->Line(75,43,123,43);
 
         $pdf->SetDrawColor(13, 27, 91);
         $pdf->SetLineWidth(0.1);
-        $pdf->SetY(90);$pdf->SetX(120);
-        $pdf->SetFont('Humanst521 BT','B',14);
+        $pdf->SetY(60);$pdf->SetX(80);
+        $pdf->SetFont('Humanst521 BT','B',10);
         $pdf->SetFillColor(13, 27, 91);
         $pdf->SetTextColor(255);
 
-		$pdf->Cell(80,5,utf8_decode("VIGENCIA"),1,0,'C',true);
+		$pdf->Cell(40,5,utf8_decode("VIGENCIA"),1,0,'C',true);
         $pdf->Ln();
-        $pdf->SetY(95);$pdf->SetX(120);
+        $pdf->SetY(65);$pdf->SetX(80);
         $pdf->SetFont('Humanst521 BT','B',14);
         $pdf->SetFillColor(255);
         $pdf->SetTextColor(0);
         $pdf->SetLineWidth(0.1);
         $pdf->SetDrawColor(0);
         
-        $pdf->SetFont('Humanst521 BT','B',12);
-		$pdf->Cell(40,5,utf8_decode($dataCic[0]["CICL_INICIOR"]),1,0,'C',true);
-        $pdf->Cell(40,5,utf8_decode($dataCic[0]["CICL_FINR"]),1,0,'C',true);
+        $pdf->SetFont('Humanst521 BT','B',10);
+		$pdf->Cell(20,5,utf8_decode($dataCic[0]["CICL_INICIOR"]),1,0,'C',true);
+        $pdf->Cell(20,5,utf8_decode($dataCic[0]["CICL_FINR"]),1,0,'C',true);
 
 
-        $pdf->SetFont('Humanst521 BT','',6);
-		$pdf->SetY(135);$pdf->SetX(113);
-		$pdf->MultiCell(90,3,utf8_decode("ESTA CREDENCIAL LO IDENTIFICA COMO ESTUDIANTE DEL INSTITUTO TECNOLÓGICO SUPERIOR DE PEROTE, ESTE DOCUMENTO ES INTRANSFERIBLE, NO ES VÁLIDO SI MUESTRA TACHADURAS O ENMENDADURAS."),0,'C',false);
+        $pdf->SetFont('Humanst521 BT','',5);
+		$pdf->SetY(80);$pdf->SetX(72);
+		$pdf->MultiCell(55,3,utf8_decode("ESTA CREDENCIAL LO IDENTIFICA COMO ESTUDIANTE DEL INSTITUTO TECNOLÓGICO SUPERIOR DE PEROTE, ESTE DOCUMENTO ES INTRANSFERIBLE, NO ES VÁLIDO SI MUESTRA TACHADURAS O ENMENDADURAS."),0,'C',false);
 		
 
         
