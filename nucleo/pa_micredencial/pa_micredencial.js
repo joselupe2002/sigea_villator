@@ -6,6 +6,7 @@ contMat=1;
 var laCarrera="";
 var elalumno="";
 var miciclo="";
+var liga="";
 
 
     $(document).ready(function($) { var Body = $('container'); Body.addClass('preloader-site');});
@@ -25,7 +26,7 @@ var miciclo="";
 			success: function(data){      
 				losdatos=JSON.parse(data);
 				if (losdatos[0]["HAY"]>0) {
-					$("#contenedor").html("<div id=\"credencial\" style=\" width:22cm; height: 14cm; text-align:center; display: inline-block;\">"+
+					$("#contenedor").html("<div id=\"credencial\" style=\" width:20cm; height: 14cm; text-align:center; display: inline-block;\">"+
 										  "    <div id=\"frente\" style=\"border:1px dotted #DFDFEA; width:10cm; height: 14cm; text-align:center; position:absolute; top:0px; left:0px; "+
 					                      "        background-image: url('../../imagenes/empresa/fondoCredF.png'); "+
 										  "        background-size: 100% 100%;\">"+
@@ -33,10 +34,9 @@ var miciclo="";
 										  "    <div id=\"atras\" style=\"border:1px dotted #DFDFEA; width:10cm; height: 14cm; text-align:center; position:absolute; top:0px; left:380px; "+
 					                      "        background-image: url('../../imagenes/empresa/fondoCredA.png'); "+
 										  "        background-size: 100% 100%;\">"+
-										  "    </div>"+
-										 
+										  "    </div>"+										 
 										  "</div>"+
-										  "<button type=\"button\" onclick=\"bajarCrdedencial('contenedor','CREDENCIAL.png');\" class=\"btn btn-primary\">Descargar</button>");
+										  "<button type=\"button\" onclick=\"bajarCrdedencial('credencial','CREDENCIAL.png');\" class=\"btn btn-primary\">Descargar</button>");
 					llenaCredencial(losdatos[0]["CICL_INICIOR"],losdatos[0]["CICL_FINR"]);
 				}	else {
 					$("#contenedor").html("<div id=\"credencial\" class=\"alert alert-danger\">No te encuentras inscrito en el CICLO ESCOLAR ACTUAL</div>");
@@ -83,7 +83,7 @@ var miciclo="";
 									 "   <div class=\"fontAmaranthB\" style=\" font-size:18px; font-color:#08083E; "+
 									 "      margin:0px; padding:0px 0px 0px 0px; position:absolute; "+
 									 "      top:360px; width:373px;\">"+
-									 "      <div style=\"background-color:#10117F; color:white;\">MATRICULA: "+alum[0]["ALUM_MATRICULA"]+"</div>"+
+									 "      <div style=\"background-color:#10117F; color:white;\">MATRÍCULA: "+alum[0]["ALUM_MATRICULA"]+"</div>"+
 									"   </div>"+
 									"   <div class=\"fontAmaranthB\" style=\" font-size:18px; font-color:#08083E; "+
 									"      margin:0px; padding:0px 5px 0px 5px; position:absolute; "+
@@ -100,6 +100,7 @@ var miciclo="";
 			var slashes = protocol.concat("//");
 			var host = slashes.concat(window.location.hostname);
 
+			liga=host+"/sigea/sigeaAPI/api.php";
 			new QRious({
 						element: document.querySelector("#codigoQR"),
 						value: host+"/sigea/sigeaAPI/api.php?t="+btoa("C1")+"&i="+btoa(usuario), // La URL o el texto
@@ -135,7 +136,7 @@ var miciclo="";
 								   "   </div>"+
 									 "   <div class=\"fontRoboto\" style=\" font-size:8px; font-color:#08083E; "+
 									  "      margin:0px; padding:0px 25px 0px 15px; position:absolute; "+
-									  "      top:440px; width:100%;\">ESTA CREDENCIAL LO IDENTIFICA COMO ESTUDIANTE DEL INSTITUTO TECNOLÓGICO SUPERIOR DE PEROTE, ESTE DOCUMENTO ES INTRANSFERIBLE, NO ES VALIDO SI MUESTRA TACHADURAS O ENMENDADURAS.</div>"+
+									  "      top:440px; width:100%;\">ESTA CREDENCIAL LO IDENTIFICA COMO ESTUDIANTE DEL INSTITUTO TECNOLÓGICO SUPERIOR DE PEROTE, ESTE DOCUMENTO ES INTRANSFERIBLE, NO ES VÁLIDO SI MUESTRA TACHADURAS O ENMENDADURAS.</div>"+
 									 "   </div>"								
 									   );		
 
@@ -172,11 +173,14 @@ function saveAs(uri, filename) {
 
 
 function bajarCrdedencial(canvasId, filename) {
-	
+	/*
     var domElement = document.getElementById(canvasId);	
 	html2canvas(domElement).then(function(canvas) {
 		saveAs(canvas.toDataURL(), 'canvas.png');
-	
-	});
+
+	});*/
+
+	enlace="nucleo/pa_micredencial/credencial.php?mat="+usuario+"&liga="+liga;
+	abrirPesta(enlace, "Evidencia");
 
 }
