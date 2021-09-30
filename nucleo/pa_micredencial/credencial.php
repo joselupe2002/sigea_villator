@@ -356,7 +356,7 @@ function TextWithRotation($x, $y, $txt, $txt_angle, $font_angle=0)
 		$pdf->Cell(60,7,utf8_decode("MATRÍCULA: ".$data[0]["ALUM_MATRICULA"]),0,0,'C',true);
 
 
-        $cadena= $_GET["liga"]."?t=".base64_encode("C1")."&i=".base64_encode($_GET["mat"]);
+        $cadena= $_GET["liga"]."?i=C1|".base64_encode($_GET["mat"]);
         //echo $cadena;
         $pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='.$cadena.'&.png',35,78,18,18);     
       
