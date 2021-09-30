@@ -137,8 +137,8 @@
 
     co=Math.round(Math.random() * (999999 - 111111) + 111111); 
 	parametros={cose:co}; $.ajax({type: "POST",url:  "../nucleo/base/iniciaPincipal.php", data:parametros, success: function(data){}});sessionStorage.setItem("co",co);
-	t="<?php echo $_GET["t"];?>";
-	i="<?php echo $_GET["i"];?>";
+	t="<?php echo explode("|",$_GET["i"])[0];?>";
+	i="<?php echo explode("|",$_GET["i"])[1];?>";
 	//console.log(atob(t));
 	//console.log(btoa("C1"));
 </script>

@@ -7,7 +7,7 @@ var elciclo="";
 
     jQuery(function($) { 
 
-		if (atob(t)=='C1') {getCredencial();}
+		if (t=='C1') {getCredencial();}
 
 	
 	});
