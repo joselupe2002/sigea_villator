@@ -67,6 +67,8 @@ contMat=1;
 		   "                <th>CveCarrera</th> "+	
 		   "                <th>Carrera</th> "+	
 		   "                <th>Rep</th> "+	
+		   "                <th>Mot</th> "+	
+		   "                <th>Ase</th> "+	
 		   "                <th>Cve_prof</th> "+	
 		   "                <th>Profesor</th> "+
 		   "                <th>Cve_Materia</th>"+
@@ -119,6 +121,16 @@ contMat=1;
 								        "<i class=\"ace-icon blue fa fa-file-text bigger-100\"></i><span class=\"btn-small\"></span> "+           
 							            "</button> ";
 									
+									btnRepMot="<button title=\"Reporte de Motivos de Reprobación Alumnos\" onclick=\"verMotReprAlu('"+valor.IDDETALLE+"','"+valor.PROFESOR+"');\""+ 
+							            "class=\"btn btn-white btn-success btn-round bigger-100\">"+ 
+								        "<i class=\"ace-icon green fa fa-user bigger-100\"></i><span class=\"btn-small\"></span> "+           
+							            "</button> ";
+									
+									btnRepAse="<button title=\"Reporte de Asesorías por corte\" onclick=\"verRepAses('"+valor.IDDETALLE+"','"+valor.PROFESOR+"','"+valor.SIE+"','"+valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SEMESTRE+"');\""+ 
+							            "class=\"btn btn-white btn-success btn-round bigger-100\">"+ 
+								        "<i class=\"ace-icon purple fa fa-group bigger-100\"></i><span class=\"btn-small\"></span> "+           
+							            "</button> ";
+
 									$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\">");
 									$("#rowM"+contR).append("<td>"+contR+"</td>");
 									$("#rowM"+contR).append("<td>"+valor.IDDETALLE+"</td>");
@@ -127,6 +139,8 @@ contMat=1;
 									$("#rowM"+contR).append("<td>"+valor.CARRERA+"</td>");
 									$("#rowM"+contR).append("<td>"+valor.CARRERAD+"</td>");
 									$("#rowM"+contR).append("<td>"+btnRep+"</td>");
+									$("#rowM"+contR).append("<td>"+btnRepMot+"</td>");
+									$("#rowM"+contR).append("<td>"+btnRepAse+"</td>");
 									$("#rowM"+contR).append("<td>"+valor.PROFESOR+"</td>");
 									$("#rowM"+contR).append("<td>"+valor.PROFESORD+"</td>");
 									$("#rowM"+contR).append("<td>"+valor.MATERIA+"</td>");								
@@ -289,3 +303,18 @@ function verReporte(elprof){
 
 	abrirPesta(enlace,"Reporte");
 }
+
+
+function verMotReprAlu (id,elprof){
+	enlace="nucleo/pd_captcal/reporteCorteMot.php?id="+id+"&profesor="+elprof+"&ciclo="+$("#selCiclos").val()+"&corte="+$("#selCortes").val();
+	abrirPesta(enlace,"Motivos");
+}
+
+
+function verRepAses (id,elprof,grupo,materia, materiad,semestre){
+	enlace="nucleo/pd_captcal/repAses.php?grupo="+grupo+"&ciclo="+$("#selCiclos").val()+"&profesor="+elprof+"&materia="+
+								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre;
+	abrirPesta(enlace,"Rep.Ases.");
+
+}
+
