@@ -140,7 +140,7 @@
 <script src="<?php echo $nivel; ?>js/tableexport.js"></script>
 
 
-<script src="histalumno.js?v=123<?php echo date("ymd"); ?>"></script>
+<script src="histalumno.js?v=<?php echo date("ymd"); ?>"></script>
 <script type="text/javascript">
 	var essuper="<?php echo $_SESSION["super"];?>";
 	var usuario="<?php echo $_SESSION["usuario"];?>";
