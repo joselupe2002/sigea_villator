@@ -152,6 +152,7 @@ function generaTablaInformacion(grid_data){
 		fondo=""; if (valor.ESTA==0) {fondo="style=\"background: #FF5733;\"";}
 		if (valor.TIPO=="I") {fondo="style=\"background: #5AB8A7;\"";}
 		if (valor.TIPO=="AC") {fondo="style=\"background: #5A98B8;\"";} 
+		if (valor.TIPO=="OC") {fondo="style=\"background: #DE8BD4;\"";} 
 
 		$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\" "+fondo+">");
 
@@ -167,7 +168,7 @@ function generaTablaInformacion(grid_data){
 		$("#rowM"+contR).append("<td>"+valor.CICL_CUATRIMESTRE+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.GPOCVE+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.TCACVE+"</td>");
-		$("#rowM"+contR).append("<td>"+valor.MATCVE+"|"+valor.ESTA+"</td>");
+		$("#rowM"+contR).append("<td>"+valor.MATCVE+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.MATE_DESCRIP+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.CICL_CREDITO+"</td>");
 		
