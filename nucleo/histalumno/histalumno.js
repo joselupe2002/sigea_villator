@@ -100,6 +100,7 @@ contMat=1;
 		elsql=" select  ID, ALUCTR, PDOCVE,ALUM_NOMBRE, CICL_CREDITO, ALUM_APEPAT,ALUM_APEMAT,CICL_CUATRIMESTRE, "+
 		"GPOCVE, TCACVE, MATCVE, MATE_DESCRIP, LISTC15, EMPL_NOMBRE, EMPL_APEPAT, EMPL_APEMAT, "+
 		"(select count(*) from eciclmate where CICL_MATERIA=MATCVE AND CICL_MAPA=ALUM_MAPA) AS ESTA,"+
+		"MATE_TIPO AS TIPO"+
 		"CARR_CLAVE, CARR_DESCRIP,LISCAL, ifnull(LISPA1,'') as LISPA1, ifnull(LISPA2,'') as LISPA2, "+		
 		"ifnull(LISPA3,'') as LISPA3,"+
 		"ifnull(LISPA4,'') as LISPA4,"+
@@ -149,6 +150,8 @@ function generaTablaInformacion(grid_data){
 	jQuery.each(grid_data, function(clave, valor) { 
   	
 		fondo=""; if (valor.ESTA==0) {fondo="style=\"background: #FF5733;\"";}
+		if (valor.TIPO=="I") {fondo="style=\"background: #B8895A;\"";}
+
 		$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\" "+fondo+">");
 
 		
