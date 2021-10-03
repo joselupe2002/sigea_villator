@@ -100,6 +100,7 @@ contMat=1;
 		elsql=" select  ID, ALUCTR, PDOCVE,ALUM_NOMBRE, CICL_CREDITO, ALUM_APEPAT,ALUM_APEMAT,CICL_CUATRIMESTRE, "+
 		"GPOCVE, TCACVE, MATCVE, MATE_DESCRIP, LISTC15, EMPL_NOMBRE, EMPL_APEPAT, EMPL_APEMAT, "+
 		"CARR_CLAVE, CARR_DESCRIP,LISCAL, ifnull(LISPA1,'') as LISPA1, ifnull(LISPA2,'') as LISPA2, "+
+		"(select count(*) from eciclmate where CICL_CLAVE=MATCVE AND CICL_MAPA=ALUM_MAPA) AS ESTA,"
 		"ifnull(LISPA3,'') as LISPA3,"+
 		"ifnull(LISPA4,'') as LISPA4,"+
 		"ifnull(LISPA5,'') as LISPA5,"+
@@ -147,8 +148,10 @@ function generaTablaInformacion(grid_data){
 	
 	jQuery.each(grid_data, function(clave, valor) { 
   	
-	
-		$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\">");
+		fondo=""; if (valor.ESTA==0) {fondo="style=\"background: #FF5733;\"";}
+		$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\" "+fondo+">");
+
+		
 		$("#rowM"+contR).append("<td>"+contR+"</td>");
 		$("#rowM"+contR).append("<td><button onclick=\"eliminar('"+valor.ID+"')\" class=\"btn btn-white btn-info btn-bold\">"+
 		                            "<i class=\"ace-icon fa fa-trash bigger-120 red\"></i></button></td>");
