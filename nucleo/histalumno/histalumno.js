@@ -150,7 +150,8 @@ function generaTablaInformacion(grid_data){
 	jQuery.each(grid_data, function(clave, valor) { 
   	
 		fondo=""; if (valor.ESTA==0) {fondo="style=\"background: #FF5733;\"";}
-		if (valor.TIPO=="I") {fondo="style=\"background: #B8895A;\"";}
+		if (valor.TIPO=="I") {fondo="style=\"background: #5AB8A7;\"";}
+		if (valor.TIPO=="AC") {fondo="style=\"background: #5A98B8;\"";} 
 
 		$("#cuerpoInformacion").append("<tr id=\"rowM"+contR+"\" "+fondo+">");
 
