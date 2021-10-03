@@ -163,7 +163,7 @@ function generaTablaInformacion(grid_data){
 		$("#rowM"+contR).append("<td>"+valor.CICL_CUATRIMESTRE+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.GPOCVE+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.TCACVE+"</td>");
-		$("#rowM"+contR).append("<td>"+valor.MATCVE+"</td>");
+		$("#rowM"+contR).append("<td>"+valor.MATCVE+"|"+valor.ESTA+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.MATE_DESCRIP+"</td>");
 		$("#rowM"+contR).append("<td>"+valor.CICL_CREDITO+"</td>");
 		
