@@ -99,8 +99,8 @@ contMat=1;
 
 		elsql=" select  ID, ALUCTR, PDOCVE,ALUM_NOMBRE, CICL_CREDITO, ALUM_APEPAT,ALUM_APEMAT,CICL_CUATRIMESTRE, "+
 		"GPOCVE, TCACVE, MATCVE, MATE_DESCRIP, LISTC15, EMPL_NOMBRE, EMPL_APEPAT, EMPL_APEMAT, "+
-		"CARR_CLAVE, CARR_DESCRIP,LISCAL, ifnull(LISPA1,'') as LISPA1, ifnull(LISPA2,'') as LISPA2, "+
-		"(select count(*) from eciclmate where CICL_CLAVE=MATCVE AND CICL_MAPA=ALUM_MAPA) AS ESTA,"
+		"(select count(*) from eciclmate where CICL_CLAVE=MATCVE AND CICL_MAPA=ALUM_MAPA) AS ESTA,"+
+		"CARR_CLAVE, CARR_DESCRIP,LISCAL, ifnull(LISPA1,'') as LISPA1, ifnull(LISPA2,'') as LISPA2, "+		
 		"ifnull(LISPA3,'') as LISPA3,"+
 		"ifnull(LISPA4,'') as LISPA4,"+
 		"ifnull(LISPA5,'') as LISPA5,"+
