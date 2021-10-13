@@ -127,7 +127,7 @@
                 $sql="SELECT MATRICULA, NOMBRE,MATERIA, MATERIAD, SEMESTRE,CREDITO,TIPOMAT, VECES, PRIMERA, SEGUNDA, TERCERA, ".
                 "(CASE WHEN TIPOMAT='AC' THEN (select CALLET from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1)".
                 "      WHEN TIPOMAT='SS' THEN (select CALLET from ecalcertificado i where i.MATRICULA=a.MATRICULA and i.MATERIA=a.MATERIA limit 1) ".
-                " ELSE CAL END) AS CAL,".
+                " ELSE MAX(CAL) END) AS CAL,".
                 " MAX(TCAL) as TCAL FROM kardexcursadas a  where MATRICULA='".$_GET["matricula"]."' AND CERRADO='S' ".
                 " GROUP BY  MATRICULA, NOMBRE,MATERIA, MATERIAD, SEMESTRE,CREDITO,TIPOMAT, VECES, PRIMERA, SEGUNDA, TERCERA ".
                 " ORDER BY SEMESTRE, MATERIAD";
