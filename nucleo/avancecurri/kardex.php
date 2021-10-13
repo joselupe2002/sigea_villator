@@ -450,7 +450,7 @@
         $matTotales=0;
         foreach($data as $row) {
             $lacal=$row["CAL"];
-            if (($row["CAL"]<70) && ($row["CAL"]!='AC')) {$lacal='NA'; } else {$materiasaprobadas++;}
+            if (($row["CAL"]<70) && (($row["TIPOMAT"]!='AC')||($row["TIPOMAT"]!='SS'))) {$lacal='NA'; } else {$materiasaprobadas++;}
             $pdf->Row(array( str_pad($n,  3, "0",STR_PAD_LEFT),
                              utf8_decode($row["MATERIA"]),
                              utf8_decode($row["MATERIAD"]),
