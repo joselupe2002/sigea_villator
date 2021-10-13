@@ -160,7 +160,7 @@
 			 sqlCor="select * from ecortescal where  CICLO='<?php echo $_GET["ciclo"]?>'"+
 		            " and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
 					" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
-		            " AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='CALIFICACION' "+
+		            " AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='CALIFICACION' and ABIERTO='S' "+
 		            " order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
 			
 			parametros={sql:sqlCor,dato:sessionStorage.co,bd:"Mysql"}
