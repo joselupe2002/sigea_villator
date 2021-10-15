@@ -3745,7 +3745,7 @@ function ss_mostrarAdjuntos(modulo,elusuario,institucion, campus,essuper,elciclo
 										cadFile="<input class=\"fileSigea\" type=\"file\" id=\"file_"+valor.CLAVE+"\""+
 											"                   onchange=\"subirPDFDriveSaveAsp_local('file_"+valor.CLAVE+"','"+carpeta+"','pdf"+
 																		c+"','RUTA_"+valor.CLAVE+"','"+valor.TIPOADJ+"','N','ID','"+valor.CLAVE+
-																		"',' DOCUMENTO  "+valor.DOCUMENTO+" ','"+tabla+"','alta','"+valor.CLAVE+"_"+elusuario+"_"+elciclo+"','S');\">"+
+																		"',' DOCUMENTO  "+valor.DOCUMENTO+" ','"+tabla+"','alta','"+valor.CLAVE+"_"+elusuario+"_"+elciclo+"','"+valor.CLAVE+"_"+elusuario+"_"+elciclo+"');\">"+
 											"           <input  type=\"hidden\" value=\"../"+valor.RUTA+"\"  name=\"RUTA_"+valor.CLAVE+"\" id=\"RUTA_"+valor.CLAVE+"\"  placeholder=\"\" />"+
 											"        </div>"+
 											"        <div class=\"col-sm-1\" style=\"padding-top:5px;\">"+

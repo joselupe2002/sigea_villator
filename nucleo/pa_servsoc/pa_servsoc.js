@@ -269,9 +269,7 @@ var miciclo="";
 			if (JSON.parse(data)[0]["HAY"]>0) {
 				cargarPestania("SERVSOC_INI","panIni","servicioSocial","eadjresidencia",usuario,miciclo);
 				cargarPestania("SERVSOC_SEG","panSeg","servicioSocial","eadjresidencia",usuario,miciclo);
-				cargarPestania("SERVSOC_FIN","panFin","servicioSocial","eadjresidencia",usuario,miciclo);
-				
-				
+				cargarPestania("SERVSOC_FIN","panFin","servicioSocial","eadjresidencia",usuario,miciclo);							
 			}
 
 			else { console.log("No hay proceso abierto");
