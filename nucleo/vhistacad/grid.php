@@ -264,7 +264,7 @@
 							data:parametros,
 	                        url:  laurl,
 	                        success: function(data){ 
-								//alert (data);	
+								console.log(data);	
 									        	
 	                        	 $('.preloader-wrapper').fadeOut();$('body').removeClass('preloader-site');
 	                        

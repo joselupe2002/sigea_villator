@@ -18,7 +18,8 @@
             $sql=$miUtil->getConsultaFiltroSD($_SESSION['usuario'],$_SESSION['super'],$_POST['modulo'],$_POST["bd"]); 
             if (isset($_POST['loscamposf'])) {
                 if (!empty($_POST['loscamposf'])) {
-                    $sql=$miUtil->getSQLfiltroSD($sql,$_POST['loscamposf'],$_POST['losdatosf'],$_POST['limitar']);       
+                    $sql=$miUtil->getSQLfiltroSD($sql,$_POST['loscamposf'],$_POST['losdatosf'],$_POST['limitar']); 
+                   // echo $sql;      
                 }
             }            
         } else {
