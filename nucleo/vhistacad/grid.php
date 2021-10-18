@@ -480,7 +480,7 @@
 					
 			restr="<?php echo $_GET['restr']?>";
 	
-			ruta="editaReg.php?modulo=<?php echo $_GET["modulo"]?>&restr=<?php echo $_GET['restr']?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo $_GET['limitar']?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&campollave=<?php echo $campoLlave; ?>&gridpropio=N&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&valorllave=";//El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
+			ruta="../base/editaReg.php?modulo=<?php echo $_GET["modulo"]?>&restr=<?php echo $_GET['restr']?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo $_GET['limitar']?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&campollave=<?php echo $campoLlave; ?>&gridpropio=N&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&valorllave=";//El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
 		   <?php                  
 	             if (file_exists("../".$_GET["modulo"]."/editaReg.php")) {?>
 	                 ruta="<?php echo "../".$_GET["modulo"]."/editaReg.php"?>?modulo=<?php echo $_GET["modulo"]?>&restr=<?php echo $_GET['restr']?>&bd=<?php echo $_GET['bd']?>&limitar=<?php echo $_GET['limitar']?>&automatico=<?php echo $_GET['automatico']?>&nombre=<?php echo $_GET["nombre"]?>&tablagraba=<?php echo $laTablaGraba;?>&tabla=<?php echo $laTabla;?>&loscamposf="+loscamposf+"&losdatosf="+losdatosf+"&campollave=<?php echo $campoLlave; ?>&gridpropio=N&valorllave=";  //El valor llave se coloca m�s abajo este debe ser siempre el ultimo parametros
@@ -525,7 +525,7 @@
 			    	        
 			    		  $.ajax({
 				  	            data:  parametros,
-				  	            url:   'eliminar.php',
+				  	            url:   '../base/eliminar.php',
 				  	            type:  'post',          
 				  	            success:  function (response) {
 				  	            	$('#dlgproceso').modal("hide");
@@ -549,7 +549,7 @@
 			
 			  $('#dlgproceso').modal({backdrop: 'static', keyboard: false});	
                <?php                  
-               $url="nuevoReg.php?modulo=".$_GET["modulo"]."&restr=".$_GET['restr']."&bd=".$_GET["bd"]."&limitar=".$_GET["limitar"]."&automatico=".$_GET["automatico"]."&nombre=".$_GET["nombre"]."&tablagraba=".$laTablaGraba."&tabla=".$laTabla."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."&gridpropio=N";
+               $url="../base/nuevoReg.php?modulo=".$_GET["modulo"]."&restr=".$_GET['restr']."&bd=".$_GET["bd"]."&limitar=".$_GET["limitar"]."&automatico=".$_GET["automatico"]."&nombre=".$_GET["nombre"]."&tablagraba=".$laTablaGraba."&tabla=".$laTabla."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."&gridpropio=N";
                if (file_exists("../".$_GET["modulo"]."/nuevoReg.php")) {$url="../".$_GET["modulo"]."/nuevoReg.php?modulo=".$_GET["modulo"]."&restr=".$_GET['restr']."&bd=".$_GET["bd"]."&limitar=".$_GET["limitar"]."&automatico=".$_GET["automatico"]."&loscamposf=".$loscamposf."&losdatosf=".$losdatosf."&gridpropio=N";}?>
                  location.href="<?php echo $url;?>";       
                       
