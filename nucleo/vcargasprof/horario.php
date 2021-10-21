@@ -186,8 +186,8 @@
 
 			    $entre=false;
 				$miConex = new Conexion();
-				$resultado=$miConex->getConsulta($_SESSION['bd'],"select a.MATERIAD, a.MATERIA, ".
-                                                 "a.SIE AS GRUPO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO, (IFNULL(a.HP,0)+IFNULL(a.HT,0)) as HT".
+				$resultado=$miConex->getConsulta($_SESSION['bd'],"select SUBSTRING(a.MATERIAD,1,50), a.MATERIA, ".
+                                                 "a.SIE AS GRUPO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO, (IFNULL(a.HP,0)+IFNULL(a.HT,0)) as HT, a.CREDITOS".
 						                         " from  vedgrupos a where IFNULL(a.BASE,'0')='0' and a.CICLO='".$_GET["ciclo"]."' and a.PROFESOR='".$_GET["ID"]."'" );				
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -225,7 +225,7 @@
 				$this->SetLineWidth(.3);
 				
 	
-				$w = array(82, 19, 10,19,19,19,19,19,19,19,10);
+				$w = array(72, 10, 19, 10,19,19,19,19,19,19,19,10);
 				$this->SetFont('Montserrat-ExtraBold','B',8);
 				for($i=0;$i<count($header);$i++)
 					$this->Cell($w[$i],7,$header[$i],1,0,'C',true);
@@ -238,20 +238,23 @@
 					$fill = false;
 					$this->SetFont('Montserrat-Medium','',6);
 					$suma=0;
+					$loscred=0;
 					foreach($data as $row)
 					{
 						$horasMat=$this->dameHoras($row);
+						$loscred+=$row[11];
 						$this->Cell($w[0],4,utf8_decode($row[0]),'LR',0,'J',$fill);
-						$this->Cell($w[1],4,$row[1],'LR',0,'L',$fill);
-						$this->Cell($w[2],4,$row[2],'LR',0,'L',$fill);
-						$this->Cell($w[3],4,$row[3],'LR',0,'L',$fill);
-						$this->Cell($w[4],4,$row[4],'LR',0,'L',$fill);
-						$this->Cell($w[5],4,$row[5],'LR',0,'L',$fill);
-					    $this->Cell($w[6],4,$row[6],'LR',0,'L',$fill);
-					    $this->Cell($w[7],4,$row[7],'LR',0,'L',$fill);
-					    $this->Cell($w[8],4,$row[8],'LR',0,'L',$fill);
-					    $this->Cell($w[9],4,$row[9],'LR',0,'L',$fill);
-					    $this->Cell($w[10],4,$horasMat,'LR',0,'C',$fill);
+						$this->Cell($w[1],4,utf8_decode($row[11]),'LR',0,'C',$fill);
+						$this->Cell($w[2],4,$row[1],'LR',0,'L',$fill);
+						$this->Cell($w[3],4,$row[2],'LR',0,'L',$fill);
+						$this->Cell($w[4],4,$row[3],'LR',0,'L',$fill);
+						$this->Cell($w[5],4,$row[4],'LR',0,'L',$fill);
+						$this->Cell($w[6],4,$row[5],'LR',0,'L',$fill);
+					    $this->Cell($w[7],4,$row[6],'LR',0,'L',$fill);
+					    $this->Cell($w[8],4,$row[7],'LR',0,'L',$fill);
+					    $this->Cell($w[9],4,$row[8],'LR',0,'L',$fill);
+					    $this->Cell($w[10],4,$row[9],'LR',0,'L',$fill);
+					    $this->Cell($w[11],4,$horasMat,'LR',0,'C',$fill);
 						$suma+=$horasMat;					
 					
 						$this->Ln();
@@ -260,7 +263,9 @@
 					$this->Cell(array_sum($w),0,'','T');
 					$this->Ln();
 					$this->SetFont('Montserrat-ExtraBold','B',8);
-					$this->Cell(array_sum($w)-10,4,'Suma de Horas','LR',0,'R',$fill);
+					$this->Cell($w[0],4,'Totales','LR',0,'R',$fill);
+					$this->Cell(10,4,$loscred,'LR',0,'C',$fill);
+					$this->Cell(162,4,"",'LR',0,'C',$fill);
 					$this->Cell(10,4,$suma,'LR',0,'C',$fill);
 					$this->Ln();
 					$this->Cell(array_sum($w),0,'','T');
@@ -398,7 +403,7 @@
 		
 		$pdf->eljefe=$dataEmpl[0]["EMPL_JEFEABREVIA"]." ".$dataEmpl[0]["EMPL_JEFED"];
 		
-		$header = array(utf8_decode('I. Carga Académica'), 'CVE', 'Grupo','Lunes','Martes',utf8_decode('Miércoles'),'Jueves','Viernes','Sabado','Domingo', 'TH');
+		$header = array(utf8_decode('I. Carga Académica'), 'CR', 'CVE', 'Grupo','Lunes','Martes',utf8_decode('Miércoles'),'Jueves','Viernes','Sabado','Domingo', 'TH');
 		
 		$data = $pdf->cargaAcademica();
 		$pdf->imprimeCargaAcad($header,$data);
