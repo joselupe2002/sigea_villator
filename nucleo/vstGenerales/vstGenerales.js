@@ -143,9 +143,9 @@ contMat=1;
 
 		tagCarreras="="+$("#selCarreras").val();
 		if ($("#selCarreras").val()=='%') {tagCarreras=" IN ("+miscarreras+")";}
-		tagCiclos="="+$("#selCiclos").val();
+		tagCiclos="='"+$("#selCiclos").val()+"'";
 		if ($("#selCiclos").val()=='%') {tagCiclos="LIKE '%'";}
-		tagModalidad="="+$("#selModalidades").val();
+		tagModalidad="='"+$("#selModalidades").val()+"'";
 		if ($("#selModalidades").val()=='%') {tagModalidad="LIKE '%'";}
 		
 

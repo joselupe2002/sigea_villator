@@ -201,7 +201,11 @@
 			$pdf->MultiCell(0,8,utf8_decode("Sin más por el momento envió un cordial saludo."),0,'J', false);
 
 			
-			$firmaof=$miutil->getDatoEmpl($dataEmpl[0]["EMPL_JEFE"],"EMPL_FIRMAOF");
+
+			$nombreDes=$miutil->getJefe('503');//Nombre del puesto de Recursos Humanos
+			$firmaof=$miutil->getDatoEmpl($miutil->getJefeNum(503),"EMPL_FIRMAOF");
+			
+			//$firmaof=$miutil->getDatoEmpl($dataEmpl[0]["EMPL_JEFE"],"EMPL_FIRMAOF");
 			
 			
 			
@@ -210,10 +214,13 @@
 			$pdf->Cell(0,0,'A T E N T A M E N T E',0,1,'L');
 			$pdf->setX(25);$pdf->setY(225);
 			$pdf->SetFont('Montserrat-ExtraLight','I',8);
-			$pdf->Cell(0,0,utf8_decode('Excelencia en Educación Tecnológica'),0,1,'L');
+			//$pdf->Cell(0,0,utf8_decode('Excelencia en Educación Tecnológica'),0,1,'L');
 			$pdf->setX(25);$pdf->setY(235);
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
-			$pdf->Cell(0,0,utf8_decode($dataEmpl[0]["EMPL_JEFED"]),0,1,'L');
+			
+			//$pdf->Cell(0,0,utf8_decode($dataEmpl[0]["EMPL_JEFED"]),0,1,'L');
+			$pdf->Cell(0,0,utf8_decode($nombreDes),0,1,'L');
+			
 			$pdf->setX(25);$pdf->setY(240);
 			$pdf->Cell(0,0,utf8_decode($firmaof),0,1,'L');
 			
