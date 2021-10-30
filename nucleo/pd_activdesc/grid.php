@@ -181,12 +181,12 @@
     	    proceso="verActividad"; etiqueta="Ver Actividades"; elcolor="btn-warning";
     	   
     	    if (valor.DESC_ABIERTA=='S') {proceso="agregarActividad"; etiqueta="Capt. Actividades"; elcolor="btn-success";}
-    	    
+    	    horario=[valor.LUNES,valor.MARTES,valor.MIERCOLES,valor.JUEVES,valor.VIERNES,valor.SABADO,valor.DOMINGO];
     	    $("#cuerpo").append("<tr id=\"row"+valor.DESC_ID+"\">");
 			$("#row"+valor.DESC_ID).append("<td>"+valor.DESC_ID+"</td>");	
 			$("#row"+valor.DESC_ID).append("<td><span class=\"badge badge-successs\">"+valor.DESC_CICLO+"<span></td>");		
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.DESC_ACTIVIDADD+"</td>");
-    	    $("#row"+valor.DESC_ID).append("<td>"+valor.DESC_HORAS+"</td>");
+    	    $("#row"+valor.DESC_ID).append("<td>"+dameHoras(horario)+"</td>");
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.LUNES+"</td>");
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.MARTES+"</td>");
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.MIERCOLES+"</td>");
@@ -252,6 +252,21 @@ function pad (str, max) {
 	  return str.length < max ? pad("0" + str, max) : str;
 	}
 	
+
+function dameHoras(lin){
+	$lashoras=0;
+	for (i=0; i<=6;i++) {
+		if ((lin[i]!='') && (lin[$i].length>10)) {
+			hor1=lin[i].substring(0,2);
+			min1=lin[i].substring(3,2);
+			hor2=lin[i].substring(6,2);
+			min2=lin[i].substring(9,2);
+			lashoras+=((hor2*60)+min2)-((hor1*60)+min1);
+		}
+	}
+	return ($lashoras/60);
+}
+
 
 function guadarPortafolio(id,campo,materia){
 	    dato=$("#"+campo).val();
