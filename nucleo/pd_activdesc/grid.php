@@ -264,7 +264,7 @@ function dameHoras(lin){
 			lashoras+=((hor2*60)+min2)-((hor1*60)+min1);
 		}
 	}
-	return ($lashoras/60);
+	return (lashoras/60);
 }
 
 
