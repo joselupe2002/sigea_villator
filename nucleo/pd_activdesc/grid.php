@@ -258,9 +258,9 @@ function dameHoras(lin){
 	for (i=0; i<=6;i++) {
 		if ((lin[i]!='') && (lin[i].length>10)) {
 			hor1=lin[i].substring(0,2);
-			min1=lin[i].substring(3,2);
-			hor2=lin[i].substring(6,2);
-			min2=lin[i].substring(9,2);
+			min1=lin[i].substring(3,5);
+			hor2=lin[i].substring(6,8);
+			min2=lin[i].substring(9,11);
 			console.log(hor1+"|"+min1+ "|"+hor2+"|"+min2);
 			lashoras+=((hor2*60)+min2)-((hor1*60)+min1);
 		}
