@@ -254,7 +254,7 @@ function pad (str, max) {
 	
 
 function dameHoras(lin){
-	$lashoras=0;
+	lashoras=0;
 	for (i=0; i<=6;i++) {
 		if ((lin[i]!='') && (lin[i].length>10)) {
 			hor1=lin[i].substring(0,2);
