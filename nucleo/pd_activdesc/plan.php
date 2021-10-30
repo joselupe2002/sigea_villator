@@ -257,7 +257,7 @@
 						if (count($rowdes)) {
 							
 
-						
+							$h=$this->dameHoras($rowdes);
 							$this->Row(array(utf8_decode($rowdes[0]),
 											 utf8_decode($rowdes[1]),
 											 utf8_decode($rowdes[2]),
@@ -267,11 +267,11 @@
 											 utf8_decode($rowdes[6]),
 											 utf8_decode($rowdes[7]),
 											 utf8_decode($rowdes[8]),
-											 $this->dameHoras($rowdes)
+											 
 											)
 										);
 
-							$suma+=$rowdes[7];
+							$suma+=$h;
 												
 							$fill = !$fill;
 						}
