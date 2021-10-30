@@ -267,7 +267,7 @@
 											 utf8_decode($rowdes[6]),
 											 utf8_decode($rowdes[7]),
 											 utf8_decode($rowdes[8]),
-											 
+											 $h
 											)
 										);
 
