@@ -64,6 +64,22 @@
 				$miutil->getEncabezado($this,'V');			
 			}
 			
+			function dameHoras($lin){
+				$lashoras=0;
+					for ($i=2; $i<=8; $i++) {
+						if (($lin[$i]!='') && (strlen($lin[$i])>10)) {
+							$hor1=substr($lin[$i],0,2);
+							$min1=substr($lin[$i],3,2);
+
+							$hor2=substr($lin[$i],6,2);
+							$min2=substr($lin[$i],9,2);
+
+							$lashoras+=(($hor2*60)+$min2)-(($hor1*60)+$min1);
+						}
+					}
+				return ($lashoras/60);
+			}
+
 			function Footer()
 			{				
 				$miutil = new UtilUser();
@@ -105,7 +121,7 @@
 				$entre=false;
 				$miConex = new Conexion();
 				$resultado=$miConex->getConsulta($_SESSION['bd'],"select a.DESC_ID, a.DESC_ACTIVIDADD,".
-						"LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, DESC_HORAS ".
+						"LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO, DESC_HORAS ".
 						" from  vedescarga a where a.DESC_CICLO='".$_GET["ciclo"]."' and a.DESC_PROFESOR='".$_GET["profesor"]."'" );
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -125,7 +141,7 @@
 				$this->SetLineWidth(.3);
 				
 			
-				$w = array(10,85,16,16,16,16,16,10);
+				$w = array(10,53,16,16,16,16,16,16,16,10);
 				$this->SetFont('Montserrat-ExtraBold','B',8);
 				for($i=0;$i<count($headerdes);$i++)
 					$this->Cell($w[$i],7,$headerdes[$i],1,0,'C',true);
@@ -153,6 +169,8 @@
 							$this->Cell($w[5],4,$rowdes[5],'LR',0,'L',$fill);
 							$this->Cell($w[6],4,$rowdes[6],'LR',0,'L',$fill);
 							$this->Cell($w[7],4,$rowdes[7],'LR',0,'C',$fill);
+							$this->Cell($w[8],4,$rowdes[8],'LR',0,'C',$fill);
+							$this->Cell($w[9],4,$this->dameHoras($rowdes),'LR',0,'C',$fill);
 							$suma+=$rowdes[7];
 							
 							$this->Ln();
