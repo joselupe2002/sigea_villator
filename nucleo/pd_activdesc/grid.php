@@ -35,7 +35,7 @@
 		<link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/bootstrap-datetimepicker.min.css" />			
 		
-		
+		<link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
 
         <style type="text/css">table.dataTable tbody tr.selected {color: blue; font-weight:bold; }
                th, td {  word-wrap: break-word;        
@@ -46,7 +46,7 @@
 	</head>
 
 
-	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white;">
+	<body id="grid_<?php echo $_GET['modulo']; ?>" style="background-color: white; width:98%;" class="sigeaPrin">
 	    
 	    
 	    
@@ -67,7 +67,9 @@
 					        <th style="text-align: center;">Martes</th> 
 					        <th style="text-align: center;">Miercoles</th> 
 					        <th style="text-align: center;">Jueves</th> 
-					        <th style="text-align: center;">Viernes</th> 					       
+					        <th style="text-align: center;">Viernes</th> 	
+							<th style="text-align: center;">Sabado</th> 
+							<th style="text-align: center;">Domingo</th> 				       
 					        <th style="text-align: center;">Plan</th> 		
 					     </tr> 
 			        </thead> 
@@ -190,6 +192,8 @@
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.MIERCOLES+"</td>");
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.JUEVES+"</td>");
     	    $("#row"+valor.DESC_ID).append("<td>"+valor.VIERNES+"</td>");
+			$("#row"+valor.DESC_ID).append("<td>"+valor.SABADO+"</td>");
+			$("#row"+valor.DESC_ID).append("<td>"+valor.DOMINGO+"</td>");
     	    $("#row"+valor.DESC_ID).append("<td><button onclick=\""+proceso+"('"+valor.DESC_ID+"','"+valor.DESC_ACTIVIDADD+"','<?php echo $_GET["modulo"];?>','"+valor.DESC_CICLO+"');\" class=\"btn btn-white "+elcolor+" btn-bold\">"+
 					                                    "<i class=\"ace-icon fa  fa-cogs bigger-120 blue\"></i> "+
 					                                    etiqueta+
