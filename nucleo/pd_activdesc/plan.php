@@ -256,19 +256,8 @@
 										       
 						if (count($rowdes)) {
 							
-							/*
-							$this->Cell($w[0],4,utf8_decode($rowdes[0]),'LR',0,'J',$fill);	
-							$this->Cell($w[1],4,utf8_decode($rowdes[1]),'LR',0,'L',$fill);
-							$this->Cell($w[2],4,$rowdes[2],'LR',0,'L',$fill);
-							$this->Cell($w[3],4,$rowdes[3],'LR',0,'L',$fill);
-							$this->Cell($w[4],4,$rowdes[4],'LR',0,'L',$fill);
-							$this->Cell($w[5],4,$rowdes[5],'LR',0,'L',$fill);
-							$this->Cell($w[6],4,$rowdes[6],'LR',0,'L',$fill);
-							$this->Cell($w[7],4,$rowdes[7],'LR',0,'C',$fill);
-							$this->Cell($w[8],4,$rowdes[8],'LR',0,'C',$fill);
-							$this->Cell($w[9],4,$this->dameHoras($rowdes),'LR',0,'C',$fill);
-*/
 
+						
 							$this->Row(array(utf8_decode($rowdes[0]),
 											 utf8_decode($rowdes[1]),
 											 utf8_decode($rowdes[2]),
@@ -283,8 +272,7 @@
 										);
 
 							$suma+=$rowdes[7];
-							
-							$this->Ln();
+												
 							$fill = !$fill;
 						}
 						
