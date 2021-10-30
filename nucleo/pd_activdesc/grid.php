@@ -261,8 +261,9 @@ function dameHoras(lin){
 			min1=lin[i].substring(3,5);
 			hor2=lin[i].substring(6,8);
 			min2=lin[i].substring(9,11);
-			console.log(hor1+"|"+min1+ "|"+hor2+"|"+min2+"="+((hor2*60)+min2)-((hor1*60)+min1));
-			lashoras+=((hor2*60)+min2)-((hor1*60)+min1);
+			h=((hor2*60)+min2)-((hor1*60)+min1);
+			console.log(hor1+"|"+min1+ "|"+hor2+"|"+min2+"="+h);
+			lashoras+=h;
 		}
 	}
 	return (lashoras/60);
