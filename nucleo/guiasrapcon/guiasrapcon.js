@@ -69,8 +69,8 @@ function seleccionaGuia(){
 
                                         activaEliminar="N";if (!(valor.RUTA=='')) {activaEliminar="S";}
                                     
-                                        dameSubirArchivoDrive("ELICONO_"+valor.ID,"Icono","ICONO_"+valor.ID,'ICONOS','png',
-                                        'ID',valor.ID,'ICONO','eadjico','alta',valor.ID,valor.RUTA,activaEliminar);	
+                                        dameSubirArchivoLocal("ELICONO_"+valor.ID,"Icono","ICONO_"+valor.ID,'guias','png',
+                                        'ID',valor.ID,'ICONO','eadjico','alta',valor.ID,valor.RUTA,activaEliminar,"ICO_"+valor.ID);	
                     
                     });
                 
