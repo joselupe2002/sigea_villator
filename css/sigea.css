@@ -176,53 +176,81 @@ input.error{
 /*=================================BARRAS VERTICALES =========================================*/
 
 .sigeaFrame {
-  SCROLLBAR-FACE-COLOR:#6699CC;
-  SCROLLBAR-HIGHLIGHT-COLOR: #6699CC;
-  SCROLLBAR-SHADOW-COLOR: #6699CC;
-  SCROLLBAR-3DLIGHT-COLOR: #FFFFFF;
-  SCROLLBAR-ARROW-COLOR: #FFFFFF;
-  SCROLLBAR-TRACK-COLOR: #E3E3E3;
-  SCROLLBAR-DARKSHADOW-COLOR: #000000;
-  }
-  
-  .sigeaPrin {
-    /*Estilos estándar experimentales (Principalmente Firefox)*/
-    scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
-    scrollbar-width: thin;
-    
-  
-  }
-  
-  .sigeaPrin::-webkit-scrollbar {
-    -webkit-appearance: none;
-  }
-  
-  .sigeaPrin::-webkit-scrollbar:vertical {
-    width:10px;
-  }
-  
-  .sigeaPrin::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
-    display: none;
-  } 
-  
-  .sigeaPrin::-webkit-scrollbar:horizontal {
-    height: 10px;
-  }
-  
-  .sigeaPrin::-webkit-scrollbar-thumb {
-    background-color: #23b3df;
-    border-radius: 20px;
-    border: 2px solid #5789bb;
-  }
-  
-  .sigeaPrin::-webkit-scrollbar-track {
-    border-radius: 10px;  
-  }
-  
+SCROLLBAR-FACE-COLOR:#6699CC;
+SCROLLBAR-HIGHLIGHT-COLOR: #6699CC;
+SCROLLBAR-SHADOW-COLOR: #6699CC;
+SCROLLBAR-3DLIGHT-COLOR: #FFFFFF;
+SCROLLBAR-ARROW-COLOR: #FFFFFF;
+SCROLLBAR-TRACK-COLOR: #E3E3E3;
+SCROLLBAR-DARKSHADOW-COLOR: #000000;
+}
 
+.sigeaPrin {
+  /*Estilos estándar experimentales (Principalmente Firefox)*/
+  scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
+}
 
+.sigeaPrin::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
 
-  
+.sigeaPrin::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+.sigeaPrin::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.sigeaPrin::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.sigeaPrin::-webkit-scrollbar-thumb {
+  background-color: #23b3df;
+  border-radius: 20px;
+  border: 2px solid #5789bb;
+}
+
+.sigeaPrin::-webkit-scrollbar-track {
+  border-radius: 10px;  
+}
+
+/*==============================================*/
+
+.sigeaPrin2 {
+  /*Estilos estándar experimentales (Principalmente Firefox)*/
+  scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
+}
+
+.sigeaPrin2::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.sigeaPrin2::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+.sigeaPrin2::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.sigeaPrin2::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.sigeaPrin2::-webkit-scrollbar-thumb {
+  background-color: #2bd647;
+  border-radius: 20px;
+  border: 2px solid #5fbb57;
+}
+
+.sigeaPrin2::-webkit-scrollbar-track {
+  border-radius: 10px;  
+}
+
 /*============================INDICADORES ==============================*/
 .indNumero {
   color:#0C0868; 
@@ -256,7 +284,6 @@ input.error{
   z-index: 1100; 
 }
 
-
 /*.sticky-container:hover{ right:-135px;}*/
 .sticky li{
   padding-left:3px;
@@ -269,5 +296,582 @@ input.error{
   cursor: pointer;
 }
 
-.sticky i:hover{color:rgb(255, 255, 255); }
-.sticky i{color:rgb(0, 0, 0); }
+.sticky i:hover{color:rgb(7, 85, 59); }
+.sticky i{color:rgb(20, 12, 63); }
+
+
+
+
+/*================ PARA LAS GUIAS LINEAL============================== */
+
+.ginumero {
+  width: 10%;
+  height: 100px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  background: rgb(41, 24, 114);
+  color:white;
+  font-size: 50px;
+  font-family: 'RobotoB';
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+.gicontenido {
+  width: 75%;
+  height: 100px;
+  padding: 3px;
+  margin: 0px;
+  overflow: auto;
+  background: rgb(255, 255, 255);
+  font-size: 20px;
+  display: inline-block;
+  text-align: Justify;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 0px 2px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 2px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 0px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+.gisubtitulo {
+  color:rgba(0, 0, 0, 0.856);
+  font-size: 0.8em;
+  line-height:normal;
+  font-weight:lighter;
+  font-family: 'Roboto';
+}
+
+.gititulo {
+  color:rgba(23, 5, 53, 0.712);
+  font-size: 1em;
+  text-align: left;
+  line-height:normal;
+  font-weight: bold;
+  font-family: 'Amaranth';
+  line-height:normal;
+}
+
+.giimagen {
+  width: 10%;
+  height: 100px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+  color:white;
+  font-size: 50px;
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+
+/*=========================================INFO CIRCULAR ==============================*/
+.giimagenCirI {
+  position:relative;
+  top:5px;
+  left: 5px;
+  width: 100px;
+  height: 100px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+.giimagenCirPeqI {
+  position:relative;
+  top:-65px;
+  left: 85px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border:#CFCFCF 2px;
+  padding: 0px;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+
+
+.giimagenCirD {
+  width: 100px;
+  height: 100px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+.giimagenCirPeqD {
+  position:relative;
+  top:-65px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border:#CFCFCF 2px;
+  padding: 0px;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+.line1 {
+  width: 112px;
+  height: 47px;
+  border-bottom: 3px dotted rgba(70, 60, 60, 0.527);
+  -webkit-transform:
+      translateY(-20px)
+      translateX(5px)
+      rotate(45deg); 
+  position: relative;
+  top:-180px;
+  left:-95px;
+  /* top: -20px; */
+}
+
+.line2 {
+  width: 210px;
+  height: 47px;
+  border-bottom: 3px dotted rgba(70, 60, 60, 0.527);
+  -webkit-transform:
+      translateY(-20px)
+      translateX(5px)
+      rotate(315deg); 
+  position: relative;
+  top:-20px;
+  left:-165px;
+  /* top: -20px; */
+}
+
+
+
+
+
+.gicuadro {
+  width: 100%;
+  height: 250px;
+  padding: 3px;
+  margin: 0px;
+  font-size: 20px;
+  overflow:auto;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+  line-height:0vw;
+}
+
+
+
+
+.ginumeroCuad {
+  position:relative;
+  top:-230px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border:#CFCFCF 2px;
+  padding: 0px;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+
+
+
+
+.giconttitulo {
+  font-size: 20px;
+  line-height:0vw;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
+
+.gicuadrolin {
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+  margin: 0px;
+  font-size: 30px;
+}
+
+
+
+/*=============================================info con lineas========*/
+
+
+.giCuad_1I {
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  margin-left:10px;
+  font-size: 25px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  display: inline-block;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+}
+
+.giCuad_1D {
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  margin-left:50px;
+  margin-right:50px;
+  font-size: 25px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  display: inline-block;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.giCuadPeq_1 {
+  position:relative;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border:#CFCFCF 2px;
+  padding: 0px;
+  top:-250px;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+  z-index: 2;
+}
+
+
+
+.giLinea_1 {
+  position:relative;
+  height: 5px;
+  border:#CFCFCF 2px;
+  padding: 0px;
+  top:-270px;
+  margin: 0px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+
+.giLineaV_1 {
+  width: 250px;
+  height: 47px;
+  border-bottom: 5px dotted rgba(70, 60, 60, 0.527);
+  -webkit-transform:
+      translateY(-0px)
+      translateX(0px)
+      rotate(90deg); 
+  position: relative;
+  top:-150px;
+  /* top: -20px; */
+}
+
+
+
+/*==============================LINEAL SIN CUADROS========================================*/
+
+
+.ginumeroLSC {
+  width: 4vw;
+  height: 4vw;
+  padding: 2px;
+  margin: 2px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgb(41, 24, 114);
+  color:white;
+  font-size: 2vw;
+  font-family: 'RobotoB';
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+.gicontenidoLSC {
+  width: 65%;
+  height: 100px;
+  padding: 3px;
+  margin: 0px;
+  overflow: auto;
+  font-size: 20px;
+  display: inline-block;
+  text-align: Justify;
+  align-items: center;
+  justify-content: center;
+}
+
+.giimagenLSC {
+  width: 5vw;
+  height: 5vw;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  font-size: 50px;
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+}
+
+
+/*=============================================nUMEROS ENLAZADOS OR LINEAS VERTICALES========*/
+
+
+.giCuadro_LIE {
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left:10px;
+  font-size: 25px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  display: inline-block;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.giCuadPeq_LIE {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 3px;
+  font-size: 20px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  background-color: blanchedalmond;
+}
+
+
+.contNum_LIE {
+
+  height: 200px;
+  display: flex; 
+  text-align: center;
+  align-items: center; 
+  justify-content: center;
+  z-index: 2;
+}
+
+.giLineaV_LIE {
+
+  width: 50px;
+  height: 250px;
+  border-left: 5px dotted rgba(70, 60, 60, 0.527);
+  position: absolute;
+  top:10px;
+  z-index: -1;
+  /* top: -20px; */
+}
+
+
+.giLineaH_LIE {
+  height: 10px;
+  border-top: 5px dotted rgba(70, 60, 60, 0.527);
+  position: absolute;
+  top:10px;
+  z-index: -1;
+  /* top: -20px; */
+}
+/*===========================INFO IMÁGENES GRANDES===========================================*/
+
+.giimagen_LIIM {
+  height: 90px;
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.089);
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+  color:white;
+  font-size: 50px;
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.imagen_grande {
+  height: 100%;
+
+  border-radius: 10px;
+  border: 10px solid rgba(0, 0, 0, 0.089);
+ 
+  
+}
+
+
+.ginumero_LIIM {
+  width: 40px;
+  height: 100px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  background: rgb(41, 24, 114);
+  color:white;
+  font-size: 50px;
+  font-family: 'RobotoB';
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+
+
+.gicontenido_LIIM {
+  width: 90%;
+  height: 100px;
+  padding: 3px;
+  margin: 0px;
+  overflow: auto;
+  background: rgb(255, 255, 255);
+  font-size: 20px;
+  display: inline-block;
+  text-align: Justify;
+  align-items: center;
+  justify-content: center;
+  border-bottom:dashed  1px rgba(0, 0.1, 0, 0.1);
+}
