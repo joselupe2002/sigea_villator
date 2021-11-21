@@ -647,7 +647,7 @@ class UtilUser {
 	
 	
 	
-	public function getParamSubmitEncuestas($rescampos,$tabla,$op,$bd,$valorllave,$ciclo){
+	public function getParamSubmitEncuestas($rescampos,$tabla,$op,$bd,$valorllave,$ciclo,$res){
 		$util= new UtilUser();
 		$param="";$resparam="";$paramadd="";
 		foreach ($rescampos as $campos) {
@@ -679,12 +679,14 @@ class UtilUser {
 		$paramadd.="IDRESPONDE".":\"".$_SESSION["usuario"]."\",\n";
 		$paramadd.="USUARIO".":\"".$_SESSION["usuario"]."\",\n";
 		$paramadd.="FECHAUS".":\"".date("d-m-Y G:i:s")."\",\n";
+		$paramadd.="FECHA".":\"".date("d-m-Y")."\",\n";
 		$paramadd.="IDENC".":\"".$valorllave."\",\n";
 		$paramadd.="CICLO".":\"".$ciclo."\",\n";
 		
 		$resparam.="parametros={\n"."tabla:\"".$tabla."\",\n".$paramadd.substr($param,0,strlen($param)-2)."\n\t\t\t\t};\n";
 		return $resparam;
 	}
+	
 	
 	public function getParamEliminar($modulo,$valorllave){
 		$util= new UtilUser();
@@ -766,19 +768,35 @@ class UtilUser {
 		$miConexU = new Conexion();
 		
 		$misRoles=$util->losRoles($usuario);
-		if (!($misRoles=='')) {$us=$misRoles;} else {$us="'".$usuario."'";}
-		
+		if (!($misRoles=='')) {$us=$misRoles;} else {$us="'".$usuario."'";}		
 		if (!($conRol)) {$us="'".$usuario."'";}
+
+		$misRoles= str_replace("'","",$misRoles);
+		$losroles= explode(",", $misRoles);
 		
-		$sq="select h.*, (SELECT count(*) FROM encrespuestas where IDENC=h.ID and IDRESPONDE='".$usuario."') as N from encuestas h where  STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') ".
-				" Between STR_TO_DATE(h.`INICIA`,'%d/%m/%Y') and STR_TO_DATE(h.`TERMINA`,'%d/%m/%Y')";
+		$sq="";
 		
-		if (!($esSuper=='S')) {	$sq=$sq. " and USUARIOS in (".$us.")";}
+		foreach($losroles as $row) {
+
+			$sq.="select h.*, (SELECT count(*) FROM encrespuestas where IDENC=h.ID and IDRESPONDE='".$usuario."') as N ".
+		    " from encuestas h where  STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') ".
+			" Between STR_TO_DATE(h.`INICIA`,'%d/%m/%Y') and STR_TO_DATE(h.`TERMINA`,'%d/%m/%Y') AND USUARIOS LIKE '%".$row."%' UNION ";
+		}
+
+		$sq=substr($sq,0,strlen($sq)-7);   
+
+
+		if ($esSuper=='S') {$sq="select h.*, (SELECT count(*) FROM encrespuestas where IDENC=h.ID and IDRESPONDE='".$usuario."') as N ".
+		    " from encuestas h where  STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') ".
+			" Between STR_TO_DATE(h.`INICIA`,'%d/%m/%Y') and STR_TO_DATE(h.`TERMINA`,'%d/%m/%Y')";}
 		
 		$sq=$sq. " ORDER BY DESCRIP";
+
+		
 		$res=$miConexU->getConsulta("Mysql",$sq);
 		return $res;
 	}
+	
 	
 	
 	public function getExamenes($usuario,$tipo) {
@@ -926,11 +944,58 @@ class UtilUser {
 	public function getTabsEncuestas($id) {
 		$util= new UtilUser();
 		$miConexU = new Conexion();
-		$res=$miConexU->getConsulta("Mysql","select distinct(SECCION) from encpreguntas WHERE ID='".$id."'
+		$res=$miConexU->getConsulta("Mysql","select distinct(SECCION) AS SECCION from encpreguntas WHERE IDENC='".$id."'
                                      order by SECCION");
 		return $res;
 	}
 	
+
+	public function getSQLPeriodicidad($periodicidad,$usuario,$idencuesta,$campos) {
+
+		if ($periodicidad=='DIARIO') {
+			$sq="SELECT ".$campos." FROM vencrespuestas where IDENC='".$idencuesta.
+			"' and IDRESPONDE='".$usuario."' and FECHA='".date("d-m-Y")."'";
+		}
+
+		if ($periodicidad=='SEMANAL') {
+			$sq="SELECT ".$campos." FROM vencrespuestas where IDENC='".$idencuesta.
+			"' and IDRESPONDE='".$usuario."' and CONCAT(ANIO,NSEMANA)=CONCAT(year(NOW()),week(NOW()))";
+		}
+
+		if ($periodicidad=='ANUAL') {
+			$sq="SELECT ".$campos." FROM vencrespuestas where IDENC='".$idencuesta.
+			"' and IDRESPONDE='".$usuario."' and NSEMANA=year(NOW())";
+		}
+
+		if ($periodicidad=='MENSUAL') {
+			$sq="SELECT ".$campos." FROM vencrespuestas where IDENC='".$idencuesta.
+			"' and IDRESPONDE='".$usuario."' and CONCAT(ANIO,MES)=CONCAT(year(NOW()),month(NOW()))";
+		}
+
+		if ($periodicidad=='CICLO') {
+			$sq="SELECT ".$campos." FROM vencrespuestas where IDENC='".$idencuesta.
+			"' and IDRESPONDE='".$usuario."' and CICLO=getciclo()";
+		}
+
+		if ($periodicidad=='UNICAVEZ') {
+			$sq="SELECT ".$campos." FROM vencrespuestas where IDENC='".$idencuesta.
+			"' and IDRESPONDE='".$usuario."'";
+		}
+	
+		return $sq;
+	}
+	
+	
+	public function getEncuestaContestada($usuario,$esSuper,$periodicidad,$idencuesta) {
+		
+		$util= new UtilUser();
+		$miConexU = new Conexion();
+		$sq=$util->getSQLPeriodicidad($periodicidad,$usuario,$idencuesta,"ID");
+		$res=$miConexU->getConsulta("Mysql",$sq);
+		if (empty($res)) { $bandera="0";}
+		else {$bandera=$res[0][0];}	
+		return $bandera;
+	}
 	 
 	
 	public function getCamposForm($modulo) {

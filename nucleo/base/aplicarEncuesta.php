@@ -1,5 +1,5 @@
 
-<?php session_start(); if (($_SESSION['inicio']==1)  && (strpos($_SESSION['permisos'],$_GET["modulo"])) ){ 
+<?php session_start(); if (($_SESSION['inicio']==1) ){ 
 	header('Content-Type: text/html; charset='.$_SESSION['encode']);
 	include("../.././includes/Conexion.php");
 	include("../.././includes/UtilUser.php");
@@ -47,7 +47,7 @@
 			
 	</head>
 
-<body style="background-color: white;">
+<body style="background-color: white;" class="sigeaPrin">
  <?php $numCol=1;
        $tam=(12/$numCol);
  ?>
@@ -55,14 +55,16 @@
    <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>
  -->
  	
- <div class="panel panel-success">
-    <div class="panel-heading" ><span class="text-danger"><strong> <?php echo $_GET['descrip'];?></strong></span> </div>
-         <div class="container text-info"  style="width:100%; background-color: #E1F3EF; text-align: justify;"><strong><?php echo $_GET['objetivo'];?></strong></div>
+ <div class="panel panel-success sigeaPrin">
+    <div class="panel-heading sigeaPrin" ><span class="text-danger"><strong> <?php echo $_GET['descrip'];?></strong></span> </div>
+         <div class="container text-info sigeaPrin"  style="width:100%; background-color: #E1F3EF; text-align: justify;"><strong><?php echo $_GET['objetivo'];?></strong></div>
+		 <br>
+         <div class="container text-info sigeaPrin"  style="width:100%; background-color: #E1F3EF; color:black; text-align: justify;"><strong><?php echo $_GET['textoi'];?></strong></div>
         
          <div class="space-10"></div>
 		 <div class="container" id="cuerpo<?php echo $_GET['modulo'];?>">	
 		          
-		     <form style="width: 100%" method="post" id="frmReg" name="frmReg">
+		     <form style="width: 100%" method="post" id="frmReg" name="frmReg" >
 	               <fieldset>
 	               
 	                   <?php $laTabla="encrespuestas"; $laTablaGraba= "encrespuestas";?>
@@ -74,10 +76,11 @@
 	                  
 	                       <?php $rescampos=$miUtil->getCamposFormEncuestas($_GET['id']); ?>
 	                   <script type="text/javascript"> campos=<?php echo json_encode($rescampos);?></script>
-	                  
-		           
+	                  		           
 	                </fieldset>
 	         </form>
+			 <div class="container text-info sigeaPrin"  style="width:100%; background-color: #E1F3EF; color:black; text-align: justify;"><strong><?php echo $_GET['textof'];?></strong></div>
+
 	        <br/>
 	         <div class="row">	
 				         <div class="col-sm-6" style="text-align: center;">
@@ -193,51 +196,63 @@
 					numCol=1;
 				    tam=(12/numCol);
 				       
-					$("#frmReg").append("<div id =\"tabPrin\" class=\"tabbable\">");  
-					$("#tabPrin").append("<div id=\"tabs_\">");  
-					c=0;		
+					$("#frmReg").append("<div id =\"tabPrin\" class=\"fotnRobotoB tabbable\">");  
+					$("#tabPrin").append("<ul class= \"nav nav-tabs\" id=\"myTab\">\n");   
+					c=0;	
+					$("#tabPrin").append("<div id=\"myTab_cont\" class=\"tab-content\">");	
 					claseActive="class=\"active\"";
-				     jQuery.each(tabs, function(clave, valor){			    
-			   	         $("#myTab").append("<li id=\"li_tabs_"+valor.SECCION+"\" "+claseActive+">\n");  
-			   	         $("#li_tabs_"+valor.SECCION).append("<a data-toggle=\"tab\" href=\"#tabs_"+valor.SECCION+"\"> <i class=\"green ace-icon fa fa-check bigger-120\"></i>"+valor.SECCION+"</a>");
-			   	         if (c==0) {elprimeTab=valor.SECCION; claseActive="";}
-			   	         c++;                             					          
-				    });
-					    
-				    
-				
-				     controw=1;  abrilinea=false; contcol=1;
-				     
-				     jQuery.each(campos, function(clave, valor){	
+				     jQuery.each(tabs, function(clave, valorSec){								    
+			   	         $("#myTab").append("<li id=\"li_tabs_"+valorSec.SECCION+"\" "+claseActive+">\n");  
+			   	         $("#li_tabs_"+valorSec.SECCION).append("<a data-toggle=\"tab\" href=\"#tabs_"+valorSec.SECCION+"\"><i class=\"green ace-icon fa fa-edit bigger-120\"></i>"+valorSec.SECCION+"</a>");
+			   	         if (c==0) {elprimeTab=valorSec.SECCION; claseActive="";}
+			   	         c++;   
+					 });     
+					 
+					$("#tabPrin").append("<div id=\"myTab_cont\" class=\"tab-content\">");
+					claseActive=" in active ";
+					c=0;
+					jQuery.each(tabs, function(clave, valor){								
+						$("#myTab_cont").append("<div id= \"tabs_"+valor.SECCION+"\"   class=\"tab-pane fade "+claseActive+" \" >\n");
+						if (c==0)	{claseActive="";}
+						c++;                        					          
+					});
 
+				   							
+					controw=1;  abrilinea=false; contcol=1;
 					
-				    	    if (contcol>numCol) {abrilinea=false; controw++;}
-				    	    		    	 
-		                    if (!(abrilinea)) { 
-		                        $("#tabs_"+valor.SECCION).append("<div  "+
-		                                                         "id=\"row_"+valor.SECCION+"_"+controw+"\" class=\"row\">\n");
-		                        $("#tabs_"+valor.SECCION).append("<div class=\"space-10\">\n");
-		                        contcol=1;
-		                        abrilinea=true;
-		                        }
-		                   
-		                    if (valor.autoinc==null) {autoi="";} else { autoi=valor.autoinc;} 
-		                   
-		                    if (abrilinea){     
-		                    	 $("#row_"+valor.SECCION+"_"+controw).append("   <div id=\"cell_"+valor.SECCION+"_"+controw+"_"+contcol+"\" class=\"col-sm-"+tam+"\">\n");                     	 
-		                         getElementoEd("cell_"+valor.SECCION+"_"+controw+"_"+contcol,valor.CLAVE,valor.TIPO,valor.PREGUNTA,valor.ELSQL,"","N", valor.gif,autoi,'I',bd,'<?php echo $_SESSION['usuario'];?>');		                         
-		                         contcol++;
-		                    	}  
-		                	callback(valor.CLAVE);                                    					         
-				      });
-				     callback("Ok");
-				     
-					}
+					jQuery.each(campos, function(clave, valor){							
+							if (contcol>numCol) {abrilinea=false; controw++;}
+																			
+							if (!(abrilinea)) {
+								$("#tabs_"+valor.SECCION).append("<div  "+
+																"id=\"row_"+valor.SECCION+"_"+controw+"\" class=\"row\">");
+								$("#tabs_"+valor.SECCION).append("<div class=\"space-10\">\n");							
+								contcol=1;
+								abrilinea=true;
+								}
+						
+							if (valor.autoinc==null) {autoi="";} else { autoi=valor.autoinc;} 
+						
+							if (abrilinea){     
+								$("#row_"+valor.SECCION+"_"+controw).append("   <div id=\"cell_"+valor.SECCION+"_"+controw+"_"+contcol+"\" class=\"col-sm-"+tam+"\">\n");                     	 
+								getElementoEd("cell_"+valor.SECCION+"_"+controw+"_"+contcol,valor.CLAVE,valor.TIPO,valor.PREGUNTA,valor.ELSQL,"","N", valor.gif,autoi,'I',bd,'<?php echo $_SESSION['usuario'];?>');		                         
+								contcol++;
+								}  
+							callback(valor.CLAVE);                                    					         
+					});
+					callback("Ok");
+		
+				}
 /*========================================================================================================*/		
 
 				$(document).ready(function(){	
 		             cargarElementos(function(evento, valor) { });
 		          	 $("#tabs").tabs();
+
+					       //Para los componentes de fecha 
+					$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
+					$('.chosen-select').chosen({allow_single_deselect:true}); 
+	
 					
 				});
 
@@ -312,7 +327,7 @@
 				
 			}
 			else {
-				 <?php echo $miUtil->getParamSubmitEncuestas($rescampos,$laTablaGraba,"I",$_SESSION["bd"],$_GET["id"],$_GET["ciclo"]);?>	
+				 <?php echo $miUtil->getParamSubmitEncuestas($rescampos,$laTablaGraba,"I",$_SESSION["bd"],$_GET["id"],$_GET["ciclo"],$_GET["res"]);?>	
 	        	 $('#dlgproceso').modal({backdrop: 'static', keyboard: false});	         
 				        $.ajax({
 			                type: "POST",
@@ -322,8 +337,12 @@
 				                		
 			                	$('#dlgproceso').modal("hide");  			                                	                      
 				                if (!(data.substring(0,1)=="0"))	
-					                 { 					                	 			                  
-                                         location.href="<?php echo $antes;?>grid.php?modulo=<?php echo $_GET['modulo']?>&bd=<?php echo $_SESSION['bd']?>&nombre=<?php echo $_GET['nombre']?>&limitar=S&automatico=S&loscamposf=&losdatosf=";                                   
+					                 { 	<?php if (isset($_GET["fuera"])){
+									        echo "location.href=\"".$antes."comprobante.php?id=".$_GET['id']."&matricula=".$_SESSION['usuario']."\";"; 
+									     }
+									 	else {
+											 echo "location.href=\"".$antes."grid.php?modulo=".$_GET['modulo']."&bd=".$_SESSION['bd']."&nombre=".$_GET['nombre']."&limitar=S&automatico=S&loscamposf=&losdatosf=\";"; 
+										 }?>				                	 			                                                                                             
 					                  }	
 				                else {alert ("OCURRIO EL SIGUIENTE ERROR: "+data);}          					           
 			                }					     
