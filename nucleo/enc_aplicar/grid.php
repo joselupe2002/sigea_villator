@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="<?php echo $nivel; ?>estilos/preloader.css" type="text/css" media="screen">         
         <link href="imagenes/login/sigea.png" rel="image_src" />
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/ui.jqgrid.min.css" />
+		<link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
 
         <style type="text/css">table.dataTable tbody tr.selected {color: blue; font-weight:bold; }
                th, td {  word-wrap: break-word;        
@@ -43,13 +44,16 @@
 
 
       <h3 class="header smaller lighter text-warning"><strong>Encuestas<i class="ace-icon fa fa-angle-double-right"></i> <small id="elciclo"></small> <small id="elciclod"></small></strong></h3>
-	     <div  class="table-responsive">
-		     <table id=tabHorarios class= "display table-condensed table-striped table-sm table-bordered table-hover nowrap " style="overflow-y: auto;">
+	     <div  class="table-responsive sigeaPrin">
+		     <table id=tabHorarios class= "fontRobotoB sigeaPrin display table-condensed table-striped table-sm table-bordered table-hover nowrap " style="overflow-y: auto;">
 				   	<thead>  
 					    <tr style="background-color: #9F5906; color: white;">					        
 					        <th style="text-align: center;">ID</th> 
-					        <th style="text-align: center;">Encuesta</th> 					       
-					        <th style="text-align: center;">Aplicar</th> 					        
+					        <th style="text-align: center;">Encuesta</th> 
+							<th style="text-align: center;">Periodicidad</th> 					       
+					        <th style="text-align: center;">Aplicar</th> 	
+							<th style="text-align: center;">Comprobante</th> 	
+							<th style="text-align: center;">Resultado</th> 			        
 					     </tr> 
 					     <?php $misNoti=$miUtil->getEncuestas($_SESSION['usuario'],$_SESSION['super'],true);
 				               $noti=0;
@@ -57,16 +61,30 @@
 				               	    echo "<tr>";
 				               	    echo "     <td>".$row["ID"]."</td>";
 				               	    echo "     <td>".$row["DESCRIP"]."</td>";
-				               	    if ($row["N"]=='0') {
+									echo "     <td>".$row["PERIODICIDAD"]."</td>";
+
+									$yaesta=$miUtil->getEncuestaContestada($_SESSION['usuario'],$_SESSION['super'],$row["PERIODICIDAD"],$row["ID"]);
+								
+								
+									$elresultado="";
+									if (($row["RESULTADO"]=='S') && ($yaesta)) {
+										$elresultado=$miUtil->getResultado($_SESSION['usuario'],$_SESSION['super'],$row["PERIODICIDAD"],$row["ID"],0);
+									}
+																	
+								
+				               	    if ($yaesta=="0") {
 						               	    echo "     <td style= \"text-align: center;\" > ".
-		                                                   "<a  onclick=\"verEncuesta('".$row["ID"]."','".$row["DESCRIP"]."','".$row["OBJETIVO"]."');\" title=\"Aplicar encuesta\" ".
+		                                                   "<a  onclick=\"verEncuesta('".$row["ID"]."','".$row["DESCRIP"]."','".$row["OBJETIVO"]."','".$row["TEXTOINI"]."','".$row["TEXTOFIN"]."','".$row["RESULTADO"]."');\" title=\"Aplicar encuesta\" ".
 		                                                   "class=\"btn btn-white btn-waarning btn-bold\">".
 		                                                   "<i class=\"ace-icon fa fa-list-alt  bigger-160 green \"></i>".
 		                                                   "</a></td>";
 						               	    }
 						            else {
 						            	    echo "<td style= \"text-align: center;\" ><span class=\"label label-danger label-white middle\">Encuesta Enviada Gracias!</span></td>";
+											echo "<td style= \"text-align: center;\" ><button onclick=\"comprobante(".$yaesta.",'".$row["ID"]."');\" class=\"btn btn-white btn-info btn-bold\"><i class=\"ace-icon fa fa-building bigger-120 blue\"></i></button></td>";
 						            }
+									echo "     <td>".$elresultado."</td>";
+
 						            echo "     </tr>";
 				               	    $noti++;
 				               }
@@ -171,10 +189,17 @@
 			
 
 
-function verEncuesta(id,descrip,objetivo){
-	 window.location="../base/aplicarEncuesta.php?ciclo="+$("#elciclo").html()+"&gridpropio=S&id="+id+"&descrip="+descrip+"&objetivo="+objetivo+"&modulo=<?php echo $_GET["modulo"];?>&nombre=<?php echo $_GET["nombre"];?>";
+function verEncuesta(id,descrip,objetivo, textoi, textof, res){
+	 window.location="../base/aplicarEncuesta.php?ciclo="+$("#elciclo").html()+"&gridpropio=S&id="+id+"&descrip="+
+	 descrip+"&objetivo="+objetivo+"&modulo=<?php echo $_GET["modulo"];?>&nombre=<?php echo $_GET["nombre"];?>&textoi="+
+	 textoi+"&textof="+textof+"&res="+res;
 }
 
+
+function comprobante (id,idenc){
+	enlace="nucleo/enc_aplicar/comprobante.php?idenc="+idenc+"&id="+id+"&matricula=<?php echo $_SESSION["usuario"]; ?>";
+	abrirPesta(enlace,"Comprobante");
+}
 
     
 		</script>
