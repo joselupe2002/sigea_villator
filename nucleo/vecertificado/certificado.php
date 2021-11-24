@@ -315,8 +315,9 @@
         foreach($data as $row) {   
             $pdf->setX($mgTabla); 
             $cadRev='';
-            $mical=$row["CAL"];
+            $mical=$row["CAL"];        
             if ($row["TIPOMAT"]=='SC') {
+                echo "entre";
                 if ($row["CAL"]>=70) {$mical="AC";} else {$mical='NA';}
             }
             if (($row["TCAL"]=='93') && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS'))) {$cadRev='*';}
