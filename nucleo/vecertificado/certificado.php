@@ -315,15 +315,19 @@
         foreach($data as $row) {   
             $pdf->setX($mgTabla); 
             $cadRev='';
+            $mical=$row["CAL"];
+            if ($row["TIPOMAT"]=='SC') {
+                if ($row["CAL"]>=70) {$mical="AC";} else {$mical='NA';}
+            }
             if (($row["TCAL"]=='93') && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS'))) {$cadRev='*';}
             $pdf->Row(array( utf8_decode($row["MATERIAD"]." ".$cadRev),
-                             utf8_decode($row["CAL"]),
+                             utf8_decode($mical),
                              "",
                              str_pad($row["CREDITO"],  2, "0",STR_PAD_LEFT)                             
                              )
                       );
             $totcred+=$row["CREDITO"];
-            if  (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS')) {
+            if  (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS') && ($row["TIPOMAT"]!='SC')) {
                 $sumacal+=$row["CAL"];
                 $n++;
             }            
