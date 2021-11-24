@@ -450,7 +450,12 @@
         $matTotales=0;
         foreach($data as $row) {
             $lacal=$row["CAL"];
-            if (($row["CAL"]<70) && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS'))) {$lacal='NA'; } else {$materiasaprobadas++;}
+                 
+            if ($row["TIPOMAT"]=='SC') {
+                if ($row["CAL"]>=70) {$lacal="AC";} else {$lacal='NA';}
+            }
+
+            if (($row["CAL"]<70) && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS') && ($row["TIPOMAT"]!='SC'))) {$lacal='NA'; } else {$materiasaprobadas++;}
             $pdf->Row(array( str_pad($n,  3, "0",STR_PAD_LEFT),
                              utf8_decode($row["MATERIA"]),
                              utf8_decode($row["MATERIAD"]),
@@ -465,7 +470,7 @@
                       );
             $matTotales++;
             $n++;
-            if (is_numeric($row["CAL"]) && ($row["TIPOMAT"]!='SS') ) {$sumacursadas+=$row["CAL"]; $cursadas++; }
+            if (is_numeric($row["CAL"]) && (($row["TIPOMAT"]!='SS') && ($row["TIPOMAT"]!='SS'))) {$sumacursadas+=$row["CAL"]; $cursadas++; }
             
         }
 

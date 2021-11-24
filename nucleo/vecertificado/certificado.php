@@ -139,8 +139,7 @@
                 " ELSE CAL END) AS CAL,".
                 "TCAL,CICLO,CREDITO,TIPOMAT, VECES, PRIMERA, SEGUNDA, TERCERA FROM kardexcursadas a ".
                 " where MATRICULA='".$_GET["matricula"]."' AND CAL>=70 AND CERRADO='S' AND CERRADO='S' ORDER BY SEMESTRE, MATERIAD";
-            
-                echo $sql;
+                      
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
 					$data[] = $row;
@@ -317,8 +316,7 @@
             $pdf->setX($mgTabla); 
             $cadRev='';
             $mical=$row["CAL"];        
-            if ($row["TIPOMAT"]=='SC') {
-                echo "entre";
+            if ($row["TIPOMAT"]=='SC') {                
                 if ($row["CAL"]>=70) {$mical="AC";} else {$mical='NA';}
             }
             if (($row["TCAL"]=='93') && (($row["TIPOMAT"]!='AC') && ($row["TIPOMAT"]!='SS'))) {$cadRev='*';}
