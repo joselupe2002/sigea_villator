@@ -470,7 +470,7 @@
                       );
             $matTotales++;
             $n++;
-            if (is_numeric($row["CAL"]) && (($row["TIPOMAT"]!='SS') && ($row["TIPOMAT"]!='SS'))) {$sumacursadas+=$row["CAL"]; $cursadas++; }
+            if (is_numeric($row["CAL"]) && (($row["TIPOMAT"]!='SS') && ($row["TIPOMAT"]!='SC'))) {$sumacursadas+=$row["CAL"]; $cursadas++; }
             
         }
 
