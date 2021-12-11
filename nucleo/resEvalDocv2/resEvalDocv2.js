@@ -383,7 +383,7 @@ function cargarFaltantes(){
 	"ALUM_CORREO AS CORREO, ALUM_CORREOINS AS CORREOINS, ALUM_TELEFONO AS TELEFONO"+
 	" from dlista a, falumnos b, ccarreras, cmaterias where a.PDOCVE="+$("#selCiclos").val()+" and "+
 	"ALUCTR=ALUM_MATRICULA and CARR_CLAVE=ALUM_CARRERAREG AND "+
-	"MATCVE=MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I') AND "+
+	"MATCVE=MATE_CLAVE AND IFNULL(MATE_TIPO,'') NOT IN ('T','RP','I') AND LISTC15<>'9999' AND "+
 	" a.ID NOT in (select IFNULL(h.IDDETALLE,0) from ed_respuestasv2 h) order by ALUM_APEPAT, ALUM_APEMAT,ALUM_NOMBRE";
 
 	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
