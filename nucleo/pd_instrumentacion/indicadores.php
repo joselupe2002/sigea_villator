@@ -61,10 +61,7 @@
 		    
 	
 	<div class="space-10"></div>
-	<div style="text-align:center;" class="row">
-         <div class="col-sm-2"> 
-              <button class="btn btn-white btn-danger btn-bold" onclick="regresar();"><i class="ace-icon fa fa-reply-all bigger-120 blue"></i>Regresar    </button>
-         </div>           
+	<div style="text-align:center;" class="row">            
 	</div>
 		
  
@@ -146,6 +143,8 @@
 								"		<div class=\"col-sm-3\" style=\"padding-top:20px;\">"+														   		
 								"			<button title=\"Copiar información de otra Unidad\" onclick=\"copiarInfo();\""+
                                 " 			class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon green fa fa-copy bigger-140\"></i> Copiar Información</button>"+    						
+								"			<button title=\"Regresar a la lista de asignaturas\" onclick=\"regresar();\""+
+                                " 			class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon red fa fa-arrow-left bigger-140\"></i> Regresar</button>"+    						
 								"		</div>"+
 								"	</div><br>"+
 								"	<div class=\"row\">"+

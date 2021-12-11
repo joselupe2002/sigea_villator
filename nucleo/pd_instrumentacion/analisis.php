@@ -76,9 +76,7 @@
 	
 	<div class="space-10"></div>
 	<div style="text-align:center;" class="row">
-         <div class="col-sm-2"> 
-              <button class="btn btn-white btn-danger btn-bold" onclick="regresar();"><i class="ace-icon fa fa-reply-all bigger-120 blue"></i>Regresar    </button>
-         </div>           
+                
 	</div>
 		
  
@@ -155,11 +153,13 @@
 			                    "<div class=\"col-sm-3\">"+								
 						    	"	    	<label class=\"fontRobotoB label label-success\">No. de Unidad o Competencia</label><select onchange=\"seleccionaUnidad('<?php echo $_GET["id"]?>');\" class=\"form-control\"  id=\"selUnidad\"></select>"+							
 								"</div>"+
-								"<div class=\"col-sm-3\" style=\"padding-top:20px;\">"+								
+								"<div class=\"col-sm-6\" style=\"padding-top:20px;\">"+								
 						    	"	<button title=\"Ver Competencias de la Unidad\" onclick=\"verCompetencias();\""+
                                 " class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon pink fa fa-lightbulb-o bigger-140\"></i> Competencias</button>"+    						
 								"	<button title=\"Copiar información de otra Unidad\" onclick=\"copiarInfo();\""+
                                 " class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon green fa fa-copy bigger-140\"></i> Copiar Información</button>"+    						
+								"	<button title=\"Copiar información de otra Unidad\" onclick=\"regresar();\""+
+                                " class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon red fa fa-arrow-left bigger-140\"></i> Regresar</button>"+    						
 								"</div>"																								
 								);
 
@@ -275,8 +275,11 @@ function seleccionaUnidad(id){
 
 					$("#row"+c).append("<td>"+valor.UNID_ACTAPR+"</td>");
 
-					$("#row"+c).append("<td><textarea id=\"actens\" onchange=\"guardar('"+id+"');\" style=\"height:340PX; width:300px;\">"+valor.ACTENSENANZA+"</textarea></td>");
+					//$("#row"+c).append("<td><textarea id=\"actens\" onchange=\"guardar('"+id+"');\" style=\"height:340PX; width:300px;\">"+valor.ACTENSENANZA+"</textarea></td>");
 					
+					$("#row"+c).append("<td><div style=\"padding:0px; width:350px;\" id=\"las_acten\" class=\"form-control\"></div>"+																				
+									"</td>");
+
 					$("#row"+c).append("<td><div style=\"padding:0px; width:350px;\" id=\"las_dc_ins\" class=\"form-control\"></div>"+																				
 									"</td>");
 
@@ -289,6 +292,9 @@ function seleccionaUnidad(id){
 
 					addSELECTMULT_CONVALOR("sel_dc_ins","las_dc_ins","PROPIO", "select CATA_CLAVE, CATA_DESCRIP "+
 						                   "from scatalogos WHERE CATA_TIPO='COMPGENERICAS' order by CATA_CLAVE ", "","BUSQUEDA",valor.DC_INS);  	
+
+					addSELECTMULT_CONVALOR("sel_acten","las_acten","PROPIO", "select CATA_CLAVE, CATA_DESCRIP "+
+						                   "from scatalogos WHERE CATA_TIPO='ACTENSENANZA' order by CATA_CLAVE ", "","BUSQUEDA",valor.ACTENSENANZA);  	
 														
 					c++;			
         		});	
@@ -326,7 +332,7 @@ function guardar(idgrupo){
 		unidad=$("#selUnidad").val();
 	
 		var losdatos=[];
-		losdatos[0]=migrupo+"|"+unidad+"|"+$("#actens").val()+"|"+$("#sel_dc_ins").val()+"|"+$("#sel_dc_int").val()+"|"+$("#sel_dc_sis").val()+"|"+$("#horteo").val()+"|"+$("#horpra").val()+"|<?php echo $_SESSION["INSTITUCION"];?>|<?php echo $_SESSION["CAMPUS"];?>|<?php echo $_SESSION["usuario"];?>|"+lafecha;
+		losdatos[0]=migrupo+"|"+unidad+"|"+$("#sel_acten").val()+"|"+$("#sel_dc_ins").val()+"|"+$("#sel_dc_int").val()+"|"+$("#sel_dc_sis").val()+"|"+$("#horteo").val()+"|"+$("#horpra").val()+"|<?php echo $_SESSION["INSTITUCION"];?>|<?php echo $_SESSION["CAMPUS"];?>|<?php echo $_SESSION["usuario"];?>|"+lafecha;
    		var loscampos = ["IDGRUPO","UNIDAD","ACTENSENANZA","DC_INS","DC_INT","DC_SIS","HORAST","HORASP","_INSTITUCION","_CAMPUS","USUARIO","FECHAUS"];
 
 		   parametros={

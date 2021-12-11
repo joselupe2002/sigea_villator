@@ -62,9 +62,7 @@
 	
 	<div class="space-10"></div>
 	<div style="text-align:center;" class="row">
-         <div class="col-sm-2"> 
-              <button class="btn btn-white btn-danger btn-bold" onclick="regresar();"><i class="ace-icon fa fa-reply-all bigger-120 blue"></i>Regresar    </button>
-         </div>           
+          
 	</div>
 		
  
@@ -145,9 +143,11 @@
 			                    "		<div class=\"col-sm-3\">"+								
 						    	"	    	<label class=\"fontRobotoB label label-success\">No. de Unidad o Competencia</label><select onchange=\"seleccionaUnidad('<?php echo $_GET["id"]?>');\" class=\"form-control\"  id=\"selUnidad\"></select>"+							
 								"		</div>"+
-								"		<div class=\"col-sm-3\" style=\"padding-top:20px;\">"+														   		
+								"		<div class=\"col-sm-6\" style=\"padding-top:20px;\">"+														   		
 								"			<button title=\"Copiar información de otra Unidad\" onclick=\"copiarInfo();\""+
                                 " 			class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon green fa fa-copy bigger-140\"></i> Copiar Información</button>"+    						
+								"			<button title=\"Regresar a la lista de asignaturas\" onclick=\"regresar();\""+
+                                " 			class=\"btn  btn-white btn-primary btn-round\"><i class=\"ace-icon red fa fa-arrow-left bigger-140\"></i> Regresar</button>"+    														
 								"		</div>"+
 								"	 </div><br>"+
 								"	<div class=\"row\">"+
@@ -159,6 +159,7 @@
 
 								
 			actualizaSelect("selUnidad", "SELECT UNID_NUMERO,concat(UNID_NUMERO,' ',UNID_DESCRIP) FROM eunidades where UNID_PRED='' AND UNID_MATERIA='<?php echo $_GET["materia"]?>' ORDER BY UNID_NUMERO", "","");			
+			
 		
 			migrupo="<?php echo $_GET["id"];?>";
 		});
@@ -194,8 +195,8 @@ function sacarCopia(){
 		 url:  "../base/ejecutasql.php",
 		 success: function(data){  
 			console.log(data);			
-			elsql="insert into ins_matriz (IDGRUPO,UNIDAD,EVAPR,PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS) "+
-			" select IDGRUPO,'"+unidad+"',EVAPR,PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS  FROM ins_matriz "+
+			elsql="insert into ins_matriz (IDGRUPO,TIPO,UNIDAD,EVAPR,PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS) "+
+			" select IDGRUPO,TIPO,'"+unidad+"',EVAPR,PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS  FROM ins_matriz "+
 			" where IDGRUPO='"+migrupo+"' and UNIDAD='"+unidadc+"';";
 
 			parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
@@ -242,15 +243,18 @@ function seleccionaUnidad(id){
 				$("#mateval").empty();
 				$("#mateval").append("<div class=\"alert alert-success\" style=\"padding:2px;\">"+
 									"	<div class=\"row\" style=\"padding:0px;\">"+
-									"  		 <div class=\"col-sm-4\">"+
+									"  		 <div class=\"col-sm-3\">"+
 									"			<label class=\"fontRobotoB\">Evidencia de Aprendizaje</label><input class=\" form-control \"  id=\"evapr\"></input>"+									
+									" 		</div>"+
+									"   	<div class=\"col-sm-2\">"+
+									"			<label class=\"fontRobotoB\">Tipo</label><select class=\" form-control \"  id=\"selTipo\"></select>"+							
 									" 		</div>"+
 									"  		 <div class=\"col-sm-2\">"+
 									"			<label class=\"fontRobotoB\">Porcentaje</label><input  class=\"form-control input-mask-numero captProy\"  id=\"porc\"></input>"+							
 									" 		</div>"+
-									"   	<div class=\"col-sm-4\">"+
+									"   	<div class=\"col-sm-3\">"+
 									"			<label class=\"fontRobotoB\">Eval. Formativa Competencia</label><input class=\" form-control \"  id=\"evalfor\"></input>"+							
-									" 		</div>"+
+									" 		</div>"+								
 									"   	<div class=\"col-sm-2\" style=\"padding-top:25px;\">"+
 									"			<button title=\"Insertar Indicador\" onclick=\"addIndicador();\""+
 									" 				class=\"btn btn-xs btn-white btn-primary btn-round\"><i class=\"ace-icon pink fa fa-plus bigger-140\"></i> Insertar</button>"+    						
@@ -259,7 +263,7 @@ function seleccionaUnidad(id){
 									"</div>"+
 									"	<div class=\"row\" style=\"padding:0px;\" >"+
 									" 		<table id=\"tabInd\" class= \"fontRobotoB display table-condensed table-striped table-sm table-bordered table-hover nowrap\" style=\"width:100%; vertical-align:text-top;\">"+
-									"			<thead><tr><th rowspan=\"2\">Id.</th><th rowspan=\"2\">Op</th><th rowspan=\"2\">Evidencia de Aprendizaje</th><th rowspan=\"2\">%</th><th rowspan=\"2\"></th><th colspan=\""+numletras+"\">Indicador Alcance</th><th rowspan=\"2\">Evaluación Formativa Competencia</th></tr>"+
+									"			<thead><tr><th rowspan=\"2\">Id.</th><th rowspan=\"2\">Op</th><th rowspan=\"2\">Evidencia de Aprendizaje</th><th rowspan=\"2\">Tipo</th><th rowspan=\"2\">%</th><th rowspan=\"2\"></th><th colspan=\""+numletras+"\">Indicador Alcance</th><th rowspan=\"2\">Evaluación Formativa Competencia</th></tr>"+
 									"                  <tr>"+letrashtml+"</tr></thead> "+
 									"			<tfoot><tr><th></th><th></th><th></th><th></th><th></th>"+letrashtmlpie+"<th></th></tr>"+
 									" 		</table>"+
@@ -270,6 +274,8 @@ function seleccionaUnidad(id){
 									);
 				$(".input-mask-numero").mask("99");
 			
+				actualizaSelect("selTipo", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TIPOSEVIDENCIAS'", "","");			
+
 				cargaDatos();
 				
 			}
@@ -337,9 +343,10 @@ function cargaDatos (){
 
       			jQuery.each(grid_data, function(clave, valor) { 	
 					$("#cuerpoMat").append("<tr id=\"row"+c+"\">");						
-					$("#row"+c).append("<td id=\"lin"+c+"\">"+valor.ID+"</td>");
+					$("#row"+c).append("<td id=\"lin"+c+"\">"+valor.ID+"</td>");					
 					$("#row"+c).append("<td><span onclick=\"elimar('"+valor.ID+"')\" style=\"cursor:pointer;\"><i class=\"fa fa-trash red bigger-160\"></i></span></td>");					
 					$("#row"+c).append("<td>"+valor.EVAPR+"</td>");
+					$("#row"+c).append("<td>"+valor.TIPO+"</td>");
 					$("#row"+c).append("<td id=\"por"+c+"\">"+valor.PORC+"</td>");
 					$("#row"+c).append("<td id=\"et"+c+"\"><i class=\"fa fa-refresh warning\"></i></td>");
 					
@@ -392,6 +399,7 @@ function addIndicador(){
 			    USUARIO:"<?php echo $_SESSION["CAMPUS"];?>",
 				FECHAUS:lafecha,
 				IDGRUPO:migrupo,
+				TIPO:$("#selTipo").val(),
 				UNIDAD:$("#selUnidad").val(),
 				EVAPR:$("#evapr").val(),
 				PORC:$("#porc").val(),
@@ -446,7 +454,7 @@ function guardarLetra(id,letra){
 				nombreCampo:letra,
 				valorCampo:valorlet,
 				bd:"Mysql"};
-	$('#dlgproceso').modal({backdrop: 'static', keyboard: false});	         
+      
 			$.ajax({
 						type: "POST",
 						url:"../base/actualizaDin.php",
@@ -454,7 +462,7 @@ function guardarLetra(id,letra){
 						success: function(data){
 							console.log(data);			
 							cargaDatos();						
-							$('#dlgproceso').modal("hide");    				       					           
+											       					           
 						}					     
 					}); 				
 }

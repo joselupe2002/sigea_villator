@@ -326,6 +326,22 @@
 				return $data;
 			}
 
+			function LoadAE($comp)
+			{			
+				$data=[];	
+				$miConex = new Conexion();
+				$resultado=$miConex->getConsulta($_SESSION['bd'],"select * from scatalogos where CATA_TIPO='ACTENSENANZA' AND ".
+				" CATA_CLAVE IN ('".str_replace(",","','",$comp)."') order by CATA_CLAVE");	
+		
+
+				foreach ($resultado as $row) {
+					$data[] = $row;
+				}
+				
+				return $data;
+			}
+
+			
 			
 			
 
@@ -462,9 +478,12 @@
 					$dataComp=$pdf->LoadCom($dataAna[0]["DC_INS"]);
 					$subtemas="";
 					foreach($dataTemas as $row2){$subtemas.=$row2["UNID_DESCRIP"]."\n";}
-					$competencias="";
-					foreach($dataComp as $row3){$competencias.=$row3["cata_descrip"]."\n";}
-				
+					$competencias=""; $c=1;
+					foreach($dataComp as $row3){ $competencias.=$c.". ".$row3["cata_descrip"]."\n";$c++;}
+
+					$acten=""; $c=1;
+					$dataacten=$pdf->LoadAE($dataAna[0]["ACTENSENANZA"]);
+					foreach($dataacten as $row4){$acten.=$c.". ".$row4["cata_descrip"]."\n"; $c++;}
 
 					$w = array(50,70,50,50,20);
 				    $pdf->SetFont('Montserrat-ExtraBold','B',7);	
@@ -482,7 +501,7 @@
 					$pdf->Row(array(
 										utf8_decode(trim($subtemas)),
 										utf8_decode(trim($row["UNID_ACTAPR"])),
-										utf8_decode($dataAna[0]["ACTENSENANZA"]),
+										utf8_decode($acten),
 										utf8_decode($competencias),
 										utf8_decode("HT: ".$dataAna[0]["HORAST"]."\nHP: ".$dataAna[0]["HORASP"])	
 										)

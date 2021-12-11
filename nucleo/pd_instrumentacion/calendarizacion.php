@@ -36,7 +36,7 @@
 	</head>
 
 
-	<body id="grid_indicadores" style="background-color: white; width:98%;">
+	<body id="grid_indicadores" style="background-color: white; width:95%;">
 	    
 	    
 	    
