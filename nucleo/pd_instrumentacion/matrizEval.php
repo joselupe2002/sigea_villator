@@ -244,7 +244,7 @@ function seleccionaUnidad(id){
 				$("#mateval").append("<div class=\"alert alert-success\" style=\"padding:2px;\">"+
 									"	<div class=\"row\" style=\"padding:0px;\">"+
 									"  		 <div class=\"col-sm-3\">"+
-									"			<label class=\"fontRobotoB\">Evidencia de Aprendizaje</label><input class=\" form-control \"  id=\"evapr\"></input>"+									
+									"			<label class=\"fontRobotoB\">Evidencia de Aprendizaje <badge class=\"badge badge-danger\" style=\"cursor:pointer;\"  onclick=\"getDescrip();\"> <i class=\"fa fa-question white\"></i></badge></label><select class=\" form-control chosen-select \"  id=\"evapr\"></select>"+									
 									" 		</div>"+
 									"   	<div class=\"col-sm-2\">"+
 									"			<label class=\"fontRobotoB\">Tipo</label><select class=\" form-control \"  id=\"selTipo\"></select>"+							
@@ -253,7 +253,7 @@ function seleccionaUnidad(id){
 									"			<label class=\"fontRobotoB\">Porcentaje</label><input  class=\"form-control input-mask-numero captProy\"  id=\"porc\"></input>"+							
 									" 		</div>"+
 									"   	<div class=\"col-sm-3\">"+
-									"			<label class=\"fontRobotoB\">Eval. Formativa Competencia</label><input class=\" form-control \"  id=\"evalfor\"></input>"+							
+									"			<label class=\"fontRobotoB\">Eval. Formativa Competencia</label><select class=\" form-control \"  id=\"evalfor\"></select>"+							
 									" 		</div>"+								
 									"   	<div class=\"col-sm-2\" style=\"padding-top:25px;\">"+
 									"			<button title=\"Insertar Indicador\" onclick=\"addIndicador();\""+
@@ -273,9 +273,17 @@ function seleccionaUnidad(id){
 									"	</div>"						
 									);
 				$(".input-mask-numero").mask("99");
+
+				
 			
 				actualizaSelect("selTipo", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TIPOSEVIDENCIAS'", "","");			
+				actualizaSelect("evapr", "SELECT ID, NOMBRE FROM ins_eviapr ORDER BY NOMBRE", "BUSQUEDA","");
+				actualizaSelect("evalfor", "SELECT CATA_CLAVE, CATA_DESCRIP FROM scatalogos where CATA_TIPO='TIPOINSEVAL'", "","");					
 
+				$('.chosen-select').chosen({allow_single_deselect:true}); 			
+			    $(window).off('resize.chosen').on('resize.chosen', function() {$('.chosen-select').each(function() {var $this = $(this); $this.next().css({'width': "100%"});})}).trigger('resize.chosen');
+			    $(document).on('settings.ace.chosen', function(e, event_name, event_val) { if(event_name != 'sidebar_collapsed') return; $('.chosen-select').each(function() {  var $this = $(this); $this.next().css({'width': "100%"});})});	     		    
+		
 				cargaDatos();
 				
 			}
@@ -325,7 +333,8 @@ function verificaSumas(){
 
 function cargaDatos (){
 
-	elsql="SELECT * FROM ins_matriz  where IDGRUPO='"+migrupo+"' AND UNIDAD='"+$("#selUnidad").val()+"' order by ID";
+	elsql="SELECT * FROM vins_matriz  where IDGRUPO='"+migrupo+"' AND UNIDAD='"+$("#selUnidad").val()+"' order by ID";
+
 	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
     $.ajax({
 		   type: "POST",
@@ -333,6 +342,7 @@ function cargaDatos (){
 		   url:  "../base/getdatossqlSeg.php",
            success: function(data){
 
+		
 			   datos=JSON.parse(data);
 			   grid_data=JSON.parse(data);			
 				c=1;
@@ -345,7 +355,7 @@ function cargaDatos (){
 					$("#cuerpoMat").append("<tr id=\"row"+c+"\">");						
 					$("#row"+c).append("<td id=\"lin"+c+"\">"+valor.ID+"</td>");					
 					$("#row"+c).append("<td><span onclick=\"elimar('"+valor.ID+"')\" style=\"cursor:pointer;\"><i class=\"fa fa-trash red bigger-160\"></i></span></td>");					
-					$("#row"+c).append("<td>"+valor.EVAPR+"</td>");
+					$("#row"+c).append("<td>"+valor.EVAPR+" "+valor.EVAPRD+" <badge class=\"badge badge-danger\" style=\"cursor:pointer;\"  onclick=\"verDescripcion('"+valor.EVAPRD+"','"+valor.EVAPR_D+"');\"> <i class=\"fa fa-question white\"></i></badge></td>");
 					$("#row"+c).append("<td>"+valor.TIPO+"</td>");
 					$("#row"+c).append("<td id=\"por"+c+"\">"+valor.PORC+"</td>");
 					$("#row"+c).append("<td id=\"et"+c+"\"><i class=\"fa fa-refresh warning\"></i></td>");
@@ -357,7 +367,7 @@ function cargaDatos (){
 											
 					}
 
-					$("#row"+c).append("<td>"+valor.EVALFOR+"</td>");
+					$("#row"+c).append("<td>"+valor.EVALFOR+" "+valor.EVALFORD+"</td>");
 					suma+=parseInt(valor.PORC);
 					$("#suma").html(suma);
 
@@ -465,6 +475,35 @@ function guardarLetra(id,letra){
 											       					           
 						}					     
 					}); 				
+}
+
+
+function getDescrip(){
+	desc=$("#evapr option:selected").text();
+	elsql="SELECT DESCRIPCION FROM ins_eviapr  where ID='"+$("#evapr").val()+"'";
+
+
+	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+    $.ajax({
+		   type: "POST",
+		   data:parametros,
+		   url:  "../base/getdatossqlSeg.php",
+           success: function(data){
+				texto=JSON.parse(data)[0][0];
+				verDescripcion(desc,texto);
+		   }
+		});
+
+
+}
+
+function verDescripcion(titulo,texto){
+dameVentana("ventMatriz", "grid_matriz","<span class=\"fontRobotoB\">"+titulo+"</span>","sm","bg-successs","","370");
+$("#body_ventMatriz").append("<div class=\"row fontRoboto bigger-120\">"+
+							"     <div class=\"col-sm-12\">"+														
+							"<p>"+texto+"</p>"	+					
+							"	  </div>");			
+
 }
 
 

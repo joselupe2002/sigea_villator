@@ -264,7 +264,7 @@
 			{			
 				$data=[];	
 				$miConex = new Conexion();
-				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT * from ins_matriz  where IDGRUPO='".$_GET["id"]."' AND UNIDAD='".$pred."'");				
+				$resultado=$miConex->getConsulta($_SESSION['bd'],"SELECT * from vins_matriz  where IDGRUPO='".$_GET["id"]."' AND UNIDAD='".$pred."'");				
 				foreach ($resultado as $row) {
 					$data[] = $row;
 				}
@@ -603,11 +603,11 @@
 							$pdf->SetFont('Montserrat-Medium','B',7);
 							foreach($dataMat as $rowm){
 
-								$fila=array(utf8_decode($rowm["EVAPR"]),utf8_decode($rowm["PORC"]));
+								$fila=array(utf8_decode($rowm["EVAPRD"]),utf8_decode($rowm["PORC"]));
 								foreach($dataInd as $rowi2){ 								
 									array_push($fila,utf8_decode($rowm[$rowi2["LETRA"]]));								
 								}
-								array_push($fila,utf8_decode($rowm["EVALFOR"]));
+								array_push($fila,utf8_decode($rowm["EVALFORD"]));
 								$pdf->Row($fila);
 							}
 						
