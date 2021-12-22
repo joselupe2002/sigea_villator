@@ -45,7 +45,7 @@
 	</head>
 
 
-	<body id="grid_registro" style="background-color: white;">
+	<body id="grid_registro" style="background-color: white;" class="sigeaPrin">
        
     <div class="preloader-wrapper"><div class="preloader"><img src="<?php echo $nivel; ?>imagenes/menu/preloader.gif"></div></div>	      
     </div>
@@ -101,7 +101,7 @@
 							<!--================ CURP DEL ASPIRANTE ======================-->
 							<div class="col-sm-2"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-danger">1</span> Clave &Uacute;nica de Reg. de Pob. CURP</strong> 
+									<strong><span class="badge badge-danger">1</span>CURP <span class="label label-primary">(AAAA010199HTCGRD05)</span></strong> 
 								</label>
 								<span class="block input-icon input-icon-right">
 									<input  class="UNO form-control width-100" name="CURP" id="CURP" />
@@ -277,6 +277,48 @@
 							    
 					     </div>
 					 </div>	
+
+					  <!--================================LINEA 4 PANEL 2 ================================-->
+					  <div class="row">
+					    <div class="col-sm-1"> </div>						
+						<div class="col-sm-3"> 
+								<label class="text-primary">
+									<strong><span class="badge badge-info">12</span>¿Presentarás exámen en Otra escuela?</strong> 
+								</label>								
+								<Select  class="DOS form-control width-100" name="PRESOTRA" id="PRESOTRA">
+								    <OPTION value="N">NO</OPTION>
+									<OPTION value="S">SI</OPTION>									
+								</SELECT>
+								<label class=" hide text-primary" id="PRESOTRACAR_ET">
+									<strong><span class="badge badge-success">12</span> ¿Donde, y que carrera?</strong> 
+								</label>
+								<input  class="hide DOS form-control width-100" name="PRESOTRACAR"   id="PRESOTRACAR" />
+						</div>
+						<div class="col-sm-3"> 
+						<label class="text-primary">
+									<strong><span class="badge badge-info">13</span>¿Trabajas?</strong> 
+								</label>								
+								<Select  class="DOS form-control width-100" name="TRABAJAS" id="TRABAJAS">
+								    <OPTION value="N">NO</OPTION>
+									<OPTION value="S">SI</OPTION>									
+								</SELECT>
+								<label class=" hide text-primary" id="DONDETRAB_ET">
+									<strong><span class="badge badge-success">13</span> ¿Donde trabajas?</strong> 
+								</label>
+								<input  class="hide DOS form-control width-100" name="DONDETRAB"   id="DONDETRAB" />
+						</div>
+						<div class="col-sm-3"> 
+								
+								<label class="text-primary">
+									<strong><span class="badge badge-info">14</span>¿Como te enteraste de la Institución?</strong> 
+								</label>								
+							    <Select  class="DOS form-control width-100" name="ENTERASTE" id="ENTERASTE">								  								
+								</SELECT>														
+							    
+					     </div>
+					 </div>	
+
+
 					</fieldset>
 				    </form>				 
 				</div><!-- Fin del panel 2-->
@@ -290,19 +332,19 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-5"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-info">12</span> Estado Bachiller</strong> 
+									<strong><span class="badge badge-info">15</span> Estado Bachiller</strong> 
 								</label>								
 							    <Select  class="TRES form-control width-100" name="ESTESCPROC" id="ESTESCPROC">									
 								</select>								
 						</div>
 						<div class="col-sm-5"> 
 						       <label class="text-primary">
-									<strong><span class="badge badge-info">13</span> Escuela de Bachillerato</strong> 
+									<strong><span class="badge badge-info">16</span> Escuela de Bachillerato</strong> 
 								</label>								
 							    <Select  class="TRES chosen-select form-control width-100" name="ESCPROC" id="ESCPROC">									
 								</select>	
 								<label class=" hide text-primary" id="ESCPROC_ET">
-									<strong><span class="badge badge-success">13</span> Especifique</strong> 									
+									<strong><span class="badge badge-success">16</span> Especifique</strong> 									
 								</label>
 								<input  class="hide TRES form-control width-100" name="ESCPROC_ADD"   id="ESCPROC_ADD" />
 						</div>							
@@ -314,14 +356,14 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-5"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-info">14</span> Promedio Bachiller <span class="text-danger">(Escala 60-100 ej. 8.3=83)</span></strong> 
+									<strong><span class="badge badge-info">17</span> Promedio Bachiller <span class="text-danger">(Escala 60-100 ej. 8.3=83)</span></strong> 
 								</label>	
-								<input  class="TRES form-control width-100" name="PROMBAC"   id="PROMBAC" />							
+								<input  class="TRES form-control width-100 input-mask-prom" name="PROMBAC"   id="PROMBAC" />							
 							   							
 						</div>
 						<div class="col-sm-3"> 
 						        <label class="text-primary">
-									<strong><span class="badge badge-info">14A</span> Area de Conocimiento</strong> 
+									<strong><span class="badge badge-info">18</span> Area de Conocimiento</strong> 
 								</label>
 								<Select  class="TRES  form-control width-100" name="AREACONOC" id="AREACONOC">									
 								</select>		
@@ -330,7 +372,7 @@
 						</div>
 						<div class="col-sm-2"> 
 						        <label class="text-primary">
-									<strong><span class="badge badge-info">14B</span> Año de Egreso</strong> 
+									<strong><span class="badge badge-info">19</span> Año de Egreso</strong> 
 								</label>	
 								<input  class="TRES form-control width-100" name="EGRESOBAC"   id="EGRESOBAC" />
 
@@ -343,15 +385,46 @@
 					<div class="row">
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-5"> 
+								<label class="text-primary">
+									<strong><span class="badge badge-info">20</span> Periodo Bachiller <span class="label label-primary">(ENERO DEL 1999 A AGOSTO DEL 2001)</span></strong> 
+								</label>	
+								<input  class="TRES form-control width-100" name="PERIODOBAC"   id="PERIODOBAC" />							
+							   							
+						</div>
+						<div class="col-sm-3"> 
+						        <label class="text-primary">
+									<strong><span class="badge badge-info">21</span> Fecha Certificado</strong> 
+								</label>
+								<div class="input-group">
+    				                 <input class="TRES form-control editandotabla date-picker" name="FECHACERBAC" id="FECHACERBAC" type="text" autocomplete="off" data-date-format="dd/mm/yyyy" /> 
+	                                 <span class="input-group-addon"><i class="fa fa-calendar bigger-110"></i></span>	                                 
+	                            </div>						
+						</div>
+						<div class="col-sm-2"> 
+						        <label class="text-primary">
+									<strong><span class="badge badge-info">22</span>Tipo de Bachiller</strong> 
+								</label>	
+								<Select  class="TRES  form-control width-100" name="TIPOBAC" id="TIPOBAC">									
+								</select>
+
+						</div>
+						<div class="col-sm-1"> </div>
+
+					</div>
+
+					<!--================================LINEA 4 PANEL 3 ================================-->
+					<div class="row">
+					    <div class="col-sm-1"> </div>
+						<div class="col-sm-5"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">15</span> Grupo índigena</strong> 
+								<strong><span class="badge badge-info">23</span> Grupo índigena</strong> 
 							</label>															   
 							<Select  class="TRES form-control width-100" name="GRUPOIND" id="GRUPOIND">									
 							</select>															   							
 						</div>
 						<div class="col-sm-5"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">16</span> Lengua índigena</strong> 
+								<strong><span class="badge badge-info">24</span> Lengua índigena</strong> 
 							</label>															   
 							<Select  class="TRES form-control width-100" name="LENIND" id="LENIND">									
 							</select>															   							
@@ -374,24 +447,31 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-3"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-info">17</span> Estado de Residencia</strong> 
+									<strong><span class="badge badge-info">25</span> Estado de Residencia</strong> 
 								</label>								
 							    <Select  class="CUATRO form-control width-100" name="ESTRES" id="ESTRES">									
 								</select>								
 						</div>
 						<div class="col-sm-3"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-info">18</span> Municipio de Residencia</strong> 
+									<strong><span class="badge badge-info">26</span> Municipio de Residencia</strong> 
 								</label>								
 							    <Select  class="CUATRO form-control width-100" name="MUNRES" id="MUNRES">									
 								</select>								
 						</div>
-						<div class="col-sm-4"> 
+						<div class="col-sm-2"> 
 						       <label class="text-primary">
-									<strong><span class="badge badge-info">19</span> Ciudad o Localidad</strong> 
+									<strong><span class="badge badge-info">27</span> Ciudad o Localidad</strong> 
 								</label>															   
 								<input  class="CUATRO form-control width-100" name="CIUDADRES"   id="CIUDADRES" />
-						</div>							
+						</div>	
+						<div class="col-sm-2"> 
+						       <label class="text-primary">
+									<strong><span class="badge badge-info">28</span> Zona</strong> 
+								</label>															   
+								<Select  class="CUATRO form-control width-100" name="ZONAPROC" id="ZONAPROC">									
+							</select>	
+						</div>						
 						<div class="col-sm-1"> </div>
 					</div>
 					
@@ -400,25 +480,25 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">20</span> Calle</strong> 
+								<strong><span class="badge badge-info">29</span> Calle</strong> 
 							</label>															   
 							<input  class="CUATRO form-control width-100" name="CALLE"   id="CALLE" />														   							
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">21</span> No. Ext/Int</strong> 
+								<strong><span class="badge badge-info">30</span> No. Ext/Int</strong> 
 							</label>															   
 							<input  class="CUATRO form-control width-100" name="NUMEROCALLE"   id="NUMEROCALLE" />														   							
 						</div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">22</span> COLONIA </strong> 
+								<strong><span class="badge badge-info">31</span> COLONIA </strong> 
 							</label>															   
 							<input  class="CUATRO form-control width-100" name="COLONIA"   id="COLONIA" />														   							
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">23</span> C.P.</strong> 
+								<strong><span class="badge badge-info">32</span> C.P.</strong> 
 							</label>															   
 							<input  class="CUATRO form-control width-100" name="CP"   id="CP" />														   							
 						</div>						
@@ -429,19 +509,19 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">24</span> Teléfono Celular</strong> 
+								<strong><span class="badge badge-info">33</span> Teléfono Celular</strong> 
 							</label>															   
-							<input  class="CUATRO form-control width-100" name="TELCEL"   id="TELCEL" />														   							
+							<input  class="CUATRO form-control width-100 input-mask-cel" name="TELCEL"   id="TELCEL" />														   							
 						</div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">25</span> Teléfono de Casa</strong> 
+								<strong><span class="badge badge-info">34</span> Teléfono de Casa</strong> 
 							</label>															   
-							<input  class="CUATRO form-control width-100" name="TELCASA"   id="TELCASA" />														   							
+							<input  class="CUATRO form-control width-100 input-mask-cel" name="TELCASA"   id="TELCASA" />														   							
 						</div>
 						<div class="col-sm-4"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">26</span> Correo Electrónico <span class="label label-danger">Importante</span></strong> 
+								<strong><span class="badge badge-info">35</span> Correo Electrónico <span class="label label-danger">Importante</span></strong> 
 							</label>															   
 							<input  class="CUATRO form-control width-100" name="CORREO"   id="CORREO" />														   							
 						</div>
@@ -453,7 +533,7 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">A</span> Cuenta con Internet en Casa</strong> 
+								<strong><span class="badge badge-info">36</span> Cuenta con Internet en Casa</strong> 
 							</label>															   
 							<Select  class="DOS form-control width-100" name="INTERNET" id="INTERNET">
 							        <OPTION value="">Elija opción</OPTION>
@@ -463,7 +543,7 @@
 						</div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">B</span> Cuenta con equipo de cómputo</strong> 
+								<strong><span class="badge badge-info">37</span> Cuenta con equipo de cómputo</strong> 
 							</label>															   
 							<Select  class="DOS form-control width-100" name="EQUIPO" id="EQUIPO">
 							        <OPTION value="">Elija opción</OPTION>
@@ -473,7 +553,7 @@
 						</div>
 						<div class="col-sm-4"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">B</span> Podría presentar examen de admisión en Línea <span class="label label-danger">Importante</span></strong> 
+								<strong><span class="badge badge-info">38</span> Podría presentar examen de admisión en Línea <span class="label label-danger">Importante</span></strong> 
 							</label>															   
 							<Select  class="DOS form-control width-100" name="EXAMENENCASA" id="EXAMENENCASA">
 							        <OPTION value="">Elija opción</OPTION>
@@ -498,7 +578,7 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-4"> 
 								<label class="text-primary">
-									<strong><span class="badge badge-info">27</span> Servicio Médico</strong> 
+									<strong><span class="badge badge-info">39</span> Servicio Médico</strong> 
 								</label>								
 							    <Select  class="CINCO form-control width-100" name="SM" id="SM">									
 								</select>								
@@ -506,7 +586,7 @@
 						
 						<div class="col-sm-3"> 
 						       <label class="text-primary">
-									<strong><span class="badge badge-info">29</span> No. Afiliación IMSS (Bachiller)</strong> 
+									<strong><span class="badge badge-info">40</span> No. Afiliación IMSS (Bachiller)</strong> 
 								</label>															   
 								<input  class="CINCO form-control width-100" name="SMNUMERO"   id="SMNUMERO" />
 								<span title="Consulte su CURP en la página oficial" class="label label-success" style="cursor:pointer;" 
@@ -517,7 +597,7 @@
 						</div>
 						<div class="col-sm-3"> 
 						       <label class="text-primary">
-									<strong><span class="badge badge-info">30</span> Tipo de Sangre</strong> 
+									<strong><span class="badge badge-info">41</span> Tipo de Sangre</strong> 
 								</label>															   
 								<input  class="CINCO form-control width-100" name="TIPOSAN"   id="TIPOSAN" />
 						</div>							
@@ -529,25 +609,33 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-4"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">31</span> Nombre del Padre</strong> 
+								<strong><span class="badge badge-info">42</span> Nombre del Padre</strong> 
 							</label>																					   
 							    <input  class="CINCO form-control width-100" name="PADRE"   id="PADRE" />														   							
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">32</span> Vive</strong> 
+								<strong><span class="badge badge-info">43</span> Vive</strong> 
 							</label>															   
 							<Select  class="CINCO form-control width-100" name="PADREVIVE" id="PADREVIVE">
 							        <OPTION value="S">SI</OPTION>	
 									<OPTION value="N">NO</OPTION>																	
 							</SELECT>														   							
 						</div>
-						<div class="col-sm-4"> 
+						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">33</span> Teléfono</strong> 
+								<strong><span class="badge badge-info">44</span> Teléfono</strong> 
 							</label>															   
-							<input  class="CINCO form-control width-100" name="PADRETEL"   id="PADRETEL" />														   							
+							<input  class="CINCO form-control width-100 input-mask-cel" name="PADRETEL"   id="PADRETEL" />														   							
 						</div>	
+						<div class="col-sm-2"> 
+								<label class="text-primary">
+									<strong><span class="badge badge-info">45</span>Escolaridad Padre</strong> 
+								</label>								
+							    <Select  class="CINCO form-control width-100" name="PADREESC" id="PADREESC">									
+								</select>								
+						</div>
+
 						<div class="col-sm-1"> </div>					
 					</div>	
 					<!--================================LINEA 3 PANEL 5 ================================-->
@@ -555,13 +643,13 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-4"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">34</span> Nombre del Madre</strong> 
+								<strong><span class="badge badge-info">46</span> Nombre del Madre</strong> 
 							</label>															   
 							<input  class="CINCO form-control width-100" name="MADRE"   id="MADRE" />														   							
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">35</span> Vive</strong> 
+								<strong><span class="badge badge-info">47</span> Vive</strong> 
 							</label>															   
 							<Select  class="CINCO form-control width-100" name="MADREVIVE" id="MADREVIVE">
 							        <OPTION value="S">SI</OPTION>	
@@ -570,23 +658,51 @@
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">36</span> Teléfono</strong> 
+								<strong><span class="badge badge-info">48</span> Teléfono</strong> 
 							</label>															   
-							<input  class="CINCO form-control width-100" name="MADRETEL"   id="MADRETEL" />														   							
+							<input  class="CINCO form-control width-100 input-mask-cel" name="MADRETEL"   id="MADRETEL" />														   							
 						</div>	
 						<div class="col-sm-2"> 
-						    <label class="text-primary">
-								<strong><span class="badge badge-info">36</span> El tutor es:</strong> 
+							<label class="text-primary">
+									<strong><span class="badge badge-info">49</span>Escolaridad Madre</strong> 
+							</label>								
+							<Select  class="CINCO form-control width-100" name="MADREESC" id="MADREESC">									
+							</select>													   							
+						</div>	
+
+						<div class="col-sm-1"> </div>					
+					</div>
+
+					<!--================================LINEA 4 PANEL 5 ================================-->
+					<div class="row">
+					    <div class="col-sm-1"> </div>
+						<div class="col-sm-4"> 
+							<label class="text-primary">
+								<strong><span class="badge badge-info">50</span> El tutor es:</strong> 
 							</label>															   
 							<Select  class="CINCO form-control width-100" name="ELTUTOR" id="ELTUTOR">
 							        <OPTION value="O">OTRA PERSONA</OPTION>		
 							        <OPTION value="P">EL PADRE</OPTION>	
 									<OPTION value="M">LA MADRE</OPTION>																									
-							</SELECT>														   							
+							</SELECT>															   							
+						</div>
+						<div class="col-sm-3"> 
+						    <label class="text-primary">
+								<strong><span class="badge badge-info">51</span> Ingreso Familiar</strong> 
+							</label>															   
+							<input  class="CINCO form-control width-100" name="INGRESO"   id="INGRESO" />														   							
+						</div>	
+						<div class="col-sm-3"> 
+						    <label class="text-primary">
+								<strong><span class="badge badge-info">52</span> Número Integrantes Familia:</strong> 
+							</label>															   
+							<input  class="CINCO form-control width-100 " name="NUMINTFAM"   id="NUMINTFAM" />														   							
 						</div>	
 
 						<div class="col-sm-1"> </div>					
 					</div>
+
+
 					</fieldset>
 				    </form>
 								
@@ -600,20 +716,20 @@
 					    <div class="col-sm-1"> </div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">37</span> Nombre del Tutor</strong> 
+								<strong><span class="badge badge-info">53</span> Nombre del Tutor</strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="TUTOR"   id="TUTOR" />														   							
 						</div>
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">38</span> Estado de Residencia</strong> 
+								<strong><span class="badge badge-info">54</span> Estado de Residencia</strong> 
 							</label>															   
 							<Select  class="SEIS form-control width-100" name="ESTTUTOR" id="ESTTUTOR">							      																
 							</SELECT>														   							
 						</div>
 						<div class="col-sm-4"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">39</span> Municipio de Residencia</strong> 
+								<strong><span class="badge badge-info">55</span> Municipio de Residencia</strong> 
 							</label>															   
 							<Select  class="SEIS form-control width-100" name="MUNTUTOR" id="MUNTUTOR">							      																
 							</SELECT>														   							
@@ -625,31 +741,31 @@
 						<div class="col-sm-1"> </div>
 						<div class="col-sm-3"> 
 						       <label class="text-primary">
-									<strong><span class="badge badge-info">40</span> Ciudad o Localidad</strong> 
+									<strong><span class="badge badge-info">56</span> Ciudad o Localidad</strong> 
 								</label>															   
 								<input  class="CUATRO form-control width-100" name="CIUDADTUTOR"   id="CIUDADTUTOR" />
 						</div>	
 						<div class="col-sm-3"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">41</span> Calle</strong> 
+								<strong><span class="badge badge-info">57</span> Calle</strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="CALLETUTOR"   id="CALLETUTOR" />														   							
 						</div>
 						<div class="col-sm-1"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">42</span> No. Ext/Int</strong> 
+								<strong><span class="badge badge-info">58</span> No. Ext/Int</strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="NUMEROCALLETUTOR"   id="NUMEROCALLETUTOR" />														   							
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">43</span> COLONIA </strong> 
+								<strong><span class="badge badge-info">59</span> COLONIA </strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="COLONIATUTOR"   id="COLONIATUTOR" />														   							
 						</div>
 						<div class="col-sm-1"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">44</span> C.P.</strong> 
+								<strong><span class="badge badge-info">60</span> C.P.</strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="CPTUTOR"   id="CPTUTOR" />														   							
 						</div>						
@@ -660,25 +776,25 @@
 						<div class="col-sm-1"> </div>
 						<div class="col-sm-2"> 
 						       <label class="text-primary">
-									<strong><span class="badge badge-info">45</span> Télefono Celular</strong> 
+									<strong><span class="badge badge-info">61</span> Télefono Celular</strong> 
 								</label>															   
-								<input  class="CUATRO form-control width-100" name="TELCELTUTOR"   id="TELCELTUTOR" />
+								<input  class="CUATRO form-control width-100 input-mask-cel" name="TELCELTUTOR"   id="TELCELTUTOR" />
 						</div>	
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">46</span> Teléfono de casa</strong> 
+								<strong><span class="badge badge-info">62</span> Teléfono de casa</strong> 
 							</label>															   
-							<input  class="SEIS form-control width-100" name="TELCASATUTOR"   id="TELCASATUTOR" />														   							
+							<input  class="SEIS form-control width-100 input-mask-cel" name="TELCASATUTOR"   id="TELCASATUTOR" />														   							
 						</div>
 						<div class="col-sm-2"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">47</span> Correo electrónico</strong> 
+								<strong><span class="badge badge-info">63</span> Correo electrónico</strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="CORREOTUTOR"   id="CORREOTUTOR" />														   							
 						</div>
 						<div class="col-sm-4"> 
 						    <label class="text-primary">
-								<strong><span class="badge badge-info">48</span> Centro de Trabajo </strong> 
+								<strong><span class="badge badge-info">64</span> Centro de Trabajo </strong> 
 							</label>															   
 							<input  class="SEIS form-control width-100" name="TRABAJOTUTOR"   id="TRABAJOTUTOR" />														   							
 						</div>										

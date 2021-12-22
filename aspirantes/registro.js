@@ -46,6 +46,14 @@ var elciclo="";
 						
 						actualizaSelect("SM","select IDSM, DESCRIP from servmed  ORDER BY IDSM","NORMAL","FUERA");
 
+						actualizaSelect("ENTERASTE","select CATA_CLAVE, CATA_DESCRIP from scatalogos where CATA_TIPO='TIPODIFUSION'  ORDER BY CATA_DESCRIP","NORMAL","FUERA");
+
+						actualizaSelect("TIPOBAC","select CATA_CLAVE, CATA_DESCRIP from scatalogos where CATA_TIPO='TIPOBACHILLER'  ORDER BY CATA_DESCRIP","NORMAL","FUERA");
+
+						actualizaSelect("ZONAPROC","select CATA_CLAVE, CATA_DESCRIP from scatalogos where CATA_TIPO='ZONASPROC'  ORDER BY CATA_DESCRIP","NORMAL","FUERA");
+
+						actualizaSelect("PADREESC","select esco_clave, esco_descrip from cescolaridad order by esco_clave","NORMAL","FUERA");
+						actualizaSelect("MADREESC","select esco_clave, esco_descrip from cescolaridad order by esco_clave","NORMAL","FUERA");
 
 											$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
 						
@@ -86,6 +94,19 @@ var elciclo="";
 							if ($(this).val()=='S') {apareceEdit($(this).attr("id"),true);}
 							else {apareceEdit($(this).attr("id"),false);}
 						}); 
+
+
+						$("#PRESOTRA").change(function(){
+							if ($(this).val()=='S') {$("#PRESOTRACAR").removeClass("hide"); $("#PRESOTRACAR_ET").removeClass("hide");}
+							else {$("#PRESOTRACAR").addClass("hide"); $("#PRESOTRACAR_ET").addClass("hide");}
+						}); 
+
+						$("#TRABAJAS").change(function(){
+							if ($(this).val()=='S') {$("#DONDETRAB").removeClass("hide"); $("#DONDETRAB_ET").removeClass("hide");}
+							else {$("#DONDETRAB").addClass("hide"); $("#DONDETRAB_ET").addClass("hide");}
+						}); 
+
+
 
 						$("#EDONAC").change(function(){			
 							actualizaSelect("MUNINAC","SELECT ID_MUNICIPIO, MUNICIPIO FROM cat_municipio where ID_ESTADO='"+$("#EDONAC").val()+"' ORDER BY MUNICIPIO","NORMAL","FUERA"); 
@@ -163,13 +184,16 @@ var elciclo="";
 																$("#CARRERA2").val(valor.CARRERA2);
 
 																$("#NACIONALIDAD").val(valor.NACIONALIDAD);
+																
 																$("#NACIONALIDAD_ADD").val(valor.NACIONALIDAD_ADD);
 																$("#FECHANAC").val(valor.FECHANAC);
 																$("#GENERO").val(valor.GENERO);
 																$("#EDOCIVIL").val(valor.EDOCIVIL);
 																$("#CAPACIDADDIF").val(valor.CAPACIDADDIF);
+																if (valor.CAPACIDADDIF=='S') {$("#CAPACIDADDIF_ADD").removeClass("hide"); $("#CAPACIDADDIF_ADD_ET").removeClass("hide");}
 																$("#CAPACIDADDIF_ADD").val(valor.CAPACIDADDIF_ADD);
 																$("#BECA").val(valor.BECA);
+																if (valor.BECA=='S') {$("#BECA_ADD").removeClass("hide"); $("#BECA_ADD_ET").removeClass("hide");}
 																$("#BECA_ADD").val(valor.BECA_ADD);
 																$("#EDONAC").val(valor.EDONAC  );
 																$("#MUNINAC").val(valor.MUNINAC);
@@ -223,6 +247,26 @@ var elciclo="";
 																$("#CURP").prop("disabled","true");
 																$("#CURP").val($("#CURP").val().toUpperCase());
 																//ocultarEspera("esperaCURP");
+
+																//======CAMPOS NUEVOS ================*/
+																$("#PERIODOBAC").val(valor.PERIODOBAC);
+																$("#FECHACERBAC").val(valor.FECHACERBAC);
+																$("#TIPOBAC").val(valor.TIPOBAC);
+
+																$("#ZONAPROC").val(valor.ZONAPROC);
+																$("#PADREESC").val(valor.PADREESC);
+																$("#MADREESC").val(valor.MADREESC);
+
+																$("#ENTERASTE").val(valor.ENTERASTE);
+																$("#PRESOTRA").val(valor.PRESOTRA);
+																if (valor.PRESOTRA=='S') {$("#PRESOTRACAR").removeClass("hide"); $("#PRESOTRACAR_ET").removeClass("hide");}
+																$("#PRESOTRACAR").val(valor.PRESOTRACAR);
+																$("#TRABAJAS").val(valor.TRABAJAS);
+																if (valor.TRABAJAS=='S') {$("#DONDETRAB").removeClass("hide"); $("#DONDETRAB_ET").removeClass("hide");}
+																$("#DONDETRAB").val(valor.DONDETRAB);
+																$("#INGRESO").val(valor.INGRESO);
+																$("#NUMINTFAM").val(valor.NUMINTFAM);												
+
 															}); 				   
 														},
 													error: function(data) {	                  
@@ -288,6 +332,19 @@ var elciclo="";
 									TELCELTUTOR : {required : true, number: true,maxlength:10, minlength:10},
 									CORREOTUTOR : {required : true, email: true},
 
+									INGRESO : {required : true, number: true,maxlength:10, minlength:0},
+									NUMINTFAM : {required : true, number: true,maxlength:2, minlength:0},
+
+									ENTERASTE: {required: true},
+									PRESOTRA : {required: true},									
+									TRABAJAS : {required: true},
+									ENTERASTE: {required: true},
+									PRESOTRA : {required: true},									
+									TRABAJAS : {required: true},
+									PERIODOBAC: {required: true},
+									FECHACERBAC: {required: true},
+									TIPOBAC: {min: 1},	
+									ENTERASTE: {min: 1},							
 
 									},
 							messages: {
@@ -333,6 +390,16 @@ var elciclo="";
 												minlength:"El número de TELÉFONO debe ser de 10 números"},
 									CORREOTUTOR : {required:"Se requiere correo electrónico de tutor",email:"El email no es correcto"},
 									
+									INGRESO : "Debe colocar una cantidad numérica y el campo es obligatorio",
+									NUMINTFAM : "Debe colocar una cantidad numérica y el campo es obligatorio",
+
+									ENTERASTE: "Debe elegir una opción",
+									PRESOTRA : "Debe elegir una opción",									
+									TRABAJAS : "Debe elegir una opción",
+									PERIODOBAC: "Debe colocar el periodo de Bachiller",
+									FECHACERBAC: "Debe colocar la fecha de certificado",
+									TIPOBAC: "Debe elegir el tipo de bachiller",
+									TIPOBAC: "Debe elegir una opción",
 							}			
 						});
 
@@ -435,7 +502,7 @@ var elciclo="";
 						$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
 				} // fin del ajax de consulta del ciclo escolar
 			});
-
+			$(".input-mask-cel").mask("9999999999");	
 	});
 	
 function guardarGen(){
@@ -504,7 +571,7 @@ function guardarPag2(){
 			tabla:"aspirantes",
 			bd:"Mysql",
 			campollave:"CONCAT(CURP,CICLO)",
-		valorllave:$("#CURP").val().toUpperCase()+elciclo,
+			valorllave:$("#CURP").val().toUpperCase()+elciclo,
 			NACIONALIDAD: $("#NACIONALIDAD").val(),	
 			NACIONALIDAD_ADD : $("#NACIONALIDAD_ADD").val().toUpperCase(),
 			FECHANAC: $("#FECHANAC").val(),
@@ -517,6 +584,11 @@ function guardarPag2(){
 			EDONAC: $("#EDONAC").val() ,
 			MUNINAC: $("#MUNINAC").val() ,
 			RFC: $("#RFC").val().toUpperCase(),
+			ENTERASTE: $("#ENTERASTE").val() ,
+			PRESOTRA: $("#PRESOTRA").val() ,
+			PRESOTRACAR: $("#PRESOTRACAR").val() ,
+			TRABAJAS: $("#TRABAJAS").val() ,
+			DONDETRAB: $("#DONDETRAB").val() ,
 			CICLO:elciclo			
 	};
 	$.ajax({
@@ -547,7 +619,10 @@ function guardarPag3(){
 		EGRESOBAC: $("#EGRESOBAC").val() ,
 		AREACONOC: $("#AREACONOC").val() ,
 		GRUPOIND: $("#GRUPOIND").val() , 
-		LENIND: $("#LENIND").val()  
+		LENIND: $("#LENIND").val(),
+		PERIODOBAC: $("#PERIODOBAC").val(),
+		FECHACERBAC: $("#FECHACERBAC").val(),
+		TIPOBAC: $("#TIPOBAC").val()
 		};
 		$.ajax({
 			type: "POST",
@@ -582,7 +657,8 @@ function guardarPag4(){
 			CORREO : $("#CORREO").val(),
 			INTERNET:$("#INTERNET").val(),
 			EQUIPO:$("#EQUIPO").val(),
-			EXAMENENCASA:$("#EXAMENENCASA").val()
+			EXAMENENCASA:$("#EXAMENENCASA").val(),
+			ZONAPROC:$("#ZONAPROC").val()
 
 		};
 		$.ajax({
@@ -614,7 +690,11 @@ function guardarPag5(){
 		MADRE: $("#MADRE").val().toUpperCase() ,
 		MADREVIVE: $("#MADREVIVE").val() , 
 		PADRETEL: $("#PADRETEL").val() , 
-		MADRETEL: $("#MADRETEL").val() 
+		MADRETEL: $("#MADRETEL").val(),
+		PADREESC: $("#PADREESC").val(),
+		MADREESC: $("#MADREESC").val(),
+		INGRESO: $("#INGRESO").val(),
+		NUMINTFAM: $("#NUMINTFAM").val()
 		};
 		$.ajax({
 			type: "POST",
