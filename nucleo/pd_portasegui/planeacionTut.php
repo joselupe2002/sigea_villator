@@ -290,7 +290,7 @@
 		$pdf->SetFuente(array('Montserrat-ExtraBold','Montserrat-Medium'));
 		$pdf->SetTamano(array('10','10'));
 		$pdf->SetEstilo(array('B',''));
-		$pdf->Row(array("OBJETIVO",utf8_decode(mb_strtoupper($arrMateria[0]["CARACTERIZACION"]))));
+		$pdf->Row(array("OBJETIVO",utf8_decode(strtoupper($arrMateria[0]["CARACTERIZACION"]))));
 
 
 		// Colores, ancho de l�nea y fuente en negrita

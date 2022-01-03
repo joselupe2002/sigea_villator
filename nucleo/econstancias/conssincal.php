@@ -277,7 +277,7 @@
    
 
         $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".$dataGen[0]["inst_extiende"]." A LOS ".
-        mb_strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
+        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
         
         $pdf->Ln(15);
 

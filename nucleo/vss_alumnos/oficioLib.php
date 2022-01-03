@@ -146,7 +146,7 @@
 
 
 		$dataof=$miutil->getConsecutivoDocumento("LIBERACIONSS",$data[0]["MATRICULA"].$data[0]["FECHAOF"]);
-		$folio=mb_strtoupper($mesTer)."/".$anioTer."/".$data[0]["CARRERACD"]."/".str_pad($dataof[0]["CONSECUTIVOSOLO"],3,'0',STR_PAD_LEFT);
+		$folio=strtoupper($mesTer)."/".$anioTer."/".$data[0]["CARRERACD"]."/".str_pad($dataof[0]["CONSECUTIVOSOLO"],3,'0',STR_PAD_LEFT);
 		
 		//$pdf->Cell(0,5,$folio,0,1,'L');
 

@@ -201,17 +201,17 @@
 		$pdf->Cell(0,0,"A EL (LA) ",0,0,'C');
 		$pdf->ln(10);
 		$pdf->SetFont('Montserrat-ExtraBold','B',22);
-		$pdf->MultiCell(170,10,utf8_decode(mb_strtoupper($data[0]["GRADO"])." ".mb_strtoupper($data[0]["NOMBRE"])),0,'C');
+		$pdf->MultiCell(170,10,utf8_decode(strtoupper($data[0]["GRADO"])." ".strtoupper($data[0]["NOMBRE"])),0,'C');
 	
 
 		$pdf->ln(5);
 		$pdf->SetFont('Montserrat-Medium','',11);
-		$pdf->MultiCell(170,5,utf8_decode(mb_strtoupper($data[0]["LEYENDA"])),0,'C', false);
+		$pdf->MultiCell(170,5,utf8_decode(strtoupper($data[0]["LEYENDA"])),0,'C', false);
 
 
 		$miutil = new UtilUser();
 		$fechadec=$miutil->formatFecha($data[0]["FECHAEXP"]);
-		$lafecha=mb_strtoupper($dataGen[0]["inst_fechaof"])." A ".date("d", strtotime($fechadec))." DE ".mb_strtoupper($miutil->getFecha($fechadec,'MES')). " DEL ".date("Y", strtotime($fechadec));
+		$lafecha=strtoupper($dataGen[0]["inst_fechaof"])." A ".date("d", strtotime($fechadec))." DE ".strtoupper($miutil->getFecha($fechadec,'MES')). " DEL ".date("Y", strtotime($fechadec));
 		
 		$pdf->ln(10);
 		$pdf->SetFont('Montserrat-ExtraLight','',10);

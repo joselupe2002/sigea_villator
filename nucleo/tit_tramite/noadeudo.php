@@ -304,7 +304,7 @@
 		$pdf->Ln(10);
 
 		$pdf->SetFont('Montserrat-Black','',10);
-		$fecha=mb_strtoupper($dataGen[0]["inst_extiende"]). " A ".date("d")." DE ".mb_strtoupper($miutil->getFecha(date("m.d.y"),'MES')). " DEL ".date("Y");
+		$fecha=strtoupper($dataGen[0]["inst_extiende"]). " A ".date("d")." DE ".strtoupper($miutil->getFecha(date("m.d.y"),'MES')). " DEL ".date("Y");
 
 		$pdf->Cell(170,5,utf8_decode($fecha),"",0,'R',false);
 

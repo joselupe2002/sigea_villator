@@ -193,7 +193,7 @@
                 $this->eljefepsto=$dataP[0]["FIRMAOF"];
                 $fechadec=$miutil->formatFecha($dataP[0]["FECHA_TIT"]);
                 $eldia=date("d", strtotime($fechadec));
-                $elmes=mb_strtoupper($miutil->getFecha($fechadec,'MES'));
+                $elmes=strtoupper($miutil->getFecha($fechadec,'MES'));
                 $elanio=date("Y", strtotime($fechadec));
                  
                 $this->SetFont('Montserrat-ExtraBold','B',16);
@@ -231,7 +231,7 @@
                 $this->eljefepsto=$dataP[0]["FIRMAOF"];
                 $fechadec=$miutil->formatFecha($dataP[0]["FECHA_TIT"]);
                 $eldia=date("d", strtotime($fechadec));
-                $elmes=mb_strtoupper($miutil->getFecha($fechadec,'MES'));
+                $elmes=strtoupper($miutil->getFecha($fechadec,'MES'));
                 $elanio=date("Y", strtotime($fechadec));
                  
                 $this->SetFont('Montserrat-ExtraBold','B',16);
@@ -276,7 +276,7 @@
                 $this->eljefepsto=$dataP[0]["FIRMAOF"];
                 $fechadec=$miutil->formatFecha($dataP[0]["FECHA_TIT"]);
                 $eldia=date("d", strtotime($fechadec));
-                $elmes=mb_strtoupper($miutil->getFecha($fechadec,'MES'));
+                $elmes=strtoupper($miutil->getFecha($fechadec,'MES'));
                 $elanio=date("Y", strtotime($fechadec));
                  
                 $this->SetFont('Montserrat-ExtraBold','B',14);
@@ -304,7 +304,7 @@
                 
                 $this->Cell(0,0,utf8_decode("EGRESADO DEL: ".$dataGen[0]["inst_razon"]),0,1,'L');
                 $this->Ln(5);
-                $this->Cell(0,0,utf8_decode(mb_strtoupper("FECHA DEL EXAMEN: ".$eldia." DE ".$elmes." DEL ".$elanio)),0,1,'L'); 
+                $this->Cell(0,0,utf8_decode(strtoupper("FECHA DEL EXAMEN: ".$eldia." DE ".$elmes." DEL ".$elanio)),0,1,'L'); 
                 $this->Ln(5);
 
                 $this->SetFont('Montserrat-ExtraBold','B',7);
