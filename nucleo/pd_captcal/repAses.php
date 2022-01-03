@@ -302,7 +302,7 @@
         foreach($datamiCorte as $row) {
             $ancol[$i]=25;
             $alig[$i]="C";
-            $titulos[$i]=strtoupper(utf8_decode($row["DESCRIPCION"]));
+            $titulos[$i]=mb_strtoupper(utf8_decode($row["DESCRIPCION"]));
             $i++;
         }
         $pdf->SetWidths($ancol);
@@ -325,7 +325,7 @@
         $pdf->SetAligns($alig);
 
         foreach($datamiCorte as $row) {
-            $line=[utf8_decode(strtoupper($row["DESCRIPCION"])), utf8_decode($row["INICIA"]),utf8_decode($row["TERMINA"])];
+            $line=[utf8_decode(mb_strtoupper($row["DESCRIPCION"])), utf8_decode($row["INICIA"]),utf8_decode($row["TERMINA"])];
             $pdf->Row($line);
         }
     

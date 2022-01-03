@@ -232,7 +232,7 @@
 		$pdf->SetFont('Times','B',10);
 		$pdf->Cell(80,5,utf8_decode("Periodo de estudios Realizados (mes y año):  "),"",0,'L',false);
 		$pdf->SetFont('Times','U',10);
-		$pdf->Cell(100,5,utf8_decode(strtoupper($miutil->getMesLetra($data[0]["MESINI"]). " ".$data[0]["ANIOINI"]). " ".strtoupper($miutil->getMesLetra($data[0]["MESFIN"]). 
+		$pdf->Cell(100,5,utf8_decode(mb_strtoupper($miutil->getMesLetra($data[0]["MESINI"]). " ".$data[0]["ANIOINI"]). " ".mb_strtoupper($miutil->getMesLetra($data[0]["MESFIN"]). 
 		                " A ".$data[0]["ANIOFIN"])),"",0,'L',false);
 
 		$pdf->Ln(5);

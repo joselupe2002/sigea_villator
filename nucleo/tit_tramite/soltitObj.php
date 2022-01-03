@@ -253,7 +253,7 @@
 		$pdf->SetFont('Montserrat-ExtraBold','',8);
 		$pdf->Cell(55,5,utf8_decode("Terminación de estudios:"),"L",0,'L',false);
 		$pdf->SetFont('Montserrat-Medium','U',8);
-		$pdf->Cell(111,5,utf8_decode(strtoupper($miutil->getMesLetra($data[0]["MESINI"]). " ".$data[0]["ANIOINI"]). " ".strtoupper($miutil->getMesLetra($data[0]["MESFIN"]). 
+		$pdf->Cell(111,5,utf8_decode(mb_strtoupper($miutil->getMesLetra($data[0]["MESINI"]). " ".$data[0]["ANIOINI"]). " ".mb_strtoupper($miutil->getMesLetra($data[0]["MESFIN"]). 
 		" A ".$data[0]["ANIOFIN"])),"R",0,'L',false);
 		
 		$pdf->Ln(3);

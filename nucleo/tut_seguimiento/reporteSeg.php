@@ -319,7 +319,7 @@
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(15,5,utf8_decode('CORTE:'),0,0,'L',false);
 		$pdf->SetFont('Montserrat-Medium','B',8);
-		$pdf->Cell(65,5,strtoupper(utf8_decode($_GET["corted"])),0,0,'L',false);
+		$pdf->Cell(65,5,mb_strtoupper(utf8_decode($_GET["corted"])),0,0,'L',false);
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(15,5,utf8_decode('GRUPO:'),0,0,'L',false);

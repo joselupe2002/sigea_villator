@@ -212,7 +212,7 @@
 		
 		$fechadec=$miutil->formatFecha($dataP[0]["FECHA_TIT"]);
 		$eldia=date("d", strtotime($fechadec));
-		$elmes=strtoupper($miutil->getFecha($fechadec,'MES'));
+		$elmes=mb_strtoupper($miutil->getFecha($fechadec,'MES'));
 		$elanio=date("Y", strtotime($fechadec));
 
 		$fechaof=date("d", strtotime($fechadec))."/".$miutil->getFecha($fechadec,'MES'). "/".date("Y", strtotime($fechadec));

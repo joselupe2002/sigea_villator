@@ -253,7 +253,7 @@
         $pdf->Ln(10);
         $pdf->SetFont('Montserrat-Medium','B',10);     
         $pdf->MultiCell(0,5,utf8_decode("DE ACUERDO CON LO QUE ESTABLECE LA LEY GENERAL DE PROFESIONES Y EL REGLAMENTO ".
-        "RESPECTIVO, EXPIDIÉNDOSE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"]).", A LOS ".strtoupper($fechapie)),0,'J',FALSE);
+        "RESPECTIVO, EXPIDIÉNDOSE LA PRESENTE EN LA CIUDAD DE ".mb_strtoupper($dataGen[0]["inst_extiende"]).", A LOS ".mb_strtoupper($fechapie)),0,'J',FALSE);
         $pdf->Ln(5);
 
         $pdf->setX(10);

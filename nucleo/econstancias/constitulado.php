@@ -271,14 +271,14 @@
 
    
         $inicio=$miutil->formatFecha($dataAlum[0]["INICIO"]);
-		$finicio=date("d", strtotime($inicio))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($inicio))))." DE ".date("Y", strtotime($inicio));
+		$finicio=date("d", strtotime($inicio))." DE ".mb_strtoupper($miutil->getMesLetra(date("m", strtotime($inicio))))." DE ".date("Y", strtotime($inicio));
         
         $fin=$miutil->formatFecha($dataAlum[0]["FIN"]);
-		$ffin=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
+		$ffin=date("d", strtotime($fin))." DE ".mb_strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
         
         $exa=$miutil->formatFecha($dataTit[0]["FECHA_ACTA"]);
        
-		$fexa=date("d", strtotime($exa))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($exa))))." DE ".date("Y", strtotime($exa));
+		$fexa=date("d", strtotime($exa))." DE ".mb_strtoupper($miutil->getMesLetra(date("m", strtotime($exa))))." DE ".date("Y", strtotime($exa));
        // echo $dataTit[0]["FECHA_ACTA"]." ".$exa." ".$fexa;
 
         $pdf->SetStyle("p","Montserrat-Medium","",10,"0,0,0");
@@ -290,7 +290,7 @@
         $dataAlum[0]["NOMBRE"]."</vb> ES EGRESADO DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>, CON PLAN DE ESTUDIOS <vb>".
         $dataAlum[0]["MAPA"]."</vb> Y LA ESPECIALIDAD DE <vb>".$dataAlum[0]["ESPECIALIDADD"]."</vb> CON NÚMERO DE CONTROL <vb>".
         $dataAlum[0]["ALUM_MATRICULA"]."</vb>, Y SE ENCUENTRA COMO <vb>TITULADO(A)</vb>, QUIEN PRESENTO SU EXAMEN PROFESIONAL EL DIA <vb>".
-        $fexa."</vb> POR LA OPCION <vb>".$dataTit[0]["OPCIOND"]."</vb> CON EL TEMA: <vb>".strtoupper($dataTit[0]["TEMA"])."</vb>.</p>"),0,'J',FALSE);
+        $fexa."</vb> POR LA OPCION <vb>".$dataTit[0]["OPCIOND"]."</vb> CON EL TEMA: <vb>".mb_strtoupper($dataTit[0]["TEMA"])."</vb>.</p>"),0,'J',FALSE);
 
         $pdf->Ln(3);
         $pdf->WriteTag(0,4,utf8_decode("<p>EL TITULO Y CÉDULA PROFESIONAL SE ENCUENTRAN EN PROCESO DE REGISTRO EN LA SECRETARÍA DE EDUCACIÓN DE VERACRUZ ".
@@ -309,8 +309,8 @@
 		$fechaof=$miutil->aletras(date("d"))." DÍAS DEL MES DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". $miutil->aletras(date("Y"));
         $pdf->Ln(5);
 
-        $pdf->WriteTag(0,5,utf8_decode("<p>SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
-        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</p>"),0,'J',FALSE);
+        $pdf->WriteTag(0,5,utf8_decode("<p>SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".mb_strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
+        mb_strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</p>"),0,'J',FALSE);
         
         $pdf->Ln(25);
 

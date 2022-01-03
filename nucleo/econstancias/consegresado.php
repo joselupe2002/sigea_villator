@@ -258,10 +258,10 @@
 
    
         $inicio=$miutil->formatFecha($dataAlum[0]["INICIO"]);
-		$finicio=date("d", strtotime($inicio))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($inicio))))." DE ".date("Y", strtotime($inicio));
+		$finicio=date("d", strtotime($inicio))." DE ".mb_strtoupper($miutil->getMesLetra(date("m", strtotime($inicio))))." DE ".date("Y", strtotime($inicio));
         
         $fin=$miutil->formatFecha($dataAlum[0]["FIN"]);
-		$ffin=date("d", strtotime($fin))." DE ".strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
+		$ffin=date("d", strtotime($fin))." DE ".mb_strtoupper($miutil->getMesLetra(date("m", strtotime($fin))))." DE ".date("Y", strtotime($fin));
         
         $pdf->SetStyle("p","Montserrat-Medium","",10,"0,0,0");
         $pdf->SetStyle("vs","Montserrat-Medium","U",10,"0,0,0");
@@ -289,8 +289,8 @@
         $pdf->Ln(5);
    
 
-        $pdf->WriteTag(0,5,utf8_decode("<p>SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
-        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</p>"),0,'J',FALSE);
+        $pdf->WriteTag(0,5,utf8_decode("<p>SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".mb_strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
+        mb_strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO.</p>"),0,'J',FALSE);
         
         $pdf->Ln(25);
 

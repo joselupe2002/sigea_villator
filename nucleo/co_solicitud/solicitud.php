@@ -222,20 +222,20 @@
 		$fechaof=date("d", strtotime($fechadecof))."/".$miutil->getFecha($fechadecof,'MES'). "/".date("Y", strtotime($fechadecof));
     
         $pdf->Ln(5);
-        $pdf->Cell(0,5,strtoupper(utf8_decode($dataGen[0]["inst_fechaof"]." ".$fechaof)),0,0,'R');
+        $pdf->Cell(0,5,mb_strtoupper(utf8_decode($dataGen[0]["inst_fechaof"]." ".$fechaof)),0,0,'R');
         $pdf->Ln(5);
 
         $pdf->setX(100);
-        $pdf->Multicell(91,5,strtoupper(utf8_decode("ASUNTO:".$dataAlum[0]["ASUNTOD"])),0,'R',false);
+        $pdf->Multicell(91,5,mb_strtoupper(utf8_decode("ASUNTO:".$dataAlum[0]["ASUNTOD"])),0,'R',false);
         $pdf->Ln(5);
 
         $pdf->SetFont('Montserrat-ExtraBold','B',10);
         $pdf->Ln(5);
-        $pdf->Cell(0,5,strtoupper(utf8_decode($dataAlum[0]["JEFED"])),0,0,'L');
+        $pdf->Cell(0,5,mb_strtoupper(utf8_decode($dataAlum[0]["JEFED"])),0,0,'L');
         $pdf->Ln(5);
-        $pdf->Cell(0,5,strtoupper(utf8_decode($dataAlum[0]["FIRMAOF"])),0,0,'L');
+        $pdf->Cell(0,5,mb_strtoupper(utf8_decode($dataAlum[0]["FIRMAOF"])),0,0,'L');
         $pdf->Ln(5);
-        $pdf->Cell(0,5,strtoupper(utf8_decode("PRESENTE")),0,0,'L');
+        $pdf->Cell(0,5,mb_strtoupper(utf8_decode("PRESENTE")),0,0,'L');
         $pdf->Ln(5);
         $pdf->SetFont('Montserrat-Medium','B',10);
         $pdf->Ln(5);

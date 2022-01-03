@@ -194,8 +194,8 @@
             function quitainicio($cad)
 			{		
                 $res=$cad;             
-                if ((substr(strtoupper($cad),0,3)=='EL ') || (substr(strtoupper($cad),0,3)=='LA ')) {
-                    $res=substr(strtoupper($cad),3,strlen($cad));
+                if ((substr(mb_strtoupper($cad),0,3)=='EL ') || (substr(mb_strtoupper($cad),0,3)=='LA ')) {
+                    $res=substr(mb_strtoupper($cad),3,strlen($cad));
                 }
 				return $res;
             }
@@ -282,7 +282,7 @@
         $fechaof2=$miutil->aletras(date("d",strtotime($fechadecof))).utf8_decode(" DÍAS DEL MES DE ").
                             $miutil->getFecha($fechadecof,'MES'). utf8_decode(" DEL AÑO "). $miutil->aletras(date("Y", strtotime($fechadecof)));
 
-        $pdf->Cell(0,5,strtoupper(utf8_decode($fechaof)),0,0,'C');
+        $pdf->Cell(0,5,mb_strtoupper(utf8_decode($fechaof)),0,0,'C');
 
         $pdf->Ln(5);
         $cad="EN LA CIUDAD DE ".utf8_decode($dataGen[0]["inst_fechaof"])." A LOS ".$fechaof2. " SIENDO LAS ".$dataCom[0]["HORAINI"]." HORAS".
@@ -300,7 +300,7 @@
         $cad.=utf8_decode("QUIENES FIRMARÁN DE CONFORMIDAD AL MARGEN Y AL CALCE DE LA PRESENTE PARA MAYOR CONSTANCIA.");
         $pdf->Ln(5);
         $pdf->SetFont('Montserrat-Medium','',10);
-        $pdf->Multicell(0,5,strtoupper($cad),0,'J',false);
+        $pdf->Multicell(0,5,mb_strtoupper($cad),0,'J',false);
         $pdf->Ln(5);
 
         $pdf->SetFont('Montserrat-black','B',10);
@@ -449,7 +449,7 @@
          $pdf->Ln(5);
          $pdf->SetFont('Montserrat-Medium','',10);
          $pdf->Multicell(0,5,utf8_decode("LAS FIRMAS ARRIBA PLASMADAS CORRESPONDEN AL ACTA DE LA ".$dataCom[0]["COMITED"].
-         "DEL COMITÉ ACADÉMICO DEL ".$dataGen[0]["inst_razon"]." CELEBRADA A LOS ").strtoupper($fechaof2)." EN ".utf8_decode($dataCom[0]["LUGAR"]).".",0,'J',false);
+         "DEL COMITÉ ACADÉMICO DEL ".$dataGen[0]["inst_razon"]." CELEBRADA A LOS ").mb_strtoupper($fechaof2)." EN ".utf8_decode($dataCom[0]["LUGAR"]).".",0,'J',false);
          $pdf->Ln(5);
 
          $pdf->Output(); 

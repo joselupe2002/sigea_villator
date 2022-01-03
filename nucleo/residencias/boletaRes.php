@@ -160,7 +160,7 @@
 				$this->Cell(0,0,utf8_decode("CAL. Calificación   Escala de Calificación 0-100; La calificación mínima aprobatoria es 70."),0,0,'L',true);
 				$this->setY(-55);
 				$this->SetFont('Montserrat-Medium','B',8);
-				$this->Cell(0,0,utf8_decode("EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A ".date("d")." DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". date("Y")),0,0,'L',true);
+				$this->Cell(0,0,utf8_decode("EN LA CIUDAD DE ".mb_strtoupper($dataGen[0]["inst_extiende"])." A ".date("d")." DE ".$miutil->getMesLetra(date("m"))." DEL AÑO ". date("Y")),0,0,'L',true);
 				$this->setY(-45);
 				$this->SetFont('Montserrat-Black','B',8);
 				$this->Cell(110,5,"",0,0,'R',true);

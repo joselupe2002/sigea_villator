@@ -247,10 +247,10 @@
 
         
         $iniCiclo=$miutil->formatFecha($dataCer[0]["FECHAINICIO"]);
-        $cadInicio=strtoupper($miutil->getMesLetra(date("m", strtotime($iniCiclo))). " DE ".date("Y", strtotime($iniCiclo)));
+        $cadInicio=mb_strtoupper($miutil->getMesLetra(date("m", strtotime($iniCiclo))). " DE ".date("Y", strtotime($iniCiclo)));
 
         $finCiclo=$miutil->formatFecha($dataCer[0]["FECHATERMINO"]);
-        $cadfin=strtoupper($miutil->getMesLetra(date("m", strtotime($finCiclo))). " DE ".date("Y", strtotime($finCiclo)));
+        $cadfin=mb_strtoupper($miutil->getMesLetra(date("m", strtotime($finCiclo))). " DE ".date("Y", strtotime($finCiclo)));
 
 		
         $pdf->setX($margeniz);

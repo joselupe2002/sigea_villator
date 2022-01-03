@@ -341,7 +341,7 @@
 
             $pdf->Row(array( utf8_decode($row["MATERIAD"]),
                              utf8_decode($row["CAL"]),
-                             utf8_decode(strtoupper($miutil->aletras($row["CAL"]))),
+                             utf8_decode(mb_strtoupper($miutil->aletras($row["CAL"]))),
                              utf8_decode($row["TCALCONS"]),
                              utf8_decode("")
                              )
@@ -377,8 +377,8 @@
         $pdf->Ln(3);
    
 
-        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
-        strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
+        $pdf->MultiCell(0,5,utf8_decode("SE EXTIENDE LA PRESENTE EN LA CIUDAD DE ".mb_strtoupper($dataGen[0]["inst_extiende"])." A LOS ".
+        mb_strtoupper($fechaof).", PARA LOS FINES QUE CONVENGAN AL INTERESADO."),0,'J',FALSE);
         
 
             
