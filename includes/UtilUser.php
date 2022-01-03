@@ -296,7 +296,7 @@ class UtilUser {
 	function basico($numero) {
 		$valor = array ('uno','dos','tres','cuatro','cinco','seis','siete','ocho',
 		'nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho',
-		'diecinueve','veinte','veintiuno','veintidos','veintitres',
+		'diecinueve','veinte','veintiuno','veintidós','veintitres',
 		 'veinticuatro','veinticinco',
 		'veintiseis','veintisiete','veintiocho','veintinueve');
 		return $valor[$numero - 1];
