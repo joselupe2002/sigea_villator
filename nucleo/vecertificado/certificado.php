@@ -371,7 +371,7 @@
         $pdf->SetFont('Humanst521 BT','',8);            
         $txt=utf8_decode("<p>SE EXTIENDE EL PRESENTE ".$cadCer." QUE AMPARA <vb>".$totcred."</vb> ".
         " CRÉDITOS DE UN TOTAL DE <vb>".$dataAlum[0]["PLACRED"]."</vb> QUE INTEGRAN EL PLAN DE ESTUDIOS CON CLAVE ".
-        $dataAlum[0]["MAPA"].", EN LA CIUDAD DE PEROTE, VERACRUZ, A LOS ".strtoupper($fechadecexp).".</p>");
+        $dataAlum[0]["MAPA"].", EN LA CIUDAD DE PEROTE, VERACRUZ, A LOS ".mb_strtoupper($fechadecexp).".</p>");
 
 
         $pdf->WriteTag(156,4,$txt,1,"J",0,0);
