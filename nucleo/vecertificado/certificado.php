@@ -271,7 +271,7 @@
         $ella='EL'; if ($dataAlum[0]["SEXO"]==2) {$ella='LA';}
         $txt=utf8_decode("<p>EL C. <vb>".$nombre."</vb> DIRECTOR GENERAL DEL <vb>". $data2[0]["inst_razon"].
         "</vb> CLAVE <vb>". $data2[0]["inst_claveof"]."</vb>, CERTIFICA, QUE SEGÚN CONSTANCIAS QUE EXISTEN EN EL ARCHIVO ESCOLAR DE ESTE INSTITUTO, ".$ella." C. <vb>".
-        $dataAlum[0]["NOMBRE"]."</vb> CURSÓ LAS ASIGNATURAS QUE INTEGRAN EL PLAN DE ESTUDIOS DE LA CARRERA DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>".
+        $dataAlum[0]["NOMBRE"]."</vb> CURSÓ LAS ASIGNATURAS QUE INTEGRAN EL PLAN DE ESTUDIOS DE <vb>".$dataAlum[0]["CARRERAD"]."</vb>".
         " (PLAN - CRÉDITOS) <vb>". $cadInicio."</vb> A <vb>".$cadfin."</vb>".
         ", CON LOS RESULTADOS QUE A CONTINUACIÓN SE ANOTAN:</p>");
 
