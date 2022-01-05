@@ -378,3 +378,9 @@ function generaTablaSubir(grid_data, op){
 
 
 
+		   function verInstrumenta(modulo,usuario,institucion, campus,essuper){
+			table = $("#G_"+modulo).DataTable();
+			enlace="nucleo/pd_instrumentacion/reporteIns.php?id="+table.rows('.selected').data()[0]["IDDET"]+"&materia="+table.rows('.selected').data()[0]["CVE_MAT"]+"&prof="+table.rows('.selected').data()[0]["EMPL"]+"&ciclo="+table.rows('.selected').data()[0]["CICLO"];
+			abrirPesta(enlace,'Instrumentación')
+		}
+		

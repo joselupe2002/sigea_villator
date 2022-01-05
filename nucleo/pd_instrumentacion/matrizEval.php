@@ -236,8 +236,10 @@ function seleccionaUnidad(id){
 					letrashtml+="<th title=\""+lasletras[i]["INDICADORD"]+"\" style=\"text-align:center;\"><span class=\"badge badge-primary\">"+letras[i]+"</span><br>"+
 					"<span id=\"s_"+letras[i]+"\"  class=\"badge badge-success\">"+lasletras[i]["VALOR"]+"</span></th>";
 
+					/*
 					letrashtmlpie+="<th style=\"text-align:center;\">"+
 					"<span id=\"spie_"+letras[i]+"\"><i class=\"fa fa-refresh green\"></i></span></th>";
+					*/
 				}
 
 				$("#mateval").empty();

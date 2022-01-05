@@ -438,7 +438,7 @@
 		$pdf->Cell(0,4,utf8_decode("Subdirección Académica o su equivalente en los Institutos Tecnológicos Descentralizados"),0,1,'C'); 
 		$pdf->Cell(0,4,utf8_decode("Instrumentación Didáctica para la Formación y Desarrollo de Competencias Profesionales"),0,1,'C'); 
 		$pdf->Cell(0,4,utf8_decode("Periodo: ".$dataCiclo[0]["CICL_CLAVE"]." - ".$dataCiclo[0]["CICL_DESCRIP"]),0,1,'C'); 
-		$pdf->Cell(0,4,utf8_decode("Nombre de la asignatura: ".$dataGrupo[0]["MATERIA"]),0,1,'C'); 
+		$pdf->Cell(0,4,utf8_decode("Nombre de la asignatura: ".$dataGrupo[0]["MATERIAD"]),0,1,'C'); 
 		$pdf->Cell(0,4,utf8_decode("Plan de estudios:".$dataGrupo[0]["MAPA"]." ".$dataGrupo[0]["CARRERAD"]),0,1,'C'); 
 		$pdf->Cell(0,4,utf8_decode("Clave de asignatura: ".$dataGrupo[0]["MATERIA"]),0,1,'C'); 
 		$pdf->Cell(0,4,utf8_decode("Horas teoría - horas prácticas - créditos: ".$dataGrupo[0]["HT"]."-".$dataGrupo[0]["HP"]."-".$dataGrupo[0]["CREDITOS"] ),0,1,'C'); 
