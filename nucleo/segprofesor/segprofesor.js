@@ -345,7 +345,7 @@ function cargaIndicadores() {
 	cadSql3=" SELECT a.IDDETALLE, a.SIE, a.MATERIA, a.MATERIAD, a.SEMESTRE, a.CARRERAD,"+
 	"(select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='N') AS NUMALUM,"+
 	"(select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='S') AS NUMBAJA,"+
-	"(select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='N' AND LISCAL>70) AS NUMAPR"+
+	"(select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='N' AND LISCAL>=70) AS NUMAPR"+
 	" FROM vedgrupos a where a.PROFESOR='"+$("#selProfesores").val()+"' and a.CICLO='"+$("#selCiclo").val()+"'";
 
 
@@ -599,7 +599,7 @@ function generaObs(grid_data){
 
 	cadSql3="SELECT SUM((select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='N')) AS NUMALUM,"+
 	"sum((select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='S')) AS NUMBAJA,"+
-	"sum((select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='N' AND LISCAL>70)) AS NUMAPR"+
+	"sum((select count(*) from dlista b where b.IDGRUPO=a.IDDETALLE AND BAJA='N' AND LISCAL>=70)) AS NUMAPR"+
 	" FROM vedgrupos a where a.PROFESOR='"+$("#selProfesores").val()+"' and a.CICLO='"+$("#selCiclo").val()+"'";
 
 	parametros3={sql:cadSql3,dato:sessionStorage.co,bd:"Mysql"}
