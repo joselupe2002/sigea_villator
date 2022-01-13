@@ -401,7 +401,7 @@ function cerrarTodo() {
 										}					     
 								}); 
 							}
-							else {alert (" OCURRIO EL SIGUIENTE ERROR: "+data+"\n");}
+							else {alert (" OCURRIO EL SIGUIENTE ERROR: "+fechacap+":"+data+"\n");}
 						    }
 						});
 					
