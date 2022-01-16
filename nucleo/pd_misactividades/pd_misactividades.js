@@ -22,7 +22,7 @@ function cargarInformacion(){
 	mostrarEspera("esperaInf","grid_avisos","Cargando Datos...");
 	cadSql="select YEAR(NOW()), COMI_HORAINI, COMI_HORAFIN, DATEDIFF(STR_TO_DATE(COMI_FECHAFIN,'%d/%m/%Y'),now()) AS DIF, "+
 	"COMI_ID, COMI_ACTIVIDAD, COMI_CUMPLIDA,COMI_FECHAINI,  COMI_FECHAFIN, COMI_LUGAR "+
-	" from vpcomisiones a where a.`COMI_PROFESOR`="+usuario+" AND  YEAR(STR_TO_DATE(a.`COMI_FECHAINI`,'%d/%m/%Y'))=YEAR(NOW())"+
+	" from vpcomisiones a where a.`COMI_PROFESOR`="+usuario+" AND  (YEAR(STR_TO_DATE(a.`COMI_FECHAINI`,'%d/%m/%Y'))=YEAR(NOW()) or  YEAR(STR_TO_DATE(a.`COMI_FECHAFIN`,'%d/%m/%Y'))=YEAR(NOW()))"+
 	" order by STR_TO_DATE(COMI_FECHAFIN,'%d/%m/%Y') DESC";
 
 	parametros={sql:cadSql,dato:sessionStorage.co,bd:"Mysql"}
