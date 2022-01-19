@@ -411,8 +411,12 @@ class UtilUser {
 
 	
 	public function  getPie($pdf,$orienta){	
-		$top1=253; $top2=243; $left1=10; $left2=180; $iniciaTexto=50; $anchoTexto=110;
-		if ($orienta=='H') {$top1=192; $top2=188; $left1=20; $left2=215;  $iniciaTexto=80; $anchoTexto=150;}
+	
+		$top1=248; $top2=258; $left1=20; $left2=15; $iniciaTexto=20; $anchoTexto=160; $anchopie2=200; $toptxt=-18;
+		if ($orienta=='H') {
+			$top1=187; $top2=194; $left1=20; $left2=15;  $iniciaTexto=20; $anchoTexto=200; $anchopie2=250; $toptxt=-15;}
+
+
 		$pre='../../'; if (($orienta=='H2')||($orienta=='V2')) {$pre='../';}
 
 		$direccion=""; $telefonos=""; $pagina="";
@@ -424,21 +428,26 @@ class UtilUser {
 			$pagina=$row["inst_pagina"];
 		}
 	
-		$pdf->Image($pre.'imagenes/empresa/piepag1.png',$left1,$top1,36);
+		$pdf->Image('../../imagenes/empresa/piepag1.png',$left1,$top1,36);
 		$pdf->SetFont('Montserrat-Medium','',7);
-		$pdf->SetY(-25);
-		$elpie= utf8_decode($direccion)." \n".utf8_decode($telefonos)."\n ".utf8_decode($pagina);
+		$pdf->SetY($toptxt);
+		$elpie= utf8_decode($direccion)." \n".utf8_decode($telefonos)." ".utf8_decode($pagina);
+
 		
 		$pdf->SetX($iniciaTexto);
+		$pdf->SetTextColor(188,142,83);
 		$pdf->MultiCell($anchoTexto,3,$elpie,0,'L',false);
-		$pdf->Image($pre.'imagenes/empresa/piepag2.png',$left2,$top2,20,20);
+		$pdf->SetTextColor(0);
+		$pdf->Image('../../imagenes/empresa/piepag2.png',$left2,$top2, $anchopie2);
 	}
 	
 	public function  getEncabezado($pdf,$orienta){
-		$left2=110; $left3=160; $anchoenc=190;
-		if ($orienta=='H') {$left2=210; $left3=260; $anchoenc=213;}
+		$left2=110; $left3=160; $anchoenc=140;
+		if ($orienta=='H') {$left2=210; $left3=260; $anchoenc=163;}
+
+		
 		$pre='../../'; if (($orienta=='H2')||($orienta=='V2')) {$pre='../';}
-		$pdf->Image($pre.'imagenes/empresa/fondo.png',0,0,187,275);
+	//	$pdf->Image($pre.'imagenes/empresa/fondo.png',0,0,187,275);
 		$pdf->Image($pre.'imagenes/empresa/encabezado.png',10,8,$anchoenc,15);
 	
 		$pdf->AddFont('Montserrat-Black','B','Montserrat-Black.php');
