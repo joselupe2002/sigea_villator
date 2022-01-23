@@ -4098,6 +4098,21 @@ function addElementPes(tipo,contenedor,tabla,campok,valork,nombre,etiqueta,tipos
 	}
 
 
+	if (tipo=='FECHA') {
+		$("#"+contenedor).append(
+			"<label class=\"fontRobotoB\">"+etiqueta+"</label>"+
+			" <div class=\"input-group\"><input   onchange=\"grabaDatoPes('"+tipo+"','"+tabla+"','"+campok+"','"+valork+"','"+nombre+"',true);\" class=\"form-control date-picker\"  id=\""+nombre+"\" "+
+		    " type=\"text\" autocomplete=\"off\"  data-date-format=\"dd/mm/yyyy\" value=\""+misdatos[0][nombre]+"\" /> "+
+			" <span class=\"input-group-addon\"><i class=\"fa fa-calendar bigger-110\"></i></span></div");		
+	}
+
+	if (tipo=='PARRAFO') {
+		$("#"+contenedor).append(
+			"<label class=\"fontRobotoB\">"+etiqueta+"</label>"+
+			"<textarea class=\"form-control\" onchange=\"grabaDatoPes('"+tipo+"','"+tabla+"','"+campok+"','"+valork+"','"+nombre+"',true);\"  id=\""+nombre+"\">"+misdatos[0][nombre]+"</textarea>");
+	}
+
+
 	if (tipo=='INPUTMON') {
 		$("#"+contenedor).append(
 			"<label class=\"fontRobotoB\">"+etiqueta+"</label>"+
@@ -4144,7 +4159,7 @@ function addElementPes(tipo,contenedor,tabla,campok,valork,nombre,etiqueta,tipos
 
 }
 
-function grabaDatoPes(tipo,tabla,campok,valork,nombre){
+function grabaDatoPes(tipo,tabla,campok,valork,nombre,sinespera){
 	elvalor=$("#"+nombre).val();
 	if (tipo=="SINO") {elvalor="N"; if ($("#"+nombre).prop("checked")) {elvalor="S";} }
 	if (tipo=="SELECTMULT") { if ($("#"+nombre).val()!=null) {elvalor=$("#"+nombre).val().toString();}}
@@ -4158,7 +4173,7 @@ function grabaDatoPes(tipo,tabla,campok,valork,nombre){
 		bd:"Mysql"};
 
 
-	$('#dlgproceso').modal({backdrop: 'static', keyboard: false});	         
+		if (!sinespera) {$('#dlgproceso').modal({backdrop: 'static', keyboard: false});}	    	         
 	   $.ajax({
 		        type: "POST",
 		        url:"../base/actualizaDin.php",
