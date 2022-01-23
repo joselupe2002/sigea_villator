@@ -415,7 +415,7 @@ function captResultados(modulo){
 						addElementPes("PARRAFO","i1","vin_visitas","ID",elid,"INCIDENCIAS","Incidencias de la Visita:","","","",misdatos);
 							
 						$("#info").append("<div class=\"row\"><div id=\"i1\" class=\"col-sm-12\"></div></div>");
-						addElementPes("FECHA","i1","vin_visitas","ID",elid,"FECHARES","Incidencias de la Visita:","","","",misdatos);
+						addElementPes("FECHA","i1","vin_visitas","ID",elid,"FECHARES","Fecha de Resultado:","","","",misdatos);
 						
 						$('.date-picker').datepicker({autoclose: true,todayHighlight: true}).next().on(ace.click_event, function(){$(this).prev().focus();});
 
