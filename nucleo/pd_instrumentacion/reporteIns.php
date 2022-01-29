@@ -394,6 +394,9 @@
 				$this->Cell(120,4,utf8_decode("PROFESOR"),0,0,'C');
 				$this->Cell(120,4,utf8_decode($dataEmpl[0]["EMPL_JEFEFIRMAOF"]),0,1,'C');
 
+				$this->setY(-10);	
+				$this->Cell(120,4,utf8_decode("JULIO 2007"),0,1,'R');
+
 			}
 			
 			
@@ -465,7 +468,7 @@
 		$pdf->SetFont('Montserrat-ExtraBold','B',10);
 		$pdf->Cell(0,4,utf8_decode("4. Análisis por competencias específicas"),0,1,'L'); 
 		$pdf->SetFont('Montserrat-Medium','',8);
-		$pdf->MultiCell(0,4,utf8_decode($dataMat[0]["COMPETENCIAS"]),0,'J'); 
+		//$pdf->MultiCell(0,4,utf8_decode($dataMat[0]["COMPETENCIAS"]),0,'J'); 
 
 		foreach($dataUni as $row){
 			$pdf->SetFont('Montserrat-ExtraBold','B',10);
@@ -496,7 +499,7 @@
 									utf8_decode("Desarrollo de competencias genéricas"),
 									utf8_decode("Horas teórico-práctica")));
 			
-					$pdf->SetFont('Montserrat-Medium','B',7);
+					$pdf->SetFont('Montserrat-Medium','B',6);
 					
 					$pdf->Row(array(
 										utf8_decode(trim($subtemas)),
@@ -628,7 +631,7 @@
 		}
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',8);
-		$pdf->Cell(0,4,utf8_decode("7. Fuentes de información y apoyos didácticos"),0,1,'L');
+		$pdf->Cell(0,4,utf8_decode("6. Fuentes de información y apoyos didácticos"),0,1,'L');
 		
 		$dataEnc= $pdf->LoadEncuadre();
 		$w = array(120,120);
@@ -647,7 +650,7 @@
 		// Calendarizacion en semanas
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',8);
-		$pdf->Cell(0,4,utf8_decode("8. Calendarización de evaluación en semanas"),0,1,'L');
+		$pdf->Cell(0,4,utf8_decode("7. Calendarización de evaluación en semanas"),0,1,'L');
 
 		$w = array(20);
 		$an=intdiv(220,16);
@@ -680,9 +683,11 @@
 		for ($i=1; $i<=16; $i++) { array_push($fila,utf8_decode(""));	}
 		$pdf->Row($fila);
 
+		/*
 		$fila=array(utf8_decode("SD"));
 		for ($i=1; $i<=16; $i++) { array_push($fila,utf8_decode(""));	}
 		$pdf->Row($fila);
+		*/
 
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',8);
