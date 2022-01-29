@@ -394,7 +394,8 @@
 				$this->Cell(120,4,utf8_decode("PROFESOR"),0,0,'C');
 				$this->Cell(120,4,utf8_decode($dataEmpl[0]["EMPL_JEFEFIRMAOF"]),0,1,'C');
 
-				$this->setY(-10);	
+				$this->setY(-10);
+				$this->setY(20);	
 				$this->Cell(120,4,utf8_decode("JULIO 2007"),0,1,'R');
 
 			}
