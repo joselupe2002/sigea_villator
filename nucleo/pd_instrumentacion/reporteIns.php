@@ -396,7 +396,7 @@
 
 				$this->setY(-10);
 				$this->setX(20);	
-				$this->Cell(240,4,utf8_decode("JULIO 2007"),0,1,'R');
+				$this->Cell(270,4,utf8_decode("JULIO 2007"),0,1,'R');
 
 			}
 			
