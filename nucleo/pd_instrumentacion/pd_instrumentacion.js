@@ -106,7 +106,7 @@ function copiar(id,profesor,materia,materiad,grupo,ciclo, base){
 							"			<br><button title=\"Sacar copia\" onclick=\"sacarCopia('"+id+"','"+profesor+"','"+ciclo+"');\""+
                                                  " 			class=\"btn btn-white btn-warning btn-round\"><i class=\"ace-icon pink fa fa-lightbulb-o bigger-140\"></i>Copiar Información</button>"+    													
 							"	  </div>");	
-       actualizaSelect("selOtro", "SELECT IDDETALLE, CONCAT(MATERIAD,'(',CICLO,'-',SIE,')') FROM vedgrupos WHERE PROFESOR='"+profesor+"'  AND MATERIA='"+materia+"' order by CICLO DESC", "","");			
+       actualizaSelect("selOtro", "SELECT IDDETALLE, CONCAT(MATERIAD,'(',CICLO,'-',IFNULL(SIE,'0'),')') FROM vedgrupos WHERE PROFESOR='"+profesor+"'  AND MATERIA='"+materia+"' order by CICLO DESC", "","");			
 							
 }
 
