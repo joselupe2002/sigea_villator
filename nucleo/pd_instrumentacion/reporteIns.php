@@ -632,7 +632,7 @@
 		}
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',8);
-		$pdf->Cell(0,4,utf8_decode("6. Fuentes de información y apoyos didácticos"),0,1,'L');
+		$pdf->Cell(0,4,utf8_decode("5. Fuentes de información y apoyos didácticos"),0,1,'L');
 		
 		$dataEnc= $pdf->LoadEncuadre();
 		$w = array(120,120);
@@ -651,7 +651,7 @@
 		// Calendarizacion en semanas
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',8);
-		$pdf->Cell(0,4,utf8_decode("7. Calendarización de evaluación en semanas"),0,1,'L');
+		$pdf->Cell(0,4,utf8_decode("6. Calendarización de evaluación en semanas"),0,1,'L');
 
 		$w = array(20);
 		$an=intdiv(220,16);
