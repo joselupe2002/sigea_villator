@@ -96,7 +96,7 @@ jQuery.each(grid_data, function(clave, valor) {
 /*=================================================================*/
 function copiar(id,profesor,materia,materiad,grupo,ciclo, base){
   
-	dameVentana("ventCopia", "grid_pd_instrumentacion","Copiar Información","lg","bg-successs","fa fa-copy blue bigger-180","370");
+	dameVentana("ventCopia", "grid_pd_instrumentacion","Copiar Información","sm","bg-successs","fa fa-copy blue bigger-180","370");
 	$("#body_ventCopia").append("<div class=\"row fontRoboto bigger-120\">"+
 							"     <div class=\"col-sm-12\">"+								
 							"	    	<label class=\"label label-primary fontRobotoB bigger-80\">Copiar Instrumentación de Otros Ciclos</label><br>"+

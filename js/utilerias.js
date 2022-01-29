@@ -318,7 +318,7 @@ function BurbujaCadena(lista) {
 
 /*================================================FUNCION PARA CREAR VENTANAS BOOTSTRAP ==============================*/
 function dameVentana(nombre,contenedor,titulo,tam,colorfondohead,imaico, alto){
-	script="<div class=\"modal fade\" id=\""+nombre+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
+	script="<div class=\"sigeaPrin modal fade\" id=\""+nombre+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
 	"   <div class=\"modal-dialog modal-"+tam+"\"  role=\"document\">"+
 	"      <div class=\"modal-content\">"+
 	"          <div class=\"modal-header "+colorfondohead+"\" >"+
