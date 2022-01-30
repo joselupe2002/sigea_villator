@@ -427,8 +427,8 @@ function cierraModal(){
 function actualizaProm(lafila,modulo,institucion, campus, valor,usuario) {
 	res="";
 	var table = $("#G_"+modulo).DataTable();	
-	elsql="update ss_alumnos set CALIFICACION=(((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
-	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10),"+
+	elsql="update ss_alumnos set CALIFICACION=round((((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
+	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10),2),"+
 	"CALIFICACION2=round((((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
 	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10))"+
 	" WHERE concat(CICLO,MATRICULA)='"+lafila[0]["CICLO"]+lafila[0]["MATRICULA"]+"'";
