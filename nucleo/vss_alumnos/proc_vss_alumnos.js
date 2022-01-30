@@ -368,3 +368,105 @@ function impBoletass(modulo,usuario,institucion, campus,essuper){
 		}
 
 }
+
+
+/*==============================================================*/
+
+function importaEval(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();
+	mostrarVentanaCierre ("vtnDatos","G_"+modulo, "Listado de calificaciones", 
+	 "<textarea id=\"lasmat\" style=\"width:100%; height:250px;\"></textarea>","Migrar", "migrarCalif();","modal-sm");
+
+}
+
+function migrarCalif () {
+
+	var matricula="";
+	$('#lasmat').val($('#lasmat').val().replace(/\t/gi,"|"));
+	
+	var lines = $('#lasmat').val().split('\n');
+	titulos=lines[0].split("|");
+
+	$('#lasmat').val("");
+
+	for(var i = 1;i < lines.length-1;i++){
+		linea=lines[i].split("|");
+		
+		parametros={
+			tabla:"ss_alumnos",
+			bd:"Mysql",
+			campollave:"concat(CICLO,' ',MATRICULA)",
+			valorllave:linea[0]+" "+linea[1],					
+		};
+
+		for (j = 2; j < titulos.length; j++){
+			Object.defineProperty(parametros, titulos[j], { value: linea[j] , enumerable: true });
+		}
+
+	
+
+		$.ajax({
+			type: "POST",
+			url:"../base/actualiza.php",
+			data: parametros,
+			success: function(data){        			        											
+			
+			}					     
+		}); 
+		$('#lasmat').val($('#lasmat').val()+"\n"+linea[0]+" "+linea[1]+"-->OK ");
+		
+	}
+}
+
+function cierraModal(){
+	window.parent.document.getElementById('FRvss_alumnos').contentWindow.location.reload();
+}
+
+
+
+function actualizaProm(lafila,modulo,institucion, campus, valor,usuario) {
+	res="";
+	var table = $("#G_"+modulo).DataTable();	
+	elsql="update ss_alumnos set CALIFICACION=(((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
+	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10),"+
+	"CALIFICACION2=round((((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
+	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10))"+
+	" WHERE concat(CICLO,MATRICULA)='"+lafila[0]["CICLO"]+lafila[0]["MATRICULA"]+"'";
+
+	parametros2={bd:"mysql",sql:elsql,dato:sessionStorage.co};
+	$.ajax({
+		type: "POST",
+		url:"../base/ejecutasql.php",
+		data:parametros2,
+		success: function(dataC){	
+			elsql3="update ss_alumnos set CALIFICACIONL=(SELECT CATA_DESCRIP FROM scatalogos where CATA_TIPO='CALIF_SS' "+
+			"AND  CATA_CLAVE=CALIFICACION2) WHERE concat(CICLO,MATRICULA)='"+lafila[0]["CICLO"]+lafila[0]["MATRICULA"]+"'";
+			parametros3={bd:"mysql",sql:elsql3,dato:sessionStorage.co};
+			$.ajax({
+				type: "POST",
+				url:"../base/ejecutasql.php",
+				data:parametros3,
+				success: function(dataC){			                	 			                   
+					$('#resul').val($('#resul').val()+(elReg+1)+" de "+(nreg)+" Se Calculo Promedio "+lafila[0]["CICLO"]+" "+lafila[0]["MATRICULA"]+" correctamente \n"); 
+					elReg++;
+					if (nreg>elReg) {actualizaProm(table.rows(elReg).data(),modulo,institucion,campus, valor,usuario);}
+					if (nreg==elReg) { window.parent.document.getElementById('FRvss_alumnos').contentWindow.location.reload();}										  
+				}					     
+			});   //ajax del procedimiento		
+		}					     
+	});   //ajax del procedimiento
+      
+}
+
+
+function procPromedio(modulo,usuario,institucion, campus,essuper){
+
+	table = $("#G_"+modulo).DataTable();
+	agregarDialogResultado(modulo);
+	nreg=0;
+	elReg=0;
+	table.rows().iterator('row', function(context, index){
+		 nreg++;		    
+	});
+	actualizaProm(table.rows(elReg).data(), modulo,institucion,campus,'S',usuario);
+}
