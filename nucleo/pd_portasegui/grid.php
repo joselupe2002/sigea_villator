@@ -365,6 +365,8 @@ function impEncuadre(id, materia, descrip, tipomat){
 			   "                  <span aria-hidden=\"true\">&times;</span>"+
 			   "             </button>"+
 			   "             <div style=\"text-align:center;\"> "+ 	
+			   "                  <button title=\"Guardar todos los cambios\" type=\"button\" class=\"btn btn-white btn-primary btn-bold\" onclick=\"cargarInstrumentacion('"+id+"');\">"+
+			   "                  <i class=\"ace-icon fa fa-arrow-down bigger-120 red\"></i>Cargar de Instrumentación</button>"+
 		       "                  <button title=\"Guardar todos los cambios\" type=\"button\" class=\"btn btn-white btn-warning btn-bold\" onclick=\"guardarActividades();\">"+
 			   "                  <i class=\"ace-icon fa fa-floppy-o bigger-120 red\"></i>Guardar Encuadre</button>"+	
 			   "             </div>"+	
@@ -924,10 +926,44 @@ function impEncuadre(id, materia, descrip, tipomat){
 				    "&grupo="+grupo+"&unidad="+unidad+"&unidadd="+unidadd;
 			abrirPesta(enlace,"Cotejo");
 		   }	
+
+		   function cargarInstrumentacion(id) {
+				elsql="select * from vins_matriz where IDGRUPO="+id+" order by UNIDAD  ";
+	
+				parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
+				$.ajax({
+					type: "POST",
+					data:parametros,
+					url:  "../base/getdatossqlSeg.php",
+					success: function(data){  
+							losdatos=JSON.parse(data); 	
+							$(".ev").val("");	
+							jQuery.each(losdatos, function(clave, valor) { 
+								//  alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
+								$("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val("");
+							
+							});	
+
+							jQuery.each(losdatos, function(clave, valor) { 
+								//  alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
+								$("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val($("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val()+"\n"+valor.EVAPRD);							
+							});	
+					}
+				}); 
+				 
+			}
+
+
     
 		</script>
+
+
+
 
 
 	</body>
 <?php } else {header("Location: index.php");}?>
 </html>
+
+
+
