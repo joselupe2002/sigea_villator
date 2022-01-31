@@ -946,7 +946,7 @@ function impEncuadre(id, materia, descrip, tipomat){
 
 							jQuery.each(losdatos, function(clave, valor) { 
 								//alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
-								$("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val($("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val()+"\n"+valor.EVAPRD);							
+								$("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val($("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val()+"\n "+valor.EVAPRD+"("+valor.PORC+")");							
 							});	
 					}
 				}); 
