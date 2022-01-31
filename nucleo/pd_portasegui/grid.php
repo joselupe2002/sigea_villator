@@ -494,11 +494,11 @@ function impEncuadre(id, materia, descrip, tipomat){
 				 $("#rowe"+c).append("<td>"+valor.UNID_ID+"</td>");
 				 $("#rowe"+c).append("<td>"+valor.UNID_NUMERO+"</td>");
 				 $("#rowe"+c).append("<td>"+valor.UNID_DESCRIP+"</td>");	
-				 $("#rowe"+c).append("<td><input  style=\"width:150px;\" id=\"a_"+c+"_2\" value=\""+valor.EP+"\" class=\"form-control\" id=\"ep\"></input></td>");	
-				 $("#rowe"+c).append("<td><input  style=\"width:150px;\" id=\"a_"+c+"_3\" value=\""+valor.ED+"\" class=\"form-control\" id=\"ep\"></input></td>");
-				 $("#rowe"+c).append("<td><input  style=\"width:150px;\" id=\"a_"+c+"_4\" value=\""+valor.EC+"\" class=\"form-control\" id=\"ep\"></input></td>");	
-				 $("#rowe"+c).append("<td><input  style=\"width:150px;\" id=\"a_"+c+"_5\" value=\""+valor.EA+"\" class=\"form-control\" id=\"ep\"></input></td>");	       		   
-				 $("#rowe"+c).append("<td><input class=\"hidden\" id=\"a_"+c+"_6\" value=\""+valor.ENCU_ID+"\"></input></td>");	       		   
+				 $("#rowe"+c).append("<td><input  title=\""+valor.UNID_NUMERO+"_EP\"  style=\"width:150px;\" id=\"a_"+c+"_2\" value=\""+valor.EP+"\" class=\"form-control\" id=\"ep\"></input></td>");	
+				 $("#rowe"+c).append("<td><input  title=\""+valor.UNID_NUMERO+"_ED\"  style=\"width:150px;\" id=\"a_"+c+"_3\" value=\""+valor.ED+"\" class=\"form-control\" id=\"ep\"></input></td>");
+				 $("#rowe"+c).append("<td><input  title=\""+valor.UNID_NUMERO+"_EC\" style=\"width:150px;\" id=\"a_"+c+"_4\" value=\""+valor.EC+"\" class=\"form-control\" id=\"ep\"></input></td>");	
+				 $("#rowe"+c).append("<td><input  title=\""+valor.UNID_NUMERO+"_EA\"  style=\"width:150px;\" id=\"a_"+c+"_5\" value=\""+valor.EA+"\" class=\"form-control\" id=\"ep\"></input></td>");	       		   
+				 $("#rowe"+c).append("<td><input  class=\"hidden\" id=\"a_"+c+"_6\" value=\""+valor.ENCU_ID+"\"></input></td>");	       		   
 				 c++;
 					global=c;
 					operacion='INSERTAR';  if (valor.ENCU_ID>0) {operacion='EDITAR';} 
@@ -945,7 +945,7 @@ function impEncuadre(id, materia, descrip, tipomat){
 							});	
 
 							jQuery.each(losdatos, function(clave, valor) { 
-								  alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
+								alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
 								$("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val($("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val()+"\n"+valor.EVAPRD);							
 							});	
 					}
