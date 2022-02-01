@@ -684,11 +684,11 @@
 		for ($i=1; $i<=16; $i++) { array_push($fila,utf8_decode(""));	}
 		$pdf->Row($fila);
 
-		/*
+		
 		$fila=array(utf8_decode("SD"));
 		for ($i=1; $i<=16; $i++) { array_push($fila,utf8_decode(""));	}
 		$pdf->Row($fila);
-		*/
+		
 
 
 		$pdf->SetFont('Montserrat-ExtraBold','B',8);

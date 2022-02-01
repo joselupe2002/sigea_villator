@@ -27,7 +27,11 @@
         <link rel="stylesheet" href="<?php echo $nivel; ?>assets/css/ui.jqgrid.min.css" />
 		<link rel="stylesheet" href="<?php echo $nivel; ?>css/sigea.css" />
 
-       
+        <style type="text/css">table.dataTable tbody tr.selected {color: blue; font-weight:bold; }
+               th, td {  word-wrap: break-word;        
+                         overflow-wrap: break-word;   }
+               
+        </style>
 	</head>
 
 
@@ -51,12 +55,8 @@
 						  <th style="text-align: center;">Asignatura</th> 
 						  <th style="text-align: center;">Evaluar</th> 
 						  <th style="text-align: center;">Promediar</th> 
-						  <th style="text-align: center;">Reporte</th> 	
-						  <th style="text-align: center;">Asesorias</th> 
-						  <th style="text-align: center;">RepxCorte</th> 
-						  <th style="text-align: center;">Mot. Rep.</th> 
-						  <th style="text-align: center;">Estratégias</th> 
-						  <th style="text-align: center;">Avance Prog.</th>                                                             	   	  
+						 <!-- <th style="text-align: center;">Reporte</th> 	-->
+						                                                   	   	  
 					   </tr> 
 			     </thead> 
 	         </table>
@@ -154,138 +154,30 @@
     	    $("#row"+valor.ID).append("<td>"+valor.MATERIA+"</td>");
 			$("#row"+valor.ID).append("<td>"+valor.MATERIAD+"</td>");
 			
-    	    $("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Evaluar a los alumnos inscritos\" onclick=\"evaluar('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
+    	    $("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Evaluar a los alumnos inscritos\" onclick=\"evaluarUnidad('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
     	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','"+valor.BASE+"');\""+
 											  " class=\"btn btn-xs btn-white btn-primary btn-round\"><i class=\"ace-icon fa red fa-building bigger-120\"></i></button></td>");
-			
+	   
+											
 			//Boton de Promediar
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Calcula Calificación Final\" onclick=\"calcularFinal('<?php echo $_SESSION["usuario"]?>','"+
+			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Calcula Calificación Final de Unidad\" onclick=\"calcularFinalUnidad('<?php echo $_SESSION["usuario"]?>','"+
     	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','pd_captcal');\""+
 											  " class=\"btn btn-xs btn-white btn-success btn-round\"><i class=\"ace-icon fa blue fa-wrench bigger-140\"></i></button></td>");								  
 											  
 			//Boton de Boleta
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Reporte de Unidades\" onclick=\"imprimirBoleta('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
+			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Reporte de Unidades\" onclick=\"imprimirBoletaUnidad('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
     	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','"+valor.BASE+"','"+valor.SEM+"');\""+
     	    	                              " class=\"btn btn-xs btn-white btn-warning btn-round\"><i class=\"ace-icon green fa fa-print bigger-140\"></i></button></td>");								  
-    	    
-			
-			//Boton de asesorias
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Reporte de asesorias\" onclick=\"imprimirRepAses('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
-    	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','"+valor.BASE+"','"+valor.SEM+"');\""+
-    	    	                              " class=\"btn btn-xs btn-white btn-warning btn-round\"><i class=\"ace-icon pink fa fa-lightbulb-o bigger-140\"></i></button></td>");								  
-    	    
-			//Boton de Reporte por COrte
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Reporte de Reprobación x Corte\" onclick=\"verPantallaCorte('<?php echo $_SESSION["usuario"]?>','"+
-    	    	                       valor.CICLO+"','"+valor.ID+"','REPROBACION');\""+
-    	    	                     " class=\"btn btn-xs btn-white btn-primary btn-round\"><i class=\"ace-icon blue fa fa-th  bigger-140\"></i></button></td>");								  
-    	    
-			 //Boton de Motivos de Reprobación por corte
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Reporte de Motivos de Reprobación x Corte\" onclick=\"verPantallaCorte('<?php echo $_SESSION["usuario"]?>','"+
-    	    	                       valor.CICLO+"','"+valor.ID+"','MOTIVOS');\""+
-    	    	                     " class=\"btn btn-xs btn-white btn-primary btn-round\"><i class=\"ace-icon purple fa fa-eye bigger-140\"></i></button></td>");								  
-    	    
-
-			//Boton de Estratégias a Realizar
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Plantear estratégias para el corte de calificaciones\" onclick=\"verEstrategias('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
-    	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','"+valor.BASE+"');\""+
-											  " class=\"btn btn-xs btn-white btn-success btn-round\"><i class=\"ace-icon fa green fa-random bigger-120\"></i></button></td>");
-
-			//Boton de Estratégias a Realizar
-
-			graf="<span class=\"infobox-progress\">"+
-				 "    <span id=\"elavance\" id=\"porcavance\" class=\"easy-pie-chart percentage\" "+
-				 "          data-color=\"green\" data-percent=\""+valor.AVANCE_PROG+"\" data-size=\"30\">"+
-				 "         <span id=\"etelavance\"  class=\"percent fontRoboto\" style=\"font-size:8px; color:black;\">"+valor.AVANCE_PROG+"%</span>"+
-				 "	  </span>"+
-				 "</span>";
-
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Capturar avance Programático de la Asignatura\" onclick=\"verAvanceProg('"+valor.ID+"','<?php echo $_SESSION["usuario"]?>','"+
-    	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','"+valor.BASE+"');\""+
-											  " class=\"btn btn-xs btn-white btn-success btn-round\"><i class=\"ace-icon fa blue fa-calendar bigger-120\"></i></button>"+
-											  "<span>"+graf+"</span></td>");
-
-			$('.easy-pie-chart.percentage').each(function(){
-			var barColor = $(this).data('color') || '#2979FF';
-			var trackColor = '#E2E2E2';
-			var size = parseInt($(this).data('size')) || 72;
-			$(this).easyPieChart({
-				barColor: barColor,
-				trackColor: trackColor,
-				scaleColor: false,
-				lineCap: 'butt',
-				lineWidth: parseInt(size/5),
-				animate:false,
-				size: size
-			}).css('color', barColor);
-			});
-							  
-    	      
     	    
 
         });
 }		
 
 
-/*=======================AVANCE PROGRAMÁTICO DEL PROFESOR ================================*/
-function verAvanceProg(id,profesor,materia,materiad,grupo,ciclo, base){
-	window.location="avanceprog.php?base="+base+"&termina_corte="+termina_corte+"&inicia_corte="+inicia_corte+"&idcorte="+
-								  idcorte+"&tipocorte="+tipocorte+"&id="+id+"&ciclo="+ciclo+"&profesor="+profesor+"&grupo="+
-								  grupo+"&materia="+materia+"&materiad="+materiad+"&modulo=<?php echo $_GET["modulo"];?>";
-}
-
-
-/*========================ESTRATEGIAS PARA MEJORAR EL RENDIMIENTO EN EL CORTE ========================*/
-
-function verEstrategias(id,profesor,materia,materiad,grupo,ciclo, base){
-	window.location="estrategias.php?base="+base+"&termina_corte="+termina_corte+"&inicia_corte="+inicia_corte+"&idcorte="+
-								  idcorte+"&tipocorte="+tipocorte+"&id="+id+"&ciclo="+ciclo+"&profesor="+profesor+"&grupo="+
-								  grupo+"&materia="+materia+"&materiad="+materiad+"&modulo=<?php echo $_GET["modulo"];?>";
-}
-
-/*===============REPORTE POR CORTE DE CALIFICACIONES ========================================*/
-
-function verPantallaCorte(elprof,elciclo,id, tipo){
-
-	if (tipo=="REPROBACION") {evento="verReporteCorte";}
-	if (tipo=="MOTIVOS") {evento="verReporteMotCorte";}
-	dameVentana("ventCorte", "grid_pd_captcal","Reporte x Corte de Calificaciones","sm","bg-successs","fa fa-book blue bigger-180","370");
-	$("#body_ventCorte").append("<div class=\"row fontRoboto\">"+
-	                            "     <div class=\"col-sm-12\">"+								
-						    	"	    	<label class=\"fontRobotoB\">No. Corte</label><select class=\"form-control\"  id=\"selCorte\"></select>"+							
-								"	  </div>"+	
-								"     <div class=\"col-sm-12\">"+								
-						    	"	    	<label class=\"fontRobotoB\">Departamento</label><select class=\"form-control\"  id=\"selDepto\"></select>"+							
-								"	  </div>"+								
-								"</div><br>"+
-								"<div class=\"col-sm-12\" style=\"text-align:center;\">"+	
-								"         <button  onclick=\""+evento+"('"+elprof+"','"+elciclo+"','"+id+"');\" class=\"fontRobotoB btn btn-white btn-danger btn-bold bigger-100\">"+
-								"            <i class= \"ace-icon fa fa-th bigger-100 blue\"></i>"+
-								"            <span class=\"text-danger\">Ver Reporte</span>"+
-								"         </button> "+
-								"</div>");
-	actualizaSelect("selCorte", "SELECT ID, DESCRIPCION FROM ecortescal where CLASIFICACION='CALIFICACION' AND CICLO=getciclo()"+
-			                    " ORDER BY STR_TO_DATE(INICIA,'%d/%m/%Y')", "","");
-	
-	actualizaSelect("selDepto", "select DISTINCT DEPTO, URES_DESCRIP from vedgrupos, fures  where CICLO=getciclo() "+
-	                            " AND PROFESOR="+elprof+" AND DEPTO=URES_URES", "","");
-				
-
-	
-}
-
-function verReporteCorte(elprof,elciclo,id){
-	enlace="nucleo/repCorte/reporteCorte.php?profesor="+elprof+"&ciclo="+elciclo+"&corte="+$("#selCorte").val()+"&depto="+$("#selDepto").val();
-	abrirPesta(enlace,"Reporte");
-}
-
-function verReporteMotCorte(elprof,elciclo,id){
-	enlace="nucleo/pd_captcal/reporteCorteMot.php?id="+id+"&profesor="+elprof+"&ciclo="+elciclo+"&corte="+$("#selCorte").val()+"&depto="+$("#selDepto").val();
-	abrirPesta(enlace,"Motivos");
-}
-
 
 
 /*======================================================================================*/
+
 
 function verificarCorte(){
 	$('#dlgproceso').modal({show:true, backdrop: 'static'});
@@ -320,6 +212,7 @@ function verificarCorte(){
 
 
 
+
 function cargarAct(){
 		$('#dlgproceso').modal({show:true, backdrop: 'static'});
 		elsql="SELECT ID, MATERIA, MATERIAD, SIE, SEM, CICLO, BASE, "+  
@@ -348,29 +241,22 @@ function cargarAct(){
 }
 
 
-function evaluar(id,profesor,materia,materiad,grupo,ciclo, base){
-	 window.location="evaluar.php?base="+base+"&termina_corte="+termina_corte+"&inicia_corte="+inicia_corte+"&idcorte="+
+
+function evaluarUnidad(id,profesor,materia,materiad,grupo,ciclo, base){
+	 window.location="evaluarUnidad.php?base="+base+"&termina_corte="+termina_corte+"&inicia_corte="+inicia_corte+"&idcorte="+
 								  idcorte+"&tipocorte="+tipocorte+"&id="+id+"&ciclo="+ciclo+"&profesor="+profesor+"&grupo="+
 								  grupo+"&materia="+materia+"&materiad="+materiad+"&modulo=<?php echo $_GET["modulo"];?>";
 }
 
 
-function imprimirBoleta(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
-	enlace="nucleo/pd_captcal/repUni.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor=<?php echo $_SESSION["usuario"];?>&materia="+
+function imprimirBoletaUnidad(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
+	enlace="nucleo/pd_captcalea/repUniUnidad.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor=<?php echo $_SESSION["usuario"];?>&materia="+
 								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre;
 	abrirPesta(enlace,"Rep.Uni.");
 
 }
 
 	
-
-function imprimirRepAses(id,profesor,materia,materiad,grupo,ciclo, base,semestre){
-	enlace="nucleo/pd_captcal/repAses.php?grupo="+grupo+"&ciclo="+ciclo+"&profesor=<?php echo $_SESSION["usuario"];?>&materia="+
-								  materia+"&materiad="+materiad+"&id="+id+"&semestre="+semestre;
-	abrirPesta(enlace,"Rep.Ases.");
-
-}
-
 
 		</script>
 
