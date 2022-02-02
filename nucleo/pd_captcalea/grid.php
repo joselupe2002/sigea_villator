@@ -160,8 +160,8 @@
 	   
 											
 			//Boton de Promediar
-			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Calcula Calificación Final de Unidad\" onclick=\"calcularFinalUnidad('<?php echo $_SESSION["usuario"]?>','"+
-    	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','pd_captcal');\""+
+			$("#row"+valor.ID).append("<td style=\"text-align: center;\"><button title=\"Calcula Calificación Final de Unidad\" onclick=\"calcularFinal('<?php echo $_SESSION["usuario"]?>','"+
+    	    	                       valor.MATERIA+"','"+valor.MATERIAD+"','"+valor.SIE+"','"+valor.CICLO+"','pd_captcalea');\""+
 											  " class=\"btn btn-xs btn-white btn-success btn-round\"><i class=\"ace-icon fa blue fa-wrench bigger-140\"></i></button></td>");								  
 											  
 			//Boton de Boleta

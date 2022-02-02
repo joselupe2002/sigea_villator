@@ -35,7 +35,7 @@
 	</head>
 
 
-	<body id="evaluar" style="background-color: white; width:98%;">
+	<body id="grid_evaluar" style="background-color: white; width:98%;">
 	    
 	    
 	    
@@ -71,9 +71,11 @@
     </div>
     
     
-		      
+	<div id="eltitulo"> </div>		      
 	<div  class="sigeaPrin table-responsive" style="overflow-y: auto; height: 300px;" >
+		  
 		  <table id="latabla" class= "display table-condensed table-striped table-sm table-bordered table-hover nowrap" ></table>
+		  
 	</div>
 	
 	<div class="space-10"></div>
@@ -93,7 +95,7 @@
 </div>
 
  
-<script src="<?php echo $nivel; ?>js/utilerias.js"></script>     
+<script src="<?php echo $nivel; ?>js/utilerias.js?v=<?php echo date('YmdHis');?>"></script>     
 <script src="<?php echo $nivel; ?>assets/js/jquery-2.1.4.min.js"></script>
 <script type="<?php echo $nivel; ?>text/javascript"> if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");</script>
 <script src="<?php echo $nivel; ?>assets/js/bootstrap.min.js"></script>
@@ -143,7 +145,14 @@
         var losCriterios;
         var cuentasCal=0;
         var eltidepocorte;
+		var idcorte;
 		var losalumnos=[];
+
+		var materia='<?php echo $_GET["materia"];?>';
+		var profesor='<?php echo $_GET["profesor"];?>';
+		var grupo='<?php echo $_GET["grupo"];?>';
+		var elciclocal='<?php echo $_GET["ciclo"];?>';
+
         
 		$(document).ready(function($) { var Body = $('body'); $(document).bind("contextmenu",function(e){return false;});  Body.addClass('preloader-site'); cargarUnidades(); $("#unidades").change(function(){cargarCalificaciones();}); });
 		$(window).load(function() {$('.preloader-wrapper').fadeOut();$('body').removeClass('preloader-site');});
@@ -174,7 +183,7 @@
 		         success: function(dataCor){   
 					 iniCorte=""; finCorte=""; 		        				         
 		        	 jQuery.each(JSON.parse(dataCor), function(clave, valorCor) { 	
-					    iniCorte=valorCor.INICIA; finCorte=valorCor.TERMINA; eltidepocorte=	valorCor.TIPO;					
+					    iniCorte=valorCor.INICIA; finCorte=valorCor.TERMINA; idcorte=valorCor.ID; eltidepocorte=	valorCor.TIPO;					
 					 });
 
 					//alert (iniCorte+" "+finCorte);
@@ -233,6 +242,15 @@
         	 launidad=parseInt($("#unidades").val());  
 			 launinum=$('#unidades option:selected').text().split(" ")[0];
         	 abierto=$('#unidades option:selected').text().split("|")[1];
+
+	
+			 $("#eltitulo").empty();
+			 mensaje="<div class=\"fontRobotoB\" style=\"text-align:center; padding:2px; border:0px; background-color:#831303; color:white;\"><i class=\"fa fa-ban white\"></i>  CERRADO PARA CAPTURA</div>";
+			 if (abierto=='A') {
+				mensaje="<div class=\"fontRobotoB\" style=\"text-align:center; padding:2px; border:0px; background-color:#031883; color:white;\"><i class=\"fa fa-keyboard-o white\"></i>  ABIERTO PARA CAPTURA</div>"
+				}
+			$("#eltitulo").append(mensaje); 
+				 
    
 			 elsql="select a.ID, ALUM_MATRICULA,  CONCAT(ALUM_APEPAT,' ',ALUM_APEMAT,' ',ALUM_NOMBRE) AS NOMBRE"+
 				          " from dlista a, falumnos b where a.ALUCTR=b.ALUM_MATRICULA and a.GPOCVE='<?php echo $_GET["grupo"];?>'"+
@@ -281,7 +299,8 @@
 				    	    $("#row"+valor.ID).append("<td id=\"matricula_"+valor.ID+"\">"+valor.ALUM_MATRICULA+"</td>");
 				    	    $("#row"+valor.ID).append("<td id=\"nombre_"+valor.ID+"\">"+utf8Decode(valor.NOMBRE)+"</td>");
 
-				    	    caddis="disabled"; if (abierto=='A') {caddis="";}
+				    	    caddis="disabled"; 
+							if (abierto=='A') {caddis="";}
 
 								jQuery.each(JSON.parse(dataE), function(claveE, valorE) { 
 									//Para capturar calificaciones
@@ -292,8 +311,8 @@
 										"		</span>"+
 										"<select "+caddis+" class=\"text-primary MAT_"+valor.ALUM_MATRICULA+"\" style=\"width:70px; font-size:14px; color:#0E0B7E;\" "+
 										"				title=\""+valorE.EVAPRD+"\""+
-										"				id=\"SEL_"+valor.ID+"_"+valorE.ID+"\" PORC=\""+valorE.PORC+"\""+
-						    	    	" 				onchange=\"guardar("+valor.ID+",'"+launinum+"','<?php echo $_GET["id"];?>','"+valorE.ID+"','"+valor.ALUM_MATRICULA+"','<?php echo $_GET["ciclo"];?>');\"></select>"+
+										"				id=\"SEL_"+valor.ID+"_"+valorE.ID+"\" PORC=\""+valorE.PORC+"\" TIPOEV=\""+valorE.TIPO+"\""+
+						    	    	" 				onchange=\"guardar("+valor.ID+",'"+launinum+"','<?php echo $_GET["id"];?>','"+valorE.ID+"','"+valor.ALUM_MATRICULA+"','<?php echo $_GET["ciclo"];?>','"+valorE.TIPO+"');\"></select>"+
 										"</div></td>");
 									
 	
@@ -316,7 +335,7 @@
 									});									  
 								});	
 
-									elsqlP="select LISCAL from dlista_eviapr_prom b where b.IDDLISTA='"+valor.ID+"' and b.UNIDAD='"+launinum+"'";
+									elsqlP="select LISCAL, count(*) as HAY from dlista_eviapr_prom b where b.IDDLISTA='"+valor.ID+"' and b.UNIDAD='"+launinum+"'";
 									parametrosP={sql:elsqlP,dato:sessionStorage.co,bd:"Mysql"}
 									$.ajax({
 										type: "POST",
@@ -324,8 +343,12 @@
 										url:  "../base/getdatossqlSeg.php",
 										success: function(dataP){  										
 														
-												lacalet="<span class=\"badge badge-danger\">"+JSON.parse(dataP)[0][0]+"</span>";
-												if (JSON.parse(dataP)[0][0]>=70) {lacalet="<span class=\"badge badge-primary\">"+JSON.parse(dataP)[0][0]+"</span>";}
+												lacalet="<span class=\"badge badge-danger\">60</span>";
+												if (JSON.parse(dataP)[0]["HAY"]>0) {
+													lacalet="<span class=\"badge badge-danger\">"+JSON.parse(dataP)[0][0]+"</span>";
+													if (JSON.parse(dataP)[0][0]>=70) {lacalet="<span class=\"badge badge-primary\">"+JSON.parse(dataP)[0][0]+"</span>";}
+													
+												}
 												$("#row"+valor.ID).append("<td id=\"PROM_"+valor.ID+"_"+valor.ALUM_MATRICULA+"_"+launinum+"\">"+lacalet+"</td>");												 
 									
 											
@@ -352,18 +375,19 @@
 
 		function calculaPromedioGen(){
 			launinum=$('#unidades option:selected').text().split(" ")[0];
+			agregarDialogResultadov2("grid_evaluar","dlgresul","modal-lg","Registros Calculados");	
 			jQuery.each(losalumnos, function(clave, valor) { 
 				calculaPromUnidad(valor.ID,valor.ALUM_MATRICULA,launinum);
-			});
-		
+
+			});		
 		}
 
 
-		function calculaPromUnidad(id, matricula,numeroUni){
+		function calculaPromUnidad(id, matricula,numeroUni,tipoev){			    
 				prom=0;
 				$(".MAT_"+matricula).each(function(){   
 					console.log($(this).attr("PORC")+" |*| "+$(this).val());
-					 if ($(this).val()<70) { prom=60; return false; }
+					 if (($(this).val()<70)) { prom=60; return false; }
 					 else {						
 						 prom+=parseFloat($(this).attr("PORC")/100*$(this).val());						
 					 	}															 										
@@ -397,7 +421,32 @@
 					success: function(data){
 						console.log(data);					
 					}				     
-				});    
+				});   
+
+				tipocal=0;
+				if (eltidepocorte=='CCO1'){tipocal="1";}
+				if (eltidepocorte=='CCO2'){tipocal="1";}
+				if (eltidepocorte=='CCO3'){tipocal="1";}
+				if (eltidepocorte=='CCO4'){tipocal="1";}
+				if (eltidepocorte=='CCO5'){tipocal="1";}
+				if (eltidepocorte=='CCC1'){tipocal="2";}
+				if (eltidepocorte=='CCC2'){tipocal="3";}
+				if (tipocal>0) {
+					laurl="../pd_captcal/actualizaCal.php?valorllave="+id+"&numeroUni="+parseInt(numeroUni)+
+								"&c="+elprom+"&tipocal="+tipocal+"&materia="+materia+"&profesor="+profesor+
+								"&ciclo="+elciclocal+"&matricula="+matricula+"&grupo="+grupo+"&tipo=CAL"+
+								"&idcorte="+idcorte+"&tipocorte="+eltidepocorte;
+					$.ajax({
+							type: "POST",
+							url:laurl,		    
+							success: function(data){									
+								$('#resul').append(dameitemRes("Califición Actualizada: "+matricula+" Unidad:"+numeroUni+" TipoCal="+tipocal,"fa fa-check green bigger-180",""));																																													
+							}					     
+						});    
+					}
+				else {
+					$('#resul').html(dameitemRes("No se puede actualizar calificaciones a Unidades, ya que al parecer no existe corte abierto","fa fa-times red bigger-180",""));					
+				}			
 
 		}	
 
@@ -411,7 +460,7 @@
 		}
 
 
-		function guardar(id,numeroUni,idmateria, idev, matricula,ciclo){
+		function guardar(id,numeroUni,idmateria, idev, matricula,ciclo, tipoev){
 
 			if (eltidepocorte=='CCO1'){tipocal="1";}
 			if (eltidepocorte=='CCO2'){tipocal="1";}
@@ -452,7 +501,7 @@
 				 console.log(data);
 				 //Calcular el Promedio 				 
 				 prom=0;
-				 calculaPromUnidad(id, matricula,numeroUni)
+				 calculaPromUnidad(id, matricula,numeroUni,tipoev)
 
 				var losdatos=[];
 					losdatos[0]=id+"|"+numeroUni+"|"+elprom+"|<?php echo $_SESSION['usuario']?>|"+lafecha;
