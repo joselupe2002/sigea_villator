@@ -544,6 +544,43 @@ function agregarDialogResultado(modulo){
 }
 
 
+
+function agregarDialogResultadov2(contenedor,nombre,tam,titulo){
+
+	tamMsj="110";
+	$("#"+nombre).remove();
+	if (tam="modal-lg") {tamMsj="160";} 
+	script=    "<div class=\"modal fade\" id=\""+nombre+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> "+
+	           "   <div class=\"modal-dialog "+tam+"\" role=\"document\">"+
+               "         <div class=\"modal-content\">"+
+               "             <div class=\"modal-header\" style=\"background-color:#05034B;\">"+
+			   "                  <span><i class=\"menu-icon white fa-2x fa fa-info\"></i>  "+
+			   "                        <span class=\"fontRobotoB white text-success lead \"> <strong>"+titulo+"</strong></span>"+
+			   "                  </span>"+
+			   "                  <button type=\"button\" class=\"close\"   data-dismiss=\"modal\" aria-label=\"Close\"> "+
+               "                        <span aria-hidden=\"true\" style=\"color:white;\">&times;</span> "+
+               "                  </button> "+
+    		   "             </div>"+
+			   "             <div class=\"sigeaPrin modal-body\" style=\"height:280px; overflow:auto;\">"+
+			   "                   <div id=\"resul\" class=\"fontRoboto\" style=\"width: 100%; height: 100%; font-size: 12px;\">"+
+			   "                   </div>"+
+			   "             </div>"+     
+               "         </div>"+
+               "   </div>"+
+               "</div>";
+	$("#"+contenedor).append(script);
+	$('#'+nombre).modal({show:true, backdrop: 'static'});	
+}
+
+function dameitemRes(msj, ico, stmsj){	
+	sc=	"<div class=\"row\">"+
+		"	<div class=\"col-sm-1\" ><i class=\""+ico+"\"></i></div>"+
+		"	<div class=\"col-sm-11 fontRobotoB bigger-150\">"+msj+"</div>"+
+		"</div>";
+	return sc;
+}
+
+
 /*================================================FUNCION PAR AGENERA TABLA CON BUSQUEDA=================================================*/
 function getJsonCol(cad){
 	campos=cad.split(",");
