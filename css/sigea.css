@@ -270,6 +270,13 @@ SCROLLBAR-DARKSHADOW-COLOR: #000000;
   align-items: center;
 }
 
+.indDescrip {
+  padding:0px;
+  margin:0px;
+  font-size:8px; 
+  line-height :10px;
+}
+
 
 
 /*================MENU LATERAL ============================== */

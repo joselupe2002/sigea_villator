@@ -4774,3 +4774,61 @@ function getEditor(padre,nombre, contenido) {
 
 }
 
+
+
+
+/*====================CALIICACIONES DETALLE X UNIDAD ==================================*/
+function dameVentanaDetUnidad(contenedor, iddet, matricula, nombre, materia, materiad) {
+
+	dameVentana("ventDet", contenedor,
+	"<span class=\"fontRobotoB bigger-60 white\">Detalles: "+materiad+"|"+matricula+"|"+nombre+"</span>","lg","bg-primary","fa fa-user white bigger-180","370");
+	$("#body_ventDet").empty();
+	$("#body_ventDet").css("vertical-align","top");
+
+	$("#body_ventDet").html("<div class=\"fontRobotoB bigger-170 row\"><div class=\"col-sm-1\"></div><div id=\"lalista\" class=\"col-sm-10\"></div></diV>");
+
+
+	sqlUni="select IDGRUPO, ID, UNID_NUMERO, UNID_DESCRIP, LISTC15 from dlista, eunidades where ID="+iddet+" AND MATCVE=UNID_MATERIA and UNID_PRED='' ORDER BY UNID_NUMERO";
+	parametrosUni={sql:sqlUni,dato:sessionStorage.co,bd:"Mysql"}
+	$.ajax({
+		type: "POST",
+		data:parametrosUni,
+		url:  "../base/getdatossqlSeg.php",
+		success: function(dataUni){   				        				         
+			jQuery.each(JSON.parse(dataUni), function(claveUni, valorUni) { 	
+				$("#lalista").append("<hr><div style=\"width:100%; background-color:#270383; color:white; margin:0px;\">"+
+									 "UNIDAD: "+valorUni.UNID_NUMERO+" "+valorUni.UNID_DESCRIP+"</div>"+
+									 "<div id=\"cont_"+valorUni.UNID_NUMERO+"\" class=\"row\" style=\"width:100%; background-color:#EDF1EC; "+
+									 "color:white; margin:0px; padding:10px;\"></div>");
+
+				sqlCal="select b.EVAPRD, LISCAL, PORC  from dlista_eviapr a, vins_matriz b  where a.IDDLISTA="+iddet+ 
+				       " and b.IDGRUPO="+valorUni.IDGRUPO+" and b.UNIDAD='"+valorUni.UNID_NUMERO+"' AND a.IDEVAPR=b.ID";
+				parametrosCal={sql:sqlCal,dato:sessionStorage.co,bd:"Mysql"}
+				$.ajax({
+					type: "POST",
+					data:parametrosCal,
+					url:  "../base/getdatossqlSeg.php",
+					success: function(dataCal){ 
+								        				         
+						jQuery.each(JSON.parse(dataCal), function(claveCal, valorCal) { 	
+							$("#cont_"+valorUni.UNID_NUMERO).append(
+							"			<div class=\"col-sm-2\">"+
+							"				<div class=\"row centrarVertical\">"+
+							"                   <span class=\"fontRobotoB indVertical\" style=\"color:black;\">CALIF.</span>"+					   
+							"                   <span class=\"fontRobotoB indNumero\" style=\"color:#180754;\">"+valorCal.LISCAL+"</span>"+
+							"          		</div>"+
+							"				<div class=\"row indDescrip\">"+
+							"                   <span class=\"fontRobotoB\" style=\"font-size:8px; color:#163C02;\">"+valorCal.EVAPRD+" ("+valorCal.PORC+"%)"+"</span>"+					   
+							"          		</div>"+
+							"           </div>");					
+						});
+					}
+				});
+
+			});
+		}
+	});
+
+								 
+
+}
