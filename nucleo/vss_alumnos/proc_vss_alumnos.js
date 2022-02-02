@@ -430,7 +430,8 @@ function actualizaProm(lafila,modulo,institucion, campus, valor,usuario) {
 	elsql="update ss_alumnos set CALIFICACION=round((((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
 	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10),2),"+
 	"CALIFICACION2=round((((REP1EVAL+REP1AUTO+REP2EVAL+REP2AUTO+REP3EVAL+REP3AUTO)/6)*0.9)+"+
-	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10))"+
+	"(((REP1EVALACT+REP2EVALACT+REP3EVALACT)/3)*0.10)),"+
+	"TOTALHORAS=(HORASBIM1+HORASBIM2+HORASBIM3)"+
 	" WHERE concat(CICLO,MATRICULA)='"+lafila[0]["CICLO"]+lafila[0]["MATRICULA"]+"'";
 
 	parametros2={bd:"mysql",sql:elsql,dato:sessionStorage.co};
