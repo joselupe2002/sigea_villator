@@ -35,7 +35,7 @@
 	</head>
 
 
-	<body id="evaluar" style="background-color: white; width:98%;">
+	<body id="evaluar" class="sigeaPrin"  style=" width:98%; background-color: white;">
 	    
 	    
 	    
@@ -57,25 +57,25 @@
 			              <?php } ?>		              
 			           </select>
 		       </div> 	
-		         <div class="col-sm-6">  
+			  
+			   <div class="col-sm-2" style="padding-top:15px;"> 			   		
+             		 	<button class="btn btn-white btn-danger btn-bold" onclick="regresar();"><i class="ace-icon fa fa-arrow-left bigger-120 red"></i>Regresar    </button>         			
+				</div>
+
+		       <div class="col-sm-4">  
                    <h1><?php echo $_GET["materiad"] ?><small><i class="ace-icon fa fa-angle-double-right"></i><?php echo $_GET["materia"] ?></small></h1>
               </div>	           
+			
          </div>
     
     </div>
     
     
 		      
-	<div  class="sigeaPrin table-responsive" style="overflow-y: auto; height: 300px;" >
+	<div  class="table-responsive" style="overflow-y: auto; height: 300px;" >
 		  <table id="latabla" class= "display table-condensed table-striped table-sm table-bordered table-hover nowrap" ></table>
 	</div>
-	
-	<div class="space-10"></div>
-	<div style="text-align:center;" class="row">
-         <div class="col-sm-2"> 
-              <button class="btn btn-white btn-danger btn-bold" onclick="regresar();"><i class="ace-icon fa fa-reply-all bigger-120 blue"></i>Regresar    </button>
-         </div>           
-	</div>
+
 		
  
 <!-- DIALOGO DE ESPERA -->     
@@ -160,7 +160,7 @@
 			 sqlCor="select * from ecortescal where  CICLO='<?php echo $_GET["ciclo"]?>'"+
 		            " and STR_TO_DATE(DATE_FORMAT(now(),'%d/%m/%Y'),'%d/%m/%Y') "+
 					" Between STR_TO_DATE(INICIA,'%d/%m/%Y') "+
-		            " AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='CALIFICACION' and ABIERTO='S' "+
+		            " AND STR_TO_DATE(TERMINA,'%d/%m/%Y') and CLASIFICACION='CALIFICACION' "+
 		            " order by STR_TO_DATE(TERMINA,'%d/%m/%Y')  DESC LIMIT 1";
 			
 			parametros={sql:sqlCor,dato:sessionStorage.co,bd:"Mysql"}
@@ -230,7 +230,7 @@
         	 launidad=parseInt($("#unidades").val());  
         	 abierto=$('#unidades option:selected').text().split("|")[1];
    
-			 elsql="select a.ID, ALUM_MATRICULA,  CONCAT(ALUM_APEPAT,' ',ALUM_APEMAT,' ',ALUM_NOMBRE) AS NOMBRE, IFNULL(LISPA"+launidad+",'0') as CAL, IFNULL(LISFA"+launidad+",'0') as FALTA"+
+			 elsql="select a.ID, LISTC13, ALUM_MATRICULA,  CONCAT(ALUM_APEPAT,' ',ALUM_APEMAT,' ',ALUM_NOMBRE) AS NOMBRE, IFNULL(LISPA"+launidad+",'0') as CAL, IFNULL(LISFA"+launidad+",'0') as FALTA"+
 				          " from dlista a, falumnos b where a.ALUCTR=b.ALUM_MATRICULA and a.GPOCVE='<?php echo $_GET["grupo"];?>'"+
 				          " and PDOCVE='<?php echo $_GET["ciclo"];?>' and LISTC15='<?php echo $_GET["profesor"];?>'"+
 						  " and MATCVE='<?php echo $_GET["materia"];?>' and a.BAJA='N' order by ALUM_APEPAT,ALUM_APEMAT,ALUM_NOMBRE";
@@ -244,47 +244,20 @@
 		         success: function(data){    
 		        	 $("#latabla").empty();
 		        	 $("#latabla").append("<thead><tr id=\"titulo\"><th style=\"text-align: center;\">No. Control</th>"+ 
-                                                      "<th style=\"text-align: center;\">Nombre</th><th colspan=\"2\" style=\"text-align: center;\">Calif.</th><th style=\"text-align: center;\">Faltas.</th></tr></thead>"); 
+                                                      "<th style=\"text-align: center;\">Nombre</th><th colspan=\"2\" style=\"text-align: center;\">Calif.</th></thead>"); 
 			     
 		        	 $("#latabla").append("<tbody id=\"cuerpo\">");		        	 
 		        	 jQuery.each(JSON.parse(data), function(clave, valor) { 
-		        		    $("#cuerpo").append("<tr id=\"row"+valor.ID+"\">");				
+		        		    $("#cuerpo").append("<tr id=\"row"+valor.ID+"\" class=\"fontRoboto\">");				
 				    	    $("#row"+valor.ID).append("<td id=\"matricula_"+valor.ID+"\">"+valor.ALUM_MATRICULA+"</td>");
 				    	    $("#row"+valor.ID).append("<td id=\"nombre_"+valor.ID+"\">"+utf8Decode(valor.NOMBRE)+"</td>");
-
-				    	    if (abierto=='A') {
-
-				    	    	//Para capturar calificaciones
-				    	    	$("#row"+valor.ID).append("<td id=\"nombre_"+valor.ID+"\">"+"<select class=\"text-primary\" style=\"width:60px; font-size:11px;\" id=\"SEL_"+valor.ID+"\" "+
-						    	    	" onchange=\"guardar("+valor.ID+",'"+launidad+"','<?php echo $_GET["materia"];?>','<?php echo $_GET["profesor"];?>','<?php echo $_GET["ciclo"];?>','"+
-						    	    	valor.ALUM_MATRICULA+"','<?php echo $_GET["grupo"];?>','CAL');\"></select>"+"</td>");
-
-				    	    	//Para el indicador 
-				    	    	laruta="..\\..\\imagenes\\menu\\mal.png";
-		                        if (valor.CAL>=70) {laruta="..\\..\\imagenes\\menu\\bien.png"; }  			    	                                 
-		                        $("#row"+valor.ID).append("<td><img id=\"SELIMG_"+valor.ID+"\" width=\"20px\" height=\"20px\" src=\""+laruta+"\"></td>");
-
-		                         //Para capturar Faltas
-				    	    	$("#row"+valor.ID).append("<td id=\"nombre_"+valor.ID+"\">"+"<select class=\"text-primary\" style=\"width:60px; font-size:11px;\" id=\"SELF_"+valor.ID+"\" "+
-						    	    	" onchange=\"guardar("+valor.ID+",'"+launidad+"','<?php echo $_GET["materia"];?>','<?php echo $_GET["profesor"];?>','<?php echo $_GET["ciclo"];?>','"+
-						    	    	valor.ALUM_MATRICULA+"','<?php echo $_GET["grupo"];?>','FALTA');\"></select>"+"</td>");
-		                            
-				    	    	$("#SELF_"+valor.ID).html($("#base").html());
-				    	    	$("#SEL_"+valor.ID).html($("#base").html());
-                                $("#SEL_"+valor.ID).val(valor.CAL);  
-                                $("#SELF_"+valor.ID).val(valor.FALTA);                              				    	    
-				    	    }
-				    	    else { 
-					    	    $("#row"+valor.ID).append("<td id=\"cal_"+valor.ID+"\">"+valor.CAL+"</td>");
-					    	   
-					    	    laruta="..\\..\\imagenes\\menu\\mal.png";
-		                        if (valor.CAL>=70) {laruta="..\\..\\imagenes\\menu\\bien.png"; }  			    	                                 
-		                        $("#row"+valor.ID).append("<td><img id=\"SELIMG_"+valor.ID+"\" width=\"20px\" height=\"20px\" src=\""+laruta+"\"></td>");
-		                        $("#row"+valor.ID).append("<td id=\"calf_"+valor.ID+"\">"+valor.FALTA+"</td>");
-		                        
-					    	    }
-
-				    	            		        	     
+						
+											
+								laruta="<span class=\"badge badge-danger\">"+valor.CAL+"</span>";
+		                        if (valor.CAL>=70) {laruta="<span class=\"badge badge-primary\">"+valor.CAL+"</span>"; }  
+					    	    $("#row"+valor.ID).append("<td id=\"cal_"+valor.ID+"\" class=\"fontRobotoB\">"+laruta+"</td>");
+							
+		        	     
 		               });
 		             },
 		         error: function(data) {	                  
@@ -302,10 +275,6 @@
 			if (eltidepocorte=='CCO1'){tipocal="1";}
 			if (eltidepocorte=='CCO2'){tipocal="1";}
 			if (eltidepocorte=='CCO3'){tipocal="1";}
-			if (eltidepocorte=='CCO4'){tipocal="1";}
-			if (eltidepocorte=='CCO5'){tipocal="1";}
-			if (eltidepocorte=='CCO6'){tipocal="1";}
-
 			if (eltidepocorte=='CCC1'){tipocal="2";}
 			if (eltidepocorte=='CCC2'){tipocal="3";}
 

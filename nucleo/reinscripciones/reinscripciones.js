@@ -980,8 +980,8 @@ function limpiarVentana(){
 
 function guardarTodos(){
 	//checamos que el alumno no tenga materias ya aprobadas 
-	elsql="select count(*) from dlista where PDOCVE='"+$("#elciclo").html().split("|")[0]+"'"+
-	" AND ALUCTR='"+$("#selAlumnos").val()+"' AND IFNULL(LISPA1,0)>=70 and GPOCVE<>'E99REV'";
+	elsql="select count(*) from vcalifevidencia where CICLO='"+$("#elciclo").html().split("|")[0]+"'"+
+	" AND MATRICULA='"+$("#selAlumnos").val()+"'";
 	parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 	$.ajax({
 		type: "POST",

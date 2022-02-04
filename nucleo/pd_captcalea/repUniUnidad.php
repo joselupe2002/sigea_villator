@@ -380,14 +380,22 @@
                 $pdf->SetWidths($arcol);
                 $n=1;
 
-                foreach($data as $row) {    
+                $apr=[];
+                $fal=[];
+                $contal=0;
+                foreach($data as $row) {  
+                      
                     $ardat=array($n,
                                 utf8_decode($row["ALUM_MATRICULA"]),
                                 utf8_decode($row["NOMBRE"]));
                     
                     for ($i=0;$i<count($dataEvid); $i++) {  
+                            $datavalor=0;
                             $datavalor= $pdf->LoadValor($row["ID"],$dataEvid[$i]["ID"]);                    
                             $ardat[$i+3]=$datavalor; 
+                            if ( $contal==0) {$apr[$i]=0; $fal[$i]=0;}
+                            if ($datavalor>=70) { $apr[$i]=$apr[$i]+1;  }
+                            if ($datavalor==0) { $fal[$i]=$fal[$i]+1;  }
                         }
 
                     $dataProm=$pdf->LoadValorFin($row["ID"],$rowP["UNID_NUMERO"]);
@@ -395,20 +403,28 @@
 
                     $pdf->Row($ardat);
                     $n++;
+                    $contal++;
                 }
 
                 $pdf->SetFillColor(172,31,6);
                 $pdf->SetTextColor(255);  
-                $pdf->SetFont('Montserrat-ExtraBold','B',9);
+                $pdf->SetFont('Montserrat-ExtraBold','B',8);
                 $pdf->Cell(7,5,'ID',1,0,'C',true);
-                $pdf->Cell(150,5,'Evidencia',1,1,'C',true);
+                $pdf->Cell(120,5,'Evidencia',1,0,'C',true);
+                $pdf->Cell(10,5,'APR',1,0,'C',true);
+                $pdf->Cell(10,5,'FAL',1,0,'C',true);
+                $pdf->Cell(10,5,'%APR',1,1,'C',true);
                 $pdf->SetFont('Montserrat-Medium','',7);
+                $i=0;
                 foreach($dataEvid as $rowE) {                   
                     $pdf->SetFillColor(255);
                     $pdf->SetTextColor(0);
                     $pdf->Cell(7,5,$rowE["EVAPR"],1,0,'C',true);
-                    $pdf->Cell(150,5,utf8_decode($rowE["EVAPRD"]." ( ".$rowE["PORC"]."% )"),1,1,'L',true);
-
+                    $pdf->Cell(120,5,utf8_decode($rowE["EVAPRD"]." ( ".$rowE["PORC"]."% )"),1,0,'L',true);
+                    $pdf->Cell(10,5,$apr[$i],1,0,'L',true);
+                    $pdf->Cell(10,5,$fal[$i],1,0,'L',true);
+                    $pdf->Cell(10,5,round(($apr[$i]/$contal)*100)."%",1,1,'L',true);
+                    $i++;
                 }
 
                 

@@ -387,10 +387,7 @@
 				prom=0;
 				$(".MAT_"+matricula).each(function(){   
 					console.log($(this).attr("PORC")+" |*| "+$(this).val());
-					 if (($(this).val()<70)) { prom=60; return false; }
-					 else {						
-						 prom+=parseFloat($(this).attr("PORC")/100*$(this).val());						
-					 	}															 										
+					prom+=parseFloat($(this).attr("PORC")/100*$(this).val());																								 										
 				});		
 				elprom=Math.round(prom);
 				color="danger"; if (elprom>=70) { color="primary"; }
