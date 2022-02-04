@@ -120,7 +120,7 @@
                 $sql="select ID, concat(ALUM_NOMBRE,' ',ALUM_APEPAT,' ',ALUM_APEMAT) as NOMBRE, ALUM_MATRICULA, IF (LISCAL<70,'NA',LISCAL) as LISCAL".
                 " from dlista a, falumnos b  where ALUCTR=ALUM_MATRICULA and a.PDOCVE='".$_GET["ciclo"].
                 "' and a.MATCVE='".$_GET["materia"]."' and a.GPOCVE='".$_GET["grupo"]."' ORDER BY ALUM_APEPAT, ALUM_APEMAT, ALUM_NOMBRE";
-                
+         
 				$resultado=$miConex->getConsulta($_SESSION['bd'],$sql);				
 				foreach ($resultado as $row) {
 					$data[] = $row;

@@ -384,3 +384,17 @@ function generaTablaSubir(grid_data, op){
 			abrirPesta(enlace,'Instrumentación')
 		}
 		
+
+
+		
+function CalifxEvidencia(modulo,usuario,institucion, campus,essuper){
+	table = $("#G_"+modulo).DataTable();	
+	enlace="nucleo/pd_captcalea/repUniUnidad.php?grupo="+table.rows('.selected').data()[0]["GRUPO"]+
+	"&ciclo="+table.rows('.selected').data()[0]["CICLO"]+
+	"&profesor="+table.rows('.selected').data()[0]["EMPL"]+
+	"&materia="+table.rows('.selected').data()[0]["CVE_MAT"]+
+	"&materiad="+table.rows('.selected').data()[0]["MATERIA"]+
+	"&id="+table.rows('.selected').data()[0]["IDDET"]+"&semestre=";
+	abrirPesta(enlace,"Rep.Uni.");
+
+}
