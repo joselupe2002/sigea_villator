@@ -136,8 +136,8 @@ function sacarCopia(migrupo,profesor,ciclo){
                      "insert into ins_analisis (IDGRUPO,UNIDAD,ACTENSENANZA,DC_INS,DC_INT,DC_SIS,HORAST,HORASP,_INSTITUCION,_CAMPUS,USUARIO,FECHAUS) "+
 			" select '"+migrupo+"',UNIDAD,ACTENSENANZA,DC_INS,DC_INT,DC_SIS,HORAST,HORASP,_INSTITUCION,_CAMPUS,USUARIO,FECHAUS  FROM ins_analisis "+
 			" where IDGRUPO='"+migrupoc+"';"+
-                     "insert into ins_matriz (IDGRUPO,UNIDAD,EVAPR,PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS) "+
-			" select '"+migrupo+"',UNIDAD,EVAPR,PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS  FROM ins_matriz "+
+                     "insert into ins_matriz (IDGRUPO,UNIDAD,EVAPR,TIPO, PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS) "+
+			" select '"+migrupo+"',UNIDAD,EVAPR,TIPO, PORC,EVALFOR,A,B,C,D,E,F,G,H,I,J,USUARIO,FECHAUS  FROM ins_matriz "+
 			" where IDGRUPO='"+migrupoc+"';"+
                      "insert into ins_calendario (IDGRUPO,SEM,TIPO,USUARIO,FECHAUS) "+
 			" select '"+migrupo+"',SEM,TIPO,USUARIO,FECHAUS  FROM ins_calendario "+

@@ -930,7 +930,7 @@ function impEncuadre(id, materia, descrip, tipomat){
 		   function cargarInstrumentacion(id) {
 				elsql="select * from vins_matriz where IDGRUPO="+id+" order by UNIDAD  ";
 	
-				alert (elsql);
+				//alert (elsql);
 				parametros={sql:elsql,dato:sessionStorage.co,bd:"Mysql"}
 				$.ajax({
 					type: "POST",
@@ -940,7 +940,7 @@ function impEncuadre(id, materia, descrip, tipomat){
 							losdatos=JSON.parse(data); 	
 							$(".ev").val("");	
 							jQuery.each(losdatos, function(clave, valor) { 
-								 alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
+								// alert ("title='"+valor.UNIDAD+"_"+valor.TIPO+"' "+$("input[title='"+valor.UNIDAD+"_"+valor.tipo+"']").val());
 								$("input[title='"+valor.UNIDAD+"_"+valor.TIPO+"']").val("");
 							
 							});	
